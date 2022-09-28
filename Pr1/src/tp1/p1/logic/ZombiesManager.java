@@ -5,7 +5,6 @@ import java.util.Random;
 import tp1.p1.control.Level;
 import tp1.p1.logic.gameobjects.Zombie;
 import tp1.p1.logic.gameobjects.ZombieList;
-
 /**
  * Manage zombies in the game.
  *
@@ -62,6 +61,16 @@ public class ZombiesManager {
 		}
 		return canAdd;
 	}
-
+	
 	// TODO fill your code
+	private int getRemainingZombies() {
+		int num = 0; //me he inventado el número para que devuelva un int y no de error pero hay que hacer la función
+		return num;
+	}
+	
+	private static boolean isPositionEmpty(int col, int fila) {
+		return true; // hay que hacer la función
+	}
+
+	
 }

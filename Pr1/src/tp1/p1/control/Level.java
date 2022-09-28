@@ -5,20 +5,33 @@ package tp1.p1.control;
  *
  */
 public enum Level {
-
+	EASY, HARD, INSANE;
 	// TODO fill your code
-
 	private int numberOfZombies;
 	
 	private double zombieFrequency;
 
+	public int getNumberOfZombies() {
+		int num = 0; 
+		return num;
+	}
+	
+	public int getZombieFrequency() {
+		int num = 0; 
+		return num;
+	}
+	
+	private Level() {
+		
+	}
 	private Level(int numberOfZombies, double zombieFrequency) {
 		this.numberOfZombies = numberOfZombies;
 		this.zombieFrequency = zombieFrequency;
 	}
-
 	// TODO fill your code
-
+	
+	
+	
 	/**
 	 * Parse an string and return any matching level
 	 * 

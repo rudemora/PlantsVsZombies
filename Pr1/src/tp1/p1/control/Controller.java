@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import tp1.p1.logic.Game;
 import tp1.p1.view.GamePrinter;
-
+import tp1.p1.view.Messages;
 /**
  * Accepts user input and coordinates the game execution logic.
  *

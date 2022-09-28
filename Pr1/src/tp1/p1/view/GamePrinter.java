@@ -89,4 +89,8 @@ public class GamePrinter {
 
 		return buffer.toString();
 	}
+	
+	private static String repeat (String s, int num ) {
+		return s; //hacer función
+	}
 }

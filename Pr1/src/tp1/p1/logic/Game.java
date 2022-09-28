@@ -24,5 +24,9 @@ public class Game {
 		
 	}
 	
+	public String positionToString(int col, int row) {
+		return  ("col"); // hacer la función
+	}
+	
 
 }
