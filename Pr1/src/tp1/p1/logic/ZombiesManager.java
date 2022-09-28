@@ -11,7 +11,7 @@ import tp1.p1.logic.gameobjects.ZombieList;
  *
  */
 public class ZombiesManager {
-
+	//clase con el main
 	private Game game;
 
 	private Level level;
