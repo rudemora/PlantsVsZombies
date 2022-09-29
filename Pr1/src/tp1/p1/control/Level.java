@@ -8,7 +8,6 @@ public enum Level {
 	EASY, HARD, INSANE;
 	// TODO fill your code
 	private int numberOfZombies;
-	
 	private double zombieFrequency;
 
 	public int getNumberOfZombies() {
@@ -22,7 +21,6 @@ public enum Level {
 	}
 	
 	private Level() {
-		
 	}
 	private Level(int numberOfZombies, double zombieFrequency) {
 		this.numberOfZombies = numberOfZombies;

@@ -1,5 +1,6 @@
 package tp1.p1.logic;
-
+//ZombieManager tiene que ser conocido por Game
+//Tiene que conocer a ZombieList
 import java.util.Random;
 
 import tp1.p1.control.Level;
