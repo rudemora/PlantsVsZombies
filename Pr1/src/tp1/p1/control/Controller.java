@@ -19,7 +19,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 	private GamePrinter gamePrinter;
 	
 	private int count_cycles;
-	
+	//hola prueba
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
 		this.scanner = scanner;
