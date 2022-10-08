@@ -9,7 +9,7 @@ import tp1.p1.view.Messages;
 /**
  * Accepts user input and coordinates the game execution logic.
  *
- */
+ */ 
 public class Controller {//traduce la interaci贸n del usuario a acciones del juego
 
 	private Game game;
@@ -27,6 +27,7 @@ public class Controller {//traduce la interaci贸n del usuario a acciones del jue
 	}
 	
 	private void draw() {
+
 		System.out.print("Number of cycles: ");
 		System.out.println(this.count_cycles);
 		System.out.print("Sun coins: ");
@@ -56,14 +57,15 @@ public class Controller {//traduce la interaci贸n del usuario a acciones del jue
 	 *
 	 * @return the player command as words
 	 */
-	private String[] prompt() {
-		System.out.print(Messages.PROMPT);
-		String line = scanner.nextLine();
-		String[] words = line.toLowerCase().trim().split("\\s+");
+	//Las opciones del usuario solo se muestran por pantalla si el usuario pide informacion
+	private String[] prompt() { 
+		System.out.print(Messages.PROMPT);//Muestra por pantalla lo del comman
+		String line = scanner.nextLine();//Scanner es la forma por la que se capturan l韓as escritas por el usuario
+		String[] words = line.toLowerCase().trim().split("\\s+");//toLowerCase para pasar todo a minusculas  Trim para quitar los blancos y split para dividir el texto en array
 
 		//System.out.println(debug(line));
 
-		return words;
+		return words;//Me devuelve lo que ha metido el usuario
 	}
 	
 	public void debug(String line) {
@@ -75,8 +77,9 @@ public class Controller {//traduce la interaci贸n del usuario a acciones del jue
 	 */
 	public void run() {
 		// TODO fill your code
+		int contador_ciclos=0;
 		this.draw();
-		
+		this.prompt();
 		//bucle con pintar(pintar el juego), user action (pide comando al usuario y ejecuta, hay que usar PROMPT), 
 		//game action, update, pintar 
 		//hacer el m茅todo list de user action, utilizar game printer para imprimir la lista generada por list
@@ -87,6 +90,7 @@ public class Controller {//traduce la interaci贸n del usuario a acciones del jue
 			userAction;
 			game.update;
 		}*/
+		contador++;
 	}
 
 }

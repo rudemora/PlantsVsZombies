@@ -21,7 +21,9 @@ public class Game {
 	private Random rand;
 	
 	private void update() {
-		
+		bool anadir_z= ZombiesManager.addZombie(); //añado el zombie
+		if(contador%2==0) {
+			//
 	}
 	
 	public String positionToString(int col, int row) {

@@ -27,7 +27,7 @@ public class ZombiesManager {
 		this.level = level;
 		this.rand = rand;
 		this.remainingZombies = level.getNumberOfZombies();
-		this.zombies = new ZombieList(this.remainingZombies);
+		this.zombies = new ZombieList(this.remainingZombies); //Crea una zombilist de longitud remaining zombis
 	}
 
 	/**
@@ -59,6 +59,9 @@ public class ZombiesManager {
 
 		if(canAdd) {
 			// TODO fill your code
+			Zombie z_nuevo= new ZombieComun();
+			this.zombies.insertar(z_nuevo);
+			//ahora falta actualizar la posicion donde lo meto que falta ver donde lo guardo
 		}
 		return canAdd;
 	}
@@ -73,5 +76,6 @@ public class ZombiesManager {
 		return true; // hay que hacer la función
 	}
 
+	//Hacer que avancen los zombies, para ello igual meter un atributo de los ciclos que llevan creados cada zombie para saber si tienen que avanzar o no
 	
 }
