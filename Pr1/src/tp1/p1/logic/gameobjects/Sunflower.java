@@ -7,7 +7,7 @@ public class Sunflower {
 	private int damage=0;
 	private int endurance=1;
 
-	public string getDescription{
+	public String getDescription() {
 		return Messages.SUNFLOWER_DESCRIPTION.formatted(cost,damage, endurance);
-}
+	}
 }
