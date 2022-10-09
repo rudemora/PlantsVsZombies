@@ -10,8 +10,8 @@ public enum Level {
 	private int numberOfZombies;
 	private double zombieFrequency;
 
-	public int getNumberOfZombies() {
-		int num = 0; 
+	public static int getNumberOfZombies() {
+		int num = 5; 
 		return num;
 	}
 	
@@ -19,6 +19,7 @@ public enum Level {
 		int num = 0; 
 		return num;
 	}
+	
 	
 	private Level() {
 	}
