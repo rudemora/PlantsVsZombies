@@ -26,7 +26,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		this.count_cycles = 0;
 	}
 	
-	private void draw() {
+	private void draw() {//Esto es necesario?
 
 		System.out.print("Number of cycles: ");
 		System.out.println(this.count_cycles);
@@ -42,7 +42,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 	 * Draw / Paint the game.
 	 */
 	private void printGame() {
-		System.out.println(gamePrinter);
+		System.out.println(gamePrinter.toString());
 	}
 
 	/**
@@ -78,8 +78,37 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 	public void run() {
 		// TODO fill your code
 		int contador_ciclos=0;
-		this.draw();
-		this.prompt();
+		printGame();
+		String[] lectura= prompt();
+		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
+		case "a":
+		case "add":
+			break;
+		case"l":
+		case"list":
+			println(Messages.LIST);
+			
+			break;
+		case"r":
+		case "reset":
+			
+			break;
+			
+		case "h":
+		case "help":
+			println(Messages.HELP);
+			break;
+		case "e":
+		case "exit":
+			break;
+		case"n":
+		case"none":
+		case "":
+			break;
+			
+		
+		}
+		
 		//bucle con pintar(pintar el juego), user action (pide comando al usuario y ejecuta, hay que usar PROMPT), 
 		//game action, update, pintar 
 		//hacer el método list de user action, utilizar game printer para imprimir la lista generada por list
@@ -90,6 +119,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 			userAction;
 			game.update;
 		}*/
+		
 		contador++;
 	}
 

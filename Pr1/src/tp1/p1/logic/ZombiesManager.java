@@ -21,6 +21,8 @@ public class ZombiesManager {
 	private int remainingZombies;
 
 	private ZombieList zombies;
+	
+	private int number; //Numero de zombies que hay
 
 	public ZombiesManager(Game game, Level level, Random rand) {
 		this.game = game;
@@ -28,6 +30,7 @@ public class ZombiesManager {
 		this.rand = rand;
 		this.remainingZombies = level.getNumberOfZombies();
 		this.zombies = new ZombieList(this.remainingZombies); //Crea una zombilist de longitud remaining zombis
+		
 	}
 
 	/**
@@ -55,12 +58,18 @@ public class ZombiesManager {
 
 	public boolean addZombie(int row) {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie()
-				&& isPositionEmpty(Game.NUM_COLS, row);
+				&& isPositionEmpty(Game.NUM_COLS, row);//Trabajar sobre el isPositionEmpty que falta
 
 		if(canAdd) {
 			// TODO fill your code
 			Zombie z_nuevo= new ZombieComun();
 			this.zombies.insertar(z_nuevo);
+			this.number++;
+			this.zombies[this.number].setZombie_x=randomZombieRow;
+			//this.zombies[this.number].setZombie_y= Game.NUM_COLS+1; No sé como meterlo porque en teoría zombieManager no tiene que importar a Game sino al revés
+			
+			
+			
 			//ahora falta actualizar la posicion donde lo meto que falta ver donde lo guardo
 		}
 		return canAdd;
@@ -68,7 +77,7 @@ public class ZombiesManager {
 	
 	// TODO fill your code
 	private int getRemainingZombies() {
-		int num = 0; //me he inventado el nÃºmero para que devuelva un int y no de error pero hay que hacer la funciÃ³n
+		int num = (level.getNumberOfZombies()-this.number)
 		return num;
 	}
 	

@@ -16,6 +16,6 @@ public class ZombieList {
 		this.zlista[contador]=z;
 		contador++;
 	}
-	
+
 	//Igual meter un metodo para borrar los zombis
 }
