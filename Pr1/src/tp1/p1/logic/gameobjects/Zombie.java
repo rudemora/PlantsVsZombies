@@ -9,7 +9,7 @@ public class Zombie {
 	private int x;
 	private int y;
 	
-	public void ZombieComun() {
+	public void Zombie() {//De momento todos los zombies son comunes
 		this.resistencia=5;
 		this.dano=1;
 		this.velocidad=2;//Cuantos ciclos le cuesta avanzar una casilla
@@ -27,6 +27,9 @@ public class Zombie {
 	}
 	public void setZombie_y(int y) {
 		this.y=y;
+	}
+	public void avanzar() {
+		this.y--;
 	}
 }
 //TENGO QUE CREAR UN CONSTRUCTOR PARA A�ADIR ZOMBIS CON SUS ESPECIFICACIONES

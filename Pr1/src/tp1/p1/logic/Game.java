@@ -3,7 +3,9 @@ package tp1.p1.logic;
 import java.util.Random;
 
 import tp1.p1.control.Level;
-
+import tp1.p1.logic.gameobjects.ZombieList;
+import tp1.p1.logic.gameobjects.PeashooterList;
+import tp1.p1.logic.gameobjects.SunflowerList;
 
 public class Game {
 	
@@ -12,6 +14,9 @@ public class Game {
 	
 	private long seed;
 	private Level level;
+	private ZombieList zombies;
+	private PeashooterList Peashooters;
+	private SunflowerList Sunflowers;
 	
 	public Game (long s, Level l) {
 		this.seed = s;

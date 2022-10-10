@@ -59,10 +59,11 @@ public class ZombiesManager {
 
 		if(canAdd) {
 			// TODO fill your code
-			Zombie z_nuevo= new ZombieComun();
+			Zombie z_nuevo= new Zombie();
 			this.zombies.insertar(z_nuevo);
 			this.number++;
-			this.zombies[this.number].setZombie_x=randomZombieRow;
+			this.zombies.cambiarposx_ultimo(row);
+			this.zombies.cambiarposy_ultimo(9);//revisar
 			//this.zombies[this.number].setZombie_y= Game.NUM_COLS+1; No sé como meterlo porque en teoría zombieManager no tiene que importar a Game sino al revés
 			//ahora falta actualizar la posicion donde lo meto que falta ver donde lo guardo
 		}

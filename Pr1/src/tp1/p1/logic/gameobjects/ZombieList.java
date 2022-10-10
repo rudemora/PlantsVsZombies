@@ -16,6 +16,11 @@ public class ZombieList {
 		this.zlista[contador]=z;
 		contador++;
 	}
-
+public void cambiarposx_ultimo(int pos) {
+	this.zlista[contador-1].setZombie_x(pos);
+}
+public void cambiarposy_ultimo(int pos) {
+	this.zlista[contador-1].setZombie_y(pos);
+}
 	//Igual meter un metodo para borrar los zombis
 }
