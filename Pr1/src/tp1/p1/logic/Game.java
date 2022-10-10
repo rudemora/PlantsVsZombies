@@ -3,9 +3,9 @@ package tp1.p1.logic;
 import java.util.Random;
 
 import tp1.p1.control.Level;
-import tp1.p1.logic.gameobjects.ZombieList;
-import tp1.p1.logic.gameobjects.PeashooterList;
-import tp1.p1.logic.gameobjects.SunflowerList;
+
+import tp1.p1.logic.gameobjects.*;
+import tp1.p1.logic.ZombiesManager;
 
 public class Game {
 	
@@ -17,19 +17,22 @@ public class Game {
 	private ZombieList zombies;
 	private PeashooterList Peashooters;
 	private SunflowerList Sunflowers;
+	private int suncoins;
 	
-	public Game (long s, Level l) {
+	
+	public void Game (long s, Level l) {
 		this.seed = s;
 		this.level = l;
+		this.suncoins=50;
 	}
 	
 	private Random rand;
 	
-	private void update() {
-		/*bool anadir_z= ZombiesManager.addZombie(); //a�ado el zombie
-		if(contador%2==0) {
-			//
-		}*/
+	
+	private void update() {//Privado no tiene que ser, no?
+		
+		
+		
 	}
 	
 	public String positionToString(int col, int row) {

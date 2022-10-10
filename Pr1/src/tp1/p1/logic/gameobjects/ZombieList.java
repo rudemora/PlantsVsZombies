@@ -7,12 +7,12 @@ public class ZombieList {
 	private int contador;
 	
 	
-	public ZombieList (int i) { //Método constructor: añade una zombilist de longitud i
+public ZombieList (int i) { //Método constructor: añade una zombilist de longitud i
 		this.zlista = new Zombie[i];
 		this.contador=0;
 	}
 	
-	public void insertar(Zombie z) {
+public void insertar(Zombie z) {
 		this.zlista[contador]=z;
 		contador++;
 	}
@@ -21,6 +21,14 @@ public void cambiarposx_ultimo(int pos) {
 }
 public void cambiarposy_ultimo(int pos) {
 	this.zlista[contador-1].setZombie_y(pos);
+}
+public boolean hayalgunzombie(int x, int y) {
+	for (int i=0; i<contador; i++) {
+		if (zlista[i].hay_Zombie(x, y)) {
+			return true;
+		}
+	}
+	return false;
 }
 	//Igual meter un metodo para borrar los zombis
 }
