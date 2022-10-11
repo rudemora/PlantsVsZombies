@@ -4,17 +4,19 @@ import tp1.p1.view.Messages;
 
 public class Peashooter {
 	private static final String description = "PEASHOOTER_DESCRIPTION";
-	private int cost;
-	private int damage;
-	private int endurance;
+	private static int cost=50;
+	private static int damage=1;
+	private int endurance=3;
 	private int posx;
 	private int posy;
 	
 	
-	public Peashooter() {
-		this.cost=50;//No sé si inicializarlo aqui o hacerlo en los atributos
-		this.damage=1;
-		this.endurance=3;
+	
+	
+	public Peashooter(int x, int y) {
+		
+		this.posx=x;
+		this.posy=y;
 	}
 	
 	public static String getDescription() {
@@ -34,4 +36,6 @@ public class Peashooter {
 	public int getEndurance() {
 		return this.endurance;
 	}
+	
+
 }

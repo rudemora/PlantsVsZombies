@@ -27,7 +27,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		this.gamePrinter = new GamePrinter(game);
 		this.count_cycles = 0;
 		this.sun_coins = 50;
-		this.remaining_zombies=
+		this.remaining_zombies=8; //Lo sacamos del level pero aun no sabemos
 	}
 	
 	
@@ -80,6 +80,10 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
 		case "a":
 		case "add":
+			if(lectura[1].equals("Peashooter")) {
+				System.out.println("hola");
+			}
+			if(lectura[1].equals("Sunflower"))
 			break;
 		case"l":
 		case"list":

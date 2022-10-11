@@ -8,13 +8,14 @@ public class Sunflower {
 	private static int endurance=1;
 	private int posx;
 	private int posy;
-	private int ciclos; //Para contar el numero de ciclos que llevan creados
+	private int ciclos=0; //Para contar el numero de ciclos que llevan creados
 	
-	
-	public void Sunflower() {
-
+	public Sunflower(int x, int y) {
+		
+		this.posx=x;
+		this.posy=y;
 	}
-
+	
 	public static String getDescription() {
 		return Messages.SUNFLOWER_DESCRIPTION.formatted(cost,damage, endurance);
 	}

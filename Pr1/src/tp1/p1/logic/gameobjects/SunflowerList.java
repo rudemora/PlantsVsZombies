@@ -2,7 +2,7 @@ package tp1.p1.logic.gameobjects;
 
 public class SunflowerList {
 	private Sunflower[] SunflowerList;
-	private int contador;
+	private int contador=0;
 	
 	
 	public boolean hayalgunSunflower(int x, int y) {
@@ -23,6 +23,15 @@ public class SunflowerList {
 			}
 		}
 		return endurance;
+	}
+	public SunflowerList(int tamano){
+		
+		this.SunflowerList= new Sunflower[tamano];
+		
+	}
+	public void add_Sunflower(int x, int y) {
+		this.SunflowerList[this.contador]=new Sunflower(x,y);
+		this.contador++;
 	}
 	
 	

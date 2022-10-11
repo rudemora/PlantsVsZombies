@@ -20,16 +20,24 @@ public class Game {
 	private int suncoins;
 	
 	
-	public Game() {
-		this.seed = 25;//No se donde se lee
-		this.level = new Level;//Falta el constructor
+	public Game(long s, Level l) {
+		this.seed = s;//No se donde se lee
+		this.level =l;//Falta el constructor
 		this.suncoins=50;
-		this.zombies= new ZombieList;
-		this.Peashooters
-		this.Sunflowers
+		this.zombies= new ZombieList(5);//El numero de zombies lo sacamos de level, pero aun sabemos como
+		//this.Peashooters= new Peashooters(); Falta poner el parametro tamano
+		//this.Sunflowers= new Sunflowers();
 	
 	}
 	
+	public int getSuncoins() {
+		return this.suncoins;
+	}
+	private void generar_soles(Sunflower s) {
+		if(s.getCiclos()%2==0) {
+			this.suncoins=this.suncoins+50;
+		}
+	}
 	private Random rand;
 	//:)
 	public String positionToString(int col, int row) {
@@ -47,8 +55,26 @@ public class Game {
 		return escribe;
 	}
 	
+	public PeashooterList crearPeashooterList() {
+		int tamano=NUM_COLS*NUM_ROWS;
+		PeashooterList P_list= new PeashooterList(tamano);
+		return P_list;
+		
+	}
+	public SunflowerList crearSunflowerList() {
+		int tamano=NUM_COLS*NUM_ROWS;
+		SunflowerList S_list= new SunflowerList(tamano);
+		return S_list;
+		
+	}
+	public ZombieList crearZombieList() {
+		int tamano=8;//Tiene que ser el number zombies del level que de momento no sabemos
+		ZombieList Z_list= new ZombieList(tamano);
+		return Z_list;
+		
+	}
 	
-	private void update() {//Privado no tiene que ser, no?
+	public void update() {//Privado no tiene que ser, no?
 		
 		
 		
