@@ -27,7 +27,7 @@ public class Game {
 	}
 	
 	private Random rand;
-	
+	//:)
 	public String positionToString(int col, int row) {
 		String escribe=" ";
 		if(zombies.hayalgunzombie(col, row)) {
