@@ -91,6 +91,10 @@ public class GamePrinter {
 	}
 	
 	private static String repeat (String s, int num ) {
-		return s; //hacer función
+		StringBuilder str = new StringBuilder();
+		for(int i =0;i< num;i=i+1) {
+			str.append(s);
+		}
+		return str.toString(); //hacer función
 	}
 }

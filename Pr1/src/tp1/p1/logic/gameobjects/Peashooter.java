@@ -3,10 +3,9 @@ package tp1.p1.logic.gameobjects;
 import tp1.p1.view.Messages;
 
 public class Peashooter {
-	private static final String description = "PEASHOOTER_DESCRIPTION";
 	private static int cost=50;
 	private static int damage=1;
-	private int endurance=3;
+	private static int endurance=3;
 	private int posx;
 	private int posy;
 	
@@ -20,7 +19,7 @@ public class Peashooter {
 	}
 	
 	public static String getDescription() {
-		return description;
+		return Messages.PEASHOOTER_DESCRIPTION.formatted(cost,damage, endurance);
 	}
 	
 	

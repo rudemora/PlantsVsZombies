@@ -41,7 +41,7 @@ public class Game {
 	private Random rand;
 	//:)
 	public String positionToString(int col, int row) {
-		String escribe="h";
+		String escribe=" ";
 /*		if(zombies.hayalgunzombie(col, row)) {
 			escribe="Z" ; //falta meter el numero de la fila y de la columna
 	

@@ -1,9 +1,11 @@
 package tp1.p1.control;
-import java.io.PrintStream;
+//import java.io.PrintStream;
 //Implementar código para imprimir mensaje(por ej, cuando termina el juego)
+import static tp1.p1.view.Messages.*;
 import java.util.Scanner;
 
 import tp1.p1.logic.Game;
+import tp1.p1.logic.gameobjects.*;
 import tp1.p1.view.GamePrinter;
 import tp1.p1.view.Messages;
 /**
@@ -35,7 +37,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 	 * Draw / Paint the game.
 	 */
 	private void printGame() {
-		System.out.println(gamePrinter.toString());
+		System.out.println(gamePrinter);
 	}
 
 	/**
@@ -72,7 +74,6 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		// TODO fill your code
 		//int contador_ciclos=0;
 		//this.count_cycles =0;
-		//this.draw();
 		this.printGame();
 		
 		
@@ -80,10 +81,12 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
 		case "a":
 		case "add":
-			if(lectura[1].equals("Peashooter")) {
-				System.out.println("hola");
+			if(lectura[1].equalsIgnoreCase("peashooter")) {
+				System.out.print(Peashooter.getDescription());
 			}
-			if(lectura[1].equals("Sunflower"))
+			else if(lectura[1].equalsIgnoreCase("sunflower")) {
+				System.out.print(Sunflower.getDescription());
+			}
 			break;
 		case"l":
 		case"list":
