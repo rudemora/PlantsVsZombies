@@ -27,42 +27,10 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		this.gamePrinter = new GamePrinter(game);
 		this.count_cycles = 0;
 		this.sun_coins = 50;
+		this.remaining_zombies=
 	}
 	
-	/*private void draw() { //Esto es necesario?
-
-		System.out.print("Number of cycles: ");
-		System.out.println(this.count_cycles);
-		System.out.print("Sun coins: ");
-		System.out.println(this.sun_coins);
-		System.out.println("Remaining zombies: ");
-		System.out.print("  ");
-		for(int i =0;i<Game.NUM_COLS ; i = i+1) {
-			System.out.print(" ");
-			for(int k =0;k<8;k=k+1) {
-				System.out.print(Character.toString(95));
-			}
-		}
-		System.out.println();
-		for(int i =0; i < Game.NUM_ROWS; i = i + 1) {
-			System.out.println();
-			System.out.print("  ");
-			for(int j = 0; j < Game.NUM_COLS ; j = j +1) {
-				System.out.print(Character.toString(124) + "        ");	
-			}
-			System.out.print(Character.toString(124));
-			System.out.println();
-			System.out.print("  ");
-			for(int k =0;k<Game.NUM_COLS ; k = k+1) {
-				System.out.print(" ");
-				for(int l =0;l<8;l=l+1) {
-					System.out.print(Character.toString(95));
-				}
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}*/
+	
 	/**
 	 * Draw / Paint the game.
 	 */
@@ -105,8 +73,9 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		//int contador_ciclos=0;
 		//this.count_cycles =0;
 		//this.draw();
-		this.prompt();
 		this.printGame();
+		this.prompt();
+		
 		String[] lectura= prompt();
 		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
 		case "a":

@@ -20,17 +20,21 @@ public class Game {
 	private int suncoins;
 	
 	
-	public Game(long s, Level l) {
-		this.seed = s;
-		this.level = l;
+	public Game() {
+		this.seed = 25;//No se donde se lee
+		this.level = new Level;//Falta el constructor
 		this.suncoins=50;
+		this.zombies= new ZombieList;
+		this.Peashooters
+		this.Sunflowers
+	
 	}
 	
 	private Random rand;
 	//:)
 	public String positionToString(int col, int row) {
-		String escribe=" ";
-		if(zombies.hayalgunzombie(col, row)) {
+		String escribe="h";
+/*		if(zombies.hayalgunzombie(col, row)) {
 			escribe="Z" ; //falta meter el numero de la fila y de la columna
 	
 		}
@@ -39,7 +43,7 @@ public class Game {
 		}
 		else if (Sunflowers.hayalgunSunflower(col, row)) {
 			escribe="S";
-		}
+		}*/
 		return escribe;
 	}
 	
