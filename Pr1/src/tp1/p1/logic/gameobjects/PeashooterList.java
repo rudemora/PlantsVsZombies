@@ -14,5 +14,16 @@ public class PeashooterList {
 		}
 		return false;
 	}
+	
+	public int endurance(int x, int y) {
+		int endurance=0;
+		for (int i=0; i<contador;i++) {
+			if (this.Peashooterlist[i].hay_Peashooter(x, y)) {
+				endurance=this.Peashooterlist[i].getEndurance();
+				return endurance;
+			}
+		}
+		return endurance;
+	}
 
 }

@@ -20,13 +20,28 @@ public class Game {
 	private int suncoins;
 	
 	
-	public void Game (long s, Level l) {
+	public Game(long s, Level l) {
 		this.seed = s;
 		this.level = l;
 		this.suncoins=50;
 	}
 	
 	private Random rand;
+	
+	public String positionToString(int col, int row) {
+		String escribe=" ";
+		if(zombies.hayalgunzombie(col, row)) {
+			escribe="Z" ; //falta meter el numero de la fila y de la columna
+	
+		}
+		else if(Peashooters.hayalgunPeashooter(col, row)) {
+			escribe="P";
+		}
+		else if (Sunflowers.hayalgunSunflower(col, row)) {
+			escribe="S";
+		}
+		return escribe;
+	}
 	
 	
 	private void update() {//Privado no tiene que ser, no?
@@ -35,9 +50,9 @@ public class Game {
 		
 	}
 	
-	public String positionToString(int col, int row) {
+	/*public String positionToString(int col, int row) {
 		return  ("col"); // hacer la función
-	}
+	}*/
 	
 	//métodos addPeashooter, addSunflower (col, fila), método reset(inicializa una partida, mirar si es el mismo código que cuando 
 	//creamos la partida)

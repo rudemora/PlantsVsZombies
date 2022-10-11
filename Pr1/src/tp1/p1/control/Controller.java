@@ -29,7 +29,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		this.sun_coins = 50;
 	}
 	
-	private void draw() { //Esto es necesario?
+	/*private void draw() { //Esto es necesario?
 
 		System.out.print("Number of cycles: ");
 		System.out.println(this.count_cycles);
@@ -62,7 +62,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 			System.out.println();
 		}
 		System.out.println();
-	}
+	}*/
 	/**
 	 * Draw / Paint the game.
 	 */
@@ -104,9 +104,9 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		// TODO fill your code
 		//int contador_ciclos=0;
 		//this.count_cycles =0;
-		this.draw();
+		//this.draw();
 		this.prompt();
-		printGame();
+		this.printGame();
 		String[] lectura= prompt();
 		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
 		case "a":

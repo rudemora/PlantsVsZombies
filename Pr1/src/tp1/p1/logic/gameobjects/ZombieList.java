@@ -30,5 +30,16 @@ public boolean hayalgunzombie(int x, int y) {
 	}
 	return false;
 }
+
+public int endurance(int x, int y) {
+	int endurance=0;
+	for (int i=0; i<contador; i++) {
+		if (zlista[i].hay_Zombie(x,y)) {
+			endurance= zlista[i].getEndurance();
+			return endurance;
+		}
+	}
+	return endurance;
+}
 	//Igual meter un metodo para borrar los zombis
 }

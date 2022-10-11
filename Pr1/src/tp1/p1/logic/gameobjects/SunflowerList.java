@@ -14,7 +14,16 @@ public class SunflowerList {
 		return false;
 	}
 	
-	
+	public int endurance (int x, int y) {
+		int endurance=0;
+		for(int i=0; i<contador; i++) {
+			if (this.SunflowerList[i].haySunflower(x, y)) {
+				endurance = this.SunflowerList[i].getEndurance();
+				return endurance;
+			}
+		}
+		return endurance;
+	}
 	
 	
 	

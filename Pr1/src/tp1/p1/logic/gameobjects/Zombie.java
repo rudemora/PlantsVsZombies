@@ -50,6 +50,10 @@ public class Zombie {
 		return this.ciclos;
 	}
 	
+	public int getEndurance() {
+		return this.endurance;
+	}
+	
 }
 //TENGO QUE CREAR UN CONSTRUCTOR PARA A�ADIR ZOMBIS CON SUS ESPECIFICACIONES
 

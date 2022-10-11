@@ -11,7 +11,7 @@ public class Peashooter {
 	private int posy;
 	
 	
-	public void Peashooter() {
+	public Peashooter() {
 		this.cost=50;//No sé si inicializarlo aqui o hacerlo en los atributos
 		this.damage=1;
 		this.endurance=3;
@@ -30,5 +30,8 @@ public class Peashooter {
 	public void recibir_dano(int dano) {//El dato dano lo pillo del zombie
 		this.endurance=this.endurance-dano;
 		
+	}
+	public int getEndurance() {
+		return this.endurance;
 	}
 }
