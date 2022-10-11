@@ -74,7 +74,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		//this.count_cycles =0;
 		//this.draw();
 		this.printGame();
-		this.prompt();
+		
 		
 		String[] lectura= prompt();
 		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
