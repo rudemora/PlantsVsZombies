@@ -25,9 +25,19 @@ public class Game {
 		this.level =l;//Falta el constructor
 		this.suncoins=50;
 		this.zombies= new ZombieList(5);//El numero de zombies lo sacamos de level, pero aun sabemos como
+		int tamano= this.NUM_COLS*this.NUM_ROWS;
+		this.Peashooters= new PeashooterList (tamano);
+		this.Sunflowers= new SunflowerList (tamano);
 		//this.Peashooters= new Peashooters(); Falta poner el parametro tamano
 		//this.Sunflowers= new Sunflowers();
 	
+	}
+	
+	public boolean hay_algo(int x, int y) {
+		if(this.Peashooters.hayalgunPeashooter(x, y)||this.Sunflowers.hayalgunSunflower(x, y)||this.zombies.hayalgunzombie(x, y)) {
+			return true;
+		}
+		return false;
 	}
 	
 	public int getSuncoins() {
@@ -42,16 +52,19 @@ public class Game {
 	//:)
 	public String positionToString(int col, int row) {
 		String escribe=" ";
-/*		if(zombies.hayalgunzombie(col, row)) {
-			escribe="Z" ; //falta meter el numero de la fila y de la columna
+		String fila= ""+col;
+		String columna=""+row;
+	if(zombies.hayalgunzombie(col, row)) {
+			
+			escribe="Z"+"["+fila+columna+"]"; 
 	
 		}
 		else if(Peashooters.hayalgunPeashooter(col, row)) {
-			escribe="P";
+			escribe="P"+"["+fila+columna+"]";
 		}
 		else if (Sunflowers.hayalgunSunflower(col, row)) {
-			escribe="S";
-		}*/
+			escribe="S"+"["+fila+columna+"]";
+		}
 		return escribe;
 	}
 	
@@ -71,6 +84,15 @@ public class Game {
 		int tamano=8;//Tiene que ser el number zombies del level que de momento no sabemos
 		ZombieList Z_list= new ZombieList(tamano);
 		return Z_list;
+		
+	}
+	public void add_P(int x, int y) {
+		this.Peashooters.add_Peashooter(x,y);
+		this.suncoins=this.suncoins-50;
+	}
+	public void add_S(int x, int y) {
+		this.Sunflowers.add_Sunflower(x,y);
+		this.suncoins=this.suncoins-20;
 		
 	}
 	

@@ -20,7 +20,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 
 	private GamePrinter gamePrinter;
 	
-	private int sun_coins;
+	private int sun_coins;//Lo ponemos aqui o en el game?
 	private int count_cycles;
 	private int remaining_zombies;
 	public Controller(Game game, Scanner scanner) {
@@ -74,41 +74,63 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		// TODO fill your code
 		//int contador_ciclos=0;
 		//this.count_cycles =0;
-		this.printGame();
+		
+		boolean end=true;
+		while(end) {
+			this.printGame();
+			String[] lectura= prompt();
+			switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
+			case "a":
+			case "add":
+				if(lectura[1].equalsIgnoreCase("peashooter")) {
+					if(this.game.getSuncoins()>=50) {
+						int x= Integer.parseInt(lectura[2]);
+						int y = Integer.parseInt(lectura[3]);
+						if(!this.game.hay_algo(x, y)) {
+							this.game.add_P(x, y);
+						}
+						
+						
+					}
+					System.out.print(Peashooter.getDescription());
+				}
+				else if(lectura[1].equalsIgnoreCase("sunflower")) {
+					if(this.game.getSuncoins()>=20) {
+						int x= Integer.parseInt(lectura[2]);
+						int y = Integer.parseInt(lectura[3]);
+						if(!this.game.hay_algo(x, y)) {
+							this.game.add_S(x, y);
+						}
+						
+					}
+					System.out.print(Sunflower.getDescription());
+				}
+				break;
+			case"l":
+			case"list":
+				System.out.println(Messages.LIST);
+
+				break;
+			case"r":
+			case "reset":
+
+				break;
+
+			case "h":
+			case "help":
+				System.out.println(Messages.HELP);
+				break;
+			case "e":
+			case "exit":
+				break;
+			case"n":
+			case"none":
+			case "":
+				break;
+		}
 		
 		
-		String[] lectura= prompt();
-		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
-		case "a":
-		case "add":
-			if(lectura[1].equalsIgnoreCase("peashooter")) {
-				System.out.print(Peashooter.getDescription());
-			}
-			else if(lectura[1].equalsIgnoreCase("sunflower")) {
-				System.out.print(Sunflower.getDescription());
-			}
-			break;
-		case"l":
-		case"list":
-			System.out.println(Messages.LIST);
 
-			break;
-		case"r":
-		case "reset":
-
-			break;
-
-		case "h":
-		case "help":
-			System.out.println(Messages.HELP);
-			break;
-		case "e":
-		case "exit":
-			break;
-		case"n":
-		case"none":
-		case "":
-			break;
 
 
 		}
