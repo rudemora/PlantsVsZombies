@@ -57,6 +57,12 @@ public class Zombie {
 		this.x++;
 	}
 	
+	public boolean muerto() {
+		if(this.endurance==0){
+			return true;
+		}
+		return false;
+	}
 }
 //TENGO QUE CREAR UN CONSTRUCTOR PARA A�ADIR ZOMBIS CON SUS ESPECIFICACIONES
 

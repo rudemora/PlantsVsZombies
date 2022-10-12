@@ -10,7 +10,9 @@ public class Peashooter {
 	private int posy;
 	
 	
-	
+	public Peashooter() {
+		
+	}
 	
 	public Peashooter(int x, int y) {
 		
@@ -34,6 +36,13 @@ public class Peashooter {
 	}
 	public int getEndurance() {
 		return this.endurance;
+	}
+	
+	public boolean muerto() {
+		if (this.endurance==0) {
+			return true;
+		}
+		return false;
 	}
 	
 

@@ -102,6 +102,8 @@ public class Game {
 	}
 	
 	private void update_P() {
+		Zombie z= new Zombie();
+		int pos=-1;
 		int x;
 		boolean ok=true;
 		for(int i=0; i<this.NUM_COLS; i++) {
@@ -111,7 +113,12 @@ public class Game {
 					while (x<this.NUM_COLS && ok) {
 					
 						if(this.zombies.hayalgunzombie(x, j)) {
-							this.zombies.zombie_posicion(x, j).disparado_Peashooter();
+							z=this.zombies.zombie_posicion(x, j);
+							z.disparado_Peashooter();
+							if(z.getEndurance()==0) {
+								pos=this.zombies.pos_Z(x, j);
+								this.zombies.matar(pos);
+							}
 							ok=false;
 						}
 					}
@@ -132,11 +139,42 @@ public class Game {
 			}
 		}
 	}
+	
+	public void zombi_ataca() {
+		Sunflower s= new Sunflower();
+		Peashooter p= new Peashooter();
+		int pos=-1;
+		for (int i=0; i<this.NUM_COLS; i++) {
+			for(int j=0; j<this.NUM_ROWS; j++) {
+				if (this.zombies.hayalgunzombie(i, j)) {
+					if(this.Peashooters.hayalgunPeashooter(i-1, j)) {
+						p=this.Peashooters.hay_P(i-1, j);
+						p.recibir_dano(1); //EL uno lo pongo para no poner movidas ahora pq todos los zombies hacen el mismo daño
+						if(p.getEndurance()<=0) {
+							pos=this.Peashooters.pos_P(i, j);
+							this.Peashooters.matar(pos);
+						}
+					}
+					if(this.Sunflowers.hayalgunSunflower(-1, j)) {
+						s=this.Sunflowers.hay_S(i-1, j);
+						s.recibir_dano(1);
+						if(s.getEndurance()<=0) {
+							pos=this.Sunflowers.pos_S(i, j);
+							this.Sunflowers.matar(pos);
+						}
+						
+					}
+				}
+			}
+		}
+	}
 	public void update() {//Privado no tiene que ser, no?
 		
 		this.suncoins=this.suncoins+this.Sunflowers.update_S();
 		this.update_P();
 		this.avanzar();
+		this.zombi_ataca();
+		
 	}
 	
 	/*public String positionToString(int col, int row) {

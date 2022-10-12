@@ -10,6 +10,9 @@ public class Sunflower {
 	private int posy;
 	private int ciclos=0; //Para contar el numero de ciclos que llevan creados
 	
+	public Sunflower() {
+		
+	}
 	public Sunflower(int x, int y) {
 		
 		this.posx=x;
@@ -45,5 +48,11 @@ public class Sunflower {
 			return 10;
 		}
 		return 0;
+	}
+	public boolean muerto() {
+		if (this.endurance==0) {
+			return true;
+		}
+		return false;
 	}
 }

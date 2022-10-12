@@ -53,8 +53,26 @@ public Zombie zombie_posicion(int x, int y) {
 	return zombie;
 }
 
+public int pos_Z(int x, int y) {//ME da la posicion en la lista del zombie que esta en la posicion (x,y)
+	int pos =-1;
+	for (int i=0; i<contador; i++) {
+		if (zlista[i].hay_Zombie(x,y)) {
+			pos=i;
+			return pos;
+		}
+	}
+	return pos;
+	
+}
 
-
+public void matar(int pos) {
+	if(this.zlista[pos].muerto()) {
+		for(int i=pos; i<(this.contador-1); i++) {
+			this.zlista[i]=this.zlista[i+1];
+		}
+		this.contador--;
+	}
+}
 
 	//Igual meter un metodo para borrar los zombis
 }
