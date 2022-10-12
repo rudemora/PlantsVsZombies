@@ -53,6 +53,9 @@ public class Zombie {
 	public int getEndurance() {
 		return this.endurance;
 	}
+	public void avance() {
+		this.x++;
+	}
 	
 }
 //TENGO QUE CREAR UN CONSTRUCTOR PARA A�ADIR ZOMBIS CON SUS ESPECIFICACIONES

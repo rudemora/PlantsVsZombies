@@ -20,7 +20,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 
 	private GamePrinter gamePrinter;
 	
-	private int sun_coins;//Lo ponemos aqui o en el game?
+	
 	private int count_cycles;
 	private int remaining_zombies;
 	public Controller(Game game, Scanner scanner) {
@@ -28,7 +28,6 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		this.scanner = scanner;
 		this.gamePrinter = new GamePrinter(game);
 		this.count_cycles = 0;
-		this.sun_coins = 50;
 		this.remaining_zombies=8; //Lo sacamos del level pero aun no sabemos
 	}
 	
@@ -66,6 +65,62 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 	public void debug(String line) {
 		//crear método debug
 	}
+	
+	private boolean swich(String[]lectura) {
+		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
+		case "a":
+		case "add":
+			if(lectura[1].equalsIgnoreCase("peashooter")) {
+				if(this.game.getSuncoins()>=50) {
+					int y= Integer.parseInt(lectura[2]);
+					int x = Integer.parseInt(lectura[3]);
+					if(!this.game.hay_algo(x, y)) {
+						this.game.add_P(x, y);
+					}
+					this.game.pagar(50);
+					
+					
+				}
+				
+			}
+			else if(lectura[1].equalsIgnoreCase("sunflower")) {
+				if(this.game.getSuncoins()>=20) {
+					int x= Integer.parseInt(lectura[2]);
+					int y = Integer.parseInt(lectura[3]);
+					if(!this.game.hay_algo(x, y)) {
+						this.game.add_S(x, y);
+					}
+					this.game.pagar(20);
+				}
+				
+			}
+			break;
+		case"l":
+		case"list":
+			System.out.println(Messages.LIST);
+
+			break;
+		case"r":
+		case "reset":
+
+			break;
+
+		case "h":
+		case "help":
+			System.out.println(Messages.HELP);
+			break;
+		case "e":
+		case "exit":
+			System.out.println(Messages.GAME_OVER);
+			return false;
+			
+		case"n":
+		case"none":
+		case "":
+			break;
+		}
+		return true;	
+	}
 
 	/**
 	 * Runs the game logic.
@@ -79,61 +134,18 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		while(end) {
 			this.printGame();
 			String[] lectura= prompt();
-			switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
-			case "a":
-			case "add":
-				if(lectura[1].equalsIgnoreCase("peashooter")) {
-					if(this.game.getSuncoins()>=50) {
-						int x= Integer.parseInt(lectura[2]);
-						int y = Integer.parseInt(lectura[3]);
-						if(!this.game.hay_algo(x, y)) {
-							this.game.add_P(x, y);
-						}
-						
-						
-					}
-					System.out.print(Peashooter.getDescription());
-				}
-				else if(lectura[1].equalsIgnoreCase("sunflower")) {
-					if(this.game.getSuncoins()>=20) {
-						int x= Integer.parseInt(lectura[2]);
-						int y = Integer.parseInt(lectura[3]);
-						if(!this.game.hay_algo(x, y)) {
-							this.game.add_S(x, y);
-						}
-						
-					}
-					System.out.print(Sunflower.getDescription());
-				}
-				break;
-			case"l":
-			case"list":
-				System.out.println(Messages.LIST);
-
-				break;
-			case"r":
-			case "reset":
-
-				break;
-
-			case "h":
-			case "help":
-				System.out.println(Messages.HELP);
-				break;
-			case "e":
-			case "exit":
-				break;
-			case"n":
-			case"none":
-			case "":
-				break;
+			end=this.swich(lectura);
+			game.update();
+			
 		}
+	
+			
 		
 		
 
 
 
-		}
+		
 		//bucle con pintar(pintar el juego), user action (pide comando al usuario y ejecuta, hay que usar PROMPT), 
 		//game action, update, pintar 
 		//hacer el método list de user action, utilizar game printer para imprimir la lista generada por list

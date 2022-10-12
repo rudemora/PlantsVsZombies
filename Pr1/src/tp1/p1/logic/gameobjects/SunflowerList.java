@@ -33,7 +33,13 @@ public class SunflowerList {
 		this.SunflowerList[this.contador]=new Sunflower(x,y);
 		this.contador++;
 	}
-	
+	public int update_S(){
+		int suma=0;
+		for (int i=0; i<this.contador; i++) {
+			suma=suma+this.SunflowerList[i].anadir_soles();
+		}
+		return suma;
+	}
 	
 	
 	

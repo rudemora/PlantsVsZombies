@@ -7,7 +7,7 @@ public class ZombieList {
 	private int contador;
 	
 	
-public ZombieList (int i) { //Método constructor: añade una zombilist de longitud i
+public ZombieList (int i) { //Mï¿½todo constructor: aï¿½ade una zombilist de longitud i
 		this.zlista = new Zombie[i];
 		this.contador=0;
 	}
@@ -41,5 +41,20 @@ public int endurance(int x, int y) {
 	}
 	return endurance;
 }
+
+public Zombie zombie_posicion(int x, int y) {
+	Zombie zombie= new Zombie();
+	for (int i=0; i<contador; i++) {
+		if (zlista[i].hay_Zombie(x,y)) {
+			zombie= zlista[i];
+			return zombie;
+		}
+	}
+	return zombie;
+}
+
+
+
+
 	//Igual meter un metodo para borrar los zombis
 }

@@ -40,4 +40,10 @@ public class Sunflower {
 	public int getEndurance() {
 		return this.endurance;
 	}
+	public int anadir_soles() {
+		if (this.ciclos%3==0) {
+			return 10;
+		}
+		return 0;
+	}
 }

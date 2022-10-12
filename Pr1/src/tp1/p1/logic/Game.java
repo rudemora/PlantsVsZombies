@@ -43,6 +43,9 @@ public class Game {
 	public int getSuncoins() {
 		return this.suncoins;
 	}
+	public void pagar(int x) {
+		this.suncoins=this.suncoins-x;
+	}
 	private void generar_soles(Sunflower s) {
 		if(s.getCiclos()%2==0) {
 			this.suncoins=this.suncoins+50;
@@ -52,18 +55,20 @@ public class Game {
 	//:)
 	public String positionToString(int col, int row) {
 		String escribe=" ";
-		String fila= ""+col;
-		String columna=""+row;
-	if(zombies.hayalgunzombie(col, row)) {
+		
+		
+		if(zombies.hayalgunzombie(col, row)) {
 			
-			escribe="Z"+"["+fila+columna+"]"; 
+			escribe="Z"+"[0"+"]"; 
 	
 		}
 		else if(Peashooters.hayalgunPeashooter(col, row)) {
-			escribe="P"+"["+fila+columna+"]";
+			int endurance= Peashooters.endurance(col, row);
+			escribe="P"+"[0"+endurance+"]";
 		}
 		else if (Sunflowers.hayalgunSunflower(col, row)) {
-			escribe="S"+"["+fila+columna+"]";
+			int endurance= Sunflowers.endurance(col, row);
+			escribe="S"+"[0"+endurance+"]";
 		}
 		return escribe;
 	}
@@ -96,10 +101,42 @@ public class Game {
 		
 	}
 	
+	private void update_P() {
+		int x;
+		boolean ok=true;
+		for(int i=0; i<this.NUM_COLS; i++) {
+			for (int j=0; j<this.NUM_ROWS;j++) {
+				if (this.Peashooters.hayalgunPeashooter(i, j)) {
+					x=i+1;
+					while (x<this.NUM_COLS && ok) {
+					
+						if(this.zombies.hayalgunzombie(x, j)) {
+							this.zombies.zombie_posicion(x, j).disparado_Peashooter();
+							ok=false;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void avanzar() {
+		for(int i=0; i<this.NUM_COLS; i++) {
+			for (int j=0; j<this.NUM_ROWS;j++) {
+				if (this.zombies.hayalgunzombie(i, j)) {
+					if(!this.Peashooters.hayalgunPeashooter(i-1, j)) {
+						this.zombies.zombie_posicion(i, j).avance();
+					}
+				}
+				
+			}
+		}
+	}
 	public void update() {//Privado no tiene que ser, no?
 		
-		
-		
+		this.suncoins=this.suncoins+this.Sunflowers.update_S();
+		this.update_P();
+		this.avanzar();
 	}
 	
 	/*public String positionToString(int col, int row) {
