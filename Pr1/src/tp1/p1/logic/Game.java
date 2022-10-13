@@ -131,9 +131,10 @@ public class Game {
 		for(int i=0; i<this.NUM_COLS; i++) {
 			for (int j=0; j<this.NUM_ROWS;j++) {
 				if (this.zombies.hayalgunzombie(i, j)) {
-					if(!this.Peashooters.hayalgunPeashooter(i-1, j)) {
+					if(!this.Peashooters.hayalgunPeashooter(i-1, j)&&!this.Sunflowers.hayalgunSunflower(i-1, j)) {
 						this.zombies.zombie_posicion(i, j).avance();
 					}
+					
 				}
 				
 			}
