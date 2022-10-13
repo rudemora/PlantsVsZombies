@@ -29,7 +29,7 @@ public class Game {
 		this.zombies= new ZombiesManager(this,level,rand);//El numero de zombies lo sacamos de level, pero aun sabemos como
 		int tamano= this.NUM_COLS*this.NUM_ROWS;
 		this.Peashooters= new PeashooterList (tamano,this);
-		this.Sunflowers= new SunflowerList (tamano);
+		this.Sunflowers= new SunflowerList (tamano,this);
 		//this.Peashooters= new Peashooters(); Falta poner el parametro tamano
 		//this.Sunflowers= new Sunflowers();
 	
@@ -44,6 +44,9 @@ public class Game {
 	
 	public int getSuncoins() {
 		return this.suncoins;
+	}
+	public void setSuncoins(int suma) {
+		this.suncoins=suma;
 	}
 	public void pagar(int x) {
 		this.suncoins=this.suncoins-x;
@@ -60,8 +63,8 @@ public class Game {
 		
 		
 		if(zombies.hayalgunzombie(col, row)) {
-			
-			escribe="Z"+"[0"+"]"; 
+			int endurance=zombies.endurance(col,row);
+			escribe="Z"+"[0"+endurance+"]"; 
 	
 		}
 		else if(Peashooters.hayalgunPeashooter(col, row)) {
@@ -83,7 +86,7 @@ public class Game {
 	}
 	public SunflowerList crearSunflowerList() {
 		int tamano=NUM_COLS*NUM_ROWS;
-		SunflowerList S_list= new SunflowerList(tamano);
+		SunflowerList S_list= new SunflowerList(tamano,this);
 		return S_list;
 		
 	}
@@ -102,6 +105,7 @@ public class Game {
 		this.suncoins=this.suncoins-20;
 		
 	}
+
 	
 	
 	
@@ -130,10 +134,13 @@ public class Game {
 	}
 	public void update() {//Privado no tiene que ser, no?
 		
-		this.suncoins=this.suncoins+this.Sunflowers.update();
+		this.Sunflowers.update();
 		this.Peashooters.update();
 		this.zombies.update();
-		//falta el matar a las cosas
+		this.Peashooters.matar();
+		this.Sunflowers.matar();
+		this.zombies.matar();
+		
 		
 	}
 	

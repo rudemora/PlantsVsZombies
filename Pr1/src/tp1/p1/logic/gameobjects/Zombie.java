@@ -58,7 +58,7 @@ public class Zombie {
 	}
 	
 	public boolean muerto() {
-		if(this.endurance==0){
+		if(this.endurance<=0){
 			return true;
 		}
 		return false;

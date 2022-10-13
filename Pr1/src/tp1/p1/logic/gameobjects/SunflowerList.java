@@ -1,9 +1,11 @@
 package tp1.p1.logic.gameobjects;
 
+import tp1.p1.logic.Game;
+
 public class SunflowerList {
 	private Sunflower[] SunflowerList;
 	private int contador=0;
-	
+	private Game game;
 	
 	public boolean hayalgunSunflower(int x, int y) {
 		for (int i=0; i<contador; i++) {
@@ -24,7 +26,6 @@ public class SunflowerList {
 	}
 	
 	
-	
 	public int endurance (int x, int y) {
 		int endurance=0;
 		for(int i=0; i<contador; i++) {
@@ -35,9 +36,11 @@ public class SunflowerList {
 		}
 		return endurance;
 	}
-	public SunflowerList(int tamano){
+
+	public SunflowerList(int tamano,Game game){
 		
 		this.SunflowerList= new Sunflower[tamano];
+		this.game=game;
 		
 	}
 	public void add_Sunflower(int x, int y) {
@@ -51,22 +54,32 @@ public class SunflowerList {
 			s.recibir_dano(dano);
 		}
 	}
-	public int update(){
+	
+	public void actualizar_ciclos() {
+		for (int i=0; i<this.contador; i++) {
+			this.SunflowerList[i].aumentar_ciclos();
+		}
+	}
+	public void update(){
 		int suma=0;
 		for (int i=0; i<this.contador; i++) {
 			suma=suma+this.SunflowerList[i].anadir_soles();
 		}
-		return suma;
+		this.game.setSuncoins(game.getSuncoins()+suma);
+		this.actualizar_ciclos();
 	}
 	
-	public void matar(int pos) {
-		if (this.SunflowerList[pos].muerto()) {
-			for(int i=pos; i<(contador-1);i++) {
-				this.SunflowerList[i]=this.SunflowerList[i+1];
-				
+	public void matar() {
+		for (int p=0; p<contador; p++) {
+			if (this.SunflowerList[p].muerto()) {
+				for(int i=p; i<(contador-1);i++) {
+					this.SunflowerList[i]=this.SunflowerList[i+1];
+					
+				}
+				this.contador--;
 			}
-			this.contador--;
 		}
+		
 	}
 	
 	

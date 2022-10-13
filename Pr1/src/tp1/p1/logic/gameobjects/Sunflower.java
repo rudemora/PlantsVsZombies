@@ -50,7 +50,7 @@ public class Sunflower {
 		return 0;
 	}
 	public boolean muerto() {
-		if (this.endurance==0) {
+		if (this.endurance<=0) {
 			return true;
 		}
 		return false;

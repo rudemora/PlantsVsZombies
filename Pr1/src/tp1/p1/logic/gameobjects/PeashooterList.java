@@ -30,8 +30,6 @@ public class PeashooterList {
 		}
 		return p;
 	}
-	
-
 	public int endurance(int x, int y) {
 		int endurance=0;
 		for (int i=0; i<contador;i++) {
@@ -43,19 +41,26 @@ public class PeashooterList {
 		return endurance;
 	}
 
+	
+
+	
+
 	public void add_Peashooter(int x, int y) {
 		this.Peashooterlist[this.contador]=new Peashooter(x,y);
 		this.contador++;
 	}
 	
-	public void matar(int pos) {
-		if (this.Peashooterlist[pos].muerto()) {
-			for(int i=pos; i<(contador-1);i++) {
-				this.Peashooterlist[i]=this.Peashooterlist[i+1];
-				
+	public void matar() {
+		for(int p=0; p<contador;p++) {
+			if (this.Peashooterlist[p].muerto()) {
+				for(int i=p; i<(contador-1);i++) {
+					this.Peashooterlist[i]=this.Peashooterlist[i+1];
+					
+				}
+				this.contador--;
 			}
-			this.contador--;
 		}
+		
 	}
 	
 	public void p_atacado(int x, int y, int dano) {
@@ -74,6 +79,7 @@ public class PeashooterList {
 			this.game.zombie_atacado(posx, posy);
 			
 		}
+		
 		
 	}
 	

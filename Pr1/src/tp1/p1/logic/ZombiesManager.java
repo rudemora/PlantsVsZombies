@@ -77,41 +77,22 @@ public class ZombiesManager {
 	}
 	
 	public boolean hayalgunzombie(int x, int y) {
-		int contador= this.zombies.getcontador();
-		for(int i=0; i<contador; i++) {
-			if(this.zombies.getposx(i)==x&&this.zombies.getposy(i)==y) {
-				return true;
-			}
-		}
-		return false;
+		return this.zombies.hayalgunzombie(x, y);
 	}
-	public int endurance(int x, int y) {
-		int endurance=0;
-		int contador=this.zombies.getcontador();
-		for (int i=0; i<contador; i++) {
-			if (hayalgunzombie(x,y)) {
-				endurance= this.zombies.endurance(i);
-				return endurance;
-			}
-		}
-		return endurance;
-	}
+
 	
 	public void zombie_atacado(int x, int y) {
-		int contador= this.zombies.getcontador();
-		boolean ok=true;
-		int p=x+1;
-		while(ok&&p<this.game.NUM_COLS) {
-			for(int i=0; i<contador; i++) {
-				if(this.zombies.sacar_zombie(i).getZombie_x()==p&&this.zombies.sacar_zombie(i).getZombie_y()==y) {
-					this.zombies.sacar_zombie(i).disparado_Peashooter();
-					ok=false;
-				}
-			}
-			p++;
+		this.zombies.zombie_atacado(x, y, this.game.NUM_COLS);
 		
-		}
-		
+	}
+	public void matar() {
+		this.zombies.matar_muertos();;
+	}
+	public void actualizar_ciclos() {
+		this.zombies.actualizar_ciclos();
+	}
+	public int endurance(int x, int y) {
+		return this.zombies.endurance(x,y);
 	}
 
 	public void update() {
@@ -130,6 +111,7 @@ public class ZombiesManager {
 			}
 			
 		}
+		this.actualizar_ciclos();
 	}
 	
 
