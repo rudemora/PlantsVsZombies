@@ -28,7 +28,7 @@ public class Game {
 		this.rand= new Random();
 		this.zombies= new ZombiesManager(this,level,rand);//El numero de zombies lo sacamos de level, pero aun sabemos como
 		int tamano= this.NUM_COLS*this.NUM_ROWS;
-		this.Peashooters= new PeashooterList (tamano);
+		this.Peashooters= new PeashooterList (tamano,this);
 		this.Sunflowers= new SunflowerList (tamano);
 		//this.Peashooters= new Peashooters(); Falta poner el parametro tamano
 		//this.Sunflowers= new Sunflowers();
@@ -77,7 +77,7 @@ public class Game {
 	
 	public PeashooterList crearPeashooterList() {
 		int tamano=NUM_COLS*NUM_ROWS;
-		PeashooterList P_list= new PeashooterList(tamano);
+		PeashooterList P_list= new PeashooterList(tamano,this);
 		return P_list;
 		
 	}
@@ -103,89 +103,40 @@ public class Game {
 		
 	}
 	
-	/*private void update_P() {
-		Zombie z= new Zombie();
-		int pos=-1;
-		int x;
-		boolean ok=true;
-		for(int i=0; i<this.NUM_COLS; i++) {
-			for (int j=0; j<this.NUM_ROWS;j++) {
-				if (this.Peashooters.hayalgunPeashooter(i, j)) {
-					x=i+1;
-					while (x<this.NUM_COLS && ok) {
-					
-						if(this.zombies.hayalgunzombie(x, j)) {
-							z=this.zombies.zombie_posicion(x, j);
-							z.disparado_Peashooter();
-							if(z.getEndurance()==0) {
-								pos=this.zombies.pos_Z(x, j);
-								this.zombies.matar(pos);
-							}
-							ok=false;
-						}
-					}
-				}
-			}
+	
+	
+	public boolean isPositionEmpty(int x, int y) {
+		if(this.Peashooters.hayalgunPeashooter(x, y)) {
+			return true;
 		}
-	}*/
-
-	private void avanzar() {
-		for(int i=0; i<this.NUM_COLS; i++) {
-			for (int j=0; j<this.NUM_ROWS;j++) {
-				if (this.zombies.hayalgunzombie(i, j)) {
-					if(!this.Peashooters.hayalgunPeashooter(i-1, j)&&!this.Sunflowers.hayalgunSunflower(i-1, j)) {
-						this.zombies.zombie_posicion(i, j).avance();
-					}
-					
-				}
-				
-			}
+		if(this.Sunflowers.hayalgunSunflower(x, y)) {
+			return true;
 		}
+		if (this.zombies.hayalgunzombie(x, y)) {
+			return true;
+		}
+		return false;
 	}
 	
-	public void zombi_ataca() {
-		Sunflower s= new Sunflower();
-		Peashooter p= new Peashooter();
-		int pos=-1;
-		for (int i=0; i<this.NUM_COLS; i++) {
-			for(int j=0; j<this.NUM_ROWS; j++) {
-				if (this.zombies.hayalgunzombie(i, j)) {
-					if(this.Peashooters.hayalgunPeashooter(i-1, j)) {
-						p=this.Peashooters.hay_P(i-1, j);
-						p.recibir_dano(1); //EL uno lo pongo para no poner movidas ahora pq todos los zombies hacen el mismo daño
-						if(p.getEndurance()<=0) {
-							pos=this.Peashooters.pos_P(i, j);
-							this.Peashooters.matar(pos);
-						}
-					}
-					if(this.Sunflowers.hayalgunSunflower(-1, j)) {
-						s=this.Sunflowers.hay_S(i-1, j);
-						s.recibir_dano(1);
-						if(s.getEndurance()<=0) {
-							pos=this.Sunflowers.pos_S(i, j);
-							this.Sunflowers.matar(pos);
-						}
-						
-					}
-				}
-			}
-		}
+	public void zombie_atacado (int x, int y) {
+		this.zombies.zombie_atacado(x, y);
+	}
+	
+	public void p_atacado(int x, int y, int dano) {
+		this.Peashooters.p_atacado(x, y, dano);
+	}
+	public void s_atacado(int x, int y, int dano) {
+		this.Sunflowers.s_atacado(x, y, dano);
 	}
 	public void update() {//Privado no tiene que ser, no?
 		
-		this.suncoins=this.suncoins+this.Sunflowers.update_S();
-		this.update_P();
-		this.avanzar();
-		this.zombi_ataca();
+		this.suncoins=this.suncoins+this.Sunflowers.update();
+		this.Peashooters.update();
+		this.zombies.update();
+		//falta el matar a las cosas
 		
 	}
-	public void atacar_Z(int x, int y) {
-		for(int i=x+1;i<this.NUM_COLS;i++) {
-			if (this.zombies.hayalgunzombie(i, y)) {
-				this.zombies.atacar(i,y);
-			}
-		}
-	}
+	
 	
 	/*public String positionToString(int col, int row) {
 		return  ("col"); // hacer la función

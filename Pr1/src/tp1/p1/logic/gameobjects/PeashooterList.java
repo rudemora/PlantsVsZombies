@@ -3,10 +3,12 @@ import tp1.p1.logic.Game;
 public class PeashooterList {
 	private Peashooter[] Peashooterlist;
 	private int contador=0;
+	private Game game;
 	
-	public PeashooterList(int tamano){
+	public PeashooterList(int tamano,Game game){
 		
 		this.Peashooterlist= new Peashooter[tamano];
+		this.game=game;
 		
 	}
 	public boolean hayalgunPeashooter(int x, int y) {
@@ -29,17 +31,7 @@ public class PeashooterList {
 		return p;
 	}
 	
-public int pos_P(int x, int y) {//Me da la posicion en la lista del sunflower de posicion de tablero (x,y)
-		
-		int pos=-1;
-		for(int i=0; i<contador;i++) {
-			if (this.Peashooterlist[i].hay_Peashooter(x, y)) {
-				return i;
-			}
-		}
-		return pos;
-		
-	}
+
 	public int endurance(int x, int y) {
 		int endurance=0;
 		for (int i=0; i<contador;i++) {
@@ -66,12 +58,20 @@ public int pos_P(int x, int y) {//Me da la posicion en la lista del sunflower de
 		}
 	}
 	
+	public void p_atacado(int x, int y, int dano) {
+		Peashooter p= new Peashooter();
+		if(this.hayalgunPeashooter(x, y)) {
+			p=this.hay_P(x, y);
+			p.recibir_dano(dano);
+		}
+	}
 	public void update() {
 		int posx;
 		int posy;
 		for(int i=0; i<this.contador; i++) {
 			posx=this.Peashooterlist[i].getPosx();
 			posy=this.Peashooterlist[i].getPosy();
+			this.game.zombie_atacado(posx, posy);
 			
 		}
 		

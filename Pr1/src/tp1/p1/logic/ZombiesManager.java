@@ -55,7 +55,7 @@ public class ZombiesManager {
 
 	public boolean addZombie(int row) {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie()
-				&& isPositionEmpty(Game.NUM_COLS, row); //Trabajar sobre el isPositionEmpty que falta
+				&& game.isPositionEmpty(Game.NUM_COLS, row); //Trabajar sobre el isPositionEmpty que falta
 
 		if(canAdd) {
 			// TODO fill your code
@@ -97,18 +97,41 @@ public class ZombiesManager {
 		return endurance;
 	}
 	
-	public void atacar(int x, int y) {
+	public void zombie_atacado(int x, int y) {
 		int contador= this.zombies.getcontador();
-		for(int i=0; i<contador; i++) {
-			if(this.zombies.sacar_zombie(i).getZombie_x()==x&&this.zombies.sacar_zombie(i).getZombie_y()==y) {
-				this.zombies.sacar_zombie(i).disparado_Peashooter();
+		boolean ok=true;
+		int p=x+1;
+		while(ok&&p<this.game.NUM_COLS) {
+			for(int i=0; i<contador; i++) {
+				if(this.zombies.sacar_zombie(i).getZombie_x()==p&&this.zombies.sacar_zombie(i).getZombie_y()==y) {
+					this.zombies.sacar_zombie(i).disparado_Peashooter();
+					ok=false;
+				}
 			}
+			p++;
+		
 		}
+		
 	}
 
-	private static boolean isPositionEmpty(int col, int fila) {
-		return true; // hay que hacer la función
+	public void update() {
+		int contador=this.zombies.getcontador();
+		int posx;
+		int posy;
+		for(int i=0; i<contador;i++) {
+			posx=this.zombies.getposx(i);
+			posy=this.zombies.getposy(i);
+			if(this.game.isPositionEmpty(posx-1, posy)) {//Compruebo si el zombie tiene que avanzar o hacer daño
+				this.zombies.getzombie(i).avance();
+			}
+			else {
+				this.game.p_atacado(posx, posy, 1);//Hace siempre 1 de dano en esta practica
+				this.game.s_atacado(posx, posy, 1);
+			}
+			
+		}
 	}
+	
 
 	//Hacer que avancen los zombies, para ello igual meter un atributo de los ciclos que llevan creados cada zombie para saber si tienen que avanzar o no
 	

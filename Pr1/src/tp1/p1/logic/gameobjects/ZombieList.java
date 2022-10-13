@@ -34,6 +34,9 @@ public int getposy(int pos) {
 	return this.zlista[pos].getZombie_y();
 }
 
+public Zombie getzombie(int pos) {//ME da el zombie de la posicion i de la lista
+	return this.zlista[pos];
+}
 		
 
 public int endurance(int pos) {
@@ -42,28 +45,8 @@ public int endurance(int pos) {
 	return endurance;
 }
 
-public Zombie zombie_posicion(int x, int y) {
-	Zombie zombie= new Zombie();
-	for (int i=0; i<contador; i++) {
-		if (zlista[i].hay_Zombie(x,y)) {
-			zombie= zlista[i];
-			return zombie;
-		}
-	}
-	return zombie;
-}
 
-public int pos_Z(int x, int y) {//ME da la posicion en la lista del zombie que esta en la posicion (x,y)
-	int pos =-1;
-	for (int i=0; i<contador; i++) {
-		if (zlista[i].hay_Zombie(x,y)) {
-			pos=i;
-			return pos;
-		}
-	}
-	return pos;
-	
-}
+
 public Zombie sacar_zombie(int i) {
 	return this.zlista[i];
 }

@@ -23,17 +23,7 @@ public class SunflowerList {
 		return s;
 	}
 	
-	public int pos_S(int x, int y) {//Me da la posicion en la lista del sunflower de posicion de tablero (x,y)
-		
-		int pos=-1;
-		for(int i=0; i<contador;i++) {
-			if (this.SunflowerList[i].haySunflower(x, y)) {
-				return i;
-			}
-		}
-		return pos;
-		
-	}
+	
 	
 	public int endurance (int x, int y) {
 		int endurance=0;
@@ -54,7 +44,14 @@ public class SunflowerList {
 		this.SunflowerList[this.contador]=new Sunflower(x,y);
 		this.contador++;
 	}
-	public int update_S(){
+	public void s_atacado(int x, int y, int dano) {
+		Sunflower s= new Sunflower();
+		if(this.hayalgunSunflower(x, y)) {
+			s= this.hay_S(x, y);
+			s.recibir_dano(dano);
+		}
+	}
+	public int update(){
 		int suma=0;
 		for (int i=0; i<this.contador; i++) {
 			suma=suma+this.SunflowerList[i].anadir_soles();
