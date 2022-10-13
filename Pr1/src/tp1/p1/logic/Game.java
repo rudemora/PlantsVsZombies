@@ -14,17 +14,19 @@ public class Game {
 	
 	private long seed;
 	private Level level;
-	private ZombieList zombies;
+	private ZombiesManager zombies;
+	
 	private PeashooterList Peashooters;
 	private SunflowerList Sunflowers;
 	private int suncoins;
-	
+	private Random rand;
 	
 	public Game(long s, Level l) {
 		this.seed = s;//No se donde se lee
 		this.level =l;//Falta el constructor
 		this.suncoins=50;
-		this.zombies= new ZombieList(5);//El numero de zombies lo sacamos de level, pero aun sabemos como
+		this.rand= new Random();
+		this.zombies= new ZombiesManager(this,level,rand);//El numero de zombies lo sacamos de level, pero aun sabemos como
 		int tamano= this.NUM_COLS*this.NUM_ROWS;
 		this.Peashooters= new PeashooterList (tamano);
 		this.Sunflowers= new SunflowerList (tamano);
@@ -51,7 +53,7 @@ public class Game {
 			this.suncoins=this.suncoins+50;
 		}
 	}
-	private Random rand;
+
 	//:)
 	public String positionToString(int col, int row) {
 		String escribe=" ";
@@ -101,7 +103,7 @@ public class Game {
 		
 	}
 	
-	private void update_P() {
+	/*private void update_P() {
 		Zombie z= new Zombie();
 		int pos=-1;
 		int x;
@@ -125,7 +127,7 @@ public class Game {
 				}
 			}
 		}
-	}
+	}*/
 
 	private void avanzar() {
 		for(int i=0; i<this.NUM_COLS; i++) {
@@ -176,6 +178,13 @@ public class Game {
 		this.avanzar();
 		this.zombi_ataca();
 		
+	}
+	public void atacar_Z(int x, int y) {
+		for(int i=x+1;i<this.NUM_COLS;i++) {
+			if (this.zombies.hayalgunzombie(i, y)) {
+				this.zombies.atacar(i,y);
+			}
+		}
 	}
 	
 	/*public String positionToString(int col, int row) {

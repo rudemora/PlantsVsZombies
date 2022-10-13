@@ -27,7 +27,7 @@ public class ZombiesManager {
 		this.level = level;
 		this.rand = rand;
 		this.remainingZombies = level.getNumberOfZombies();
-		this.zombies = new ZombieList(this.remainingZombies); //Crea una zombilist de longitud remaining zombis
+		this.zombies = new ZombieList(level.getNumberOfZombies()); //Crea una zombilist de longitud remaining zombis
 	}
 
 	/**
@@ -76,6 +76,36 @@ public class ZombiesManager {
 		return num;
 	}
 	
+	public boolean hayalgunzombie(int x, int y) {
+		int contador= this.zombies.getcontador();
+		for(int i=0; i<contador; i++) {
+			if(this.zombies.getposx(i)==x&&this.zombies.getposy(i)==y) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public int endurance(int x, int y) {
+		int endurance=0;
+		int contador=this.zombies.getcontador();
+		for (int i=0; i<contador; i++) {
+			if (hayalgunzombie(x,y)) {
+				endurance= this.zombies.endurance(i);
+				return endurance;
+			}
+		}
+		return endurance;
+	}
+	
+	public void atacar(int x, int y) {
+		int contador= this.zombies.getcontador();
+		for(int i=0; i<contador; i++) {
+			if(this.zombies.sacar_zombie(i).getZombie_x()==x&&this.zombies.sacar_zombie(i).getZombie_y()==y) {
+				this.zombies.sacar_zombie(i).disparado_Peashooter();
+			}
+		}
+	}
+
 	private static boolean isPositionEmpty(int col, int fila) {
 		return true; // hay que hacer la función
 	}

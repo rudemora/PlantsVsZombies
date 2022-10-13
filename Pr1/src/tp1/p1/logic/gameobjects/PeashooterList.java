@@ -1,5 +1,5 @@
 package tp1.p1.logic.gameobjects;
-
+import tp1.p1.logic.Game;
 public class PeashooterList {
 	private Peashooter[] Peashooterlist;
 	private int contador=0;
@@ -65,5 +65,18 @@ public int pos_P(int x, int y) {//Me da la posicion en la lista del sunflower de
 			this.contador--;
 		}
 	}
+	
+	public void update() {
+		int posx;
+		int posy;
+		for(int i=0; i<this.contador; i++) {
+			posx=this.Peashooterlist[i].getPosx();
+			posy=this.Peashooterlist[i].getPosy();
+			
+		}
+		
+	}
+	
+	
 	
 }

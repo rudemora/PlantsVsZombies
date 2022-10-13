@@ -11,7 +11,8 @@ public ZombieList (int i) { //M�todo constructor: a�ade una zombilist de lon
 		this.zlista = new Zombie[i];
 		this.contador=0;
 	}
-	
+
+
 public void insertar(Zombie z) {
 		this.zlista[contador]=z;
 		contador++;
@@ -22,23 +23,22 @@ public void cambiarposx_ultimo(int pos) {
 public void cambiarposy_ultimo(int pos) {
 	this.zlista[contador-1].setZombie_y(pos);
 }
-public boolean hayalgunzombie(int x, int y) {
-	for (int i=0; i<contador; i++) {
-		if (zlista[i].hay_Zombie(x, y)) {
-			return true;
-		}
-	}
-	return false;
+
+public int getcontador() {
+	return this.contador;
+}
+public int getposx(int pos) {
+	return this.zlista[pos].getZombie_x();
+}
+public int getposy(int pos) {
+	return this.zlista[pos].getZombie_y();
 }
 
-public int endurance(int x, int y) {
+		
+
+public int endurance(int pos) {
 	int endurance=0;
-	for (int i=0; i<contador; i++) {
-		if (zlista[i].hay_Zombie(x,y)) {
-			endurance= zlista[i].getEndurance();
-			return endurance;
-		}
-	}
+	endurance=this.zlista[pos].getEndurance();
 	return endurance;
 }
 
@@ -63,6 +63,9 @@ public int pos_Z(int x, int y) {//ME da la posicion en la lista del zombie que e
 	}
 	return pos;
 	
+}
+public Zombie sacar_zombie(int i) {
+	return this.zlista[i];
 }
 
 public void matar(int pos) {

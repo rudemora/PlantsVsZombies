@@ -44,6 +44,12 @@ public class Peashooter {
 		}
 		return false;
 	}
+	public int getPosx() {
+		return this.posx;
+	}
+	public int getPosy() {
+		return this.posy;
+	}
 	
 
 }

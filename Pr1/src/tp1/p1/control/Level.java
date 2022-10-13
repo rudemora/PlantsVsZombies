@@ -5,25 +5,22 @@ package tp1.p1.control;
  *
  */
 public enum Level {
-	EASY, HARD, INSANE;
+	EASY(3,0.1), HARD(5,0.2), INSANE(10,0.3);
 	// TODO fill your code
 	private int numberOfZombies;
 	private double zombieFrequency;
 
-	public static int getNumberOfZombies() {
-		int num = 5; 
-		return num;
+	public  int getNumberOfZombies() {
+		return this.numberOfZombies;
 	}
 	
-	public int getZombieFrequency() {
-		int num = 0; 
-		return num;
+	public double getZombieFrequency() {
+		return this.zombieFrequency;
 	}
 	
 	
-	private Level() {
-		
-	}
+	
+	
 	private Level(int numberOfZombies, double zombieFrequency) {
 		this.numberOfZombies = numberOfZombies;
 		this.zombieFrequency = zombieFrequency;
