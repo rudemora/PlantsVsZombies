@@ -31,13 +31,7 @@ public class ZombieList {
 			this.zlista[contador]=z;
 			contador++;
 		}
-	public void cambiarposx_ultimo(int pos) {
-		this.zlista[contador-1].setZombie_x(pos);
-	}
-	public void cambiarposy_ultimo(int pos) {
-		this.zlista[contador-1].setZombie_y(pos);
-	}
-	
+
 	public int getcontador() {
 		return this.contador;
 	}
@@ -64,14 +58,17 @@ public class ZombieList {
 		}
 	}
 	public void matar_muertos() {
+
 		for (int i=0; i<contador; i++) {
 			if(this.zlista[i].muerto()) {
 				for(int p=i;p<(contador-1);p++) {
 					zlista[p]=zlista[p+1];
 				}
 				this.contador--;
+				
 			}
 		}
+	
 	}
 	public void zombie_atacado(int x, int y, int num_cols) {
 		
@@ -89,7 +86,22 @@ public class ZombieList {
 		}
 		
 	}
+	
+	public boolean quedan_zombies() {
+		if (contador==0) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean zombie_gana() {
+		for(int i=0; i<contador; i++) {
+			if (this.zlista[i].getZombie_x()==0) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 
-	//Igual meter un metodo para borrar los zombis
 }

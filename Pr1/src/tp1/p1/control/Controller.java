@@ -74,7 +74,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 				if(this.game.getSuncoins()>=50) {
 					int y= Integer.parseInt(lectura[2]);
 					int x = Integer.parseInt(lectura[3]);
-					if(!this.game.hay_algo(x, y)) {
+					if(this.game.isPositionEmpty(x, y)) {
 						this.game.add_P(x, y);
 					}
 					this.game.pagar(50);
@@ -87,7 +87,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 				if(this.game.getSuncoins()>=20) {
 					int x= Integer.parseInt(lectura[2]);
 					int y = Integer.parseInt(lectura[3]);
-					if(!this.game.hay_algo(x, y)) {
+					if(this.game.isPositionEmpty(x, y)) {
 						this.game.add_S(x, y);
 					}
 					this.game.pagar(20);
@@ -119,7 +119,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		case "":
 			break;
 		}
-		return true;	
+		return true;	//FALTAN LOS MESAJES DE INVALID COMMAND
 	}
 
 	/**
@@ -135,8 +135,15 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 			this.printGame();
 			String[] lectura= prompt();
 			end=this.swich(lectura);
-			game.update();
+			end=game.update();
 			
+		}
+		
+		if(this.game.quiengana()) {
+			System.out.println(Messages.ZOMBIES_WIN);
+		}
+		else {
+			System.out.println(Messages.PLAYER_WINS);
 		}
 	
 			

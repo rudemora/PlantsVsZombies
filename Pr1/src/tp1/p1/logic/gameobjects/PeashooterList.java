@@ -79,7 +79,7 @@ public class PeashooterList {
 			this.game.zombie_atacado(posx, posy);
 			
 		}
-		
+		this.matar();
 		
 	}
 	

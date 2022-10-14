@@ -60,15 +60,6 @@ public class SunflowerList {
 			this.SunflowerList[i].aumentar_ciclos();
 		}
 	}
-	public void update(){
-		int suma=0;
-		for (int i=0; i<this.contador; i++) {
-			suma=suma+this.SunflowerList[i].anadir_soles();
-		}
-		this.game.setSuncoins(game.getSuncoins()+suma);
-		this.actualizar_ciclos();
-	}
-	
 	public void matar() {
 		for (int p=0; p<contador; p++) {
 			if (this.SunflowerList[p].muerto()) {
@@ -81,6 +72,16 @@ public class SunflowerList {
 		}
 		
 	}
+	public void update(){
+		int suma=0;
+		for (int i=0; i<this.contador; i++) {
+			suma=suma+this.SunflowerList[i].anadir_soles();
+		}
+		this.game.setSuncoins(game.getSuncoins()+suma);
+		this.actualizar_ciclos();
+		this.matar();
+	}
+	
 	
 	
 	

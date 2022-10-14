@@ -21,7 +21,7 @@ public class ZombiesManager {
 	private int remainingZombies;
 
 	private ZombieList zombies;
-	private int number; //Numero de zombies que hay
+	private int number; //Numero de zombies que han salido
 	public ZombiesManager(Game game, Level level, Random rand) {
 		this.game = game;
 		this.level = level;
@@ -60,11 +60,14 @@ public class ZombiesManager {
 		if(canAdd) {
 			// TODO fill your code
 			Zombie z_nuevo= new Zombie();
+			z_nuevo.setZombie_y(row);
+			z_nuevo.setZombie_x(game.NUM_COLS);
 			this.zombies.insertar(z_nuevo);
-			this.number++;
-			this.zombies.cambiarposx_ultimo(row);
-			this.zombies.cambiarposy_ultimo(9);//revisar
-			//this.zombies[this.number].setZombie_y= Game.NUM_COLS+1; No sé como meterlo porque en teoría zombieManager no tiene que importar a Game sino al revés
+			
+			this.remainingZombies--;
+			
+			
+			
 			//ahora falta actualizar la posicion donde lo meto que falta ver donde lo guardo
 		}
 		return canAdd;
@@ -72,8 +75,7 @@ public class ZombiesManager {
 	
 	// TODO fill your code
 	private int getRemainingZombies() {
-		int num = (level.getNumberOfZombies()-this.number);
-		return num;
+		return this.remainingZombies;
 	}
 	
 	public boolean hayalgunzombie(int x, int y) {
@@ -94,8 +96,15 @@ public class ZombiesManager {
 	public int endurance(int x, int y) {
 		return this.zombies.endurance(x,y);
 	}
+	public boolean zombie_gana() {
+		return this.zombies.zombie_gana();
+	}
+	
+	public boolean quedan_zombies() {
+		return this.zombies.quedan_zombies();
+	}
 
-	public void update() {
+	public boolean update() {
 		int contador=this.zombies.getcontador();
 		int posx;
 		int posy;
@@ -106,12 +115,22 @@ public class ZombiesManager {
 				this.zombies.getzombie(i).avance();
 			}
 			else {
-				this.game.p_atacado(posx, posy, 1);//Hace siempre 1 de dano en esta practica
-				this.game.s_atacado(posx, posy, 1);
+				this.game.p_atacado(posx -1, posy, 1);//Hace siempre 1 de dano en esta practica
+				this.game.s_atacado(posx -1, posy, 1);
 			}
 			
 		}
 		this.actualizar_ciclos();
+		this.matar();
+		if(!addZombie()&&this.remainingZombies==0) {
+			if(!quedan_zombies()) {
+				return false;
+			}
+		}
+		else if(zombie_gana()) {
+			return false;
+		}
+		return true;
 	}
 	
 

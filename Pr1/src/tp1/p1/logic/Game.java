@@ -35,12 +35,7 @@ public class Game {
 	
 	}
 	
-	public boolean hay_algo(int x, int y) {
-		if(this.Peashooters.hayalgunPeashooter(x, y)||this.Sunflowers.hayalgunSunflower(x, y)||this.zombies.hayalgunzombie(x, y)) {
-			return true;
-		}
-		return false;
-	}
+	
 	
 	public int getSuncoins() {
 		return this.suncoins;
@@ -51,11 +46,7 @@ public class Game {
 	public void pagar(int x) {
 		this.suncoins=this.suncoins-x;
 	}
-	private void generar_soles(Sunflower s) {
-		if(s.getCiclos()%2==0) {
-			this.suncoins=this.suncoins+50;
-		}
-	}
+	
 
 	//:)
 	public String positionToString(int col, int row) {
@@ -111,15 +102,15 @@ public class Game {
 	
 	public boolean isPositionEmpty(int x, int y) {
 		if(this.Peashooters.hayalgunPeashooter(x, y)) {
-			return true;
+			return false;
 		}
 		if(this.Sunflowers.hayalgunSunflower(x, y)) {
-			return true;
+			return false;
 		}
 		if (this.zombies.hayalgunzombie(x, y)) {
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	public void zombie_atacado (int x, int y) {
@@ -132,14 +123,18 @@ public class Game {
 	public void s_atacado(int x, int y, int dano) {
 		this.Sunflowers.s_atacado(x, y, dano);
 	}
-	public void update() {//Privado no tiene que ser, no?
+	public boolean quiengana() { //Una vez acabada la partida, devuelve true si ganan los zombies
+		if(this.zombies.zombie_gana()) {
+			return true;
+		}
+		return false;
+	}
+	public boolean update() {//Privado no tiene que ser, no?
 		
 		this.Sunflowers.update();
 		this.Peashooters.update();
-		this.zombies.update();
-		this.Peashooters.matar();
-		this.Sunflowers.matar();
-		this.zombies.matar();
+		return this.zombies.update();
+		
 		
 		
 	}
