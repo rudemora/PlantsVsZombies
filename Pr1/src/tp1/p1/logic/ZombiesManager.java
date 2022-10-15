@@ -54,18 +54,14 @@ public class ZombiesManager {
 	}
 
 	public boolean addZombie(int row) {
-		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie()
-				&& game.isPositionEmpty(Game.NUM_COLS, row); //Trabajar sobre el isPositionEmpty que falta
-
+		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && game.isPositionEmpty(Game.NUM_COLS - 1, row); //Trabajar sobre el isPositionEmpty que falta
 		if(canAdd) {
 			// TODO fill your code
 			Zombie z_nuevo= new Zombie();
 			z_nuevo.setZombie_y(row);
-			z_nuevo.setZombie_x(game.NUM_COLS);
+			z_nuevo.setZombie_x(Game.NUM_COLS - 1);
 			this.zombies.insertar(z_nuevo);
-			
-			this.remainingZombies--;
-			
+			this.remainingZombies = this.remainingZombies - 1;
 			
 			
 			//ahora falta actualizar la posicion donde lo meto que falta ver donde lo guardo
@@ -74,7 +70,7 @@ public class ZombiesManager {
 	}
 	
 	// TODO fill your code
-	private int getRemainingZombies() {
+	public int getRemainingZombies() {
 		return this.remainingZombies;
 	}
 	
@@ -84,11 +80,11 @@ public class ZombiesManager {
 
 	
 	public void zombie_atacado(int x, int y) {
-		this.zombies.zombie_atacado(x, y, this.game.NUM_COLS);
+		this.zombies.zombie_atacado(x, y, Game.NUM_COLS);
 		
 	}
 	public void matar() {
-		this.zombies.matar_muertos();;
+		this.zombies.matar_muertos();
 	}
 	public void actualizar_ciclos() {
 		this.zombies.actualizar_ciclos();
@@ -111,18 +107,20 @@ public class ZombiesManager {
 		for(int i=0; i<contador;i++) {
 			posx=this.zombies.getposx(i);
 			posy=this.zombies.getposy(i);
-			if(this.game.isPositionEmpty(posx-1, posy)) {//Compruebo si el zombie tiene que avanzar o hacer daño
+			if(this.game.isPositionEmpty(posx-1, posy) && this.zombies.getzombie(i).canAvanzar()) {//Compruebo si el zombie tiene que avanzar o hacer daño
 				this.zombies.getzombie(i).avance();
+
 			}
 			else {
 				this.game.p_atacado(posx -1, posy, 1);//Hace siempre 1 de dano en esta practica
 				this.game.s_atacado(posx -1, posy, 1);
 			}
 			
+			
 		}
-		this.actualizar_ciclos();
 		this.matar();
-		if(!addZombie()&&this.remainingZombies==0) {
+		this.actualizar_ciclos();
+		if(!addZombie() && this.remainingZombies==0) {
 			if(!quedan_zombies()) {
 				return false;
 			}
@@ -130,6 +128,7 @@ public class ZombiesManager {
 		else if(zombie_gana()) {
 			return false;
 		}
+		
 		return true;
 	}
 	

@@ -18,7 +18,7 @@ public class ZombieList {
 	}
 	public int endurance(int x, int y) {
 		for(int i=0;i<contador;i++) {
-			if(zlista[i].getZombie_x()==x&&zlista[i].getZombie_y()==y) {
+			if(zlista[i].getZombie_x()==x && zlista[i].getZombie_y()==y) {
 				return zlista[i].getEndurance();
 			}
 		}
@@ -58,14 +58,12 @@ public class ZombieList {
 		}
 	}
 	public void matar_muertos() {
-
 		for (int i=0; i<contador; i++) {
 			if(this.zlista[i].muerto()) {
 				for(int p=i;p<(contador-1);p++) {
 					zlista[p]=zlista[p+1];
 				}
 				this.contador--;
-				
 			}
 		}
 	
@@ -88,7 +86,7 @@ public class ZombieList {
 	}
 	
 	public boolean quedan_zombies() {
-		if (contador==0) {
+		if (this.contador==0) {
 			return false;
 		}
 		return true;

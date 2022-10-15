@@ -72,11 +72,11 @@ public class Messages {
 
 	public static final String NOT_ENOUGH_COINS = "Not enough suncoins";
 
-	public static final String NUMBER_OF_CYCLES = "Number of cycles:";
+	public static final String NUMBER_OF_CYCLES = "Number of cycles: %d"; // se puede cambiar esto? he añadido %d
 	
-	public static final String NUMBER_OF_COINS = "Sun coins:";
+	public static final String NUMBER_OF_COINS = "Sun coins: %d"; // se puede cambiar esto?
 
-	public static final String REMAINING_ZOMBIES = "Remaining zombies:";
+	public static final String REMAINING_ZOMBIES = "Remaining zombies: %d"; //se puede cambiar esto?
 
 	public static final String ZOMBIE_ICON = " Z[%02d]";
 	

@@ -28,7 +28,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		this.scanner = scanner;
 		this.gamePrinter = new GamePrinter(game);
 		this.count_cycles = 0;
-		this.remaining_zombies=8; //Lo sacamos del level pero aun no sabemos
+		this.remaining_zombies = game.getRemainingZombies(); //Lo sacamos del level pero aun no sabemos
 	}
 	
 	
@@ -36,6 +36,9 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 	 * Draw / Paint the game.
 	 */
 	private void printGame() {
+		System.out.println(String.format(Messages.NUMBER_OF_CYCLES, this.getCountCycles()));
+		System.out.println(String.format(Messages.NUMBER_OF_COINS, game.getSuncoins()));
+		System.out.println(String.format(Messages.REMAINING_ZOMBIES, this.game.getRemainingZombies()));
 		System.out.println(gamePrinter);
 	}
 
@@ -56,114 +59,107 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		System.out.print(Messages.PROMPT);//Muestra por pantalla lo del comman
 		String line = scanner.nextLine();//Scanner es la forma por la que se capturan l�nas escritas por el usuario
 		String[] words = line.toLowerCase().trim().split("\\s+");//toLowerCase para pasar todo a minusculas  Trim para quitar los blancos y split para dividir el texto en array
-
-		//System.out.println(debug(line));
+		System.out.println(Messages.debug(line));
 
 		return words;//Me devuelve lo que ha metido el usuario
 	}
 	
-	public void debug(String line) {
-		//crear método debug
-	}
+
 	
 	private boolean swich(String[]lectura) {
 		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
 		case "a":
 		case "add":
-			if(lectura[1].equalsIgnoreCase("peashooter")) {
+			if(lectura[1].equalsIgnoreCase("peashooter" ) || lectura[1].equalsIgnoreCase("p")) {
 				if(this.game.getSuncoins()>=50) {
-					int y= Integer.parseInt(lectura[2]);
-					int x = Integer.parseInt(lectura[3]);
+					int x = Integer.parseInt(lectura[2]);
+					int y = Integer.parseInt(lectura[3]);
 					if(this.game.isPositionEmpty(x, y)) {
 						this.game.add_P(x, y);
 					}
-					this.game.pagar(50);
+					//this.game.pagar(50); ya se paga en add_S
 					
 					
 				}
-				
 			}
-			else if(lectura[1].equalsIgnoreCase("sunflower")) {
+			else if(lectura[1].equalsIgnoreCase("sunflower") || lectura[1].equalsIgnoreCase("s")) {
 				if(this.game.getSuncoins()>=20) {
 					int x= Integer.parseInt(lectura[2]);
 					int y = Integer.parseInt(lectura[3]);
 					if(this.game.isPositionEmpty(x, y)) {
 						this.game.add_S(x, y);
 					}
-					this.game.pagar(20);
+					//this.game.pagar(20); ya se paga en add_S
 				}
 				
 			}
+			this.count_cycles +=1;
 			break;
 		case"l":
 		case"list":
 			System.out.println(Messages.LIST);
 
-			break;
+			return false;
+			
 		case"r":
 		case "reset":
 
-			break;
+			return false;
 
 		case "h":
 		case "help":
 			System.out.println(Messages.HELP);
-			break;
-		case "e":
-		case "exit":
-			System.out.println(Messages.GAME_OVER);
 			return false;
+		
 			
 		case"n":
 		case"none":
 		case "":
-			break;
+			this.count_cycles +=1;
+			return true;
 		}
 		return true;	//FALTAN LOS MESAJES DE INVALID COMMAND
 	}
-
+	
+	public int getCountCycles() {
+			return this.count_cycles;
+		}
+	
+	public int getRemainingZombies() {
+		return this.remaining_zombies;
+	}
 	/**
 	 * Runs the game logic.
 	 */
 	public void run() {
-		// TODO fill your code
-		//int contador_ciclos=0;
-		//this.count_cycles =0;
+		
 		
 		boolean end=true;
+		this.printGame();
+		boolean paint;
 		while(end) {
-			this.printGame();
-			String[] lectura= prompt();
-			end=this.swich(lectura);
-			end=game.update();
 			
+			String[] lectura= prompt();
+			paint = this.swich(lectura);
+			         //end=game.update();			
+			if (paint) {
+				game.update(); 
+				this.printGame();
+			}
+			
+			
+
 		}
-		
 		if(this.game.quiengana()) {
 			System.out.println(Messages.ZOMBIES_WIN);
 		}
 		else {
 			System.out.println(Messages.PLAYER_WINS);
 		}
-	
+		
 			
+	
 		
-		
-
-
-
-		
-		//bucle con pintar(pintar el juego), user action (pide comando al usuario y ejecuta, hay que usar PROMPT), 
-		//game action, update, pintar 
-		//hacer el método list de user action, utilizar game printer para imprimir la lista generada por list
-		//none ejecuta un ciclo, el usuario no hace nada y se ejecuta game action (cosas aleatorias) y update (actualizar cambios)
-		
-		/*while () {
-			pintar;
-			userAction;
-			game.update;
-		}*/
-		this.count_cycles += 1;
 	}
 
 }

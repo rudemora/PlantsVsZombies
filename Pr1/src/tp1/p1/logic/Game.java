@@ -5,6 +5,7 @@ import java.util.Random;
 import tp1.p1.control.Level;
 
 import tp1.p1.logic.gameobjects.*;
+import tp1.p1.view.Messages;
 import tp1.p1.logic.ZombiesManager;
 
 public class Game {
@@ -40,6 +41,10 @@ public class Game {
 	public int getSuncoins() {
 		return this.suncoins;
 	}
+	
+	public int getRemainingZombies() {
+		return zombies.getRemainingZombies();
+	}
 	public void setSuncoins(int suma) {
 		this.suncoins=suma;
 	}
@@ -47,24 +52,22 @@ public class Game {
 		this.suncoins=this.suncoins-x;
 	}
 	
-
+	
 	//:)
 	public String positionToString(int col, int row) {
-		String escribe=" ";
-		
-		
+		String escribe= "";
 		if(zombies.hayalgunzombie(col, row)) {
-			int endurance=zombies.endurance(col,row);
-			escribe="Z"+"[0"+endurance+"]"; 
-	
+			int endurance = zombies.endurance(col, row);
+			return String.format(Messages.ZOMBIE_ICON, endurance);
 		}
 		else if(Peashooters.hayalgunPeashooter(col, row)) {
-			int endurance= Peashooters.endurance(col, row);
-			escribe="P"+"[0"+endurance+"]";
+			int endurance = Peashooters.endurance(col, row);
+			return String.format(Messages.PEASHOOTER_ICON, endurance);
+
 		}
 		else if (Sunflowers.hayalgunSunflower(col, row)) {
-			int endurance= Sunflowers.endurance(col, row);
-			escribe="S"+"[0"+endurance+"]";
+			int endurance = Sunflowers.endurance(col, row);
+			return String.format(Messages.SUNFLOWER_ICON, endurance);
 		}
 		return escribe;
 	}
@@ -129,11 +132,12 @@ public class Game {
 		}
 		return false;
 	}
-	public boolean update() {//Privado no tiene que ser, no?
-		
+	public void update() {//Privado no tiene que ser, no?  //ver la razón de que sea boolean o no
 		this.Sunflowers.update();
 		this.Peashooters.update();
-		return this.zombies.update();
+		this.zombies.update();
+		
+		//return this.zombies.update();
 		
 		
 		

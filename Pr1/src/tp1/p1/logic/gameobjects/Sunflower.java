@@ -8,7 +8,7 @@ public class Sunflower {
 	private static int endurance=1;
 	private int posx;
 	private int posy;
-	private int ciclos=0; //Para contar el numero de ciclos que llevan creados
+	private int ciclos=1; //Para contar el numero de ciclos que llevan creados. // LO PONGO A 1 PARA QUE NO AÑADA EN EL PRIMER CICLO
 	
 	public Sunflower() {
 		
@@ -44,7 +44,7 @@ public class Sunflower {
 		return this.endurance;
 	}
 	public int anadir_soles() {
-		if (this.ciclos%3==0) {
+		if (this.ciclos%4==0) {
 			return 10;
 		}
 		return 0;
