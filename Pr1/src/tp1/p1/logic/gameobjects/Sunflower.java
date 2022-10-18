@@ -8,7 +8,7 @@ public class Sunflower {
 	private static int endurance=1;
 	private int posx;
 	private int posy;
-	private int ciclos=1; //Para contar el numero de ciclos que llevan creados. // LO PONGO A 1 PARA QUE NO AÑADA EN EL PRIMER CICLO
+	private int ciclos = 0; //Para contar el numero de ciclos que llevan creados. // LO PONGO A 1 PARA QUE NO AÑADA EN EL PRIMER CICLO
 	
 	public Sunflower() {
 		
@@ -16,14 +16,15 @@ public class Sunflower {
 	public Sunflower(int x, int y) {
 		
 		this.posx=x;
-		this.posy=y;
+		this.posy=y;	
+		this.ciclos = this.ciclos + 1;
 	}
 	
 	public static String getDescription() {
 		return Messages.SUNFLOWER_DESCRIPTION.formatted(cost,damage, endurance);
 	}
 	public boolean haySunflower(int x, int y) {
-		if(this.posx==x && this.posy==y && this.endurance>0) {
+		if(this.posx==x && this.posy==y && endurance>0) {
 			return true;
 		}
 		else {
@@ -32,7 +33,7 @@ public class Sunflower {
 	}
 	
 	public void recibir_dano(int dano) {
-		this.endurance=this.endurance-dano;
+		endurance=endurance-dano;
 	}
 	public void aumentar_ciclos() {
 		this.ciclos++;
@@ -41,16 +42,17 @@ public class Sunflower {
 		return this.ciclos;
 	}
 	public int getEndurance() {
-		return this.endurance;
+		return endurance;
 	}
 	public int anadir_soles() {
 		if (this.ciclos%4==0) {
+			this.ciclos = 1;
 			return 10;
 		}
 		return 0;
 	}
 	public boolean muerto() {
-		if (this.endurance<=0) {
+		if (endurance<=0) {
 			return true;
 		}
 		return false;

@@ -94,7 +94,7 @@ public class ZombieList {
 	
 	public boolean zombie_gana() {
 		for(int i=0; i<contador; i++) {
-			if (this.zlista[i].getZombie_x()==0) {
+			if (this.zlista[i].getZombie_x()<0) {
 				return true;
 			}
 		}

@@ -12,7 +12,7 @@ import tp1.p1.view.Messages;
  * PlantsVsZombies main class.
  */
 public class PlantsVsZombies {
-
+	
 	/**
 	 * Show application help message
 	 */
@@ -55,6 +55,7 @@ public class PlantsVsZombies {
 			usage();
 			return;
 		}
+		
 		Game game = new Game(seed, level);
 		Scanner scanner = new Scanner(System.in);
 		Controller controller = new Controller(game, scanner);

@@ -21,22 +21,26 @@ public class Game {
 	private SunflowerList Sunflowers;
 	private int suncoins;
 	private Random rand;
-	
+	private int countCycles;
 	public Game(long s, Level l) {
-		this.seed = s;//No se donde se lee
-		this.level =l;//Falta el constructor
+		this.seed = s;
+		this.level =l;
 		this.suncoins=50;
-		this.rand= new Random();
-		this.zombies= new ZombiesManager(this,level,rand);//El numero de zombies lo sacamos de level, pero aun sabemos como
-		int tamano= this.NUM_COLS*this.NUM_ROWS;
+		this.countCycles = 0;
+		this.rand= new Random(this.seed);
+		this.zombies= new ZombiesManager(this,level,rand);
+		int tamano= NUM_COLS*NUM_ROWS;
 		this.Peashooters= new PeashooterList (tamano,this);
 		this.Sunflowers= new SunflowerList (tamano,this);
-		//this.Peashooters= new Peashooters(); Falta poner el parametro tamano
-		//this.Sunflowers= new Sunflowers();
-	
 	}
 	
+	public int getCountCycles() {
+		return countCycles;
+	}
 	
+	public void addCycles() {
+		this.countCycles += 1;
+	}
 	
 	public int getSuncoins() {
 		return this.suncoins;
@@ -104,16 +108,22 @@ public class Game {
 	
 	
 	public boolean isPositionEmpty(int x, int y) {
-		if(this.Peashooters.hayalgunPeashooter(x, y)) {
+		if (x>= 0 && x < NUM_COLS && y>= 0 && y < NUM_ROWS) {
+			if(this.Peashooters.hayalgunPeashooter(x, y)) {
+				return false;
+			}
+			if(this.Sunflowers.hayalgunSunflower(x, y)) {
+				return false;
+			}
+			if (this.zombies.hayalgunzombie(x, y)) {
+				return false;
+			}
+			return true;
+		}
+		else {
 			return false;
 		}
-		if(this.Sunflowers.hayalgunSunflower(x, y)) {
-			return false;
-		}
-		if (this.zombies.hayalgunzombie(x, y)) {
-			return false;
-		}
-		return true;
+		
 	}
 	
 	public void zombie_atacado (int x, int y) {
@@ -132,15 +142,19 @@ public class Game {
 		}
 		return false;
 	}
-	public void update() {//Privado no tiene que ser, no?  //ver la razón de que sea boolean o no
+	public boolean update() {//Privado no tiene que ser, no?  //ver la razón de que sea boolean o no
 		this.Sunflowers.update();
 		this.Peashooters.update();
-		this.zombies.update();
-		
-		//return this.zombies.update();
-		
-		
-		
+			return this.zombies.update();		
+	}
+	
+	
+	public long getSeed () {
+		return this.seed;
+	}
+	
+	public Level getLevel() {
+		return this.level;
 	}
 	
 	

@@ -27,19 +27,19 @@ public class Peashooter {
 	
 	public boolean hay_Peashooter(int x, int y) {
 		
-		return (this.posx==x && this.posy==y&& this.endurance>0); //Asegurarse que el doble igual funciona
+		return (this.posx==x && this.posy==y&& endurance>0); //Asegurarse que el doble igual funciona
 	}
 	
 	public void recibir_dano(int dano) {//El dato dano lo pillo del zombie
-		this.endurance=this.endurance-dano;
+		endurance=endurance-dano;
 		
 	}
 	public int getEndurance() {
-		return this.endurance;
+		return endurance;
 	}
 	
 	public boolean muerto() {
-		if (this.endurance<=0) {
+		if (endurance<=0) {
 			return true;
 		}
 		return false;

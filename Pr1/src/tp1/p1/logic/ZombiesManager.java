@@ -2,7 +2,9 @@ package tp1.p1.logic;
 //ZombieManager tiene que ser conocido por Game
 //Tiene que conocer a ZombieList
 import java.util.Random;
+import java.util.Scanner;
 
+import tp1.p1.control.Controller;
 import tp1.p1.control.Level;
 import tp1.p1.logic.gameobjects.Zombie;
 import tp1.p1.logic.gameobjects.ZombieList;
@@ -21,7 +23,6 @@ public class ZombiesManager {
 	private int remainingZombies;
 
 	private ZombieList zombies;
-	private int number; //Numero de zombies que han salido
 	public ZombiesManager(Game game, Level level, Random rand) {
 		this.game = game;
 		this.level = level;
@@ -54,12 +55,12 @@ public class ZombiesManager {
 	}
 
 	public boolean addZombie(int row) {
-		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && game.isPositionEmpty(Game.NUM_COLS - 1, row); //Trabajar sobre el isPositionEmpty que falta
+		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && game.isPositionEmpty(Game.NUM_COLS, row); //Trabajar sobre el isPositionEmpty que falta
 		if(canAdd) {
 			// TODO fill your code
 			Zombie z_nuevo= new Zombie();
 			z_nuevo.setZombie_y(row);
-			z_nuevo.setZombie_x(Game.NUM_COLS - 1);
+			z_nuevo.setZombie_x(Game.NUM_COLS);
 			this.zombies.insertar(z_nuevo);
 			this.remainingZombies = this.remainingZombies - 1;
 			
@@ -100,6 +101,7 @@ public class ZombiesManager {
 		return this.zombies.quedan_zombies();
 	}
 
+	
 	public boolean update() {
 		int contador=this.zombies.getcontador();
 		int posx;
@@ -122,14 +124,14 @@ public class ZombiesManager {
 		this.actualizar_ciclos();
 		if(!addZombie() && this.remainingZombies==0) {
 			if(!quedan_zombies()) {
-				return false;
+				return true;
 			}
 		}
 		else if(zombie_gana()) {
-			return false;
+			return true;
 		}
 		
-		return true;
+		return false;
 	}
 	
 

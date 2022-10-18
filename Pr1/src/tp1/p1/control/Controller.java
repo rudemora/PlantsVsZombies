@@ -21,14 +21,13 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 	private GamePrinter gamePrinter;
 	
 	
-	private int count_cycles;
-	private int remaining_zombies;
+	//private int count_cycles;
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
 		this.scanner = scanner;
 		this.gamePrinter = new GamePrinter(game);
-		this.count_cycles = 0;
-		this.remaining_zombies = game.getRemainingZombies(); //Lo sacamos del level pero aun no sabemos
+		//this.count_cycles = 0;
+		//this.remaining_zombies = game.getRemainingZombies(); //Lo sacamos del level pero aun no sabemos
 	}
 	
 	
@@ -36,8 +35,8 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 	 * Draw / Paint the game.
 	 */
 	private void printGame() {
-		System.out.println(String.format(Messages.NUMBER_OF_CYCLES, this.getCountCycles()));
-		System.out.println(String.format(Messages.NUMBER_OF_COINS, game.getSuncoins()));
+		System.out.println(String.format(Messages.NUMBER_OF_CYCLES, this.game.getCountCycles()));
+		System.out.println(String.format(Messages.NUMBER_OF_COINS, this.game.getSuncoins()));
 		System.out.println(String.format(Messages.REMAINING_ZOMBIES, this.game.getRemainingZombies()));
 		System.out.println(gamePrinter);
 	}
@@ -70,17 +69,32 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		switch(lectura[0]){//Para leer lo que inserte el usuario desde Command
 		case "a":
 		case "add":
-			if(lectura[1].equalsIgnoreCase("peashooter" ) || lectura[1].equalsIgnoreCase("p")) {
+			if (lectura.length < 4) {
+				System.out.println(Messages.error(Messages.COMMAND_PARAMETERS_MISSING));
+				return false;
+			}
+			else if (lectura.length > 4) {
+				System.out.println(Messages.error(Messages.INVALID_COMMAND));
+				return false;
+			}
+			else if(lectura[1].equalsIgnoreCase("peashooter" ) || lectura[1].equalsIgnoreCase("p")) {
 				if(this.game.getSuncoins()>=50) {
 					int x = Integer.parseInt(lectura[2]);
 					int y = Integer.parseInt(lectura[3]);
 					if(this.game.isPositionEmpty(x, y)) {
 						this.game.add_P(x, y);
 					}
-					//this.game.pagar(50); ya se paga en add_S
-					
-					
+					else {
+						System.out.println(Messages.error(Messages.INVALID_POSITION));
+						return false;
+					}
+						//this.game.pagar(50); ya se paga en add_S
 				}
+				else {
+					System.out.println(Messages.error(Messages.NOT_ENOUGH_COINS));
+					return false;
+				}
+				this.game.addCycles();
 			}
 			else if(lectura[1].equalsIgnoreCase("sunflower") || lectura[1].equalsIgnoreCase("s")) {
 				if(this.game.getSuncoins()>=20) {
@@ -89,77 +103,113 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 					if(this.game.isPositionEmpty(x, y)) {
 						this.game.add_S(x, y);
 					}
-					//this.game.pagar(20); ya se paga en add_S
+					else {
+						System.out.println(Messages.error(Messages.INVALID_POSITION));
+						return false;
+					}
+						//this.game.pagar(20); ya se paga en add_S
 				}
-				
+				else {
+					System.out.println(Messages.error(Messages.NOT_ENOUGH_COINS));
+					return false;
+				}
+				this.game.addCycles();
 			}
-			this.count_cycles +=1;
-			break;
+			else {
+				System.out.print(Messages.error(Messages.INVALID_GAME_OBJECT));
+				return false;
+			}
+			return true;
+			
+			/*catch (IndexOutOfBoundsException nfe) {
+				System.out.println(Messages.error(Messages.COMMAND_PARAMETERS_MISSING));
+				return false;
+			}*/
+			
 		case"l":
 		case"list":
-			System.out.println(Messages.LIST);
-
-			return false;
-			
-		case"r":
-		case "reset":
-
+			if (lectura.length == 1) {
+				System.out.println(Messages.LIST);
+			}
+			else {
+				System.out.println(Messages.error(Messages.INVALID_COMMAND));
+			}
 			return false;
 
 		case "h":
 		case "help":
-			System.out.println(Messages.HELP);
+			if (lectura.length == 1) {
+				System.out.println(Messages.HELP);
+			}
+			else {
+				System.out.println(Messages.error(Messages.INVALID_COMMAND));
+			}
 			return false;
 		
-			
+		case "r":
+		case "reset":
+			if (lectura.length == 1) {
+				this.game = new Game(this.game.getSeed(), this.game.getLevel());
+				this.gamePrinter = new GamePrinter(this.game);
+				return true;
+
+			}
+			else {
+				System.out.println(Messages.error(Messages.INVALID_COMMAND));
+				return false;
+			}
 		case"n":
 		case"none":
 		case "":
-			this.count_cycles +=1;
+			this.game.addCycles();
 			return true;
+		default:
+			System.out.println(Messages.error(Messages.UNKNOWN_COMMAND));
+			return false;
 		}
-		return true;	//FALTAN LOS MESAJES DE INVALID COMMAND
+		
 	}
 	
-	public int getCountCycles() {
-			return this.count_cycles;
-		}
-	
-	public int getRemainingZombies() {
-		return this.remaining_zombies;
-	}
 	/**
 	 * Runs the game logic.
 	 */
 	public void run() {
-		
-		
-		boolean end=true;
+		boolean end=false;
 		this.printGame();
-		boolean paint;
-		while(end) {
-			
+		boolean paint = true;
+		boolean exit = false;
+		while(!end && !exit) {
 			String[] lectura= prompt();
-			paint = this.swich(lectura);
-			         //end=game.update();			
+			if (lectura[0].equalsIgnoreCase("e") || lectura[0].equalsIgnoreCase("exit")) {
+				if (lectura.length==1) {
+					exit = true;
+					paint = false;	
+					this.printGame();
+					System.out.println(Messages.GAME_OVER);
+					System.out.println(Messages.PLAYER_QUITS);
+				}
+				else {
+					System.out.println(Messages.error(Messages.INVALID_COMMAND));
+					paint = false;
+				}
+			}
+			else {
+				paint = this.swich(lectura);
+			}	
 			if (paint) {
-				game.update(); 
+				end = game.update(); 
 				this.printGame();
 			}
-			
-			
-
 		}
-		if(this.game.quiengana()) {
-			System.out.println(Messages.ZOMBIES_WIN);
+		if (!exit) {
+			System.out.println(Messages.GAME_OVER);
+			if(this.game.quiengana()) {
+				System.out.println(Messages.ZOMBIES_WIN);
+			}
+			else if (!this.game.quiengana()) {
+				System.out.println(Messages.PLAYER_WINS);
+			}
 		}
-		else {
-			System.out.println(Messages.PLAYER_WINS);
-		}
-		
-			
-	
-		
 	}
 
 }
