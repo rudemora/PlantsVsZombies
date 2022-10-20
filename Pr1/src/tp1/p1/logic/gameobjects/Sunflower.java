@@ -4,9 +4,9 @@ import tp1.p1.logic.Game;
 import tp1.p1.view.Messages;
 
 public class Sunflower {
-	private static int cost=20;
-	private static int damage=0;
-	private static int endurance=1;
+	private int cost;
+	private int damage;
+	private int endurance;
 	private int posx;
 	private int posy;
 	private int ciclos = 0; //Para contar el numero de ciclos que llevan creados. // LO PONGO A 1 PARA QUE NO AÑADA EN EL PRIMER CICLO
@@ -16,7 +16,9 @@ public class Sunflower {
 		this.game=game;
 	}
 	public Sunflower(int x, int y, Game game) {
-		
+		this.cost = 20;
+		this.damage =0;
+		this.endurance = 1;
 		this.posx=x;
 		this.posy=y;
 		this.game=game;
@@ -24,7 +26,7 @@ public class Sunflower {
 	}
 	
 	public static String getDescription() {
-		return Messages.SUNFLOWER_DESCRIPTION.formatted(cost,damage, endurance);
+		return Messages.SUNFLOWER_DESCRIPTION.formatted(20,0, 1);
 	}
 	public boolean haySunflower(int x, int y) {
 		if(this.posx==x && this.posy==y && endurance>0) {
@@ -35,8 +37,10 @@ public class Sunflower {
 		}
 	}
 	
-	public void recibir_dano(int dano) {
-		endurance=endurance-dano;
+	public void recibir_dano(int x, int y, int dano) {
+		if(this.posx == x && this.posy == y) {
+			endurance=endurance-dano;
+		}
 	}
 	public void aumentar_ciclos() {
 		this.ciclos++;
@@ -63,6 +67,9 @@ public class Sunflower {
 	public void update() {
 		this.game.setSuncoins(this.game.getSuncoins()+this.anadir_soles());
 		aumentar_ciclos();
-		
+	}
+	
+	public int pagar() {
+		return this.cost;
 	}
 }

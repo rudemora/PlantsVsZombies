@@ -103,18 +103,10 @@ public class Game {
 		this.suncoins=this.suncoins-50;
 	}
 	public void add_S(int x, int y) {
-		this.Sunflowers.add_Sunflower(x,y);
-		this.suncoins=this.suncoins-20;
-		
+		int coste = this.Sunflowers.add_Sunflower(x,y);
+		this.suncoins=this.suncoins-coste;
 	}
 
-	public int getNumCols() {
-		return NUM_COLS;
-	}
-	public int getNumRows() {
-		return NUM_ROWS;
-	}
-	
 	
 	public boolean isPositionEmpty(int x, int y) {
 		if(this.Peashooters.hayalgunPeashooter(x, y)) {
@@ -129,46 +121,34 @@ public class Game {
 		return true;		
 	}
 	
-	public void zombie_atacado (int x, int y) {
-		this.zombies.zombie_atacado(x, y);
+	public void zombie_atacado (int x, int y, int damage) {
+		int cols = NUM_COLS;
+		this.zombies.zombie_atacado(x, y, damage, cols);
 	}
 	
-	public void p_atacado(int x, int y, int dano) {
-		this.Peashooters.p_atacado(x, y, dano);
+	public void peashooter_atacado(int x, int y, int dano) {
+		this.Peashooters.peashooter_atacado(x, y, dano);
 	}
-	public void s_atacado(int x, int y, int dano) {
-		this.Sunflowers.s_atacado(x, y, dano);
+	public void sunflower_atacado(int x, int y, int dano) {
+		this.Sunflowers.sunflower_atacado(x, y, dano);
 	}
-	public boolean quiengana() { //Una vez acabada la partida, devuelve true si ganan los zombies
+	public boolean quiengana() { 
 		if(this.zombies.zombie_gana()) {
 			return true;
 		}
 		return false;
 	}
-	public boolean update() {//Privado no tiene que ser, no?  //ver la razón de que sea boolean o no
+	public boolean update() {  
 		this.Sunflowers.update();
 		this.Peashooters.update();
 			return this.zombies.update();		
 	}
 	
-	
-	public long getSeed () {
-		return this.seed;
+	public void atacar(int x, int y, int dano) {
+		this.peashooter_atacado(x, y, dano); 
+		this.sunflower_atacado(x, y, dano);
 	}
 	
-	public Level getLevel() {
-		return this.level;
-	}
-	
-	
-	/*public String positionToString(int col, int row) {
-		return  ("col"); // hacer la función
-	}*/
-	
-	//métodos addPeashooter, addSunflower (col, fila), método reset(inicializa una partida, mirar si es el mismo código que cuando 
-	//creamos la partida)
-	//creamos metodo update, ejecuta game action y update, tercer y cuarto paso del run
-	//podemos poner un método update dentro de sunflower y desde ahí lo hacemos, habrá que recorrer la lista desde ahí, también desde PeashooterList
-	//el método update del SunflowerList, hacemos un for para ver cada sunflower, hacemos un update: sf.update, ve si está vivo, sf.get() y sf.setciclos()
+
 
 }

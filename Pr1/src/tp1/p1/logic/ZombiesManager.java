@@ -80,8 +80,8 @@ public class ZombiesManager {
 	}
 
 	
-	public void zombie_atacado(int x, int y) {
-		this.zombies.zombie_atacado(x, y, Game.NUM_COLS);
+	public void zombie_atacado(int x, int y, int damage, int numcols) {
+		this.zombies.zombie_atacado(x, y, damage, numcols);
 		
 	}
 	public void matar() {
@@ -117,8 +117,5 @@ public class ZombiesManager {
 		
 		return false;
 	}
-	
-
-	//Hacer que avancen los zombies, para ello igual meter un atributo de los ciclos que llevan creados cada zombie para saber si tienen que avanzar o no
 	
 }

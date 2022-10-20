@@ -34,17 +34,12 @@ public class Zombie {
 	public void setZombie_y(int y) {
 		this.y=y;
 	}
-	public int getZombie_dano() {
-		return dano;
-	}
-	/*public void avanzar() {
-		this.y--;
-	}*/
+
 	public boolean hay_Zombie(int x, int y) {
 		return (this.x==x && this.y==y && this.endurance>0);
 	}
-	public void disparado_Peashooter() {
-		this.endurance--;
+	public void disparado_Peashooter(int damage) {
+		this.endurance = this.endurance - damage;
 	}
 	
 	public void aumentar_ciclos() {
@@ -81,11 +76,8 @@ public class Zombie {
 
 		}
 		else {
-			this.game.p_atacado(posx -1, posy, 1);//Hace siempre 1 de dano en esta practica
-			this.game.s_atacado(posx -1, posy, 1);
-		} 	//CAMBIAR
+			this.game.atacar(posx-1,posy, this.dano);
+		} 	
 	}
 }
-//TENGO QUE CREAR UN CONSTRUCTOR PARA A�ADIR ZOMBIS CON SUS ESPECIFICACIONES
 
-//El valor con el que se construyen los zombis en esta primera pr�ctica supongo que ser� zombi com�n y tirando

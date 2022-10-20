@@ -81,16 +81,13 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 				if(this.game.getSuncoins()>=50) {
 					int x = Integer.parseInt(lectura[2]);
 					int y = Integer.parseInt(lectura[3]);
-					if (x>= 0 && x < this.game.getNumCols() && y>= 0 && y < this.game.getNumRows()) {
-						if(this.game.isPositionEmpty(x, y)) {
-							this.game.add_P(x, y);
-						}
+					if (x>= 0 && x < game.NUM_COLS && y>= 0 && y < game.NUM_ROWS && this.game.isPositionEmpty(x, y)) {
+						this.game.add_P(x, y);
 					}
 					else {
 						System.out.println(Messages.error(Messages.INVALID_POSITION));
 						return false;
 					}
-						//this.game.pagar(50); ya se paga en add_S
 				}
 				else {
 					System.out.println(Messages.error(Messages.NOT_ENOUGH_COINS));
@@ -102,16 +99,13 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 				if(this.game.getSuncoins()>=20) {
 					int x= Integer.parseInt(lectura[2]);
 					int y = Integer.parseInt(lectura[3]);
-					if (x>= 0 && x < this.game.getNumCols() && y>= 0 && y < this.game.getNumRows()) {
-						if(this.game.isPositionEmpty(x, y)) {
+					if (x>= 0 && x < game.NUM_COLS && y>= 0 && y <  game.NUM_ROWS && this.game.isPositionEmpty(x, y)) {
 							this.game.add_S(x, y);
-						}
 					}
 					else {
 						System.out.println(Messages.error(Messages.INVALID_POSITION));
 						return false;
 					}
-						//this.game.pagar(20); ya se paga en add_S
 				}
 				else {
 					System.out.println(Messages.error(Messages.NOT_ENOUGH_COINS));

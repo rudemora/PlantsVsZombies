@@ -43,15 +43,14 @@ public class SunflowerList {
 		this.game=game;
 		
 	}
-	public void add_Sunflower(int x, int y) {
+	public int add_Sunflower(int x, int y) {
 		this.SunflowerList[this.contador]=new Sunflower(x,y,this.game);
 		this.contador++;
+		return this.SunflowerList[this.contador - 1].pagar();
 	}
-	public void s_atacado(int x, int y, int dano) {
-		Sunflower s= new Sunflower(this.game);
-		if(this.hayalgunSunflower(x, y)) {
-			s= this.hay_S(x, y);
-			s.recibir_dano(dano);
+	public void sunflower_atacado(int x, int y, int dano) {
+		for(int i =0;i<this.contador;i=i+1) {
+			this.SunflowerList[i].recibir_dano(x,y,dano);
 		}
 	}
 	
@@ -76,15 +75,9 @@ public class SunflowerList {
 		for (int i=0; i<this.contador; i++) {
 			this.SunflowerList[i].update();
 		}
-		
 		this.matar();
 	}
-	
-	
-	
-	
-	
-	
+		
 	
 }
 

@@ -68,14 +68,14 @@ public class ZombieList {
 		}
 	
 	}
-	public void zombie_atacado(int x, int y, int num_cols) {
+	public void zombie_atacado(int x, int y, int damage, int num_cols) {
 		
 		boolean ok=true;
 		int p=x+1;
 		while(ok&&p<num_cols) {
 			for(int i=0; i<contador; i++) {
 				if(this.zlista[i].getZombie_x()==p&&this.zlista[i].getZombie_y()==y) {
-					this.zlista[i].disparado_Peashooter();
+					this.zlista[i].disparado_Peashooter(damage);
 					ok=false;
 				}
 			}
@@ -106,5 +106,4 @@ public class ZombieList {
 			
 		}
 	}
-
 }

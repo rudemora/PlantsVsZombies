@@ -12,7 +12,6 @@ public class PeashooterList {
 		
 	}
 	public boolean hayalgunPeashooter(int x, int y) {
-		
 		for (int i=0; i<contador; i++) {
 			if(this.Peashooterlist[i].hay_Peashooter(x, y)) {
 				return true;
@@ -21,15 +20,7 @@ public class PeashooterList {
 		return false;
 	}
 	
-	public Peashooter hay_P(int x, int y) {
-		Peashooter p= new Peashooter(this.game);
-		for (int i=0; i<contador; i++) {
-			if(this.Peashooterlist[i].hay_Peashooter(x, y)) {
-				return this.Peashooterlist[i];
-			}
-		}
-		return p;
-	}
+
 	public int endurance(int x, int y) {
 		int endurance=0;
 		for (int i=0; i<contador;i++) {
@@ -63,17 +54,15 @@ public class PeashooterList {
 		
 	}
 	
-	public void p_atacado(int x, int y, int dano) {
-		Peashooter p= new Peashooter(this.game);
-		if(this.hayalgunPeashooter(x, y)) {
-			p=this.hay_P(x, y);
-			p.recibir_dano(dano);
+	public void peashooter_atacado(int x, int y, int dano) {
+		for(int i =0;i<this.contador;i=i+1) {
+			this.Peashooterlist[i].recibir_dano(x,y,dano);
 		}
 	}
+	
 	public void update() {
 		for(int i=0; i<this.contador; i++) {
 			this.Peashooterlist[i].update();
-			
 		}
 		this.matar();
 		
