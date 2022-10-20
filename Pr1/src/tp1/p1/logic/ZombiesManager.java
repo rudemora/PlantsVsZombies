@@ -116,7 +116,7 @@ public class ZombiesManager {
 			else {
 				this.game.p_atacado(posx -1, posy, 1);//Hace siempre 1 de dano en esta practica
 				this.game.s_atacado(posx -1, posy, 1);
-			}
+			} 	//CAMBIAR
 			
 			
 		}
