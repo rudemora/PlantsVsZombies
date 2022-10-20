@@ -81,8 +81,10 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 				if(this.game.getSuncoins()>=50) {
 					int x = Integer.parseInt(lectura[2]);
 					int y = Integer.parseInt(lectura[3]);
-					if(this.game.isPositionEmpty(x, y)) {
-						this.game.add_P(x, y);
+					if (x>= 0 && x < this.game.getNumCols() && y>= 0 && y < this.game.getNumRows()) {
+						if(this.game.isPositionEmpty(x, y)) {
+							this.game.add_P(x, y);
+						}
 					}
 					else {
 						System.out.println(Messages.error(Messages.INVALID_POSITION));
@@ -100,8 +102,10 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 				if(this.game.getSuncoins()>=20) {
 					int x= Integer.parseInt(lectura[2]);
 					int y = Integer.parseInt(lectura[3]);
-					if(this.game.isPositionEmpty(x, y)) {
-						this.game.add_S(x, y);
+					if (x>= 0 && x < this.game.getNumCols() && y>= 0 && y < this.game.getNumRows()) {
+						if(this.game.isPositionEmpty(x, y)) {
+							this.game.add_S(x, y);
+						}
 					}
 					else {
 						System.out.println(Messages.error(Messages.INVALID_POSITION));
@@ -121,10 +125,6 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 			}
 			return true;
 			
-			/*catch (IndexOutOfBoundsException nfe) {
-				System.out.println(Messages.error(Messages.COMMAND_PARAMETERS_MISSING));
-				return false;
-			}*/
 			
 		case"l":
 		case"list":
@@ -149,8 +149,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		case "r":
 		case "reset":
 			if (lectura.length == 1) {
-				this.game = new Game(this.game.getSeed(), this.game.getLevel());
-				this.gamePrinter = new GamePrinter(this.game);
+				this.game.reset();
 				return true;
 
 			}
@@ -169,6 +168,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		}
 		
 	}
+	
 	
 	/**
 	 * Runs the game logic.

@@ -5,6 +5,7 @@ import java.util.Random;
 import tp1.p1.control.Level;
 
 import tp1.p1.logic.gameobjects.*;
+import tp1.p1.view.GamePrinter;
 import tp1.p1.view.Messages;
 import tp1.p1.logic.ZombiesManager;
 
@@ -25,13 +26,7 @@ public class Game {
 	public Game(long s, Level l) {
 		this.seed = s;
 		this.level =l;
-		this.suncoins=50;
-		this.countCycles = 0;
-		this.rand= new Random(this.seed);
-		this.zombies= new ZombiesManager(this,level,rand);
-		int tamano= NUM_COLS*NUM_ROWS;
-		this.Peashooters= new PeashooterList (tamano,this);
-		this.Sunflowers= new SunflowerList (tamano,this);
+		this.reset();
 	}
 	
 	public int getCountCycles() {
@@ -57,7 +52,16 @@ public class Game {
 	}
 	
 	
-	//:)
+	public void reset() {
+		this.suncoins=50;
+		this.countCycles = 0;
+		this.rand= new Random(this.seed);
+		this.zombies= new ZombiesManager(this,level,rand);
+		int tamano= NUM_COLS*NUM_ROWS;
+		this.Peashooters= new PeashooterList (tamano,this);
+		this.Sunflowers= new SunflowerList (tamano,this);
+	}
+	
 	public String positionToString(int col, int row) {
 		String escribe= "";
 		if(zombies.hayalgunzombie(col, row)) {
@@ -104,26 +108,25 @@ public class Game {
 		
 	}
 
-	
+	public int getNumCols() {
+		return NUM_COLS;
+	}
+	public int getNumRows() {
+		return NUM_ROWS;
+	}
 	
 	
 	public boolean isPositionEmpty(int x, int y) {
-		if (x>= 0 && x < NUM_COLS && y>= 0 && y < NUM_ROWS) {
-			if(this.Peashooters.hayalgunPeashooter(x, y)) {
-				return false;
-			}
-			if(this.Sunflowers.hayalgunSunflower(x, y)) {
-				return false;
-			}
-			if (this.zombies.hayalgunzombie(x, y)) {
-				return false;
-			}
-			return true;
-		}
-		else {
+		if(this.Peashooters.hayalgunPeashooter(x, y)) {
 			return false;
 		}
-		
+		if(this.Sunflowers.hayalgunSunflower(x, y)) {
+			return false;
+		}
+		if (this.zombies.hayalgunzombie(x, y)) {
+			return false;
+		}
+		return true;		
 	}
 	
 	public void zombie_atacado (int x, int y) {
