@@ -100,6 +100,11 @@ public class ZombieList {
 		}
 		return false;
 	}
-
+	public void update() {
+		for(int i=0; i<contador;i++) {
+			zlista[i].update();
+			
+		}
+	}
 
 }

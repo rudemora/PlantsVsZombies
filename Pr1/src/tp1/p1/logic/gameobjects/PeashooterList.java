@@ -22,7 +22,7 @@ public class PeashooterList {
 	}
 	
 	public Peashooter hay_P(int x, int y) {
-		Peashooter p= new Peashooter();
+		Peashooter p= new Peashooter(this.game);
 		for (int i=0; i<contador; i++) {
 			if(this.Peashooterlist[i].hay_Peashooter(x, y)) {
 				return this.Peashooterlist[i];
@@ -46,7 +46,7 @@ public class PeashooterList {
 	
 
 	public void add_Peashooter(int x, int y) {
-		this.Peashooterlist[this.contador]=new Peashooter(x,y);
+		this.Peashooterlist[this.contador]=new Peashooter(x,y, this.game);
 		this.contador++;
 	}
 	
@@ -64,19 +64,15 @@ public class PeashooterList {
 	}
 	
 	public void p_atacado(int x, int y, int dano) {
-		Peashooter p= new Peashooter();
+		Peashooter p= new Peashooter(this.game);
 		if(this.hayalgunPeashooter(x, y)) {
 			p=this.hay_P(x, y);
 			p.recibir_dano(dano);
 		}
 	}
 	public void update() {
-		int posx;
-		int posy;
 		for(int i=0; i<this.contador; i++) {
-			posx=this.Peashooterlist[i].getPosx();
-			posy=this.Peashooterlist[i].getPosy();
-			this.game.zombie_atacado(posx, posy);
+			this.Peashooterlist[i].update();
 			
 		}
 		this.matar();

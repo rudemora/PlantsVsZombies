@@ -16,7 +16,7 @@ public class SunflowerList {
 		return false;
 	}
 	public Sunflower hay_S(int x, int y) {
-		Sunflower s= new Sunflower();
+		Sunflower s= new Sunflower(this.game);
 		for (int i=0; i<contador; i++) {
 			if(this.SunflowerList[i].haySunflower(x, y)) {
 				return this.SunflowerList[i];
@@ -44,11 +44,11 @@ public class SunflowerList {
 		
 	}
 	public void add_Sunflower(int x, int y) {
-		this.SunflowerList[this.contador]=new Sunflower(x,y);
+		this.SunflowerList[this.contador]=new Sunflower(x,y,this.game);
 		this.contador++;
 	}
 	public void s_atacado(int x, int y, int dano) {
-		Sunflower s= new Sunflower();
+		Sunflower s= new Sunflower(this.game);
 		if(this.hayalgunSunflower(x, y)) {
 			s= this.hay_S(x, y);
 			s.recibir_dano(dano);
@@ -73,12 +73,10 @@ public class SunflowerList {
 		
 	}
 	public void update(){
-		int suma=0;
 		for (int i=0; i<this.contador; i++) {
-			suma=suma+this.SunflowerList[i].anadir_soles();
+			this.SunflowerList[i].update();
 		}
-		this.game.setSuncoins(game.getSuncoins()+suma);
-		this.actualizar_ciclos();
+		
 		this.matar();
 	}
 	

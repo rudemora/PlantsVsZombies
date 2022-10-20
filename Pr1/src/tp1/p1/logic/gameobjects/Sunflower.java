@@ -1,5 +1,6 @@
 package tp1.p1.logic.gameobjects;
 
+import tp1.p1.logic.Game;
 import tp1.p1.view.Messages;
 
 public class Sunflower {
@@ -9,14 +10,16 @@ public class Sunflower {
 	private int posx;
 	private int posy;
 	private int ciclos = 0; //Para contar el numero de ciclos que llevan creados. // LO PONGO A 1 PARA QUE NO AÑADA EN EL PRIMER CICLO
+	private Game game;
 	
-	public Sunflower() {
-		
+	public Sunflower(Game game) {
+		this.game=game;
 	}
-	public Sunflower(int x, int y) {
+	public Sunflower(int x, int y, Game game) {
 		
 		this.posx=x;
-		this.posy=y;	
+		this.posy=y;
+		this.game=game;
 		this.ciclos = this.ciclos + 1;
 	}
 	
@@ -56,5 +59,10 @@ public class Sunflower {
 			return true;
 		}
 		return false;
+	}
+	public void update() {
+		this.game.setSuncoins(this.game.getSuncoins()+this.anadir_soles());
+		aumentar_ciclos();
+		
 	}
 }

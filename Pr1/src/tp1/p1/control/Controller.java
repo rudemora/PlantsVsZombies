@@ -77,7 +77,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 				System.out.println(Messages.error(Messages.INVALID_COMMAND));
 				return false;
 			}
-			else if(lectura[1].equalsIgnoreCase("peashooter" ) || lectura[1].equalsIgnoreCase("p")) {
+			else if("peashooter".equalsIgnoreCase(lectura[1] ) || "p".equalsIgnoreCase(lectura[1])) {
 				if(this.game.getSuncoins()>=50) {
 					int x = Integer.parseInt(lectura[2]);
 					int y = Integer.parseInt(lectura[3]);
@@ -98,7 +98,7 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 				}
 				this.game.addCycles();
 			}
-			else if(lectura[1].equalsIgnoreCase("sunflower") || lectura[1].equalsIgnoreCase("s")) {
+			else if("sunflower".equalsIgnoreCase(lectura[1]) || "s".equalsIgnoreCase(lectura[1])) {
 				if(this.game.getSuncoins()>=20) {
 					int x= Integer.parseInt(lectura[2]);
 					int y = Integer.parseInt(lectura[3]);
@@ -180,13 +180,13 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		boolean exit = false;
 		while(!end && !exit) {
 			String[] lectura= prompt();
-			if (lectura[0].equalsIgnoreCase("e") || lectura[0].equalsIgnoreCase("exit")) {
+			if ("e".equalsIgnoreCase(lectura[0]) || "exit".equalsIgnoreCase(lectura[0])) {
 				if (lectura.length==1) {
 					exit = true;
 					paint = false;	
-					this.printGame();
+					
 					System.out.println(Messages.GAME_OVER);
-					System.out.println(Messages.PLAYER_QUITS);
+					System.out.print(Messages.PLAYER_QUITS);
 				}
 				else {
 					System.out.println(Messages.error(Messages.INVALID_COMMAND));
@@ -204,10 +204,10 @@ public class Controller {//traduce la interación del usuario a acciones del jue
 		if (!exit) {
 			System.out.println(Messages.GAME_OVER);
 			if(this.game.quiengana()) {
-				System.out.println(Messages.ZOMBIES_WIN);
+				System.out.print(Messages.ZOMBIES_WIN);
 			}
 			else if (!this.game.quiengana()) {
-				System.out.println(Messages.PLAYER_WINS);
+				System.out.print(Messages.PLAYER_WINS);
 			}
 		}
 	}

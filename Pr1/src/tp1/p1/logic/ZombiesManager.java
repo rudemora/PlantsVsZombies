@@ -58,7 +58,7 @@ public class ZombiesManager {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && game.isPositionEmpty(Game.NUM_COLS, row); //Trabajar sobre el isPositionEmpty que falta
 		if(canAdd) {
 			// TODO fill your code
-			Zombie z_nuevo= new Zombie();
+			Zombie z_nuevo= new Zombie(this.game);
 			z_nuevo.setZombie_y(row);
 			z_nuevo.setZombie_x(Game.NUM_COLS);
 			this.zombies.insertar(z_nuevo);
@@ -103,23 +103,7 @@ public class ZombiesManager {
 
 	
 	public boolean update() {
-		int contador=this.zombies.getcontador();
-		int posx;
-		int posy;
-		for(int i=0; i<contador;i++) {
-			posx=this.zombies.getposx(i);
-			posy=this.zombies.getposy(i);
-			if(this.game.isPositionEmpty(posx-1, posy) && this.zombies.getzombie(i).canAvanzar()) {//Compruebo si el zombie tiene que avanzar o hacer daño
-				this.zombies.getzombie(i).avance();
-
-			}
-			else {
-				this.game.p_atacado(posx -1, posy, 1);//Hace siempre 1 de dano en esta practica
-				this.game.s_atacado(posx -1, posy, 1);
-			} 	//CAMBIAR
-			
-			
-		}
+		this.zombies.update();
 		this.matar();
 		this.actualizar_ciclos();
 		if(!addZombie() && this.remainingZombies==0) {

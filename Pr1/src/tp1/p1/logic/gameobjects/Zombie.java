@@ -1,11 +1,12 @@
 package tp1.p1.logic.gameobjects;
 
+import tp1.p1.logic.Game;
 public class Zombie {
 	//comportamiento
 	public int endurance = 5;
 	private int dano = 1;
 	private int velocidad = 2;
-	
+	private Game game;
 	private int x;
 	private int y;
 	private int ciclos = 1;//Estos ciclos seran aumentados desde el run para saber si por ej el zombie tiene que avanzar
@@ -18,7 +19,9 @@ public class Zombie {
 		this.velocidad=2;//Cuantos ciclos le cuesta avanzar una casilla
 	}*/
 
-
+	public Zombie(Game game) {
+		this.game=game;
+	}
 	public int getZombie_x() {
 		return this.x;
 	}
@@ -68,6 +71,19 @@ public class Zombie {
 			return true;
 		}
 		return false;
+	}
+	
+	public void update() {
+		int posx=this.x;
+		int posy=this.y;
+		if(this.game.isPositionEmpty(posx-1, posy) && this.canAvanzar()) {//Compruebo si el zombie tiene que avanzar o hacer daño
+			this.avance();
+
+		}
+		else {
+			this.game.p_atacado(posx -1, posy, 1);//Hace siempre 1 de dano en esta practica
+			this.game.s_atacado(posx -1, posy, 1);
+		} 	//CAMBIAR
 	}
 }
 //TENGO QUE CREAR UN CONSTRUCTOR PARA A�ADIR ZOMBIS CON SUS ESPECIFICACIONES

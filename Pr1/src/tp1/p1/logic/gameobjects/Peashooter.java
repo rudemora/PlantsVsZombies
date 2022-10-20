@@ -1,6 +1,7 @@
 package tp1.p1.logic.gameobjects;
 
 import tp1.p1.view.Messages;
+import tp1.p1.logic.Game;
 
 public class Peashooter {
 	private static int cost=50;
@@ -8,16 +9,18 @@ public class Peashooter {
 	private static int endurance=3;
 	private int posx;
 	private int posy;
+	private Game game;
 	
 	
-	public Peashooter() {
-		
+	public Peashooter(Game game) {
+		this.game=game;
 	}
 	
-	public Peashooter(int x, int y) {
+	public Peashooter(int x, int y,Game game) {
 		
 		this.posx=x;
 		this.posy=y;
+		this.game=game;
 	}
 	
 	public static String getDescription() {
@@ -49,6 +52,9 @@ public class Peashooter {
 	}
 	public int getPosy() {
 		return this.posy;
+	}
+	public void update() {
+		this.game.zombie_atacado(posx, posy);
 	}
 	
 
