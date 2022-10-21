@@ -38,6 +38,7 @@ public class Peashooter {
 			endurance=endurance-dano;
 		}
 	}
+	
 	public int getEndurance() {
 		return endurance;
 	}
@@ -48,15 +49,12 @@ public class Peashooter {
 		}
 		return false;
 	}
-	public int getPosx() {
-		return this.posx;
-	}
-	public int getPosy() {
-		return this.posy;
-	}
-	public void update() {
+	
+	void update() {
 		this.game.zombie_atacado(posx, posy, this.damage);
 	}
 	
-
+	public int pagar() {
+		return this.cost;
+	}
 }

@@ -30,19 +30,16 @@ public class PlantsVsZombies {
 	public static void main(String[] args) {
 		// Required to avoid issues with tests
 		Locale.setDefault(new Locale("es", "ES"));
-
 		if (args.length < 1 || args.length > 2) {
 			usage();
 			return;
 		}
-
 		Level level = Level.valueOfIgnoreCase(args[0]);
 		if (level == null) {
 			System.out.println(Messages.ALLOWED_LEVELS);
 			usage();
 			return;
 		}
-
 		long seed = System.currentTimeMillis() % 1000;
 		String seedParam = "";
 		try {
@@ -63,9 +60,5 @@ public class PlantsVsZombies {
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));		
 		controller.run();
-		
-
-		
 	}
-
 }

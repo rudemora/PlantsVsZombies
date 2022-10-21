@@ -12,10 +12,6 @@ public class ZombieList {
 			this.contador=0;
 		}
 	
-	public int getposx(int i) {
-		return this.zlista[i].getZombie_x();
-		
-	}
 	public int endurance(int x, int y) {
 		for(int i=0;i<contador;i++) {
 			if(zlista[i].getZombie_x()==x && zlista[i].getZombie_y()==y) {
@@ -24,25 +20,11 @@ public class ZombieList {
 		}
 		return -1;
 	}
-	public int getposy(int i) {
-		return this.zlista[i].getZombie_y();
-	}
+	
 	public void insertar(Zombie z) {
 			this.zlista[contador]=z;
 			contador++;
 		}
-
-	public int getcontador() {
-		return this.contador;
-	}
-
-	
-	public Zombie getzombie(int pos) {//ME da el zombie de la posicion i de la lista
-		return this.zlista[pos];
-	}
-			
-	
-
 	
 	public boolean hayalgunzombie(int x, int y) {
 		for(int i=0; i<this.contador; i++) {
@@ -52,11 +34,13 @@ public class ZombieList {
 		}
 		return false;
 	}
+	
 	public void actualizar_ciclos() {
 		for (int i=0; i<this.contador;i++) {
 			this.zlista[i].aumentar_ciclos();
 		}
 	}
+	
 	public void matar_muertos() {
 		for (int i=0; i<contador; i++) {
 			if(this.zlista[i].muerto()) {
@@ -68,6 +52,7 @@ public class ZombieList {
 		}
 	
 	}
+	
 	public void zombie_atacado(int x, int y, int damage, int num_cols) {
 		
 		boolean ok=true;
@@ -100,10 +85,12 @@ public class ZombieList {
 		}
 		return false;
 	}
+	
 	public void update() {
 		for(int i=0; i<contador;i++) {
 			zlista[i].update();
 			
 		}
 	}
+	
 }

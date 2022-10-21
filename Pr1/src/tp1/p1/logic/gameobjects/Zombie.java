@@ -11,43 +11,32 @@ public class Zombie {
 	private int y;
 	private int ciclos = 1;//Estos ciclos seran aumentados desde el run para saber si por ej el zombie tiene que avanzar
 	
-	
-	//¿ES REALMENTE NECESARIO?
-	/*public void Zombie() {//De momento todos los zombies son comunes
-		this.endurance=5;
-		this.dano=1;
-		this.velocidad=2;//Cuantos ciclos le cuesta avanzar una casilla
-	}*/
-
 	public Zombie(Game game) {
 		this.game=game;
 	}
+	
 	public int getZombie_x() {
 		return this.x;
 	}
+	
 	public int getZombie_y() {
 		return this.y;
 	}
+	
 	public void setZombie_x(int x) {
 		this.x=x;
 	}
+	
 	public void setZombie_y(int y) {
 		this.y=y;
 	}
 
-	public boolean hay_Zombie(int x, int y) {
-		return (this.x==x && this.y==y && this.endurance>0);
-	}
 	public void disparado_Peashooter(int damage) {
 		this.endurance = this.endurance - damage;
 	}
 	
 	public void aumentar_ciclos() {
 		this.ciclos= this.ciclos + 1;
-	}
-	
-	public int getCiclos() {
-		return this.ciclos;
 	}
 	
 	public int getEndurance() {
@@ -79,5 +68,6 @@ public class Zombie {
 			this.game.atacar(posx-1,posy, this.dano);
 		} 	
 	}
+	
 }
 

@@ -36,9 +36,10 @@ public class PeashooterList {
 
 	
 
-	public void add_Peashooter(int x, int y) {
+	public int add_Peashooter(int x, int y) {
 		this.Peashooterlist[this.contador]=new Peashooter(x,y, this.game);
 		this.contador++;
+		return this.Peashooterlist[this.contador - 1].pagar();
 	}
 	
 	public void matar() {

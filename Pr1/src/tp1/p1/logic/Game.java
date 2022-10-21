@@ -47,10 +47,6 @@ public class Game {
 	public void setSuncoins(int suma) {
 		this.suncoins=suma;
 	}
-	public void pagar(int x) {
-		this.suncoins=this.suncoins-x;
-	}
-	
 	
 	public void reset() {
 		this.suncoins=50;
@@ -80,29 +76,11 @@ public class Game {
 		return escribe;
 	}
 	
-	public PeashooterList crearPeashooterList() {
-		int tamano=NUM_COLS*NUM_ROWS;
-		PeashooterList P_list= new PeashooterList(tamano,this);
-		return P_list;
-		
+	public void add_Peashooter(int x, int y) {
+		int coste = this.Peashooters.add_Peashooter(x,y);
+		this.suncoins=this.suncoins-coste;
 	}
-	public SunflowerList crearSunflowerList() {
-		int tamano=NUM_COLS*NUM_ROWS;
-		SunflowerList S_list= new SunflowerList(tamano,this);
-		return S_list;
-		
-	}
-	public ZombieList crearZombieList() {
-		int tamano=8;//Tiene que ser el number zombies del level que de momento no sabemos
-		ZombieList Z_list= new ZombieList(tamano);
-		return Z_list;
-		
-	}
-	public void add_P(int x, int y) {
-		this.Peashooters.add_Peashooter(x,y);
-		this.suncoins=this.suncoins-50;
-	}
-	public void add_S(int x, int y) {
+	public void add_Sunflower(int x, int y) {
 		int coste = this.Sunflowers.add_Sunflower(x,y);
 		this.suncoins=this.suncoins-coste;
 	}
@@ -129,9 +107,11 @@ public class Game {
 	public void peashooter_atacado(int x, int y, int dano) {
 		this.Peashooters.peashooter_atacado(x, y, dano);
 	}
+	
 	public void sunflower_atacado(int x, int y, int dano) {
 		this.Sunflowers.sunflower_atacado(x, y, dano);
 	}
+	
 	public boolean quiengana() { 
 		if(this.zombies.zombie_gana()) {
 			return true;
@@ -150,5 +130,5 @@ public class Game {
 	}
 	
 
-
+	
 }

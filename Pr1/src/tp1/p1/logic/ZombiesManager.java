@@ -71,6 +71,7 @@ public class ZombiesManager {
 	}
 	
 	// TODO fill your code
+	
 	public int getRemainingZombies() {
 		return this.remainingZombies;
 	}
@@ -84,12 +85,14 @@ public class ZombiesManager {
 		this.zombies.zombie_atacado(x, y, damage, numcols);
 		
 	}
+	
 	public void matar() {
 		this.zombies.matar_muertos();
 	}
 	public void actualizar_ciclos() {
 		this.zombies.actualizar_ciclos();
 	}
+	
 	public int endurance(int x, int y) {
 		return this.zombies.endurance(x,y);
 	}

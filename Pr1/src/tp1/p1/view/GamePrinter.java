@@ -61,9 +61,7 @@ public class GamePrinter {
 		str.append(getInfo());
 
 		// Paint game board
-
 		str.append(IDENTED_ROW_BORDER);
-
 		for (int row = 0; row < Game.NUM_ROWS; row++) {
 			str.append(MARGIN).append(VERTICAL_DELIMITER);
 			for (int col = 0; col < Game.NUM_COLS; col++) {
@@ -73,7 +71,6 @@ public class GamePrinter {
 				str.append(IDENTED_ROW_BORDER);
 			}
 		}
-
 		return str.toString();
 	}
 
