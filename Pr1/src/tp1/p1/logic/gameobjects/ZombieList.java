@@ -14,7 +14,7 @@ public class ZombieList {
 	
 	public int endurance(int x, int y) {
 		for(int i=0;i<contador;i++) {
-			if(zlista[i].getZombie_x()==x && zlista[i].getZombie_y()==y) {
+			if(this.zlista[i].hayZombie(x, y)) {
 				return zlista[i].getEndurance();
 			}
 		}
@@ -28,7 +28,7 @@ public class ZombieList {
 	
 	public boolean hayalgunzombie(int x, int y) {
 		for(int i=0; i<this.contador; i++) {
-			if(this.zlista[i].getZombie_x()==x&&this.zlista[i].getZombie_y()==y) {
+			if(this.zlista[i].hayZombie(x, y)) {
 				return true;
 			}
 		}
@@ -59,7 +59,7 @@ public class ZombieList {
 		int p=x+1;
 		while(ok&&p<num_cols) {
 			for(int i=0; i<contador; i++) {
-				if(this.zlista[i].getZombie_x()==p&&this.zlista[i].getZombie_y()==y) {
+				if(this.zlista[i].hayZombie(p, y)) {
 					this.zlista[i].disparado_Peashooter(damage);
 					ok=false;
 				}
@@ -79,13 +79,13 @@ public class ZombieList {
 	
 	public boolean zombie_gana() {
 		for(int i=0; i<contador; i++) {
-			if (this.zlista[i].getZombie_x()<0) {
+			if (this.zlista[i].zombiegana()) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+ 	
 	public void update() {
 		for(int i=0; i<contador;i++) {
 			zlista[i].update();

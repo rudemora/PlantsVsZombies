@@ -14,7 +14,7 @@ public class SunflowerList {
 		
 	}
 	
-	public boolean hayalgunSunflower(int x, int y) {
+	public boolean hayalgunSunflower(int x, int y) {//(Devuelve true si hay algun sunflower en la posicion x,y
 		for (int i=0; i<contador; i++) {
 			if(this.SunflowerList[i].haySunflower(x, y)) {
 				return true;

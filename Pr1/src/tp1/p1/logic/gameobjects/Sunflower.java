@@ -12,9 +12,7 @@ public class Sunflower {
 	private int ciclos = 0; //Para contar el numero de ciclos que llevan creados. // LO PONGO A 1 PARA QUE NO AÑADA EN EL PRIMER CICLO
 	private Game game;
 	
-	public Sunflower(Game game) {
-		this.game=game;
-	}
+	
 	
 	public Sunflower(int x, int y, Game game) {
 		this.cost = 20;

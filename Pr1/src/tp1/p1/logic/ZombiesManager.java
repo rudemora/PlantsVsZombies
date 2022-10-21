@@ -58,9 +58,7 @@ public class ZombiesManager {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && game.isPositionEmpty(Game.NUM_COLS, row); //Trabajar sobre el isPositionEmpty que falta
 		if(canAdd) {
 			// TODO fill your code
-			Zombie z_nuevo= new Zombie(this.game);
-			z_nuevo.setZombie_y(row);
-			z_nuevo.setZombie_x(Game.NUM_COLS);
+			Zombie z_nuevo= new Zombie(this.game,Game.NUM_COLS,row);
 			this.zombies.insertar(z_nuevo);
 			this.remainingZombies = this.remainingZombies - 1;
 			
@@ -76,7 +74,7 @@ public class ZombiesManager {
 		return this.remainingZombies;
 	}
 	
-	public boolean hayalgunzombie(int x, int y) {
+	public boolean hayalgunzombie(int x, int y) {//Devuelve true si hay algun zombie en la posicion x,y
 		return this.zombies.hayalgunzombie(x, y);
 	}
 
@@ -106,8 +104,8 @@ public class ZombiesManager {
 
 	
 	public boolean update() {
-		this.zombies.update();
 		this.matar();
+		this.zombies.update();
 		this.actualizar_ciclos();
 		if(!addZombie() && this.remainingZombies==0) {
 			if(!quedan_zombies()) {

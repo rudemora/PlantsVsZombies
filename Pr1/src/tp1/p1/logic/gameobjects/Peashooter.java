@@ -30,7 +30,7 @@ public class Peashooter {
 	
 	public boolean hay_Peashooter(int x, int y) {
 		
-		return (this.posx==x && this.posy==y&& endurance>0); //Asegurarse que el doble igual funciona
+		return (this.posx==x && this.posy==y&& endurance>0); 
 	}
 	
 	public void recibir_dano(int x, int y, int dano) {

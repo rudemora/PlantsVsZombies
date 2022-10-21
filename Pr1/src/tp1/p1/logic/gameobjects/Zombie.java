@@ -11,24 +11,25 @@ public class Zombie {
 	private int y;
 	private int ciclos = 1;//Estos ciclos seran aumentados desde el run para saber si por ej el zombie tiene que avanzar
 	
-	public Zombie(Game game) {
+	public Zombie(Game game,int x, int y) {
 		this.game=game;
-	}
-	
-	public int getZombie_x() {
-		return this.x;
-	}
-	
-	public int getZombie_y() {
-		return this.y;
-	}
-	
-	public void setZombie_x(int x) {
 		this.x=x;
+		this.y=y;
 	}
 	
-	public void setZombie_y(int y) {
-		this.y=y;
+
+	public boolean hayZombie(int x, int y) {//Devuelve true si hay un zombie en la posicon x,y
+		if(this.x==x&&this.y==y&&this.endurance>0) {
+			return true;
+		}
+		return false;
+	}
+	public boolean zombiegana() {
+		if (this.x<0) {
+			return true;
+			
+		}
+		return false;
 	}
 
 	public void disparado_Peashooter(int damage) {

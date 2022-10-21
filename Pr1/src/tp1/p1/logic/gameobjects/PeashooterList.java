@@ -11,7 +11,7 @@ public class PeashooterList {
 		this.game=game;
 		
 	}
-	public boolean hayalgunPeashooter(int x, int y) {
+	public boolean hayalgunPeashooter(int x, int y) {//Devuelve true si hay algun Peashooter en la posicion (x,y)
 		for (int i=0; i<contador; i++) {
 			if(this.Peashooterlist[i].hay_Peashooter(x, y)) {
 				return true;
@@ -62,10 +62,11 @@ public class PeashooterList {
 	}
 	
 	public void update() {
+		this.matar();
 		for(int i=0; i<this.contador; i++) {
 			this.Peashooterlist[i].update();
 		}
-		this.matar();
+		
 		
 	}
 	
