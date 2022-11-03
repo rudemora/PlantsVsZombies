@@ -11,7 +11,11 @@ public interface GameWorld {
 	public static final int NUM_ROWS = 4;
 
 	public static final int NUM_COLS = 8;
-
+	
+	//void playerQuits();
+	
 	// TODO add your code here
-
+	public static void playerQuits() {
+		Game.playerQuits = true;
+	}
 }

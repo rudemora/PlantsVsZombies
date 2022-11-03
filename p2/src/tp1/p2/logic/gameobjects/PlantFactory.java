@@ -18,6 +18,7 @@ public class PlantFactory {
 	public static boolean isValidPlant(String plantName) {
 		for (Plant p : AVAILABLE_PLANTS) {
 			// TODO add your code here
+			p.getDescription();
 		}
 
 		return false;

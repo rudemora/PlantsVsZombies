@@ -4,7 +4,7 @@ public class Game implements GameStatus, GameWorld {
 
     public static final int INITIAL_SUNCOINS = 50;
 
-    private boolean playerQuits;
+    protected static boolean playerQuits;
 
     //...
 }

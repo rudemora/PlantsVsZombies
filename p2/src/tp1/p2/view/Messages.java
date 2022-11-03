@@ -1,5 +1,7 @@
 package tp1.p2.view;
 
+import tp1.p1.logic.gameobjects.Peashooter;
+import tp1.p1.logic.gameobjects.Sunflower;
 import tp1.p2.control.Level;
 
 /**
@@ -76,6 +78,8 @@ public class Messages {
 
 	//
 	// Game Objects
+	public static final String PEASHOOTER_DESCRIPTION = "[P]eashooter: cost='%d' suncoins, damage='%d', endurance='%d'";
+	public static final String SUNFLOWER_DESCRIPTION = "[S]unflower: cost='%d' suncoins, damage='%d', endurance='%d'";
 	//
 
 	public static final String GAME_OBJECT_STATUS = "%2s[%02d]";

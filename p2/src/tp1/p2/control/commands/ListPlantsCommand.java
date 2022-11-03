@@ -30,7 +30,8 @@ public class ListPlantsCommand extends Command {
 	public ExecutionResult execute(GameWorld game) {
 		System.out.println(Messages.AVAILABLE_PLANTS);
 		// TODO add your code here
-
+		System.out.println(Messages.SUNFLOWER_DESCRIPTION);
+		System.out.println(Messages.PEASHOOTER_DESCRIPTION);
 		System.out.println();
 
 		return new ExecutionResult(false);

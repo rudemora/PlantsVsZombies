@@ -50,11 +50,15 @@ public class AddPlantCommand extends Command implements Cloneable {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
+		
+		return new ExecutionResult(true);
 	}
 
 	@Override
 	public Command create(String[] parameters) {
 		// TODO add your code here
+		
 	}
-
+	
+	
 }

@@ -20,7 +20,7 @@ import tp1.p2.view.Messages;
  *
  */
 public abstract class Command {
-
+	private static GameWorld game;
 	/* @formatter:off */
 	private static final List<Command> AVAILABLE_COMMANDS = Arrays.asList(
 		new AddPlantCommand(),
@@ -36,12 +36,13 @@ public abstract class Command {
 
 	public static Command parse(String[] commandWords) {
 		if (commandWords.length == 1 && commandWords[0].isEmpty()) {
-			// TODO add your code here
+			return defaultCommand;
 		}
 
 		for (Command command : AVAILABLE_COMMANDS) {
 			if (command.matchCommand(commandWords[0])) {
-				// TODO add your code here
+				command.execute(game);
+				return command;
 			}
 		}
 		System.out.println(error(Messages.UNKNOWN_COMMAND));
