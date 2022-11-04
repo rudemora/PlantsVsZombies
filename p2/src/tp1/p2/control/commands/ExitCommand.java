@@ -30,6 +30,7 @@ public class ExitCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		GameWorld.playerQuits();
+		
 		return new ExecutionResult(false);
 	}
 

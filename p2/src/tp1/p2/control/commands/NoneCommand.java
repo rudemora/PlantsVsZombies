@@ -36,6 +36,7 @@ public class NoneCommand extends Command {
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
 		
+		return new ExecutionResult(true);
 	}
 
 }
