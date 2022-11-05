@@ -4,8 +4,8 @@ import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.PlantFactory;
 public class Sunflower extends Plant  {//extends Plant tambi�n no?
 	
-	public Sunflower() {
-		super();
+	public String getDescription() {
+		return "hhh";
 	}
 	public String getName() {
 		return Messages.SUNFLOWER_NAME;

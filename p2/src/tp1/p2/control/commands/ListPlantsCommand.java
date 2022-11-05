@@ -30,7 +30,7 @@ public class ListPlantsCommand extends Command {
 	public ExecutionResult execute(GameWorld game) {
 		System.out.println(Messages.AVAILABLE_PLANTS);
 		for(Plant p: PlantFactory.getAvailablePlants()) {
-			p.getDescription();
+			System.out.println(p.getDescription());
 		}
 		
 		// TODO add your code here

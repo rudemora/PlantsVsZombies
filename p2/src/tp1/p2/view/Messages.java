@@ -78,8 +78,7 @@ public class Messages {
 
 	//
 	// Game Objects
-	public static final String PEASHOOTER_DESCRIPTION = "[P]eashooter: cost='%d' suncoins, damage='%d', endurance='%d'";
-	public static final String SUNFLOWER_DESCRIPTION = "[S]unflower: cost='%d' suncoins, damage='%d', endurance='%d'";
+	
 	//
 
 	public static final String GAME_OBJECT_STATUS = "%2s[%02d]";
