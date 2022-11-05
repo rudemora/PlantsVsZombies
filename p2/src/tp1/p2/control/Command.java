@@ -21,6 +21,7 @@ import tp1.p2.view.Messages;
  */
 public abstract class Command {
 	private static GameWorld game;
+	
 	/* @formatter:off */
 	private static final List<Command> AVAILABLE_COMMANDS = Arrays.asList(
 		new AddPlantCommand(),
@@ -85,7 +86,7 @@ public abstract class Command {
 	 * 
 	 * @return {@code true} if game board must be printed {@code false} otherwise.
 	 */
-	public abstract ExecutionResult execute(GameWorld game);
+	public abstract ExecutionResult execute(GameWorld game, String[] words);
 
 	public Command create(String[] parameters) {
 		return this;

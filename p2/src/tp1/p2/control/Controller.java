@@ -77,7 +77,8 @@ public class Controller {
 				Command command = Command.parse(words);
 				if (command != null) {
 					// 3-4. Game Action & Update
-					refreshDisplay = game.execute(command,game);
+					
+					refreshDisplay = game.execute(command,game,words);
 				} else {
 					refreshDisplay = false;
 				}
@@ -87,8 +88,18 @@ public class Controller {
 		if (refreshDisplay) {
 			printGame();
 		}
-
 		printEndMessage();
+		if(game.isPlayerQuits()) {
+			System.out.println(Messages.PLAYER_QUITS);
+			
+		}
+			
+		
+		else {
+			
+		}
+			
 	}
+			
 
 }

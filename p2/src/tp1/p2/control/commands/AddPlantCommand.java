@@ -5,6 +5,7 @@ import static tp1.p2.view.Messages.error;
 import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
 import tp1.p2.logic.GameWorld;
+import tp1.p2.logic.Game;
 import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.PlantFactory;
 import tp1.p2.view.Messages;
@@ -18,6 +19,8 @@ public class AddPlantCommand extends Command implements Cloneable {
 	private String plantName;
 
 	private boolean consumeCoins;
+	
+	private Game game;
 
 	public AddPlantCommand() {
 		this(true);
@@ -49,8 +52,14 @@ public class AddPlantCommand extends Command implements Cloneable {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game) {
+	public ExecutionResult execute(GameWorld game, String[] words) {
 		// TODO add your code here
+		int col= Integer.parseInt(words[2]);
+		int row= Integer.parseInt(words[3]);
+		//Plant plant = PlantFactory.spawnPlant(words[1], game, col, row);
+		//game.addPlant(plant);
+	
+		
 		
 		return new ExecutionResult(true);
 	}

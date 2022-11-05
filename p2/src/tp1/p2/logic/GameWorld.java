@@ -18,4 +18,6 @@ public interface GameWorld {
 	public static void playerQuits() {
 		Game.playerQuits = true;
 	}
+	
+	
 }

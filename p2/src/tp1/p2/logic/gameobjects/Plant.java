@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Collections;
 import tp1.p2.view.Messages;
+import tp1.p2.logic.GameWorld;
 import tp1.p2.logic.gameobjects.PlantFactory;
 //Las subclases y superclases tienen que importarse mutuamente?
 
@@ -11,17 +12,22 @@ import tp1.p2.logic.gameobjects.PlantFactory;
 
 
 public abstract class Plant extends PlantFactory {
+	protected int cost;
+	protected int damage;
+	protected int endurance;
+	protected int posx;
+	protected int posy;
+	protected GameWorld game;
 	
-	
-	public Plant() {
-		
-	}
+	//public Plant()
 	
 	abstract public String getDescription();
 		/* return "zzz";
 		//return Messages.PLANT_DESCRIPTION.formatted(null);//aqui le metemos el this.getSymbol, this.get endurance....
 	};*/
 	
+	
+	//{movida,...,plant}
 	public abstract String getName();
 	public abstract String getSymbol();
 	

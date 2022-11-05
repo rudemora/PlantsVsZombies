@@ -10,11 +10,7 @@ import tp1.p2.logic.GameWorld;
 
 
 public abstract class PlantFactory {
-	protected int cost;
-	protected int damage;
-	protected int endurance;
-	protected int posx;
-	protected int posy;
+	
 	private GameWorld game;
 	
 	/* @formatter:off */
@@ -28,10 +24,18 @@ public abstract class PlantFactory {
 		
 	}
 
-	/*Public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
+	/*public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
 		// TODO add your code here
-		Plant plant = create();
+		//Plant plant= new Plant();
+		for(Plant p: PlantFactory.getAvailablePlants()) {
+			if(p.getName().equals(plantName)) {
+				
+				//plant=p;
+				
+			}
+		}
 		return plant;
+		
 	}*/
 
 	public static List<Plant> getAvailablePlants() {

@@ -4,23 +4,23 @@ import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
 
 public class Game implements GameStatus, GameWorld {
-
+	private GameObjectContainer lista;
     public static final int INITIAL_SUNCOINS = 50;
 
     protected static boolean playerQuits;
     
     public Game (long seed, Level level) {//FALTA POR HACER
-    	
+    	this.playerQuits=false;
     }
-    public boolean execute (Command command,Game game) {//FALTA POR HACER
+    public boolean execute (Command command,Game game, String[] words) {//FALTA POR HACER
     	
-    	return command.execute(game).draw();
+    	return command.execute(game,words).draw();
     }
     public boolean isFinished() {
     	return false;
     }
     public boolean isPlayerQuits() {
-    	return false;
+    	return this.playerQuits;
     }
     public int getCycle() {
     	return 1;

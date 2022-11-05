@@ -28,7 +28,7 @@ public class HelpCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game) {
+	public ExecutionResult execute(GameWorld game, String[] words) {
 		StringBuilder buffer = new StringBuilder(Messages.HELP_AVAILABLE_COMMANDS);
 
 		for (Command command : Command.getAvailableCommands()) {

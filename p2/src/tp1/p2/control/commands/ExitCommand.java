@@ -28,7 +28,7 @@ public class ExitCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game) {
+	public ExecutionResult execute(GameWorld game, String[] words) {
 		GameWorld.playerQuits();
 		
 		return new ExecutionResult(false);

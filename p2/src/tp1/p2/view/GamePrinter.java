@@ -106,6 +106,6 @@ public class GamePrinter implements GameStatus {
 	 */
 	public String endMessage() {
 		// TODO add your code here
-		return "hola";
+		return Messages.GAME_OVER;
 	}
 }

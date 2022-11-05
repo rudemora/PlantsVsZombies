@@ -43,7 +43,7 @@ public class ResetCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game){
+	public ExecutionResult execute(GameWorld game, String[] words){
 		// TODO add your code here
 		return new ExecutionResult(true);
 	}

@@ -32,5 +32,6 @@ public class Peashooter extends Plant {
 	protected int getEndurance() {
 		return 1;
 	}
+
 }
 

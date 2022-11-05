@@ -27,7 +27,7 @@ public class ListPlantsCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game) {
+	public ExecutionResult execute(GameWorld game, String[] words) {
 		System.out.println(Messages.AVAILABLE_PLANTS);
 		for(Plant p: PlantFactory.getAvailablePlants()) {
 			System.out.println(p.getDescription());
