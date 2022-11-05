@@ -7,5 +7,5 @@ public interface GameStatus {
 	int getSuncoins();
 
 	// TODO add your code here
-
+	abstract public String positionToString(int x, int y);
 }

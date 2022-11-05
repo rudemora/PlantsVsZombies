@@ -4,15 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Collections;
 import tp1.p2.view.Messages;
+import tp1.p2.logic.gameobjects.PlantFactory;
 //Las subclases y superclases tienen que importarse mutuamente?
 
 
 
 
-public abstract class Plant {
+public abstract class Plant extends PlantFactory {
 
-	 protected String getDescription() {
-		return Messages.PLANT_DESCRIPTION.formatted(null)//aqui le metemos el this.getSymbol, this.get endurance....
+	 public String getDescription() {
+		 return "hola";
+		//return Messages.PLANT_DESCRIPTION.formatted(null);//aqui le metemos el this.getSymbol, this.get endurance....
 	};
 	
 	public abstract String getName();

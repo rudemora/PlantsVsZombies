@@ -30,7 +30,14 @@ public abstract class Command {
 		new ExitCommand(),
 		new NoneCommand()
 	);
+	private boolean ok;
 	/* @formatter:on */
+	public Command() {
+		
+	}
+	public Command (boolean ok) {//FALTA POR HACER
+		this.ok=ok;
+	}
 
 	private static Command defaultCommand;
 
@@ -42,6 +49,7 @@ public abstract class Command {
 		for (Command command : AVAILABLE_COMMANDS) {
 			if (command.matchCommand(commandWords[0])) {
 				command.execute(game);
+				
 				return command;
 			}
 		}

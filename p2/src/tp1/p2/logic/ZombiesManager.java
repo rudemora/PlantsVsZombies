@@ -60,6 +60,13 @@ public class ZombiesManager {
 		int row = randomZombieRow();
 		return addZombie(row);
 	}
+	private int getRemainingZombies() {
+		return 0;
+	}
+	
+	private boolean isPositionEmpty(int x, int y) {
+		return true;
+	}
 
 	public boolean addZombie(int row) {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && isPositionEmpty(GameWorld.NUM_COLS, row);

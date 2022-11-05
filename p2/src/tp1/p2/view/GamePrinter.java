@@ -6,7 +6,7 @@ import tp1.p2.logic.GameStatus;
 import tp1.p2.logic.GameWorld;
 import tp1.utils.StringUtils;
 
-public class GamePrinter {
+public class GamePrinter implements GameStatus {
 
 	private static final String SPACE = " ";
 
@@ -87,6 +87,16 @@ public class GamePrinter {
 
 		return str.toString();
 	}
+	
+	public String positionToString(int x, int y) {
+		return "hola";
+	}
+	public int getCycle() {
+		return 1;
+	}
+	public int getSuncoins() {
+		return 1;
+	}
 
 	/**
 	 * Builds the message to be printed once the game has finished.
@@ -96,5 +106,6 @@ public class GamePrinter {
 	 */
 	public String endMessage() {
 		// TODO add your code here
+		return "hola";
 	}
 }

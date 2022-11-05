@@ -24,6 +24,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 	}
 
 	public AddPlantCommand(boolean consumeCoins) {
+		super();
 		this.consumeCoins = consumeCoins;
 	}
 
@@ -57,7 +58,8 @@ public class AddPlantCommand extends Command implements Cloneable {
 	@Override
 	public Command create(String[] parameters) {
 		// TODO add your code here
-		
+		Command command= new AddPlantCommand();
+		return command;
 	}
 	
 	

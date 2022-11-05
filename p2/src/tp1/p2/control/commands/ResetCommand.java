@@ -45,12 +45,14 @@ public class ResetCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game){
 		// TODO add your code here
-
+		return new ExecutionResult(true);
 	}
 
 	@Override
 	public Command create(String[] parameters) {
 		// TODO add your code here
+		Command command= new ResetCommand();
+		return command;
 	}
 
 }
