@@ -39,7 +39,7 @@ public abstract class Command {
 		this.ok=ok;
 	}
 
-	private static Command defaultCommand;
+	private static Command defaultCommand = new NoneCommand();
 
 	public static Command parse(String[] commandWords) {
 		if (commandWords.length == 1 && commandWords[0].isEmpty()) {
@@ -48,8 +48,6 @@ public abstract class Command {
 
 		for (Command command : AVAILABLE_COMMANDS) {
 			if (command.matchCommand(commandWords[0])) {
-				
-				
 				return command;
 			}
 		}

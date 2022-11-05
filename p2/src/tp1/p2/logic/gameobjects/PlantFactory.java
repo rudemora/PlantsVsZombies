@@ -10,7 +10,12 @@ import tp1.p2.logic.GameWorld;
 
 
 public abstract class PlantFactory {
-
+	protected int cost;
+	protected int damage;
+	protected int endurance;
+	protected int posx;
+	protected int posy;
+	private GameWorld game;
 	
 	/* @formatter:off */
 	private static final List<Plant> AVAILABLE_PLANTS = Arrays.asList(
@@ -19,33 +24,26 @@ public abstract class PlantFactory {
 	);
 	/* @formatter:on */
 
-	public static boolean isValidPlant(String plantName) {
-		for (Plant p : AVAILABLE_PLANTS) {
-			// TODO add your code here
-			p.getDescription();
-		}
-
-		return false;
+	protected PlantFactory() {
+		
 	}
-	
-	
 
-	/*public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
+	/*Public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
 		// TODO add your code here
-		Plant plant = new Plant();
+		Plant plant = create();
 		return plant;
 	}*/
 
 	public static List<Plant> getAvailablePlants() {
 		return Collections.unmodifiableList(AVAILABLE_PLANTS);
 	}
-
+	
+	
+	
 	/*
 	 * Avoid creating instances of this class
 	 */
-	protected PlantFactory() {
-		
-	}
+	
 	
 
 }

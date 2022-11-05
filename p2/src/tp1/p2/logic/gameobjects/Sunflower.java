@@ -4,8 +4,14 @@ import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.PlantFactory;
 public class Sunflower extends Plant  {//extends Plant tambi�n no?
 	
+	protected Sunflower () {
+		cost = 20;
+		damage = 0;
+		endurance = 1;
+	}
+	
 	public String getDescription() {
-		return "hhh";
+		return Messages.PLANT_DESCRIPTION.formatted(Messages.SUNFLOWER_NAME_SHORTCUT,cost,damage,endurance);
 	}
 	public String getName() {
 		return Messages.SUNFLOWER_NAME;

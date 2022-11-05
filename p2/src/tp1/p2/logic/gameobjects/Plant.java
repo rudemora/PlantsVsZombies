@@ -12,6 +12,11 @@ import tp1.p2.logic.gameobjects.PlantFactory;
 
 public abstract class Plant extends PlantFactory {
 	
+	
+	public Plant() {
+		
+	}
+	
 	abstract public String getDescription();
 		/* return "zzz";
 		//return Messages.PLANT_DESCRIPTION.formatted(null);//aqui le metemos el this.getSymbol, this.get endurance....
