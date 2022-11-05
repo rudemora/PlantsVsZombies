@@ -12,8 +12,9 @@ public class Game implements GameStatus, GameWorld {
     public Game (long seed, Level level) {//FALTA POR HACER
     	
     }
-    public boolean execute (Command command) {//FALTA POR HACER
-    	return true;
+    public boolean execute (Command command,Game game) {//FALTA POR HACER
+    	
+    	return command.execute(game).draw();
     }
     public boolean isFinished() {
     	return false;

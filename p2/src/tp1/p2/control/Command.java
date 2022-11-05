@@ -48,7 +48,7 @@ public abstract class Command {
 
 		for (Command command : AVAILABLE_COMMANDS) {
 			if (command.matchCommand(commandWords[0])) {
-				command.execute(game);
+				
 				
 				return command;
 			}

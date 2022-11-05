@@ -14,8 +14,8 @@ public abstract class PlantFactory {
 	
 	/* @formatter:off */
 	private static final List<Plant> AVAILABLE_PLANTS = Arrays.asList(
-		/*new Sunflower(),
-		new Peashooter()*/
+		new Sunflower(),
+		new Peashooter()
 	);
 	/* @formatter:on */
 

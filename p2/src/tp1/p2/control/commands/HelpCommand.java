@@ -9,7 +9,7 @@ public class HelpCommand extends Command {
 
 	@Override
 	protected String getName() {
-		return Messages.COMMAND_HELP_NAME;
+		return Messages.COMMAND_HELP_NAME ;
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class HelpCommand extends Command {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_HELP_DETAILS;
+		return Messages.COMMAND_HELP_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 
 	@Override
@@ -41,8 +41,9 @@ public class HelpCommand extends Command {
 		}
 
 		System.out.println(buffer.toString());
-
 		return new ExecutionResult(false);
-	}
 
+		
+	} 
+	
 }

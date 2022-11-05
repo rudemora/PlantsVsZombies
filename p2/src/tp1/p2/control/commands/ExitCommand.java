@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_EXIT_DETAILS;
+		return Messages.COMMAND_EXIT_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 
 	@Override

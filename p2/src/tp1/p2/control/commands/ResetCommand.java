@@ -34,7 +34,7 @@ public class ResetCommand extends Command {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_RESET_DETAILS;
+		return Messages.COMMAND_RESET_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 
 	@Override

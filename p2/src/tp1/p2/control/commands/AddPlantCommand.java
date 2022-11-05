@@ -40,7 +40,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_ADD_DETAILS;
+		return Messages.COMMAND_ADD_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 
 	@Override

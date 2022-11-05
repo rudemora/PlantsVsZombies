@@ -24,7 +24,7 @@ public class NoneCommand extends Command {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_NONE_DETAILS;
+		return Messages.COMMAND_NONE_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 
 	@Override
