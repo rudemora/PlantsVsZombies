@@ -21,7 +21,7 @@ import tp1.p2.view.Messages;
  */
 public abstract class Command {
 	private static GameWorld game;
-	
+	private boolean consumeCoins;
 	/* @formatter:off */
 	private static final List<Command> AVAILABLE_COMMANDS = Arrays.asList(
 		new AddPlantCommand(),
@@ -31,13 +31,10 @@ public abstract class Command {
 		new ExitCommand(),
 		new NoneCommand()
 	);
-	private boolean ok;
 	/* @formatter:on */
-	public Command() {
-		
-	}
-	public Command (boolean ok) {//FALTA POR HACER
-		this.ok=ok;
+	
+	public Command (boolean consume) {//FALTA POR HACER
+		consumeCoins=consume;
 	}
 
 	private static Command defaultCommand = new NoneCommand();
@@ -49,6 +46,7 @@ public abstract class Command {
 
 		for (Command command : AVAILABLE_COMMANDS) {
 			if (command.matchCommand(commandWords[0])) {
+				command = command.create(commandWords);
 				return command;
 			}
 		}
@@ -86,7 +84,7 @@ public abstract class Command {
 	 * 
 	 * @return {@code true} if game board must be printed {@code false} otherwise.
 	 */
-	public abstract ExecutionResult execute(GameWorld game, String[] words);
+	public abstract ExecutionResult execute(GameWorld game);
 
 	public Command create(String[] parameters) {
 		return this;

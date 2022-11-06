@@ -47,7 +47,7 @@ public class GamePrinter implements GameStatus {
 		StringBuilder buffer = new StringBuilder();
 
 		/* @formatter:off */
-		// TODO add your code here
+		//buffer.append();
 		/* @formatter:on */
 
 		return buffer.toString();
@@ -89,7 +89,7 @@ public class GamePrinter implements GameStatus {
 	}
 	
 	public String positionToString(int x, int y) {
-		return "hola";
+		return "ooo";
 	}
 	public int getCycle() {
 		return 1;

@@ -43,7 +43,7 @@ public abstract class GameObject implements GameItem {
 
 	public String toString() {
 		if (isAlive()) {
-			return "hola";
+			return "ee";
 			// TODO add your code here
 		} else {
 			return "";

@@ -6,6 +6,7 @@ import java.util.List;
 import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.Peashooter;
 import tp1.p2.logic.gameobjects.Sunflower;
+import tp1.p2.view.Messages;
 import tp1.p2.logic.GameWorld;
 
 
@@ -24,19 +25,18 @@ public abstract class PlantFactory {
 		
 	}
 
-	/*public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
+	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
 		// TODO add your code here
-		//Plant plant= new Plant();
 		for(Plant p: PlantFactory.getAvailablePlants()) {
-			if(p.getName().equals(plantName)) {
-				
-				//plant=p;
-				
+			if(p.getName().equalsIgnoreCase(plantName)) {
+				p.posx = col;
+				p.posy = row;
+				return p;
 			}
 		}
-		return plant;
-		
-	}*/
+		System.out.println(Messages.INVALID_GAME_OBJECT);
+		return null;
+	}
 
 	public static List<Plant> getAvailablePlants() {
 		return Collections.unmodifiableList(AVAILABLE_PLANTS);

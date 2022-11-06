@@ -8,8 +8,7 @@ import tp1.p2.view.Messages;
 public class NoneCommand extends Command {
 
 	public NoneCommand() {
-		// default command
-		super(true);
+		super(false);
 	}
 
 	@Override
@@ -33,9 +32,8 @@ public class NoneCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game, String[] words) {
+	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
-		
 		return new ExecutionResult(true);
 	}
 

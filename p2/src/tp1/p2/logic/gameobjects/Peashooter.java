@@ -14,17 +14,15 @@ public class Peashooter extends Plant {
 	public String getDescription() {
 		 return Messages.PLANT_DESCRIPTION.formatted(Messages.PEASHOOTER_NAME_SHORTCUT,cost,damage,endurance);
 	 }
-	public String getSymbol() {
-		return "hola";
-	}
+	
 	public String getName() {
 		return Messages.PEASHOOTER_NAME;
 	}
 	protected String getShortcut() {
 		return Messages.PEASHOOTER_NAME_SHORTCUT;
 	}
-	protected int getCost() {
-		return 1;
+	public int getCost() {
+		return this.cost;
 	}
 	protected int getDamage() {
 		return 1;
@@ -32,6 +30,19 @@ public class Peashooter extends Plant {
 	protected int getEndurance() {
 		return 1;
 	}
-
+	
+	 public int getCol() {
+		 return this.posx;
+	 }
+	 
+	 public int getRow() {
+		 return this.posy;
+	 }
+	 
+	 @Override
+	 public String getSymbol() {
+			return String.format(Messages.PEASHOOTER_SYMBOL, this.endurance);
+	}
+		
 }
 

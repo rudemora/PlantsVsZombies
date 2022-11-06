@@ -13,11 +13,13 @@ public class ResetCommand extends Command {
 	private Level level;
 
 	private long seed;
-
+	
 	public ResetCommand() {
+		super(false);
 	}
-
+	
 	public ResetCommand(Level level, long seed) {
+		this();
 		this.level = level;
 		this.seed = seed;
 	}
@@ -43,16 +45,26 @@ public class ResetCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game, String[] words){
+	public ExecutionResult execute(GameWorld game){
 		// TODO add your code here
+		
 		return new ExecutionResult(true);
 	}
 
 	@Override
 	public Command create(String[] parameters) {
 		// TODO add your code here
-		Command command= new ResetCommand();
+		if(parameters.length==3) {
+			Level level = Level.valueOfIgnoreCase(parameters[1]);
+			long seed = System.currentTimeMillis() % 1000;
+			seed = Long.parseLong(parameters[2]);
+			Command command= new ResetCommand(level, seed);
 		return command;
+		}
+		else {
+			System.out.println(Messages.COMMAND_PARAMETERS_MISSING);
+			return null;
+		}
 	}
 
 }

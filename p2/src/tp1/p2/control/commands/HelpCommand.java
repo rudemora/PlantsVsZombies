@@ -7,6 +7,10 @@ import tp1.p2.view.Messages;
 
 public class HelpCommand extends Command {
 
+	public HelpCommand() {
+		super(false);
+	}
+	
 	@Override
 	protected String getName() {
 		return Messages.COMMAND_HELP_NAME ;
@@ -28,7 +32,7 @@ public class HelpCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game, String[] words) {
+	public ExecutionResult execute(GameWorld game) {
 		StringBuilder buffer = new StringBuilder(Messages.HELP_AVAILABLE_COMMANDS);
 
 		for (Command command : Command.getAvailableCommands()) {

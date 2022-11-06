@@ -22,13 +22,13 @@ public abstract class Plant extends PlantFactory {
 	//public Plant()
 	
 	abstract public String getDescription();
-		/* return "zzz";
-		//return Messages.PLANT_DESCRIPTION.formatted(null);//aqui le metemos el this.getSymbol, this.get endurance....
-	};*/
 	
-	
-	//{movida,...,plant}
+	abstract public int getCost();
+	abstract public int getCol();
+	abstract public int getRow();
+
 	public abstract String getName();
-	public abstract String getSymbol();
+	abstract public String getSymbol();
+	//public abstract void add();
 	
 }

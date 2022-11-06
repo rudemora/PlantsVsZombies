@@ -93,8 +93,6 @@ public class Controller {
 			System.out.println(Messages.PLAYER_QUITS);
 			
 		}
-			
-		
 		else {
 			
 		}

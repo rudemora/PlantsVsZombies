@@ -21,14 +21,18 @@ public class AddPlantCommand extends Command implements Cloneable {
 	private boolean consumeCoins;
 	
 	private Game game;
-
+	
 	public AddPlantCommand() {
-		this(true);
+		super(true);
 	}
 
-	public AddPlantCommand(boolean consumeCoins) {
-		super();
+	public AddPlantCommand(boolean consumeCoins, int columna, int fila, String name) {
+		super(consumeCoins);
 		this.consumeCoins = consumeCoins;
+		this.col = columna;
+		this.row= fila;
+		this.plantName=name;
+		
 	}
 
 	@Override
@@ -52,24 +56,27 @@ public class AddPlantCommand extends Command implements Cloneable {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game, String[] words) {
-		// TODO add your code here
-		int col= Integer.parseInt(words[2]);
-		int row= Integer.parseInt(words[3]);
-		//Plant plant = PlantFactory.spawnPlant(words[1], game, col, row);
-		//game.addPlant(plant);
-	
-		
-		
+	public ExecutionResult execute(GameWorld game) {
+		// TODO add your code here	
+		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
+		game.addPlant(plant);
 		return new ExecutionResult(true);
 	}
 
 	@Override
 	public Command create(String[] parameters) {
 		// TODO add your code here
-		Command command= new AddPlantCommand();
+		if(parameters.length == 4) {
+			String name = parameters[1];
+			int col = Integer.parseInt(parameters[2]);
+			int row = Integer.parseInt(parameters[3]);
+			Command command= new AddPlantCommand(true, col, row, name);
 		return command;
+		}
+		else {
+			System.out.println(Messages.COMMAND_PARAMETERS_MISSING);
+			return null;
+		}
+		
 	}
-	
-	
 }

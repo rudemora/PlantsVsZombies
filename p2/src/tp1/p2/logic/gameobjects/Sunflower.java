@@ -19,16 +19,29 @@ public class Sunflower extends Plant  {//extends Plant tambi�n no?
 	protected String getShortcut() {
 		return Messages.SUNFLOWER_NAME_SHORTCUT;
 	}
-	protected int getCost() {
-		return 1;
+	
+	public int getCost() {
+		return this.cost;
 	}
+	
+	 public int getCol() {
+		 return this.posx;
+	 }
+	 
+	 public int getRow() {
+		 return this.posy;
+	 }
+
 	protected int getDamage() {
 		return 1;
 	}
 	protected int getEndurance() {
 		return 1;
 	}
+	
+	@Override
 	public String getSymbol() {
-		return "hola";
+		return String.format(Messages.SUNFLOWER_SYMBOL, this.endurance);
 	}
+	
 }
