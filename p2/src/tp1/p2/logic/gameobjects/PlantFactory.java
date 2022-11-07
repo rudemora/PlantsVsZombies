@@ -26,7 +26,7 @@ public abstract class PlantFactory {
 	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
 		// TODO add your code here
 		for(Plant p: PlantFactory.getAvailablePlants()) {
-			if(p.getName().equalsIgnoreCase(plantName)) {
+			if(p.getName().equalsIgnoreCase(plantName) || p.getSymbol().equalsIgnoreCase(plantName)) {
 				p = p.create(col, row);
 				return p;
 			}
