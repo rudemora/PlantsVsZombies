@@ -21,7 +21,7 @@ public interface GameWorld {
 	public void playerQuits();
 	
 	
-	public void addPlant(Plant plant);
+	abstract public void addGameObject(GameObject object);
 	
 
 	

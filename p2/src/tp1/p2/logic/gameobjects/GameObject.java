@@ -18,10 +18,11 @@ public abstract class GameObject implements GameItem {
 	protected int row;
 
 
-	GameObject() {
+	public GameObject() {
+		
 	}
 
-	GameObject(GameWorld game, int col, int row) {
+	public GameObject(GameWorld game, int col, int row) {
 		this.game = game;
 		this.col = col;
 		this.row = row;

@@ -3,9 +3,15 @@ import tp1.p2.view.Messages;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.PlantFactory;
+ 
+
 public class Peashooter extends Plant {
 	
-	protected Peashooter() {
+	public Peashooter() {
+		
+	}
+	public Peashooter(GameWorld game, int x, int y) {
+		super(game, x, y);
 		cost= 50;
 		damage= 1;
 		endurance = 3;
@@ -31,18 +37,37 @@ public class Peashooter extends Plant {
 		return 1;
 	}
 	
-	 public int getCol() {
-		 return this.posx;
-	 }
-	 
-	 public int getRow() {
-		 return this.posy;
-	 }
+	
+
 	 
 	 @Override
 	 public String getSymbol() {
 			return String.format(Messages.PEASHOOTER_SYMBOL, this.endurance);
 	}
+	 
+	public Peashooter create(int col, int row) {
+		 return new Peashooter(game, col, row);
+	 }
+
+	@Override
+	protected boolean isAlive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public void onEnter() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onExit() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 

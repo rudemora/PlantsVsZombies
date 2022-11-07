@@ -5,10 +5,11 @@ import static tp1.p2.view.Messages.error;
 import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
 import tp1.p2.logic.GameWorld;
-import tp1.p2.logic.Game;
+//import tp1.p2.logic.Game; //añadido por nosotros
 import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.PlantFactory;
 import tp1.p2.view.Messages;
+import tp1.p2.logic.gameobjects.GameObject; //añadido por nosotros
 
 public class AddPlantCommand extends Command implements Cloneable {
 
@@ -20,7 +21,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 
 	private boolean consumeCoins;
 	
-	private Game game;
+	private GameWorld game;
 	
 	public AddPlantCommand() {
 		super(true);
@@ -59,7 +60,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here	
 		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-		game.addPlant(plant);
+		game.addGameObject(plant);
 		return new ExecutionResult(true);
 	}
 

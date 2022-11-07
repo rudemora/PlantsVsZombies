@@ -2,7 +2,7 @@ package tp1.p2.logic;
 import tp1.p2.control.Level;
 import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
-
+import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.logic.gameobjects.Plant; //añadido para que addplant funcione
 
 public class Game implements GameStatus, GameWorld {
@@ -15,10 +15,11 @@ public class Game implements GameStatus, GameWorld {
     
     public Game (long seed, Level level) {//FALTA POR HACER
     	playerQuits=false;
+    	lista = new GameObjectContainer();
     }
-    public boolean execute (Command command,Game game, String[] words) {//FALTA POR HACER
+    public boolean execute (Command command) {//FALTA POR HACER
     	
-    	return command.execute(game).draw();
+    	return command.execute(this).draw();
     }
     public boolean isFinished() {
     	return false;
@@ -43,7 +44,8 @@ public class Game implements GameStatus, GameWorld {
     	playerQuits = true;
     }
     
-    public void addPlant(Plant plant) {
+    public void addGameObject(GameObject object) {
+    	lista.add(object);
     }
     //...
 }

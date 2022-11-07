@@ -21,16 +21,13 @@ public abstract class PlantFactory {
 	);
 	/* @formatter:on */
 
-	protected PlantFactory() {
-		
-	}
+	
 
 	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
 		// TODO add your code here
 		for(Plant p: PlantFactory.getAvailablePlants()) {
 			if(p.getName().equalsIgnoreCase(plantName)) {
-				p.posx = col;
-				p.posy = row;
+				p = p.create(col, row);
 				return p;
 			}
 		}
