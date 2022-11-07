@@ -50,8 +50,17 @@ public abstract class GameObject implements GameItem {
 			return "";
 		}
 	}
+	
+	public boolean hay_algo(int col, int row) {//Dice si hay algo en esa posición
+		if(this.col==col&&this.row==row) {
+			return true;
+		}
+		return false;
+	}
 
-	abstract protected String getSymbol();
+	abstract public String getSymbol();
+	
+	abstract public int getEndurance();
 
 	abstract public String getDescription();
 

@@ -34,9 +34,10 @@ public class Sunflower extends Plant  {//extends Plant tambi�n no?
 	protected int getDamage() {
 		return 1;
 	}
-	protected int getEndurance() {
-		return 1;
-	}
+	@Override
+	 public int getEndurance() {
+		 return this.endurance;
+	 }
 	
 	@Override
 	public String getSymbol() {

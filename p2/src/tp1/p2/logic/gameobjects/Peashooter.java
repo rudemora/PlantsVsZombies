@@ -33,9 +33,6 @@ public class Peashooter extends Plant {
 	protected int getDamage() {
 		return 1;
 	}
-	protected int getEndurance() {
-		return 1;
-	}
 	
 	
 
@@ -44,7 +41,10 @@ public class Peashooter extends Plant {
 	 public String getSymbol() {
 			return String.format(Messages.PEASHOOTER_SYMBOL, this.endurance);
 	}
-	 
+	 @Override
+	 public int getEndurance() {
+		 return this.endurance;
+	 }
 	public Peashooter create(int col, int row) {
 		 return new Peashooter(game, col, row);
 	 }

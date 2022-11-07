@@ -18,4 +18,29 @@ public class GameObjectContainer {
 		gameObjects.add(object);
 	}
 	
+	public boolean isPositionEmpty(int col,int row) {
+		for(int i=0; i< this.gameObjects.size();i++) {
+			if (this.gameObjects.get(i).hay_algo(col,row)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	public int endurance(int col, int row) {
+		for(int i=0; i< this.gameObjects.size();i++) {
+			if (this.gameObjects.get(i).hay_algo(col,row)) {
+				return this.gameObjects.get(i).getEndurance();
+			}
+		}
+		return -1;
+	}
+	
+	public String getsymbol(int col, int row) {
+		for(int i=0; i< this.gameObjects.size();i++) {
+			if (this.gameObjects.get(i).hay_algo(col,row)) {
+				return this.gameObjects.get(i).getSymbol();
+			}
+		}
+		return "";
+	}
 }
