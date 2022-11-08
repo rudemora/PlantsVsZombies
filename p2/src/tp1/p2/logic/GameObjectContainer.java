@@ -15,8 +15,7 @@ public class GameObjectContainer {
 
 	// TODO add your code here
 	public void addObject(GameObject object) {
-		
-			gameObjects.add(object);
+		gameObjects.add(object);
 			
 		
 		
@@ -24,16 +23,21 @@ public class GameObjectContainer {
 	}
 	
 	public boolean isPositionEmpty(int col,int row) {
-		for(int i=0; i< this.gameObjects.size();i++) {
-			if (this.gameObjects.get(i).hay_algo(col,row)) {
+		for(GameObject g: gameObjects) {
+			if(g.isInPosition(col, row)) {
 				return false;
 			}
 		}
+		/*for(int i=0; i< this.gameObjects.size();i++) {
+			if (this.gameObjects.get(i).isInPosition(col,row)) {
+				return false;
+			}
+		}*/
 		return true;
 	}
 	public int getEndurance(int col, int row) {
 		for(int i=0; i< this.gameObjects.size();i++) {
-			if (this.gameObjects.get(i).hay_algo(col,row)) {
+			if (this.gameObjects.get(i).isInPosition(col,row)) {
 				return this.gameObjects.get(i).getEndurance();
 			}
 		}
@@ -42,7 +46,7 @@ public class GameObjectContainer {
 	
 	public String getSymbol(int col, int row) {
 		for(int i=0; i< this.gameObjects.size();i++) {
-			if (this.gameObjects.get(i).hay_algo(col,row)) {
+			if (this.gameObjects.get(i).isInPosition(col,row)) {
 				return this.gameObjects.get(i).getSymbol();
 			}
 		}

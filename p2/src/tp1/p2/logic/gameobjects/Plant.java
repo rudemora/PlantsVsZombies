@@ -18,7 +18,6 @@ public abstract class Plant extends GameObject {
 	public GameWorld game;
 	
 	public Plant() {
-		
 	}
 	
 	public Plant(GameWorld game, int col, int row) {
@@ -32,5 +31,5 @@ public abstract class Plant extends GameObject {
 
 	public abstract String getName();
 	abstract public String getSymbol();
-	abstract public Plant create(int col, int row);
+	abstract public void create(GameWorld game, int col, int row);
 }

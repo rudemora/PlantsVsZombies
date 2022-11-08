@@ -6,6 +6,7 @@ import tp1.p2.logic.gameobjects.PlantFactory;
 public class Sunflower extends Plant  {//extends Plant tambi�n no?
 	
 	public Sunflower() {
+		super();
 		cost= 20;
 		damage= 0;
 		endurance = 1;
@@ -42,10 +43,11 @@ public class Sunflower extends Plant  {//extends Plant tambi�n no?
 		return String.format(Messages.SUNFLOWER_SYMBOL, this.endurance);
 	}
 	
-	public Sunflower create(int col, int row) {
+	public void create(GameWorld game, int col, int row) {
+		this.game = game;
 		this.col=col;
 		this.row=row;
-		return this;
+		
 	 }
 	@Override
 	protected boolean isAlive() {

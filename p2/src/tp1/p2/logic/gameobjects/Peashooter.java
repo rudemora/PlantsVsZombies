@@ -45,16 +45,22 @@ public class Peashooter extends Plant {
 	 public int getEndurance() {
 		 return this.endurance;
 	 }
-	public Peashooter create(int col, int row) {
+	public void create(GameWorld game, int col, int row) {
+		this.game = game;
 		this.col=col;
 		this.row=row;
-		return this;
+		
 	 }
 
 	@Override
 	protected boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.endurance > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
 	}
 	@Override
 	public void update() {

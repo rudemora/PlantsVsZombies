@@ -11,11 +11,11 @@ import tp1.p2.logic.GameWorld;
  */
 public abstract class GameObject implements GameItem {
 
-	protected GameWorld game;
+	public GameWorld game;
 
-	protected int col;
+	public int col;
 
-	protected int row;
+	public int row;
 
 
 	public GameObject() {
@@ -51,19 +51,15 @@ public abstract class GameObject implements GameItem {
 		}
 	}
 	
-	public boolean hay_algo(int col, int row) {//Dice si hay algo en esa posición
-		if(this.col==col&&this.row==row) {
-			return true;
-		}
-		return false;
-	}
-
 	abstract public int getCost();
 	abstract public String getSymbol();
-	public boolean canAdd() {
-		if(this.game.isPositionEmpty(col, row)) {
+	
+	public boolean canAdd(GameWorld game) {
+		if(game.isPositionEmpty(col, row)) {
 			return true;
 		}
+		System.out.println(row);
+
 		return false;
 	}
 	abstract public int getEndurance();

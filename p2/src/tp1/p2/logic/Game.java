@@ -65,7 +65,7 @@ public class Game implements GameStatus, GameWorld {
     }
     
     public void addObject(GameObject object) {
-    	if(object.canAdd()) {
+    	if(object.canAdd(this)) {
     		this.addGameObject(object);
     		this.addCycle();
     		this.consumeCoins(object);
@@ -75,16 +75,15 @@ public class Game implements GameStatus, GameWorld {
     }
     
     public void addGameObject(GameObject object) {
-    	
     	lista.addObject(object);
     	
     }
     
-    public int consumeCoins(GameObject object) {
+    public void consumeCoins(GameObject object) {
     	
     	int coste = object.getCost();
     	this.sunCoins = this.sunCoins-coste;
-    	return this.sunCoins;
+    	
     }
     public boolean isPositionEmpty(int x, int y) {
     	return lista.isPositionEmpty(x, y);

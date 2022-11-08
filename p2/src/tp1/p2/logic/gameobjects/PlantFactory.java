@@ -27,7 +27,7 @@ public  class PlantFactory {
 		// TODO add your code here
 		for(Plant p: PlantFactory.getAvailablePlants()) {
 			if(p.getName().equalsIgnoreCase(plantName) || p.getSymbol().equalsIgnoreCase(plantName)) {
-				p = p.create(col, row);
+				p.create(game, col, row);
 				return p;
 			}
 		}
