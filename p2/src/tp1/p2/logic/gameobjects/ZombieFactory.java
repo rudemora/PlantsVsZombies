@@ -1,5 +1,8 @@
 package tp1.p2.logic.gameobjects;
 import java.util.*;
+
+import tp1.p2.logic.GameWorld;
+import tp1.p2.view.Messages;
 public class ZombieFactory {
 
 	
@@ -8,4 +11,7 @@ public class ZombieFactory {
 
 		return array;
 	}
+	
+	
+	
 }

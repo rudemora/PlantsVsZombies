@@ -23,6 +23,7 @@ public interface GameWorld {
 	
 	abstract public void addObject(GameObject object);
 	abstract public void addCycle();
+	abstract public boolean isPositionEmpty(int x, int y);
 
 	
 }

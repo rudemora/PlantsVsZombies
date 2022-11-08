@@ -21,6 +21,8 @@ public class ZombiesManager {
 	private int remainingZombies;
 	
 	private int zombiesAlived;
+	
+	private GameObjectContainer lista;
 
 	public ZombiesManager(GameWorld game, Level level, Random rand) {
 		this.game = game;
@@ -65,7 +67,7 @@ public class ZombiesManager {
 	}
 	
 	private boolean isPositionEmpty(int x, int y) {
-		return true;
+		return game.isPositionEmpty(x, y);
 	}
 
 	public boolean addZombie(int row) {
@@ -73,6 +75,8 @@ public class ZombiesManager {
 		int zombieType = randomZombieType();
 
 		if (canAdd) {
+			//Me falta insertar el zombie del tipo Zombie type en el contenedor
+			this.remainingZombies--;
 			// TODO add your code here
 		}
 		return canAdd;

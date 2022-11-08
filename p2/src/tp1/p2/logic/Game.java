@@ -80,6 +80,9 @@ public class Game implements GameStatus, GameWorld {
     	this.sunCoins = this.sunCoins-coste;
     	return this.sunCoins;
     }
+    public boolean isPositionEmpty(int x, int y) {
+    	return lista.isPositionEmpty(x, y);
+    }
     public String positionToString(int col, int row) {
 		String escribe= "";
 		if(!lista.isPositionEmpty(col, row)) {
