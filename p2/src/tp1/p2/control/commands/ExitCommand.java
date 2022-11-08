@@ -9,7 +9,6 @@ import tp1.p2.view.Messages;
 public class ExitCommand extends Command {
 	
 	public ExitCommand() {
-		super(false);
 	}
 	
 	@Override

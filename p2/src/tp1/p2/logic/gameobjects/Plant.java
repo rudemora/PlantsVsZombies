@@ -12,10 +12,10 @@ import tp1.p2.logic.gameobjects.PlantFactory;
 
 
 public abstract class Plant extends GameObject {
-	protected int cost;
-	protected int damage;
-	protected int endurance;
-	protected GameWorld game;
+	public int cost;
+	public int damage;
+	public int endurance;
+	public GameWorld game;
 	
 	public Plant() {
 		

@@ -21,8 +21,8 @@ public interface GameWorld {
 	public void playerQuits();
 	
 	
-	abstract public void addGameObject(GameObject object);
-	
+	abstract public void addObject(GameObject object);
+	abstract public void addCycle();
 
 	
 }

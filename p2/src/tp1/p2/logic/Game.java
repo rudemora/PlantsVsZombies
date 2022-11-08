@@ -10,13 +10,25 @@ public class Game implements GameStatus, GameWorld {
 	private GameObjectContainer lista;
 	
     public static final int INITIAL_SUNCOINS = 50;
-    public static final int CYCLE = 0;
+    public static final int INITIAL_CYCLE = 0;
     
     protected static boolean playerQuits;
     
-    public Game (long seed, Level level) {//FALTA POR HACER
+    protected Level level;
+    protected long seed;
+    protected int cycle;
+    protected int remainingZombies;
+    protected int sunCoins;
+    
+    public Game (long s, Level l) {//FALTA POR HACER
     	playerQuits=false;
     	lista = new GameObjectContainer();
+    	this.seed = s;
+    	this.level = l;
+    	cycle = INITIAL_CYCLE;
+    	remainingZombies = l.getNumberOfZombies();
+    	sunCoins = INITIAL_SUNCOINS;
+    	
     }
     public boolean execute (Command command) {//FALTA POR HACER
     	
@@ -29,12 +41,21 @@ public class Game implements GameStatus, GameWorld {
     	return playerQuits;
     }
     public int getCycle() {
-    	return CYCLE;
+    	return cycle;
     }
+    
+    public void addCycle() {
+    	cycle = cycle + 1;
+    }
+    
     public int getSuncoins() {
-    	return INITIAL_SUNCOINS;
+    	return sunCoins;
     }
- 
+    
+    public int getRemainingZombies() {
+    	return remainingZombies;
+    }
+    
     public ExecutionResult update() {
     	return new ExecutionResult(true);
     }
@@ -43,19 +64,35 @@ public class Game implements GameStatus, GameWorld {
     	playerQuits = true;
     }
     
+    public void addObject(GameObject object) {
+    	this.addGameObject(object);
+		this.addCycle();
+		this.consumeCoins(object);
+    }
+    
     public void addGameObject(GameObject object) {
-    	lista.add(object);
+    	lista.addObject(object);
+    	
+    }
+    
+    public int consumeCoins(GameObject object) {
+    	int coste = object.getCost();
+    	this.sunCoins = this.sunCoins-coste;
+    	return this.sunCoins;
     }
     public String positionToString(int col, int row) {
 		String escribe= "";
 		if(!lista.isPositionEmpty(col, row)) {
-			int endurance = lista.endurance(col, row);
-			String icon= lista.getsymbol(col,row);
+			int endurance = lista.getEndurance(col, row);
+			String icon= lista.getSymbol(col,row);
 			return Messages.GAME_OBJECT_STATUS.formatted(icon,endurance);
 			
 		}
 		
 		return escribe;
 	}
+    
+
+    
     //...
 }

@@ -21,7 +21,6 @@ import tp1.p2.view.Messages;
  */
 public abstract class Command {
 	private static GameWorld game;
-	private boolean consumeCoins;
 	/* @formatter:off */
 	private static final List<Command> AVAILABLE_COMMANDS = Arrays.asList(
 		new AddPlantCommand(),
@@ -33,10 +32,7 @@ public abstract class Command {
 	);
 	/* @formatter:on */
 	
-	public Command (boolean consume) {//FALTA POR HACER
-		consumeCoins=consume;
-	}
-
+	
 	private static Command defaultCommand = new NoneCommand();
 
 	public static Command parse(String[] commandWords) {

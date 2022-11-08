@@ -7,18 +7,17 @@ import tp1.p2.logic.gameobjects.PlantFactory;
 
 public class Peashooter extends Plant {
 	
-	public Peashooter() {
-		
-	}
-	public Peashooter(GameWorld game, int x, int y) {
-		super(game, x, y);
+	private GameWorld game;
+	
+	public Peashooter (){
 		cost= 50;
 		damage= 1;
 		endurance = 3;
 	}
+
 	
 	public String getDescription() {
-		 return Messages.PLANT_DESCRIPTION.formatted(Messages.PEASHOOTER_NAME_SHORTCUT,cost,damage,endurance);
+		return Messages.PLANT_DESCRIPTION.formatted(Messages.PEASHOOTER_NAME_SHORTCUT,cost,damage,endurance);
 	 }
 	
 	public String getName() {
@@ -46,7 +45,9 @@ public class Peashooter extends Plant {
 		 return this.endurance;
 	 }
 	public Peashooter create(int col, int row) {
-		 return new Peashooter(game, col, row);
+		this.col=col;
+		this.row=row;
+		return this;
 	 }
 
 	@Override
@@ -61,7 +62,6 @@ public class Peashooter extends Plant {
 	}
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override

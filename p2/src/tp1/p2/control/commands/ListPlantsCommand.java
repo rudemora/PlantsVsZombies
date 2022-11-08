@@ -10,7 +10,7 @@ import tp1.p2.view.Messages;
 public class ListPlantsCommand extends Command {
 	
 	public ListPlantsCommand() {
-		super(false);
+		
 	}
 	
 	@Override
@@ -35,10 +35,10 @@ public class ListPlantsCommand extends Command {
 		System.out.println(Messages.AVAILABLE_PLANTS);
 		for(Plant p: PlantFactory.getAvailablePlants()) {
 			System.out.println(p.getDescription());
+
 		}
-		
 		// TODO add your code here
-	
+		
 		System.out.println();
 
 		return new ExecutionResult(false);

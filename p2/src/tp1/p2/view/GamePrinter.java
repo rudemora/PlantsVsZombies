@@ -88,14 +88,16 @@ public class GamePrinter implements GameStatus {
 		return str.toString();
 	}
 	
-	public String positionToString(int x, int y) {
-		return "ooo";
+	public String positionToString(int x, int y) { // este método no hace nada, pero si lo eliminamos da error pues tiene que heredarse de status
+		System.out.print("eee");
+		return "a";
 	}
+	
 	public int getCycle() {
-		return 1;
+		return game.getCycle();
 	}
 	public int getSuncoins() {
-		return 1;
+		return game.getSuncoins();
 	}
 
 	/**

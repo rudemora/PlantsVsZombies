@@ -58,11 +58,11 @@ public class Messages {
 
 	public static final String NOT_ENOUGH_COINS = "Not enough suncoins";
 
-	public static final String NUMBER_OF_CYCLES = "Number of cycles:";
+	public static final String NUMBER_OF_CYCLES = "Number of cycles: %d";
 
-	public static final String NUMBER_OF_COINS = "Sun coins:";
+	public static final String NUMBER_OF_COINS = "Sun coins: %d";
 
-	public static final String REMAINING_ZOMBIES = "Remaining zombies:";
+	public static final String REMAINING_ZOMBIES = "Remaining zombies: %d";
 
 	public static final String GAME_OVER = "Game over";
 

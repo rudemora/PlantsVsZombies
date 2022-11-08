@@ -30,6 +30,9 @@ public class Controller {
 	 * Draw / Paint the game.
 	 */
 	private void printGame() {
+		System.out.println(String.format(Messages.NUMBER_OF_CYCLES, this.game.getCycle()));
+		System.out.println(String.format(Messages.NUMBER_OF_COINS, this.game.getSuncoins()));
+		System.out.println(String.format(Messages.REMAINING_ZOMBIES, this.game.getRemainingZombies()));
 		System.out.println(gamePrinter);
 	}
 

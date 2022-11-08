@@ -9,7 +9,7 @@ import tp1.p2.logic.GameWorld;
 import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.PlantFactory;
 import tp1.p2.view.Messages;
-import tp1.p2.logic.gameobjects.GameObject; //añadido por nosotros
+//import tp1.p2.logic.gameobjects.GameObject; //añadido por nosotros
 
 public class AddPlantCommand extends Command implements Cloneable {
 
@@ -19,17 +19,14 @@ public class AddPlantCommand extends Command implements Cloneable {
 
 	private String plantName;
 
-	private boolean consumeCoins;
 	
 	private GameWorld game;
 	
 	public AddPlantCommand() {
-		super(true);
+
 	}
 
-	public AddPlantCommand(boolean consumeCoins, int columna, int fila, String name) {
-		super(consumeCoins);
-		this.consumeCoins = consumeCoins;
+	public AddPlantCommand(int columna, int fila, String name) {
 		this.col = columna;
 		this.row= fila;
 		this.plantName=name;
@@ -60,7 +57,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here	
 		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-		game.addGameObject(plant);
+		game.addObject(plant);
 		return new ExecutionResult(true);
 	}
 
@@ -71,7 +68,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 			String name = parameters[1];
 			int col = Integer.parseInt(parameters[2]);
 			int row = Integer.parseInt(parameters[3]);
-			Command command= new AddPlantCommand(true, col, row, name);
+			Command command= new AddPlantCommand(col, row, name);
 		return command;
 		}
 		else {

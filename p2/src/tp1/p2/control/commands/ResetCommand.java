@@ -15,7 +15,7 @@ public class ResetCommand extends Command {
 	private long seed;
 	
 	public ResetCommand() {
-		super(false);
+		
 	}
 	
 	public ResetCommand(Level level, long seed) {

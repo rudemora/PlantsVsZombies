@@ -2,10 +2,11 @@ package tp1.p2.logic;
 
 public interface GameStatus {
 
-	int getCycle();
+	abstract public int getCycle();
 
-	int getSuncoins();
+	abstract public int getSuncoins();
 
 	// TODO add your code here
 	abstract public String positionToString(int x, int y);
+	
 }

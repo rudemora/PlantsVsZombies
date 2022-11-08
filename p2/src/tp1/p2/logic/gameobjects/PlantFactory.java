@@ -10,7 +10,7 @@ import tp1.p2.view.Messages;
 import tp1.p2.logic.GameWorld;
 
 
-public abstract class PlantFactory {
+public  class PlantFactory {
 	
 	private GameWorld game;
 	
