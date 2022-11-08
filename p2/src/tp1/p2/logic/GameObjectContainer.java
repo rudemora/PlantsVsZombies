@@ -15,7 +15,11 @@ public class GameObjectContainer {
 
 	// TODO add your code here
 	public void addObject(GameObject object) {
-		gameObjects.add(object);
+		
+			gameObjects.add(object);
+			
+		
+		
 		//System.out.print(gameObjects.get(0).getCol());
 	}
 	

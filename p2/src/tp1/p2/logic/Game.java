@@ -65,17 +65,23 @@ public class Game implements GameStatus, GameWorld {
     }
     
     public void addObject(GameObject object) {
-    	this.addGameObject(object);
-		this.addCycle();
-		this.consumeCoins(object);
+    	if(object.canAdd()) {
+    		this.addGameObject(object);
+    		this.addCycle();
+    		this.consumeCoins(object);
+    	}
+    	
+    	
     }
     
     public void addGameObject(GameObject object) {
+    	
     	lista.addObject(object);
     	
     }
     
     public int consumeCoins(GameObject object) {
+    	
     	int coste = object.getCost();
     	this.sunCoins = this.sunCoins-coste;
     	return this.sunCoins;

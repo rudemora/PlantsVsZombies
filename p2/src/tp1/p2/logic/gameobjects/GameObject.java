@@ -22,7 +22,7 @@ public abstract class GameObject implements GameItem {
 		
 	}
 
-	GameObject(GameWorld game, int col, int row) {
+	public GameObject(GameWorld game, int col, int row) {
 		this.game = game;
 		this.col = col;
 		this.row = row;
@@ -60,7 +60,12 @@ public abstract class GameObject implements GameItem {
 
 	abstract public int getCost();
 	abstract public String getSymbol();
-	
+	public boolean canAdd() {
+		if(this.game.isPositionEmpty(col, row)) {
+			return true;
+		}
+		return false;
+	}
 	abstract public int getEndurance();
 
 	abstract public String getDescription();
