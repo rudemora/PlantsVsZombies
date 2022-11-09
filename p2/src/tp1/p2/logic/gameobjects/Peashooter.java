@@ -7,7 +7,6 @@ import tp1.p2.logic.gameobjects.PlantFactory;
 
 public class Peashooter extends Plant {
 	
-	private GameWorld game;
 	
 	public Peashooter (){
 		cost= 50;
@@ -29,11 +28,7 @@ public class Peashooter extends Plant {
 	public int getCost() {
 		return this.cost;
 	}
-	protected int getDamage() {
-		return 1;
-	}
-	
-	
+
 	
 
 	 
@@ -41,27 +36,16 @@ public class Peashooter extends Plant {
 	 public String getSymbol() {
 			return String.format(Messages.PEASHOOTER_SYMBOL, this.endurance);
 	}
-	 @Override
-	 public int getEndurance() {
-		 return this.endurance;
-	 }
-	public void create(GameWorld game, int col, int row) {
-		this.game = game;
-		this.col=col;
-		this.row=row;
-		
+
+	public Peashooter create(GameWorld game, int col, int row) {
+		Peashooter P = new Peashooter();
+		P.game = game;
+		P.col=col;
+		P.row=row;
+		return P;
 	 }
 
-	@Override
-	protected boolean isAlive() {
-		if (this.endurance > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-		
-	}
+
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub

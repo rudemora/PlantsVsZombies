@@ -13,9 +13,7 @@ import tp1.p2.logic.gameobjects.PlantFactory;
 
 public abstract class Plant extends GameObject {
 	public int cost;
-	public int damage;
-	public int endurance;
-	public GameWorld game;
+	
 	
 	public Plant() {
 	}
@@ -29,7 +27,6 @@ public abstract class Plant extends GameObject {
 	abstract public int getCost();
 
 
-	public abstract String getName();
-	abstract public String getSymbol();
-	abstract public void create(GameWorld game, int col, int row);
+	
+	abstract public Plant create(GameWorld game, int col, int row);
 }

@@ -34,7 +34,8 @@ public class NoneCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
-		game.addCycle();
+		game.addZombie(); // prueba
+		//game.update() debemos eliminar el game.addZombie
 		return new ExecutionResult(true);
 	}
 

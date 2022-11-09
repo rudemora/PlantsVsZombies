@@ -47,7 +47,7 @@ public class GamePrinter implements GameStatus {
 		StringBuilder buffer = new StringBuilder();
 
 		/* @formatter:off */
-		//buffer.append();
+		
 		/* @formatter:on */
 
 		return buffer.toString();

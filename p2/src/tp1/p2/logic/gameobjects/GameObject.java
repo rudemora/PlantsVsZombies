@@ -11,13 +11,16 @@ import tp1.p2.logic.GameWorld;
  */
 public abstract class GameObject implements GameItem {
 
-	public GameWorld game;
+	protected GameWorld game;
 
 	public int col;
 
 	public int row;
 
-
+	public int damage;
+	public int endurance;
+	public int ciclo;
+	public int cost;
 	public GameObject() {
 		
 	}
@@ -26,10 +29,14 @@ public abstract class GameObject implements GameItem {
 		this.game = game;
 		this.col = col;
 		this.row = row;
+		this.ciclo = 0;
 	}
 
-	public boolean isInPosition(int col, int row) {
-		return this.col == col && this.row == row;
+	public boolean isInPosition(int columna, int fila) {
+		//System.out.print(col);
+		//System.out.println(columna);
+
+		return this.col == columna && this.row == fila;
 	}
 
 	public int getCol() {
@@ -40,7 +47,14 @@ public abstract class GameObject implements GameItem {
 		return row;
 	}
 	
-	abstract protected boolean isAlive();
+	public boolean isAlive() {
+		if (this.endurance <= 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
 	public String toString() {
 		if (isAlive()) {
@@ -50,21 +64,27 @@ public abstract class GameObject implements GameItem {
 			return "";
 		}
 	}
-	
-	abstract public int getCost();
+	abstract public String getName();
 	abstract public String getSymbol();
 	
-	public boolean canAdd(GameWorld game) {
-		if(game.isPositionEmpty(col, row)) {
+	public boolean canAdd() {
+		if(game.isPositionEmpty(this.col, this.row) ) {
 			return true;
 		}
-		System.out.println(row);
-
 		return false;
 	}
-	abstract public int getEndurance();
+	
+	public int getEndurance() {
+		return this.endurance;
+	}
 
-	abstract public String getDescription();
+	public int getDamage() {
+		return this.damage;
+	}
+	
+	public int getCost() {
+		return this.cost;
+	}
 
 	abstract public void update();
 	

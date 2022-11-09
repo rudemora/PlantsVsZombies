@@ -16,20 +16,19 @@ public class GameObjectContainer {
 	// TODO add your code here
 	public void addObject(GameObject object) {
 		gameObjects.add(object);
-			
-		
-		
-		//System.out.print(gameObjects.get(0).getCol());
 	}
 	
 	public boolean isPositionEmpty(int col,int row) {
+		//System.out.print(col);
 		for(GameObject g: gameObjects) {
 			if(g.isInPosition(col, row)) {
 				return false;
 			}
-		}
+	}
 		/*for(int i=0; i< this.gameObjects.size();i++) {
+			System.out.print(gameObjects.size());
 			if (this.gameObjects.get(i).isInPosition(col,row)) {
+	    		//System.out.print("A");
 				return false;
 			}
 		}*/

@@ -20,7 +20,7 @@ import tp1.p2.view.Messages;
  *
  */
 public abstract class Command {
-	private static GameWorld game;
+	protected static GameWorld game;
 	/* @formatter:off */
 	private static final List<Command> AVAILABLE_COMMANDS = Arrays.asList(
 		new AddPlantCommand(),

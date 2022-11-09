@@ -15,5 +15,5 @@ public interface GameItem {
 	 *         otherwise.
 	 */
 	//boolean receiveZombieAttack(int damage);
-
+	//void kill();
 }

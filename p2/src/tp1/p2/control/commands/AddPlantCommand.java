@@ -20,7 +20,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 	private String plantName;
 
 	
-	private GameWorld game;
+	//private GameWorld game;
 	
 	public AddPlantCommand() {
 
@@ -57,8 +57,16 @@ public class AddPlantCommand extends Command implements Cloneable {
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here	
 		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-		game.addObject(plant);
-		return new ExecutionResult(true);
+		if(game.addObject(plant)) {
+			game.addZombie();
+			//game.update() debemos eliminar el game.addZombie
+			return new ExecutionResult(true);
+		}	
+		return new ExecutionResult(false);
+
+		/*else {
+			return new ExecutionResult(false);
+		}*/
 	}
 
 	@Override

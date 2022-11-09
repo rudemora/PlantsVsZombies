@@ -12,7 +12,7 @@ import tp1.p2.logic.GameWorld;
 
 public  class PlantFactory {
 	
-	private GameWorld game;
+	//private GameWorld game;
 	
 	/* @formatter:off */
 	private static final List<Plant> AVAILABLE_PLANTS = Arrays.asList(
@@ -26,11 +26,13 @@ public  class PlantFactory {
 	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
 		// TODO add your code here
 		for(Plant p: PlantFactory.getAvailablePlants()) {
-			if(p.getName().equalsIgnoreCase(plantName) || p.getSymbol().equalsIgnoreCase(plantName)) {
-				p.create(game, col, row);
-				return p;
-			}
+				if(p.getName().equalsIgnoreCase(plantName) || p.getSymbol().equalsIgnoreCase(plantName)) {
+					Plant planta = p.create(game, col, row);
+					return planta;
+				}
+			
 		}
+		
 		System.out.println(Messages.INVALID_GAME_OBJECT);
 		return null;
 	}

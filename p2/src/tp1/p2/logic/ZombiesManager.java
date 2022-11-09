@@ -51,7 +51,7 @@ public class ZombiesManager {
 	}
 
 	private int randomZombieType() {
-		return rand.nextInt(ZombieFactory.getAvailableZombies().size());
+		return 0;// rand.nextInt(ZombieFactory.getAvailableZombies().size()); preguntar en lab
 	}
 
 	public void update() {
@@ -63,7 +63,7 @@ public class ZombiesManager {
 		return addZombie(row);
 	}
 	private int getRemainingZombies() {
-		return 0;
+		return this.remainingZombies;
 	}
 	
 	private boolean isPositionEmpty(int x, int y) {
@@ -73,10 +73,11 @@ public class ZombiesManager {
 	public boolean addZombie(int row) {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && isPositionEmpty(GameWorld.NUM_COLS, row);
 		int zombieType = randomZombieType();
-
 		if (canAdd) {
-			//Me falta insertar el zombie del tipo Zombie type en el contenedor
-			this.remainingZombies--;
+			Zombie zombie = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
+			Zombie z = zombie.create(game, row);
+			game.addObject(z);
+			game.restarZombies();
 			// TODO add your code here
 		}
 		return canAdd;
