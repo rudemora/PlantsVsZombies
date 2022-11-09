@@ -1,9 +1,12 @@
 package tp1.p2.logic.gameobjects;
 
 import tp1.p2.logic.Game;
+import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 public class ZombieComun extends Zombie {
+	
+
 	
 	public ZombieComun() {
 		speed= 2;
@@ -27,8 +30,16 @@ public class ZombieComun extends Zombie {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		this.addCycle();
+		GameItem item = game.getGameItemInPosition(col - 1, row);
+		if(item != null ) {  
+    		item.receiveZombieAttack(this.damage);
+		}
+		else {
+			if(this.game.isPositionEmpty(col-1, row) && this.canAvanzar()) {
+				this.avanzar();
+			}
+		}
 	}
 	@Override
 	public void onEnter() {
@@ -48,5 +59,9 @@ public class ZombieComun extends Zombie {
 		return Z;
 	}
 
+	protected void avanzar() {
+		this.col--;
+	}
+	
 	
 }

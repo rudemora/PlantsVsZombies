@@ -4,6 +4,7 @@ import static tp1.p2.view.Messages.error;
 
 import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
+import tp1.p2.logic.Game;
 import tp1.p2.logic.GameWorld;
 //import tp1.p2.logic.Game; //añadido por nosotros
 import tp1.p2.logic.gameobjects.Plant;
@@ -57,16 +58,18 @@ public class AddPlantCommand extends Command implements Cloneable {
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here	
 		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-		if(game.addObject(plant)) {
-			game.addZombie();
-			//game.update() debemos eliminar el game.addZombie
+		if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
+			if(game.addObject(plant)) {
+			game.update(); 
 			return new ExecutionResult(true);
-		}	
+			}	
+		}
+		else {
+			System.out.print(error(Messages.INVALID_POSITION));
+		}
 		return new ExecutionResult(false);
 
-		/*else {
-			return new ExecutionResult(false);
-		}*/
+		
 	}
 
 	@Override

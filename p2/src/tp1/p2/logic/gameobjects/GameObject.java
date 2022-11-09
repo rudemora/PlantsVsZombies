@@ -4,6 +4,7 @@ import static tp1.p2.view.Messages.status;
 
 import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
+import tp1.p2.view.Messages;
 
 /**
  * Base class for game non playable character in the game.
@@ -21,7 +22,7 @@ public abstract class GameObject implements GameItem {
 	public int endurance;
 	public int ciclo;
 	public int cost;
-	public GameObject() {
+	/*public GameObject() {
 		
 	}
 
@@ -30,7 +31,7 @@ public abstract class GameObject implements GameItem {
 		this.col = col;
 		this.row = row;
 		this.ciclo = 0;
-	}
+	}*/
 
 	public boolean isInPosition(int columna, int fila) {
 		//System.out.print(col);
@@ -58,14 +59,19 @@ public abstract class GameObject implements GameItem {
 
 	public String toString() {
 		if (isAlive()) {
-			return "ee";
+			int endurance = this.endurance;
+			String icon= this.getSymbol();
+			return status(icon,endurance);
 			// TODO add your code here
-		} else {
+		} 
+		else {
 			return "";
 		}
 	}
 	abstract public String getName();
 	abstract public String getSymbol();
+	
+	
 	
 	public boolean canAdd() {
 		if(game.isPositionEmpty(this.col, this.row) ) {
@@ -74,9 +80,7 @@ public abstract class GameObject implements GameItem {
 		return false;
 	}
 	
-	public int getEndurance() {
-		return this.endurance;
-	}
+
 
 	public int getDamage() {
 		return this.damage;
@@ -85,7 +89,15 @@ public abstract class GameObject implements GameItem {
 	public int getCost() {
 		return this.cost;
 	}
-
+	
+	public void addCycle() {
+		this.ciclo = this.ciclo +1;
+	}
+	
+	public int getEndurance() {
+		return this.endurance;
+	}
+	
 	abstract public void update();
 	
 	abstract public void onEnter();

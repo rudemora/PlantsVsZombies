@@ -9,9 +9,7 @@ import tp1.p2.view.Messages;
 
 public class ListPlantsCommand extends Command {
 	
-	public ListPlantsCommand() {
-		
-	}
+	
 	
 	@Override
 	protected String getName() {

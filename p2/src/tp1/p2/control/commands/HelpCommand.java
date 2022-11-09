@@ -7,9 +7,7 @@ import tp1.p2.view.Messages;
 
 public class HelpCommand extends Command {
 
-	public HelpCommand() {
-		
-	}
+	
 	
 	@Override
 	protected String getName() {

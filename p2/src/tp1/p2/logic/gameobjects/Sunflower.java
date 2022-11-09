@@ -1,8 +1,7 @@
 package tp1.p2.logic.gameobjects;
 import tp1.p2.view.Messages;
 import tp1.p2.logic.GameWorld;
-import tp1.p2.logic.gameobjects.Plant;
-import tp1.p2.logic.gameobjects.PlantFactory;
+
 public class Sunflower extends Plant  {//extends Plant tambi�n no?
 	
 	public Sunflower() {
@@ -43,11 +42,21 @@ public class Sunflower extends Plant  {//extends Plant tambi�n no?
 		return S;
 	 }
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
+	public int addSoles() {
+		if (this.ciclo%4==0) {
+			this.ciclo = 1;
+			return 10;
+		}
+		return 0;
 	}
+	
+	@Override
+	public void update() { //preguntar si está bien hecho
+		// TODO Auto-generated method stub
+		this.addCycle();
+		this.game.setSuncoins(this.game.getSuncoins()+this.addSoles());
+	}
+	
 	@Override
 	public void onEnter() {
 		// TODO Auto-generated method stub

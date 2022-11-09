@@ -7,7 +7,7 @@ import tp1.p2.logic.gameobjects.GameObject;
 
 public class GameObjectContainer {
 
-	private List<GameObject> gameObjects;
+	public List<GameObject> gameObjects;
 	
 	public GameObjectContainer() {
 		gameObjects = new ArrayList<>();
@@ -18,20 +18,24 @@ public class GameObjectContainer {
 		gameObjects.add(object);
 	}
 	
+
+	
+	public boolean zombiesGana() {
+		for(int i =0;i<gameObjects.size();i=i+1) {
+			if (gameObjects.get(i).col == -1) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean isPositionEmpty(int col,int row) {
-		//System.out.print(col);
 		for(GameObject g: gameObjects) {
 			if(g.isInPosition(col, row)) {
 				return false;
 			}
-	}
-		/*for(int i=0; i< this.gameObjects.size();i++) {
-			System.out.print(gameObjects.size());
-			if (this.gameObjects.get(i).isInPosition(col,row)) {
-	    		//System.out.print("A");
-				return false;
-			}
-		}*/
+		}
+		
 		return true;
 	}
 	public int getEndurance(int col, int row) {
@@ -50,5 +54,26 @@ public class GameObjectContainer {
 			}
 		}
 		return "";
+	}
+	
+	public GameItem getGameItemInPosition(int col,int row) {
+		for(int i =0;i<gameObjects.size();i=i+1) {
+			if ( gameObjects.get(i).getCol() == col && gameObjects.get(i).getRow() == row) {
+				return gameObjects.get(i);
+			}
+		}
+		return null;
+		
+	}
+	
+	public void update() {
+		for(int i=0; i< this.gameObjects.size();i++) {
+			if (gameObjects.get(i).isAlive()) {
+				gameObjects.get(i).update();
+			}
+			else {
+				gameObjects.remove(i);   // no sabemos si va aquí o en onExit()
+			}
+		}
 	}
 }

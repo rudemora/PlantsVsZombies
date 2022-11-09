@@ -96,7 +96,12 @@ public class Controller {
 			
 		}
 		else {
-			
+			if (game.jugadorGanador()) {
+				System.out.print(Messages.PLAYER_WINS);
+			}
+			else {
+				System.out.print(Messages.ZOMBIES_WIN);
+			}
 		}
 			
 	}

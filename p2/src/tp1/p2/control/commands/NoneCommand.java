@@ -7,9 +7,7 @@ import tp1.p2.view.Messages;
 
 public class NoneCommand extends Command {
 
-	public NoneCommand() {
-		
-	}
+	
 
 	@Override
 	protected String getName() {
@@ -34,8 +32,7 @@ public class NoneCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
-		game.addZombie(); // prueba
-		//game.update() debemos eliminar el game.addZombie
+		game.update(); 
 		return new ExecutionResult(true);
 	}
 

@@ -1,8 +1,10 @@
 package tp1.p2.logic.gameobjects;
 import tp1.p2.view.Messages;
+import tp1.p2.logic.Game;
+import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
-import tp1.p2.logic.gameobjects.Plant;
-import tp1.p2.logic.gameobjects.PlantFactory;
+//import tp1.p2.logic.gameobjects.Plant;
+//import tp1.p2.logic.gameobjects.PlantFactory;
  
 
 public class Peashooter extends Plant {
@@ -44,11 +46,22 @@ public class Peashooter extends Plant {
 		P.row=row;
 		return P;
 	 }
-
+	
+	
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		this.addCycle();
+		int i = col + 1;
+		boolean atacked = false;
+		while (!atacked && i <Game.NUM_COLS) {
+			GameItem item = game.getGameItemInPosition(i, row);
+			if(item != null ) {  
+    		atacked = item.receivePeashooterAttack(this.damage);
+			}
+			i = i +1;
+		}
 		
 	}
 	@Override

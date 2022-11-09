@@ -22,7 +22,6 @@ public class ZombiesManager {
 	
 	private int zombiesAlived;
 	
-	private GameObjectContainer lista;
 
 	public ZombiesManager(GameWorld game, Level level, Random rand) {
 		this.game = game;
@@ -51,7 +50,7 @@ public class ZombiesManager {
 	}
 
 	private int randomZombieType() {
-		return 0;// rand.nextInt(ZombieFactory.getAvailableZombies().size()); preguntar en lab
+		return 0; //rand.nextInt(ZombieFactory.getAvailableZombies().size()); 
 	}
 
 	public void update() {
@@ -62,22 +61,34 @@ public class ZombiesManager {
 		int row = randomZombieRow();
 		return addZombie(row);
 	}
-	private int getRemainingZombies() {
+	
+	public int getRemainingZombies() {
 		return this.remainingZombies;
 	}
+	
+	
 	
 	private boolean isPositionEmpty(int x, int y) {
 		return game.isPositionEmpty(x, y);
 	}
-
+	
+	public boolean zombiesDead() {
+		return zombiesAlived == 0;
+	}
+	
+	public void matarZombie() {
+		zombiesAlived--;
+	}
+	
 	public boolean addZombie(int row) {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && isPositionEmpty(GameWorld.NUM_COLS, row);
 		int zombieType = randomZombieType();
 		if (canAdd) {
 			Zombie zombie = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
-			Zombie z = zombie.create(game, row);
+			Zombie z = zombie.create(game, row);            // usamos este método en vez de new porque no sabemos cómo hacerlo (igual en comandos y plantas)
 			game.addObject(z);
-			game.restarZombies();
+			remainingZombies --;
+			zombiesAlived += 1;
 			// TODO add your code here
 		}
 		return canAdd;

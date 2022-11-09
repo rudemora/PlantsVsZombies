@@ -3,16 +3,13 @@ package tp1.p2.logic.gameobjects;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import tp1.p2.logic.gameobjects.Plant;
-import tp1.p2.logic.gameobjects.Peashooter;
-import tp1.p2.logic.gameobjects.Sunflower;
+
 import tp1.p2.view.Messages;
 import tp1.p2.logic.GameWorld;
 
 
 public  class PlantFactory {
 	
-	//private GameWorld game;
 	
 	/* @formatter:off */
 	private static final List<Plant> AVAILABLE_PLANTS = Arrays.asList(

@@ -4,10 +4,15 @@ import tp1.p2.view.Messages;
 import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
 import tp1.p2.logic.gameobjects.GameObject;
-import tp1.p2.logic.gameobjects.Plant; //añadido para que addplant funcione
+ //añadido para que addplant funcione
 import java.util.Random;			   //añadido para nuevo atributo
-import tp1.p2.logic.ZombiesManager;	   //añadido por nosotros para inicializarlo
+ //añadido por nosotros para inicializarlo
 import static tp1.p2.view.Messages.error; //error suncoins insuficientes
+
+
+
+
+
 
 public class Game implements GameStatus, GameWorld {
 	public GameObjectContainer lista;
@@ -20,29 +25,30 @@ public class Game implements GameStatus, GameWorld {
     protected Level level;
     protected long seed;
     protected int cycle;
-    protected int remainingZombies;
     protected int sunCoins;
     private Random rand;
     private ZombiesManager Zombies;
+
     
     public Game (long s, Level l) {//FALTA POR HACER
-    	playerQuits=false;
-    	lista = new GameObjectContainer();
-    	this.seed = s;
-    	this.level = l;
-    	this.rand = new Random(this.seed);
-    	this.Zombies= new ZombiesManager(this,level,rand);
-    	cycle = INITIAL_CYCLE;
-    	remainingZombies = l.getNumberOfZombies();
-    	sunCoins = INITIAL_SUNCOINS;
-    	
+    	this.reset(s, l);    	
     }
     public boolean execute (Command command) {//FALTA POR HACER
     	
     	return command.execute(this).draw();
     }
     public boolean isFinished() {
-    	return false;
+    	if (this.Zombies.getRemainingZombies() == 0 && Zombies.zombiesDead()) {    // está bien utilizar esto o es mejor crear un atributo??
+    		return true; 
+    	}
+    	else {
+    		if (zombiesGana()) {
+    			return true;
+    		}
+    		else {
+        		return false;
+    		}
+    	}
     }
     public boolean isPlayerQuits() {
     	return playerQuits;
@@ -51,37 +57,35 @@ public class Game implements GameStatus, GameWorld {
     	return cycle;
     }
     
-    private void addCycle() {
-    	cycle = cycle + 1;
+    public void reset(long seed, Level level) {
+    	playerQuits=false;
+    	lista = new GameObjectContainer();
+    	this.seed = seed;
+    	this.level = level;
+    	this.rand = new Random(this.seed);
+    	this.Zombies= new ZombiesManager(this,level,rand);
+    	cycle = INITIAL_CYCLE;
+    	sunCoins = INITIAL_SUNCOINS;
     }
     
     public int getSuncoins() {
     	return sunCoins;
     }
     
-    public int getRemainingZombies() {
-    	return remainingZombies;
-    }
+	public void setSuncoins(int coins) {
+		sunCoins = coins;
+	}
     
-    public int restarZombies() {
-    	return remainingZombies--;
-    }
+    
+   
     
     public ExecutionResult update() {
-    	for(int col =0;col<Game.NUM_COLS;col=col+1) {
-    		for(int row =0;row<Game.NUM_ROWS;row = row+1) {
-    			GameItem item = this.getGameItemInPosition(col, row);
-    			if(item != null ) {  
-    				item.receiveZombieAttack(this.damage);
-    				return new ExecutionResult(true);
-    			}
-    		}
-    	}
+    	this.lista.update();
+    	this.addZombie();
+    	return new ExecutionResult(true);
     }
      
-    public GameItem getGameItemInPosition(int col, int row) { //quizá cambiar por getGameItemInContainer
-    	
-    }
+    
     
     public void playerQuits() {
     	playerQuits = true;
@@ -106,7 +110,7 @@ public class Game implements GameStatus, GameWorld {
     	
     }
     
-    public void addZombie() {
+    private void addZombie() {
     	Zombies.addZombie();
     	cycle = cycle + 1;  	
     }
@@ -129,16 +133,33 @@ public class Game implements GameStatus, GameWorld {
     public String positionToString(int col, int row) {
 		String escribe= "";
 		if(!lista.isPositionEmpty(col, row)) {
-			int endurance = lista.getEndurance(col, row);
-			String icon= lista.getSymbol(col,row);
-			return Messages.GAME_OBJECT_STATUS.formatted(icon,endurance);
+			GameItem item = this.getGameItemInPosition(col, row);
+			return item.toString();
 			
 		}
 		
 		return escribe;
 	}
     
+    public int getRemainingZombies() {
+    	return this.Zombies.getRemainingZombies();
+    }
     
+    public GameItem getGameItemInPosition(int col, int row) {
+    	return lista.getGameItemInPosition(col, row);
+    }
+
+    public boolean jugadorGanador() {
+    	return this.Zombies.getRemainingZombies() == 0;
+    }
+    
+    public void matarZombie() {
+    	Zombies.matarZombie();
+    }
+    
+    public boolean zombiesGana() {
+    	return lista.zombiesGana();
+    }
     
     //...
 }
