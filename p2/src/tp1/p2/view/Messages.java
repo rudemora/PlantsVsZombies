@@ -1,7 +1,5 @@
 package tp1.p2.view;
 
-import tp1.p2.logic.gameobjects.Peashooter;
-import tp1.p2.logic.gameobjects.Sunflower;
 import tp1.p2.control.Level;
 
 /**

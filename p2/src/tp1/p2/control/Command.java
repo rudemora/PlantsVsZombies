@@ -20,7 +20,7 @@ import tp1.p2.view.Messages;
  *
  */
 public abstract class Command {
-	protected static GameWorld game;
+	//protected static GameWorld game; CREO QUE NO HACE FALTA
 	/* @formatter:off */
 	private static final List<Command> AVAILABLE_COMMANDS = Arrays.asList(
 		new AddPlantCommand(),
@@ -35,11 +35,10 @@ public abstract class Command {
 	
 	private static Command defaultCommand = new NoneCommand();
 
-	public static Command parse(String[] commandWords) {
+	protected static Command parse(String[] commandWords) {
 		if (commandWords.length == 1 && commandWords[0].isEmpty()) {
 			return defaultCommand;
 		}
-
 		for (Command command : AVAILABLE_COMMANDS) {
 			if (command.matchCommand(commandWords[0])) {
 				command = command.create(commandWords);
@@ -50,7 +49,7 @@ public abstract class Command {
 		return null;
 	}
 
-	public static Iterable<Command> getAvailableCommands() {
+	protected static Iterable<Command> getAvailableCommands() {
 		return Collections.unmodifiableList(AVAILABLE_COMMANDS);
 	}
 
@@ -62,11 +61,11 @@ public abstract class Command {
 
 	abstract public String getHelp();
 
-	public boolean isDefaultAction() {
+	private boolean isDefaultAction() {
 		return Command.defaultCommand == this;
 	}
 
-	public boolean matchCommand(String token) {
+	private boolean matchCommand(String token) {
 		String shortcut = getShortcut();
 		String name = getName();
 		return shortcut.equalsIgnoreCase(token) || name.equalsIgnoreCase(token)
@@ -80,9 +79,9 @@ public abstract class Command {
 	 * 
 	 * @return {@code true} if game board must be printed {@code false} otherwise.
 	 */
-	public abstract ExecutionResult execute(GameWorld game);
+	abstract public ExecutionResult execute(GameWorld game);
 
-	public Command create(String[] parameters) {
+	protected Command create(String[] parameters) {
 		return this;
 	}
 

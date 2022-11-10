@@ -20,9 +20,6 @@ public class AddPlantCommand extends Command implements Cloneable {
 
 	private String plantName;
 
-	
-	//private GameWorld game;
-	
 	public AddPlantCommand() {
 
 	}
@@ -61,6 +58,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 		if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
 			if(game.addObject(plant)) {
 			game.update(); 
+			game.removeDead();
 			return new ExecutionResult(true);
 			}	
 		}
@@ -73,7 +71,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 	}
 
 	@Override
-	public Command create(String[] parameters) {
+	protected Command create(String[] parameters) {
 		// TODO add your code here
 		if(parameters.length == 4) {
 			String name = parameters[1];
@@ -83,7 +81,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 		return command;
 		}
 		else {
-			System.out.println(Messages.COMMAND_PARAMETERS_MISSING);
+			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
 			return null;
 		}
 		

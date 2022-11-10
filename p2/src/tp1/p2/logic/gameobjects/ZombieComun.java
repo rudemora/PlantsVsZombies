@@ -8,7 +8,7 @@ public class ZombieComun extends Zombie {
 	
 
 	
-	public ZombieComun() {
+	protected ZombieComun() {
 		speed= 2;
 		damage= 1;
 		endurance = 5;
@@ -16,13 +16,12 @@ public class ZombieComun extends Zombie {
 		cost = 0;
 	}
 	
-	public ZombieComun(GameWorld game, int col, int row) {
+	protected ZombieComun(GameWorld game, int col, int row) {
 		super(game, col, row);
 		speed= 2;
 		damage= 1;
 		endurance = 5;
 		col = Game.NUM_COLS;
-		cost = 0;
 	}
 	
 	@Override
@@ -31,10 +30,10 @@ public class ZombieComun extends Zombie {
 	}
 	
 	@Override
-	public String getSymbol() {{
+	public String getSymbol() {
 		return Messages.ZOMBIE_SYMBOL;
 	}
-}
+
 
 
 	@Override
@@ -69,6 +68,4 @@ public class ZombieComun extends Zombie {
 	protected void avanzar() {
 		this.col--;
 	}
-	
-	
 }

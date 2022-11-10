@@ -1,6 +1,6 @@
-/*package tp1.p2;
+package tp1.p2;
 
-//import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -12,9 +12,9 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 
-import tp1.p2.PlantsVsZombies;
+
 
 public class PlantsVsZombiesTests {
 
@@ -71,8 +71,8 @@ public class PlantsVsZombiesTests {
 
 	@Test
 	public void test00() {
-		parameterizedTest(Paths.get("test/p2/00-easy_25-input.txt"), Paths.get("test/p2/00-easy_25-expected.txt"),
-				Paths.get("test/p2/00-easy_25-output.txt"), new String[] { "EASY", "25" });
+		parameterizedTest(Paths.get("p2/test/00-easy_25-input.txt"), Paths.get("p2/test/00-easy_25-expected.txt"),
+				Paths.get("p2/test/00-easy_25-output.txt"), new String[] { "EASY", "25" });
 	}
 
 	@Test
@@ -99,4 +99,4 @@ public class PlantsVsZombiesTests {
 				Paths.get("test/p2/04-insane_360-output.txt"), new String[] { "INSANE", "360" });
 	}
 
-}*/
+}

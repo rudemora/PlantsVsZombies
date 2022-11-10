@@ -47,12 +47,16 @@ public class ResetCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game){
 		// TODO add your code here
+		if (level == null) {
+			level = game.getLevel();
+			seed =  game.getSeed();
+		}
 		game.reset(seed, level);
 		return new ExecutionResult(true);
 	}
 
 	@Override
-	public Command create(String[] parameters) {
+	protected Command create(String[] parameters) {
 		// TODO add your code here
 		if(parameters.length==3) {
 			Level level = Level.valueOfIgnoreCase(parameters[1]);
@@ -61,8 +65,12 @@ public class ResetCommand extends Command {
 			Command command= new ResetCommand(level, seed);
 		return command;
 		}
+		else if (parameters.length == 1) {
+			Command command = new ResetCommand();
+			return command;
+		}
 		else {
-			System.out.println(Messages.COMMAND_PARAMETERS_MISSING);
+			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
 			return null;
 		}
 	}

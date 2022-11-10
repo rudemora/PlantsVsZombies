@@ -14,8 +14,6 @@ public class GamePrinter {
 
 	private static final String VERTICAL_DELIMITER = "|";
 
-	private static final String NEW_LINE = System.lineSeparator();
-
 	private static final int MARGIN_SIZE = 2;
 
 	private static final String MARGIN = repeat(SPACE, MARGIN_SIZE);
@@ -89,14 +87,6 @@ public class GamePrinter {
 	}
 	
 	
-	
-	public int getCycle() {
-		return game.getCycle();
-	}
-	public int getSuncoins() {
-		return game.getSuncoins();
-	}
-
 	/**
 	 * Builds the message to be printed once the game has finished.
 	 * 

@@ -92,15 +92,15 @@ public class Controller {
 		}
 		printEndMessage();
 		if(game.isPlayerQuits()) {
-			System.out.println(Messages.PLAYER_QUITS);
+			System.out.print(Messages.PLAYER_QUITS);
 			
 		}
 		else {
 			if (game.jugadorGanador()) {
-				System.out.println(Messages.PLAYER_WINS);
+				System.out.print(Messages.PLAYER_WINS);
 			}
 			else {
-				System.out.println(Messages.ZOMBIES_WIN);
+				System.out.print(Messages.ZOMBIES_WIN);
 			}
 		}
 			

@@ -1,9 +1,8 @@
 package tp1.p2.logic;
 
-import tp1.p2.control.Command;
+
 import tp1.p2.control.ExecutionResult;
 import tp1.p2.control.Level;
-import tp1.p2.control.actions.GameAction;  //Único sitio donde se llama GameAction
 import tp1.p2.logic.gameobjects.GameObject;
 
 
@@ -23,7 +22,10 @@ public interface GameWorld {
 	abstract public boolean addObject(GameObject object);
 	abstract public boolean isPositionEmpty(int x, int y);
 	abstract public GameItem getGameItemInPosition(int x, int y);
+	abstract public void removeDead();
 	abstract public void addSuncoins(int Coins);
 	abstract public void reset(long seed, Level level);
 	abstract public void matarZombie();
+	abstract public Level getLevel();
+	abstract public long getSeed();
 }

@@ -3,13 +3,13 @@ package tp1.p2.logic.gameobjects;
 import tp1.p2.logic.GameWorld;
 public abstract class Zombie extends GameObject {
 	
-	public int speed;
+	protected int speed;
 	
-	public Zombie() {
+	protected Zombie() {
 		
 	}
 	
-	public Zombie(GameWorld game, int col, int row) {
+	protected Zombie(GameWorld game, int col, int row) {
 		super(game, col, row);
 	}
 	
@@ -30,10 +30,7 @@ public abstract class Zombie extends GameObject {
 	
 	abstract protected void avanzar();
 	
-
-	
-	
-	public boolean canAvanzar() {
+	protected boolean canAvanzar() {
 		return (this.ciclo % this.speed) == 0;
 	}
 }

@@ -9,36 +9,32 @@ import java.util.Random;			   //añadido para nuevo atributo
  //añadido por nosotros para inicializarlo
 import static tp1.p2.view.Messages.error; //error suncoins insuficientes
 
-
-
-
-
-
 public class Game implements GameStatus, GameWorld {
-	public GameObjectContainer lista;
+	private GameObjectContainer lista;
 	
-    public static final int INITIAL_SUNCOINS = 50;
-    public static final int INITIAL_CYCLE = 0;
+    private static final int INITIAL_SUNCOINS = 50;
+    private static final int INITIAL_CYCLE = 0;
     
-    protected static boolean playerQuits;
+    private static boolean playerQuits;
     
-    protected Level level;
-    protected long seed;
-    protected int cycle;
-    protected int sunCoins;
+    private Level level;
+    private long seed;
+    private int cycle;
+    private int sunCoins;
     private Random rand;
     private ZombiesManager Zombies;
 
     
-    public Game (long s, Level l) {//FALTA POR HACER
+    public Game (long s, Level l) {
     	this.reset(s, l);    	
     }
-    public boolean execute (Command command) {//FALTA POR HACER
-    	
+    
+    public boolean execute (Command command) {
     	return command.execute(this).draw();
     }
+    
     public boolean isFinished() {
-    	if (this.Zombies.getRemainingZombies() == 0 && Zombies.zombiesDead()) {    // está bien utilizar esto o es mejor crear un atributo??
+    	if (this.Zombies.getRemainingZombies() == 0 && Zombies.zombiesDead()) { 
     		return true; 
     	}
     	else {
@@ -50,9 +46,11 @@ public class Game implements GameStatus, GameWorld {
     		}
     	}
     }
+    
     public boolean isPlayerQuits() {
     	return playerQuits;
     }
+    
     public int getCycle() {
     	return cycle;
     }
@@ -66,27 +64,26 @@ public class Game implements GameStatus, GameWorld {
     	this.Zombies= new ZombiesManager(this,level,rand);
     	cycle = INITIAL_CYCLE;
     	sunCoins = INITIAL_SUNCOINS;
+    	System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
+		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));	
     }
     
     public void addSuncoins(int coins) {
     	sunCoins = sunCoins + coins;
     }
-    
-
-    
+        
     public int getSuncoins() {
     	return sunCoins;
     }
    
     
     public ExecutionResult update() {
-    	this.lista.update();
-    	this.addZombie();
+    	boolean add = this.addZombie();
+    	cycle = cycle + 1;
+    	this.lista.update(add);
     	return new ExecutionResult(true);
     }
      
-    
-    
     public void playerQuits() {
     	playerQuits = true;
     }
@@ -103,23 +100,19 @@ public class Game implements GameStatus, GameWorld {
     		}
     	}
     	else {
-        	System.out.println(error(Messages.INVALID_POSITION));    			
         	return false;
     	}
-    		
-    	
     }
     
-    private void addZombie() {
-    	Zombies.addZombie();
-    	cycle = cycle + 1;  	
+    private boolean addZombie() {
+    	return Zombies.addZombie();  	
     }
     
-    public void addGameObject(GameObject object) {
+    private void addGameObject(GameObject object) {
     	lista.addObject(object);
     }
     
-    public boolean consumeCoins(GameObject object) {
+    private boolean consumeCoins(GameObject object) {
     	int coste = object.getCost();
     	if(coste <= this.sunCoins) {
         	this.sunCoins = this.sunCoins-coste;
@@ -127,9 +120,11 @@ public class Game implements GameStatus, GameWorld {
     	}
     	return false;
     }
+    
     public boolean isPositionEmpty(int x, int y) {
     	return lista.isPositionEmpty(x, y);
     }
+    
     public String positionToString(int col, int row) {
 		String escribe= "";
 		if(!lista.isPositionEmpty(col, row)) {
@@ -157,8 +152,20 @@ public class Game implements GameStatus, GameWorld {
     	Zombies.matarZombie();
     }
     
-    public boolean zombiesGana() {
+    public void removeDead() {
+    	lista.removeDead();
+    }
+    
+    private boolean zombiesGana() {
     	return lista.zombiesGana();
+    }
+    
+    public Level getLevel() {
+    	return this.level;
+    }
+    
+    public long getSeed() {
+    	return this.seed;
     }
     
     //...

@@ -4,7 +4,7 @@ import static tp1.p2.view.Messages.status;
 
 import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
-import tp1.p2.view.Messages;
+
 
 /**
  * Base class for game non playable character in the game.
@@ -14,16 +14,16 @@ public abstract class GameObject implements GameItem {
 
 	protected GameWorld game;
 
-	public int col;
+	protected int col;
 
-	public int row;
+	protected int row;
 
-	public int damage;
-	public int endurance;
-	public int ciclo;
-	public int cost;
+	protected int damage;
+	protected int endurance;
+	protected int ciclo;
+	protected int cost;
 	
-	public GameObject() {
+	protected GameObject() {
 		
 	}
 
@@ -38,11 +38,11 @@ public abstract class GameObject implements GameItem {
 		return this.col == columna && this.row == fila;
 	}
 
-	public int getCol() {
+	protected int getCol() {
 		return col;
 	}
 
-	public int getRow() {
+	protected int getRow() {
 		return row;
 	}
 	
@@ -66,10 +66,9 @@ public abstract class GameObject implements GameItem {
 			return "";
 		}
 	}
+	
 	abstract public String getName();
 	abstract public String getSymbol();
-	
-	
 	
 	public boolean canAdd() {
 		if(game.isPositionEmpty(this.col, this.row) ) {
@@ -78,22 +77,21 @@ public abstract class GameObject implements GameItem {
 		return false;
 	}
 	
-
-
-	public int getDamage() {
-		return this.damage;
-	}
-	
 	public int getCost() {
 		return this.cost;
 	}
 	
-	public void addCycle() {
+	protected void addCycle() {
 		this.ciclo = this.ciclo +1;
 	}
 	
-	public int getEndurance() {
-		return this.endurance;
+	public boolean winner() {
+		if (this.col <= -1) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	abstract public void update();

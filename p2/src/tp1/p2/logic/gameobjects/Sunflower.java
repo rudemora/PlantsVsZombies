@@ -2,17 +2,17 @@ package tp1.p2.logic.gameobjects;
 import tp1.p2.view.Messages;
 import tp1.p2.logic.GameWorld;
 
-public class Sunflower extends Plant  {//extends Plant tambi�n no?
+public class Sunflower extends Plant  {
 	private int soles;
 	
-	public Sunflower() {
+	protected Sunflower() {
 		cost= 20;
 		damage= 0;
 		endurance = 1;
 		soles = 10;
 	}
 	
-	public Sunflower(GameWorld game, int col, int row) {
+	protected Sunflower(GameWorld game, int col, int row) {
 		super(game, col, row);
 		cost= 20;
 		damage= 0;
@@ -48,7 +48,7 @@ public class Sunflower extends Plant  {//extends Plant tambi�n no?
 		return sunflower;
 	 }
 
-	public int addSoles() {
+	private int addSoles() {
 		if (this.ciclo%4==0) {
 			this.ciclo = 1;
 			return soles;
@@ -57,7 +57,7 @@ public class Sunflower extends Plant  {//extends Plant tambi�n no?
 	}
 	
 	@Override
-	public void update() { //preguntar si está bien hecho
+	public void update() { 
 		// TODO Auto-generated method stub
 		this.addCycle();
 		this.game.addSuncoins(this.addSoles());
