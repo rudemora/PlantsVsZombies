@@ -6,7 +6,7 @@ import tp1.p2.logic.GameStatus;
 import tp1.p2.logic.GameWorld;
 import tp1.utils.StringUtils;
 
-public class GamePrinter implements GameStatus {
+public class GamePrinter {
 
 	private static final String SPACE = " ";
 
@@ -88,10 +88,7 @@ public class GamePrinter implements GameStatus {
 		return str.toString();
 	}
 	
-	public String positionToString(int x, int y) { // este método no hace nada, pero si lo eliminamos da error pues tiene que heredarse de status
-		System.out.print("eee");
-		return "a";
-	}
+	
 	
 	public int getCycle() {
 		return game.getCycle();

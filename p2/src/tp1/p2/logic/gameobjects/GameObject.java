@@ -22,21 +22,19 @@ public abstract class GameObject implements GameItem {
 	public int endurance;
 	public int ciclo;
 	public int cost;
-	/*public GameObject() {
+	
+	public GameObject() {
 		
 	}
 
-	public GameObject(GameWorld game, int col, int row) {
+	protected GameObject(GameWorld game, int col, int row) {
 		this.game = game;
 		this.col = col;
 		this.row = row;
 		this.ciclo = 0;
-	}*/
+	}
 
 	public boolean isInPosition(int columna, int fila) {
-		//System.out.print(col);
-		//System.out.println(columna);
-
 		return this.col == columna && this.row == fila;
 	}
 

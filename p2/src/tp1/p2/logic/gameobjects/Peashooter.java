@@ -15,7 +15,14 @@ public class Peashooter extends Plant {
 		damage= 1;
 		endurance = 3;
 	}
-
+	
+	public Peashooter(GameWorld game, int col, int row) {
+		super(game, col, row);
+		cost= 50;
+		damage= 1;
+		endurance = 3;
+	}
+	
 	
 	public String getDescription() {
 		return Messages.PLANT_DESCRIPTION.formatted(Messages.PEASHOOTER_NAME_SHORTCUT,cost,damage,endurance);
@@ -40,11 +47,8 @@ public class Peashooter extends Plant {
 	}
 
 	public Peashooter create(GameWorld game, int col, int row) {
-		Peashooter P = new Peashooter();
-		P.game = game;
-		P.col=col;
-		P.row=row;
-		return P;
+		Peashooter peashooter = new Peashooter(game, col, row);
+		return peashooter;
 	 }
 	
 	

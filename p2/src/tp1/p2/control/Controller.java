@@ -97,10 +97,10 @@ public class Controller {
 		}
 		else {
 			if (game.jugadorGanador()) {
-				System.out.print(Messages.PLAYER_WINS);
+				System.out.println(Messages.PLAYER_WINS);
 			}
 			else {
-				System.out.print(Messages.ZOMBIES_WIN);
+				System.out.println(Messages.ZOMBIES_WIN);
 			}
 		}
 			

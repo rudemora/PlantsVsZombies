@@ -23,8 +23,7 @@ public interface GameWorld {
 	abstract public boolean addObject(GameObject object);
 	abstract public boolean isPositionEmpty(int x, int y);
 	abstract public GameItem getGameItemInPosition(int x, int y);
-	abstract public int getSuncoins();
-	abstract public void setSuncoins(int coins);
+	abstract public void addSuncoins(int Coins);
 	abstract public void reset(long seed, Level level);
 	abstract public void matarZombie();
 }

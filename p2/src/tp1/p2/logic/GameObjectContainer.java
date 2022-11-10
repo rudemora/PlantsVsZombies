@@ -38,27 +38,12 @@ public class GameObjectContainer {
 		
 		return true;
 	}
-	public int getEndurance(int col, int row) {
-		for(int i=0; i< this.gameObjects.size();i++) {
-			if (this.gameObjects.get(i).isInPosition(col,row)) {
-				return this.gameObjects.get(i).getEndurance();
-			}
-		}
-		return -1;
-	}
+
 	
-	public String getSymbol(int col, int row) {
-		for(int i=0; i< this.gameObjects.size();i++) {
-			if (this.gameObjects.get(i).isInPosition(col,row)) {
-				return this.gameObjects.get(i).getSymbol();
-			}
-		}
-		return "";
-	}
 	
-	public GameItem getGameItemInPosition(int col,int row) {
+	public GameItem getGameItemInPosition(int col,int row) {  
 		for(int i =0;i<gameObjects.size();i=i+1) {
-			if ( gameObjects.get(i).getCol() == col && gameObjects.get(i).getRow() == row) {
+			if ( gameObjects.get(i).isInPosition(col, row)) { 
 				return gameObjects.get(i);
 			}
 		}
@@ -72,7 +57,7 @@ public class GameObjectContainer {
 				gameObjects.get(i).update();
 			}
 			else {
-				gameObjects.remove(i);   // no sabemos si va aquí o en onExit()
+				gameObjects.remove(i);   
 			}
 		}
 	}

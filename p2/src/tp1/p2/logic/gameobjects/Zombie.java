@@ -5,7 +5,15 @@ public abstract class Zombie extends GameObject {
 	
 	public int speed;
 	
-
+	public Zombie() {
+		
+	}
+	
+	public Zombie(GameWorld game, int col, int row) {
+		super(game, col, row);
+	}
+	
+	
 	abstract public Zombie create(GameWorld game, int row);
 	
 	public boolean receiveZombieAttack(int damage) {

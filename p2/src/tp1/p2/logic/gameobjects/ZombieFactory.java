@@ -14,10 +14,11 @@ public class ZombieFactory {
 		/* @formatter:on */
 	
 	
-	public static ArrayList<Integer> getAvailableZombies() {
-		ArrayList<Integer> array = new ArrayList<Integer> (1);
-
-		return array;
+	public static List<Zombie> getAvailableZombies() {
+		/*ArrayList<Integer> array = new ArrayList<Integer> (1);
+		return Collections.unmodifiableList(array);
+		*/
+		return Collections.unmodifiableList(AVAILABLE_ZOMBIES);
 	}
 	
 	

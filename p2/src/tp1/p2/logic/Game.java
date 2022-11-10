@@ -68,15 +68,15 @@ public class Game implements GameStatus, GameWorld {
     	sunCoins = INITIAL_SUNCOINS;
     }
     
+    public void addSuncoins(int coins) {
+    	sunCoins = sunCoins + coins;
+    }
+    
+
+    
     public int getSuncoins() {
     	return sunCoins;
     }
-    
-	public void setSuncoins(int coins) {
-		sunCoins = coins;
-	}
-    
-    
    
     
     public ExecutionResult update() {

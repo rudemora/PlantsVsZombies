@@ -16,6 +16,15 @@ public class ZombieComun extends Zombie {
 		cost = 0;
 	}
 	
+	public ZombieComun(GameWorld game, int col, int row) {
+		super(game, col, row);
+		speed= 2;
+		damage= 1;
+		endurance = 5;
+		col = Game.NUM_COLS;
+		cost = 0;
+	}
+	
 	@Override
 	public String getName() {
 		return Messages.ZOMBIE_NAME;
@@ -53,10 +62,8 @@ public class ZombieComun extends Zombie {
 	}
 	
 	public ZombieComun create(GameWorld game, int row) {
-		ZombieComun Z = new ZombieComun();
-		Z.game = game;
-		Z.row=row;
-		return Z;
+		ZombieComun zombieComun = new ZombieComun(game, col, row);
+		return zombieComun;
 	}
 
 	protected void avanzar() {

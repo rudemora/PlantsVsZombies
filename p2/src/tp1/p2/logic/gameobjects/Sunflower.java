@@ -3,13 +3,22 @@ import tp1.p2.view.Messages;
 import tp1.p2.logic.GameWorld;
 
 public class Sunflower extends Plant  {//extends Plant tambi�n no?
+	private int soles;
 	
 	public Sunflower() {
 		cost= 20;
 		damage= 0;
 		endurance = 1;
+		soles = 10;
 	}
 	
+	public Sunflower(GameWorld game, int col, int row) {
+		super(game, col, row);
+		cost= 20;
+		damage= 0;
+		endurance = 1;
+		soles = 10;
+	}
 	
 	public String getDescription() {
 		return Messages.PLANT_DESCRIPTION.formatted(Messages.SUNFLOWER_NAME_SHORTCUT,cost,damage,endurance);
@@ -35,17 +44,14 @@ public class Sunflower extends Plant  {//extends Plant tambi�n no?
 	}
 	
 	public Sunflower create(GameWorld game, int col, int row) {
-		Sunflower S = new Sunflower();
-		S.game = game;
-		S.col=col;
-		S.row=row;
-		return S;
+		Sunflower sunflower = new Sunflower(game, col, row);
+		return sunflower;
 	 }
 
 	public int addSoles() {
 		if (this.ciclo%4==0) {
 			this.ciclo = 1;
-			return 10;
+			return soles;
 		}
 		return 0;
 	}
@@ -54,7 +60,7 @@ public class Sunflower extends Plant  {//extends Plant tambi�n no?
 	public void update() { //preguntar si está bien hecho
 		// TODO Auto-generated method stub
 		this.addCycle();
-		this.game.setSuncoins(this.game.getSuncoins()+this.addSoles());
+		this.game.addSuncoins(this.addSoles());
 	}
 	
 	@Override
