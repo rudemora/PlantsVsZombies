@@ -21,9 +21,8 @@ public class ZombiesManager {
 	private int remainingZombies;
 	
 	private int zombiesAlived;
-	
 
-	protected ZombiesManager(GameWorld game, Level level, Random rand) {
+	public ZombiesManager(GameWorld game, Level level, Random rand) {
 		this.game = game;
 		this.level = level;
 		this.rand = rand;
@@ -50,44 +49,36 @@ public class ZombiesManager {
 	}
 
 	private int randomZombieType() {
-		return rand.nextInt(ZombieFactory.getAvailableZombies().size()); 
+		return rand.nextInt(ZombieFactory.getAvailableZombies().size());
 	}
 
-	
-	protected boolean addZombie() {
+	public void update() {
+		addZombie();
+	}
+
+	public boolean addZombie() {
 		int row = randomZombieRow();
 		return addZombie(row);
 	}
-	
-	protected int getRemainingZombies() {
-		return this.remainingZombies;
-	}
-	
-	
-	private boolean isPositionEmpty(int x, int y) {
-		return game.isPositionEmpty(x, y);
-	}
-	
-	protected boolean zombiesDead() {
-		return zombiesAlived == 0;
-	}
-	
-	protected void matarZombie() {
-		zombiesAlived--;
-	}
-	
-	protected boolean addZombie(int row) {
+
+	public boolean addZombie(int row) {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && isPositionEmpty(GameWorld.NUM_COLS, row);
 		int zombieType = randomZombieType();
+
 		if (canAdd) {
-			Zombie zombie = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
-			Zombie z = zombie.create(game, row);
-			game.addObject(z);
-			remainingZombies --;
-			zombiesAlived += 1;
 			// TODO add your code here
 		}
 		return canAdd;
+	}
+
+	private boolean isPositionEmpty(int numCols, int row) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private int getRemainingZombies() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	// TODO add your code here

@@ -1,6 +1,6 @@
 package tp1.p2.logic.gameobjects;
 
-public class ZombieComun extends Zombie {
+public class CherryBomb extends Plant {
 
 	@Override
 	public boolean receiveZombieAttack(int damage) {

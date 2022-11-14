@@ -30,9 +30,6 @@ public class Controller {
 	 * Draw / Paint the game.
 	 */
 	private void printGame() {
-		System.out.println(String.format(Messages.NUMBER_OF_CYCLES, this.game.getCycle()));
-		System.out.println(String.format(Messages.NUMBER_OF_COINS, this.game.getSuncoins()));
-		System.out.println(String.format(Messages.REMAINING_ZOMBIES, this.game.getRemainingZombies()));
 		System.out.println(gamePrinter);
 	}
 
@@ -90,21 +87,8 @@ public class Controller {
 		if (refreshDisplay) {
 			printGame();
 		}
+
 		printEndMessage();
-		if(game.isPlayerQuits()) {
-			System.out.print(Messages.PLAYER_QUITS);
-			
-		}
-		else {
-			if (game.jugadorGanador()) {
-				System.out.print(Messages.PLAYER_WINS);
-			}
-			else {
-				System.out.print(Messages.ZOMBIES_WIN);
-			}
-		}
-			
 	}
-			
 
 }

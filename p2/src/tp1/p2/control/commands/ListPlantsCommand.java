@@ -8,9 +8,7 @@ import tp1.p2.logic.gameobjects.PlantFactory;
 import tp1.p2.view.Messages;
 
 public class ListPlantsCommand extends Command {
-	
-	
-	
+
 	@Override
 	protected String getName() {
 		return Messages.COMMAND_LIST_NAME;
@@ -21,7 +19,7 @@ public class ListPlantsCommand extends Command {
 	}
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_LIST_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
+		return Messages.COMMAND_LIST_DETAILS;
 	}
 	@Override
 	public String getHelp() {
@@ -31,12 +29,8 @@ public class ListPlantsCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		System.out.println(Messages.AVAILABLE_PLANTS);
-		for(Plant p: PlantFactory.getAvailablePlants()) {
-			System.out.println(p.getDescription());
-
-		}
 		// TODO add your code here
-		
+
 		System.out.println();
 
 		return new ExecutionResult(false);

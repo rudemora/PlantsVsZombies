@@ -1,172 +1,182 @@
 package tp1.p2.logic;
-import tp1.p2.control.Level;
-import tp1.p2.view.Messages;
+
+import static tp1.p2.view.Messages.error;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.List;
+import java.util.Random;
+
 import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
+import tp1.p2.control.Level;
+import tp1.p2.logic.actions.GameAction;
 import tp1.p2.logic.gameobjects.GameObject;
- //añadido para que addplant funcione
-import java.util.Random;			   //añadido para nuevo atributo
- //añadido por nosotros para inicializarlo
-import static tp1.p2.view.Messages.error; //error suncoins insuficientes
+import tp1.p2.logic.gameobjects.Sun;
+import tp1.p2.view.Messages;
 
 public class Game implements GameStatus, GameWorld {
-	private GameObjectContainer lista;
+
+	private long seed;
+
+	private Level level;
 	
-    private static final int INITIAL_SUNCOINS = 50;
-    private static final int INITIAL_CYCLE = 0;
-    
-    private static boolean playerQuits;
-    
-    private Level level;
-    private long seed;
-    private int cycle;
-    private int sunCoins;
-    private Random rand;
-    private ZombiesManager Zombies;
+	private int cycle;
 
-    
-    public Game (long s, Level l) {
-    	this.reset(s, l);    	
-    }
-    
-    public boolean execute (Command command) {
-    	return command.execute(this).draw();
-    }
-    
-    public boolean isFinished() {
-    	if (this.Zombies.getRemainingZombies() == 0 && Zombies.zombiesDead()) { 
-    		return true; 
-    	}
-    	else {
-    		if (zombiesGana()) {
-    			return true;
-    		}
-    		else {
-        		return false;
-    		}
-    	}
-    }
-    
-    public boolean isPlayerQuits() {
-    	return playerQuits;
-    }
-    
-    public int getCycle() {
-    	return cycle;
-    }
-    
-    public void reset(long seed, Level level) {
-    	playerQuits=false;
-    	lista = new GameObjectContainer();
-    	this.seed = seed;
-    	this.level = level;
-    	this.rand = new Random(this.seed);
-    	this.Zombies= new ZombiesManager(this,level,rand);
-    	cycle = INITIAL_CYCLE;
-    	sunCoins = INITIAL_SUNCOINS;
-    	System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
-		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));	
-    }
-    
-    public void addSuncoins(int coins) {
-    	sunCoins = sunCoins + coins;
-    }
-        
-    public int getSuncoins() {
-    	return sunCoins;
-    }
-   
-    
-    public ExecutionResult update() {
-    	boolean add = this.addZombie();
-    	cycle = cycle + 1;
-    	this.lista.update(add);
-    	return new ExecutionResult(true);
-    }
-     
-    public void playerQuits() {
-    	playerQuits = true;
-    }
-    
-    public boolean addObject(GameObject object) {    	
-    	if(object.canAdd()) {
-    		if (this.consumeCoins(object)) {
-    			this.addGameObject(object);
-    			return true;
-    		}
-    		else {
-    			System.out.println(error(Messages.NOT_ENOUGH_COINS));
-    			return false;
-    		}
-    	}
-    	else {
-        	return false;
-    	}
-    }
-    
-    private boolean addZombie() {
-    	return Zombies.addZombie();  	
-    }
-    
-    private void addGameObject(GameObject object) {
-    	lista.addObject(object);
-    }
-    
-    private boolean consumeCoins(GameObject object) {
-    	int coste = object.getCost();
-    	if(coste <= this.sunCoins) {
-        	this.sunCoins = this.sunCoins-coste;
-        	return true;
-    	}
-    	return false;
-    }
-    
-    public boolean isPositionEmpty(int x, int y) {
-    	return lista.isPositionEmpty(x, y);
-    }
-    
-    public String positionToString(int col, int row) {
-		String escribe= "";
-		if(!lista.isPositionEmpty(col, row)) {
-			GameItem item = this.getGameItemInPosition(col, row);
-			return item.toString();
-			
-		}
-		
-		return escribe;
+	private GameObjectContainer container;
+
+	private Deque<GameAction> actions;
+
+	// TODO add your attributes here
+
+	public Game(long seed, Level level) {
+		this.seed = seed;
+		this.level = level;
+		this.container = new GameObjectContainer();
+		reset();
 	}
-    
-    public int getRemainingZombies() {
-    	return this.Zombies.getRemainingZombies();
-    }
-    
-    public GameItem getGameItemInPosition(int col, int row) {
-    	return lista.getGameItemInPosition(col, row);
-    }
 
-    public boolean jugadorGanador() {
-    	return this.Zombies.getRemainingZombies() == 0;
-    }
-    
-    public void matarZombie() {
-    	Zombies.matarZombie();
-    }
-    
-    public void removeDead() {
-    	lista.removeDead();
-    }
-    
-    private boolean zombiesGana() {
-    	return lista.zombiesGana();
-    }
-    
-    public Level getLevel() {
-    	return this.level;
-    }
-    
-    public long getSeed() {
-    	return this.seed;
-    }
-    
-    //...
+	/**
+	 * Resets the game.
+	 */
+	//@Override
+	public void reset() {
+		reset(this.level, this.seed);
+	}
+
+	/**
+	 * Resets the game with the provided level and seed.
+	 * 
+	 * @param level {@link Level} Used to initialize the game.
+	 * @param seed Random seed Used to initialize the game.
+	 */
+	//@Override
+	public void reset(Level level, long seed) {
+		// TODO add your code here
+		this.cycle = 0;
+		this.actions = new ArrayDeque<>();
+	}
+
+
+	/**
+	 * Executes the game actions and update the game objects in the board.
+	 * 
+	 */
+	//@Override
+	public void update() {
+
+		// 1. Execute pending actions
+		executePendingActions();
+
+		// 2. Execute game Actions
+		// TODO add your code here
+
+		// 3. Game object updates
+		// TODO add your code here
+
+		// 4. & 5. Remove dead and execute pending actions
+		boolean deadRemoved = true;
+		while (deadRemoved || areTherePendingActions()) {
+			// 4. Remove dead
+			deadRemoved = this.container.removeDead();
+
+			// 5. execute pending actions
+			executePendingActions();
+		}
+
+		this.cycle++;
+
+		// 6. Notify commands that a new cycle started
+		Command.newCycle();
+
+	}
+
+	private void executePendingActions() {
+		while (!this.actions.isEmpty()) {
+			GameAction action = this.actions.removeLast();
+			action.execute(this);
+		}
+	}
+
+	private boolean areTherePendingActions() {
+		return this.actions.size() > 0;
+	}
+
+	public boolean execute(Command command) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isPlayerQuits() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void addSun() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean tryToCatchObject(int col, int row) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addItem(GameItem item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void addItem(Sun sun) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getCycle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSuncoins() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getRemainingZombies() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String positionToString(int col, int row) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getGeneratedSuns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getCaughtSuns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	// TODO add your code here
+
 }

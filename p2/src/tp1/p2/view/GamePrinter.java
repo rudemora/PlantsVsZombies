@@ -14,13 +14,15 @@ public class GamePrinter {
 
 	private static final String VERTICAL_DELIMITER = "|";
 
+	private static final String NEW_LINE = System.lineSeparator();
+
 	private static final int MARGIN_SIZE = 2;
 
 	private static final String MARGIN = repeat(SPACE, MARGIN_SIZE);
 
 	private static final String EXTENDED_MARGIN = repeat(SPACE, MARGIN_SIZE+2);
 
-	private static final int CELL_SIZE = 8;
+	private static final int CELL_SIZE = 8+6;
 
 	private static final String CELL_BORDER = repeat(CELL_BORDER_CHAR, CELL_SIZE);
 
@@ -45,7 +47,7 @@ public class GamePrinter {
 		StringBuilder buffer = new StringBuilder();
 
 		/* @formatter:off */
-		
+		// TODO add your code here
 		/* @formatter:on */
 
 		return buffer.toString();
@@ -85,8 +87,7 @@ public class GamePrinter {
 
 		return str.toString();
 	}
-	
-	
+
 	/**
 	 * Builds the message to be printed once the game has finished.
 	 * 
@@ -95,6 +96,6 @@ public class GamePrinter {
 	 */
 	public String endMessage() {
 		// TODO add your code here
-		return Messages.GAME_OVER;
+		return "eee";
 	}
 }

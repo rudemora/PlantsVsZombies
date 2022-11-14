@@ -14,4 +14,56 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>test/00-easy_25-expected.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/00-easy_25-expected.txt</location>
+		</link>
+		<link>
+			<name>test/00-easy_25-input.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/00-easy_25-input.txt</location>
+		</link>
+		<link>
+			<name>test/01-easy_25-expected.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/01-easy_25-expected.txt</location>
+		</link>
+		<link>
+			<name>test/01-easy_25-input.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/01-easy_25-input.txt</location>
+		</link>
+		<link>
+			<name>test/02-easy_25-expected.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/02-easy_25-expected.txt</location>
+		</link>
+		<link>
+			<name>test/02-easy_25-input.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/02-easy_25-input.txt</location>
+		</link>
+		<link>
+			<name>test/03-hard_17-expected.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/03-hard_17-expected.txt</location>
+		</link>
+		<link>
+			<name>test/03-hard_17-input.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/03-hard_17-input.txt</location>
+		</link>
+		<link>
+			<name>test/04-insane_360-expected.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/04-insane_360-expected.txt</location>
+		</link>
+		<link>
+			<name>test/04-insane_360-input.txt</name>
+			<type>1</type>
+			<location>C:/Users/HP/git/practica2/test/p2/04-insane_360-input.txt</location>
+		</link>
+	</linkedResources>
 </projectDescription>

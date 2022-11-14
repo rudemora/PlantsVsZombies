@@ -5,6 +5,7 @@ package tp1.p2.logic;
  *
  */
 public interface GameItem {
+
 	/**
 	 * Receive a zombie attack.
 	 * 
@@ -13,6 +14,24 @@ public interface GameItem {
 	 * @return <code>true</code> if a plant has been attacked, <code>false</code>
 	 *         otherwise.
 	 */
-	abstract boolean receiveZombieAttack(int damage);
-	abstract boolean receivePeashooterAttack(int damage);    // por qué ha de ser booleano?
+	boolean receiveZombieAttack(int damage);
+
+	/**
+	 * Receive a plant attack.
+	 * 
+	 * @param damage Received damage.
+	 * 
+	 * @return <code>true</code> if a plant has been attacked, <code>false</code>
+	 *         otherwise.
+	 */
+	boolean receivePlantAttack(int damage);
+
+	
+	/**
+	 * Try to catch a sun (if no other sun has been catched this cycle).
+	 * 
+	 * @return <code>true</code> if the sun has been catched, <code>false</code> otherwise.
+	 */
+	boolean catchObject();
+
 }

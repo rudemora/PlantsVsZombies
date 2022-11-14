@@ -7,11 +7,9 @@ import tp1.p2.view.Messages;
 
 public class HelpCommand extends Command {
 
-	
-	
 	@Override
 	protected String getName() {
-		return Messages.COMMAND_HELP_NAME ;
+		return Messages.COMMAND_HELP_NAME;
 	}
 
 	@Override
@@ -21,7 +19,7 @@ public class HelpCommand extends Command {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_HELP_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
+		return Messages.COMMAND_HELP_DETAILS;
 	}
 
 	@Override
@@ -35,17 +33,15 @@ public class HelpCommand extends Command {
 
 		for (Command command : Command.getAvailableCommands()) {
 			/* @formatter:off */
-			buffer.append(Messages.LINE_SEPARATOR);
+
 			// TODO add your code here
-			buffer.append(command.getDetails());			
-			buffer.append(command.getHelp());
+
 			/* @formatter:on */
 		}
 
 		System.out.println(buffer.toString());
-		return new ExecutionResult(false);
 
-		
-	} 
-	
+		return new ExecutionResult(false);
+	}
+
 }
