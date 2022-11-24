@@ -21,7 +21,9 @@ public class AddPlantCheatCommand extends Command {
 	public String getDetails() {
 		return Messages.COMMAND_CHEAT_PLANT_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
-
+	
+	//prueba
+	
 	@Override
 	public String getHelp() {
 		// TODO Auto-generated method stub
