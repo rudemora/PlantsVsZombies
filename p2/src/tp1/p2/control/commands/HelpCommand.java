@@ -19,7 +19,7 @@ public class HelpCommand extends Command {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_HELP_DETAILS;
+		return Messages.COMMAND_HELP_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 
 	@Override
@@ -33,9 +33,10 @@ public class HelpCommand extends Command {
 
 		for (Command command : Command.getAvailableCommands()) {
 			/* @formatter:off */
-
+			buffer.append(Messages.LINE_SEPARATOR);
 			// TODO add your code here
-
+			buffer.append(command.getDetails());			
+			buffer.append(command.getHelp());
 			/* @formatter:on */
 		}
 

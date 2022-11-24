@@ -15,8 +15,10 @@ public interface GameWorld {
 
 	boolean tryToCatchObject(int col, int row);
 
-	boolean addItem(GameItem item);
+	boolean addItem(GameObject gameObject);
 
 	void addItem(Sun sun);
-
+	
+	abstract void playerQuits();
+	abstract boolean isFullyOcuppied(int col, int row);
 }

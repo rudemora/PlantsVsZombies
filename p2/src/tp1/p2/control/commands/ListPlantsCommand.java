@@ -19,7 +19,7 @@ public class ListPlantsCommand extends Command {
 	}
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_LIST_DETAILS;
+		return Messages.COMMAND_LIST_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 	@Override
 	public String getHelp() {
@@ -29,11 +29,15 @@ public class ListPlantsCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		System.out.println(Messages.AVAILABLE_PLANTS);
+		for(Plant p: PlantFactory.getAvailablePlants()) {
+			System.out.println(p.getDescription());
+		}
 		// TODO add your code here
-
+		
 		System.out.println();
 
 		return new ExecutionResult(false);
 	}
+
 
 }

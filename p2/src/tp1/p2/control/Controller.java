@@ -30,6 +30,9 @@ public class Controller {
 	 * Draw / Paint the game.
 	 */
 	private void printGame() {
+		System.out.println(String.format(Messages.NUMBER_OF_CYCLES, game.getCycle()));
+		System.out.println(String.format(Messages.NUMBER_OF_COINS, game.getSuncoins()));
+		System.out.println(String.format(Messages.REMAINING_ZOMBIES, game.getRemainingZombies()));
 		System.out.println(gamePrinter);
 	}
 
@@ -73,7 +76,8 @@ public class Controller {
 
 			if (words.length == 0) {
 				System.out.println(error(Messages.UNKNOWN_COMMAND));
-			} else {
+			} 
+			else {
 				Command command = Command.parse(words);
 				if (command != null) {
 					// 3-4. Game Action & Update
@@ -87,8 +91,20 @@ public class Controller {
 		if (refreshDisplay) {
 			printGame();
 		}
-
+		
 		printEndMessage();
+		if(game.isPlayerQuits()) {
+			System.out.print(Messages.PLAYER_QUITS);
+			
+		}
+		/*else {
+			//if (game.jugadorGanador()) {
+			//	System.out.print(Messages.PLAYER_WINS);
+			//}
+			//else {
+				System.out.print(Messages.ZOMBIES_WIN);
+			//}
+		}*/
 	}
 
 }

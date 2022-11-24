@@ -31,7 +31,7 @@ public interface GameStatus {
 	 * 
 	 * @return a string that represents the content of the cell (col, row).
 	 */
-	String positionToString(int col, int row);
+	abstract public String positionToString(int col, int row);
 
 	/**
 	 * Get the number of generated suns.

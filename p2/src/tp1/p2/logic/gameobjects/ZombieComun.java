@@ -1,7 +1,19 @@
 package tp1.p2.logic.gameobjects;
 
-public class ZombieComun extends Zombie {
+import tp1.p2.logic.GameWorld;
+import tp1.p2.view.Messages;
 
+public class ZombieComun extends Zombie {
+	
+	protected ZombieComun (){
+		endurance = 5;
+	}
+	
+	protected ZombieComun (GameWorld game, int col, int row) {
+		super(game, col, row);
+		endurance = 5;
+	}
+	
 	@Override
 	public boolean receiveZombieAttack(int damage) {
 		// TODO Auto-generated method stub
@@ -28,14 +40,12 @@ public class ZombieComun extends Zombie {
 
 	@Override
 	protected String getSymbol() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format(Messages.ZOMBIE_SYMBOL, this.getEndurance());
 	}
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return Messages.ZOMBIE_DESCRIPTION.formatted(Messages.ZOMBIE_NAME,getSpeed(),getDamage(),getEndurance());
 	}
 
 	@Override
@@ -54,6 +64,30 @@ public class ZombieComun extends Zombie {
 	public void onExit() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean fillPosition() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getEndurance() {
+		// TODO Auto-generated method stub
+		return endurance;
+	}
+
+	@Override
+	protected int getDamage() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
+	@Override
+	public int getSpeed() {
+		// TODO Auto-generated method stub
+		return 2;
 	}
 
 }

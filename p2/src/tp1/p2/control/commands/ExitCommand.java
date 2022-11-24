@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_EXIT_DETAILS;
+		return Messages.COMMAND_EXIT_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 
 	@Override
@@ -29,8 +29,8 @@ public class ExitCommand extends Command {
 
 	@Override
 	public ExecutionResult execute(GameWorld game) {
-		// TODO add your code here
-		return null;
+		game.playerQuits();
+		return new ExecutionResult(false);
 	}
 
 }

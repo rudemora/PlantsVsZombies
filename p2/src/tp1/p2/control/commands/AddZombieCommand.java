@@ -39,7 +39,7 @@ public class AddZombieCommand extends Command {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_ADD_ZOMBIE_DETAILS;
+		return Messages.COMMAND_ADD_ZOMBIE_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 
 	@Override

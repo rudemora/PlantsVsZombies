@@ -18,13 +18,20 @@ public abstract class GameObject implements GameItem {
 	protected int row;
 
 
-	GameObject() {
+	
+	protected int endurance;
+	protected int ciclo;
+	
+	
+	protected GameObject() {
+		
 	}
 
-	GameObject(GameWorld game, int col, int row) {
+	protected GameObject(GameWorld game, int col, int row) {
 		this.game = game;
 		this.col = col;
 		this.row = row;
+		this.ciclo = 0;
 	}
 
 	public boolean isInPosition(int col, int row) {
@@ -53,7 +60,14 @@ public abstract class GameObject implements GameItem {
 	abstract protected String getSymbol();
 
 	abstract public String getDescription();
-
+	
+	//abstract public String getName();
+	//abstract public int getCost();
+	
+	abstract public int getEndurance();
+	
+	abstract protected int getDamage();
+	
 	abstract public void update();
 	
 	abstract public void onEnter();

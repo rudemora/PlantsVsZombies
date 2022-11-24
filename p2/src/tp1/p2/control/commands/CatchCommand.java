@@ -27,7 +27,7 @@ public class CatchCommand extends Command {
 	private CatchCommand(int col, int row) {
 		this.col = col;
 		this.row = row;
-		caughtSunThisCycle = false;
+		
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class CatchCommand extends Command {
 
 	@Override
 	public String getDetails() {
-		return Messages.COMMAND_CATCH_DETAILS;
+		return Messages.COMMAND_CATCH_DETAILS+Messages.HELP_DETAILS_COMMAND_HELP_SEPARATOR;
 	}
 
 	@Override

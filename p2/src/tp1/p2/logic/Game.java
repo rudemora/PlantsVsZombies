@@ -17,6 +17,8 @@ import tp1.p2.view.Messages;
 
 public class Game implements GameStatus, GameWorld {
 
+	private static final int INITIAL_SUNCOINS = 50; // HACER LO MISMO CON ENDURANCE (PONER UNA INICIAL) Y CON VIDA(LA QUE CAMBIE)
+	private static final int INITIAL_CYCLE = 0;
 	private long seed;
 
 	private Level level;
@@ -27,23 +29,19 @@ public class Game implements GameStatus, GameWorld {
 
 	private Deque<GameAction> actions;
 
-	// TODO add your attributes here
-
+	private static boolean playerQuits;
+	
+	private Random rand;
+	
+	private ZombiesManager Zombies;
+	
+	private int sunCoins;
+	
 	public Game(long seed, Level level) {
-		this.seed = seed;
-		this.level = level;
-		this.container = new GameObjectContainer();
-		reset();
+		this.reset(level, seed);
 	}
 
-	/**
-	 * Resets the game.
-	 */
-	//@Override
-	public void reset() {
-		reset(this.level, this.seed);
-	}
-
+	
 	/**
 	 * Resets the game with the provided level and seed.
 	 * 
@@ -53,11 +51,24 @@ public class Game implements GameStatus, GameWorld {
 	//@Override
 	public void reset(Level level, long seed) {
 		// TODO add your code here
-		this.cycle = 0;
+		this.seed = seed;
+		this.level = level;
+		this.container = new GameObjectContainer(); // PREGUNTAR POR QUÉ NO TIENE QUE ESTAR AQUÍ Y ESTABA EN EL CONSTRUCTOR DE GAME
+		cycle = INITIAL_CYCLE;
+		playerQuits = false;
 		this.actions = new ArrayDeque<>();
+		this.rand = new Random(this.seed);
+		this.Zombies= new ZombiesManager(this,level,rand);
+		sunCoins = INITIAL_SUNCOINS;
+		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
+		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
 	}
 
-
+	
+	
+	
+	
+	
 	/**
 	 * Executes the game actions and update the game objects in the board.
 	 * 
@@ -101,11 +112,24 @@ public class Game implements GameStatus, GameWorld {
 	private boolean areTherePendingActions() {
 		return this.actions.size() > 0;
 	}
-
-	public boolean execute(Command command) {
-		// TODO Auto-generated method stub
-		return false;
+	
+	/**
+	 * Checks if a cell is fully occupied, that is, the position can be shared between an NPC (Plant, Zombie) and Suns .
+	 * 
+	 * @param col Column of the cell
+	 * @param row Row of the cell
+	 * 
+	 * @return <code>true</code> if the cell is fully occupied, <code>false</code>
+	 *         otherwise.
+	 */
+	@Override
+	public boolean isFullyOcuppied(int col, int row) {
+		return this.container.isFullyOccupied(col, row);
 	}
+	
+	public boolean execute (Command command) {
+    	return command.execute(this).draw();
+    }
 
 	public boolean isFinished() {
 		// TODO Auto-generated method stub
@@ -114,7 +138,7 @@ public class Game implements GameStatus, GameWorld {
 
 	public boolean isPlayerQuits() {
 		// TODO Auto-generated method stub
-		return false;
+		return playerQuits;
 	}
 
 	@Override
@@ -130,7 +154,7 @@ public class Game implements GameStatus, GameWorld {
 	}
 
 	@Override
-	public boolean addItem(GameItem item) {
+	public boolean addItem(GameObject gameObject) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -144,13 +168,13 @@ public class Game implements GameStatus, GameWorld {
 	@Override
 	public int getCycle() {
 		// TODO Auto-generated method stub
-		return 0;
+		return cycle;
 	}
 
 	@Override
 	public int getSuncoins() {
 		// TODO Auto-generated method stub
-		return 0;
+		return sunCoins;
 	}
 
 	@Override
@@ -161,10 +185,20 @@ public class Game implements GameStatus, GameWorld {
 
 	@Override
 	public String positionToString(int col, int row) {
-		// TODO Auto-generated method stub
-		return null;
+		String escribe= "";
+		if(!container.isPositionEmpty(col, row)) {
+			GameItem item = this.getGameItemInPosition(col, row);
+			return item.toString();
+			
+		}
+		
+		return escribe;
 	}
-
+	
+	public GameItem getGameItemInPosition(int col, int row) {
+    	return container.getGameItemInPosition(col, row);
+    }
+	
 	@Override
 	public int getGeneratedSuns() {
 		// TODO Auto-generated method stub
@@ -175,6 +209,12 @@ public class Game implements GameStatus, GameWorld {
 	public int getCaughtSuns() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void playerQuits() {
+		playerQuits = true;
+		
 	}
 
 	// TODO add your code here

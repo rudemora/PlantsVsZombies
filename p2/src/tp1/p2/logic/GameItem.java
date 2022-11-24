@@ -33,5 +33,12 @@ public interface GameItem {
 	 * @return <code>true</code> if the sun has been catched, <code>false</code> otherwise.
 	 */
 	boolean catchObject();
+	
+	/**
+	 * Checks if the game object fills its current position, that is, does not allow other {@link GameObject} to share its position.
+	 * 
+	 * @return
+	 */
+	boolean fillPosition();
 
 }

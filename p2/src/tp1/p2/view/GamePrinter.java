@@ -96,6 +96,6 @@ public class GamePrinter {
 	 */
 	public String endMessage() {
 		// TODO add your code here
-		return "eee";
+		return Messages.GAME_OVER;
 	}
 }

@@ -1,7 +1,34 @@
 package tp1.p2.logic.gameobjects;
 
+import tp1.p2.logic.GameWorld;
+import tp1.p2.view.Messages;
+
 public class WallNut extends Plant {
 
+	protected WallNut (){
+		endurance = 10;
+	}
+	
+	protected WallNut(GameWorld game, int col, int row) {
+		super(game, col, row);
+		endurance = 10;
+	}
+	
+	@Override
+	public int getCost() {
+		return 50;
+	}
+	
+	@Override
+	public int getEndurance() {
+		return endurance;
+	}
+	
+	@Override 
+	public int getDamage() {
+		return 0;
+	}
+	
 	@Override
 	public boolean receiveZombieAttack(int damage) {
 		// TODO Auto-generated method stub
@@ -26,18 +53,18 @@ public class WallNut extends Plant {
 		return false;
 	}
 
+	
+	
 	@Override
 	protected String getSymbol() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format(Messages.WALL_NUT_SYMBOL, this.getEndurance());
 	}
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return Messages.PLANT_DESCRIPTION.formatted(Messages.WALL_NUT_NAME_SHORTCUT,getCost(),getDamage(),getEndurance());
 	}
-
+	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
@@ -54,6 +81,12 @@ public class WallNut extends Plant {
 	public void onExit() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean fillPosition() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

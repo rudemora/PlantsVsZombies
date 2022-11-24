@@ -45,11 +45,13 @@ public abstract class Command {
 	public static Command parse(String[] commandWords) {
 		if (commandWords.length == 1 && commandWords[0].isEmpty()) {
 			// TODO add your code here
+			return defaultCommand;
 		}
 
 		for (Command command : AVAILABLE_COMMANDS) {
 			if (command.matchCommand(commandWords[0])) {
-				// TODO add your code here
+				command = command.create(commandWords);
+				return command;
 			}
 		}
 		System.out.println(error(Messages.UNKNOWN_COMMAND));
@@ -105,10 +107,10 @@ public abstract class Command {
 	public abstract ExecutionResult execute(GameWorld game);
 
 	public Command create(String[] parameters) {
-		if (parameters.length != 0) {
+		/*if (parameters.length != 0) {
 			System.out.println(error(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER));
 			return null;
-		}
+		}*/
 		return this;
 	}
 
