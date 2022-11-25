@@ -10,7 +10,7 @@ public class GameObjectContainer {
 
 	private List<GameObject> gameObjects;
 
-	public GameObjectContainer() {
+	protected GameObjectContainer() {
 		gameObjects = new ArrayList<>();
 	}
 
@@ -76,8 +76,10 @@ public class GameObjectContainer {
 	protected boolean isPositionEmpty(int col,int row) {
 		for(GameObject g: gameObjects) {
 			if(g.isInPosition(col, row)) {
+				
 				return false;
 			}
+			
 		}
 		return true;
 	}
@@ -97,8 +99,5 @@ public class GameObjectContainer {
 		gameObjects.add(object);
 	}
 	
-	public int getSize() {
-		return gameObjects.size();
-	}
-
+	
 }

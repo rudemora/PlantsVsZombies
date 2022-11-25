@@ -53,8 +53,8 @@ public class Game implements GameStatus, GameWorld {
 		// TODO add your code here
 		this.seed = seed;
 		this.level = level;
-		this.container = new GameObjectContainer(); // PREGUNTAR POR QUÉ NO TIENE QUE ESTAR AQUÍ Y ESTABA EN EL CONSTRUCTOR DE GAME
-		System.out.println(container.getSize());
+		container = new GameObjectContainer(); // PREGUNTAR POR QUÉ NO TIENE QUE ESTAR AQUÍ Y ESTABA EN EL CONSTRUCTOR DE GAME
+		//System.out.println(container.getSize());
 		cycle = INITIAL_CYCLE;
 		playerQuits = false;
 		this.actions = new ArrayDeque<>();
@@ -156,12 +156,11 @@ public class Game implements GameStatus, GameWorld {
 		return false;
 	}
 
-	@Override
-	public boolean addItem(GameObject gameObject, boolean consumeCoins) {//Este consumeCoins se lo he metido yo
+	
+	public boolean addObject(GameObject gameObject, boolean consumeCoins) {//Este consumeCoins se lo he metido yo
 		if(gameObject.canAdd()) {
-    		if (consumeCoins && this.consumeCoins(gameObject) ) {
+			if (consumeCoins && this.consumeCoins(gameObject) ) {
     			this.addGameObject(gameObject);
-    			System.out.println(container.getSize());
     			return true;
     		}
     		else {
@@ -203,7 +202,6 @@ public class Game implements GameStatus, GameWorld {
 		String escribe= "";
 		if(!container.isPositionEmpty(col, row)) {
 			GameItem item = this.getGameItemInPosition(col, row);
-			System.out.println("aaa");
 			return item.toString();
 			
 		}

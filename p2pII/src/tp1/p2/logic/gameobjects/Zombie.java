@@ -1,5 +1,6 @@
 package tp1.p2.logic.gameobjects;
 
+import tp1.p2.logic.Game;
 import tp1.p2.logic.GameWorld;
 public abstract class Zombie extends GameObject {
 	
@@ -7,7 +8,7 @@ public abstract class Zombie extends GameObject {
 		
 	}
 	protected Zombie(GameWorld game, int col, int row) {
-		super(game, col, row);
+		super(game, Game.NUM_COLS, row);
 	}
 	
 	abstract public int getSpeed();
@@ -25,5 +26,10 @@ public abstract class Zombie extends GameObject {
 			game.matarZombie();
 		}
 		return true;
+	}
+	
+	@Override
+	public int getCost() {
+		return 0;
 	}
 }

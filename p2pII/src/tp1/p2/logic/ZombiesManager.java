@@ -64,12 +64,11 @@ public class ZombiesManager {
 	public boolean addZombie(int row) {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && isPositionEmpty(GameWorld.NUM_COLS, row);
 		int zombieType = randomZombieType();
-
 		if (canAdd) {
 			// TODO add your code here
 			Zombie zombie = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
 			Zombie z = zombie.create(game, row);
-			game.addGameObject(z);
+			game.addObject(z, true);
 			remainingZombies --;
 			zombiesAlived += 1;
 		}

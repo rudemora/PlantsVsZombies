@@ -25,6 +25,7 @@ import tp1.p2.view.Messages;
  */
 public abstract class Command {
 
+	
 	/* @formatter:off */
 	private static final List<Command> AVAILABLE_COMMANDS = Arrays.asList(
 		new AddPlantCommand(),

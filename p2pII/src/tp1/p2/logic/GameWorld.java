@@ -16,11 +16,10 @@ public interface GameWorld {
 
 	boolean tryToCatchObject(int col, int row);
 
-	abstract boolean addItem(GameObject gameObject, boolean consumeCoins);
+	abstract public boolean addObject(GameObject gameObject, boolean consumeCoins);
 	abstract public GameItem getGameItemInPosition(int x, int y);
 	abstract public void addSuncoins(int Coins);
 	void addItem(Sun sun);
-	abstract public void addGameObject(GameObject object);
 	abstract void playerQuits();
 	abstract public void removeDead();
 	abstract public boolean isPositionEmpty(int x, int y);
@@ -28,3 +27,7 @@ public interface GameWorld {
 	abstract public void matarZombie();//Pensar si todos estos metodos tienen que ser abstractos
 	abstract boolean isFullyOcuppied(int col, int row);
 }
+
+
+
+

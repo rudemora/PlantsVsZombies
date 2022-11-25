@@ -4,7 +4,7 @@ import static tp1.p2.view.Messages.error;
 
 import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
-//import tp1.p2.logic.Game;
+import tp1.p2.logic.Game;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.PlantFactory;
@@ -63,11 +63,10 @@ public class AddPlantCommand extends Command implements Cloneable {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
-		
-		if (col>= 0 && col < game.NUM_COLS && row>= 0 && row < game.NUM_ROWS) {
-			Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-		
-			if(game.addItem(plant, this.consumeCoins)) {
+		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
+		if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
+			
+			if(game.addObject(plant, this.consumeCoins)) {
 			game.update(); 
 			game.removeDead();
 			return new ExecutionResult(true);

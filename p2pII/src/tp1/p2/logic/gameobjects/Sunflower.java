@@ -51,11 +51,6 @@ public class Sunflower extends Plant {
 		return false;
 	}
 
-	@Override
-	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public String getSymbol() {

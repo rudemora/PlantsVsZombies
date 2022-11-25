@@ -18,11 +18,11 @@ public enum Level {
 	}
 
 	public int getNumberOfZombies() {
-		return numberOfZombies;
+		return this.numberOfZombies;
 	}
 
 	public double getZombieFrequency() {
-		return zombieFrequency;
+		return this.zombieFrequency;
 	}
 
 	/**

@@ -33,11 +33,7 @@ public class BucketHead extends Zombie {
 		return false;
 	}
 
-	@Override
-	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	@Override
 	protected String getSymbol() {

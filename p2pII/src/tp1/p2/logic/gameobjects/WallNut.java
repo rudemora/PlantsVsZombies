@@ -47,11 +47,6 @@ public class WallNut extends Plant {
 		return false;
 	}
 
-	@Override
-	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	
 	

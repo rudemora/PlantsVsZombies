@@ -34,8 +34,8 @@ public abstract class GameObject implements GameItem {
 		this.ciclo = 0;
 	}
 
-	public boolean isInPosition(int col, int row) {
-		return this.col == col && this.row == row;
+	public boolean isInPosition(int columna, int fila) {
+		return this.col == columna && this.row == fila;
 	}
 
 	public int getCol() {
@@ -56,9 +56,8 @@ public abstract class GameObject implements GameItem {
 	}
 
 	public String toString() {
-		System.out.println(this.getDescription());
-		if (isAlive()) {
 		
+		if (isAlive()) {
 			int endurance = this.endurance;
 			String icon= this.getSymbol();
 			return status(icon,endurance);
@@ -87,6 +86,7 @@ public abstract class GameObject implements GameItem {
 	abstract public void onExit();
 	
 	abstract public String getName();
+	
 	public boolean canAdd() {
 		if(game.isPositionEmpty(this.col, this.row) ) {
 			return true;

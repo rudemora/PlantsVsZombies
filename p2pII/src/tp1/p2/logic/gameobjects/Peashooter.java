@@ -33,11 +33,7 @@ public class Peashooter extends Plant {
 		return false;
 	}
 
-	@Override
-	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	protected String getSymbol() {
@@ -105,8 +101,11 @@ public class Peashooter extends Plant {
 		return Messages.PEASHOOTER_NAME;
 	}
 	public Peashooter create(GameWorld game, int col, int row) {
-		Peashooter peashooter = new Peashooter(game, col, row);
-		return peashooter;
+		Peashooter P = new Peashooter();
+		P.game = game;
+		P.col=col;
+		P.row=row;
+		return P;
 	 }
 	
 	
