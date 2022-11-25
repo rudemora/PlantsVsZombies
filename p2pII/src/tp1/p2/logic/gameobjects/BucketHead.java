@@ -1,5 +1,6 @@
 package tp1.p2.logic.gameobjects;
 
+import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
@@ -50,8 +51,16 @@ public class BucketHead extends Zombie {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		this.addCycle();
+		GameItem item = game.getGameItemInPosition(col - 1, row);
+		if(item != null ) {  
+    		item.receiveZombieAttack(this.getDamage());
+		}
+		else {
+			if(this.game.isPositionEmpty(col-1, row) && this.canAvanzar()) {
+				this.avanzar();
+			}
+		}
 	}
 
 	@Override
@@ -88,6 +97,21 @@ public class BucketHead extends Zombie {
 	protected int getDamage() {
 		// TODO Auto-generated method stub
 		return 1;
+	}
+	public String getName() {
+		// TODO Auto-generated method stub
+		return Messages.BUCKET_HEAD_ZOMBIE_NAME;
+	}
+	
+	@Override
+	public BucketHead create(GameWorld game, int row) {
+		BucketHead buckethead = new BucketHead(game, col, row);
+		return buckethead;
+	}
+	@Override
+	protected void avanzar() {
+		this.col--;
+		
 	}
 
 }

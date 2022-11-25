@@ -1,5 +1,6 @@
 package tp1.p2.logic.gameobjects;
 
+import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
@@ -50,8 +51,16 @@ public class ZombieComun extends Zombie {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		this.addCycle();
+		GameItem item = game.getGameItemInPosition(col - 1, row);
+		if(item != null ) {  
+    		item.receiveZombieAttack(this.getDamage());
+		}
+		else {
+			if(this.game.isPositionEmpty(col-1, row) && this.canAvanzar()) {
+				this.avanzar();
+			}
+		}
 	}
 
 	@Override
@@ -89,5 +98,24 @@ public class ZombieComun extends Zombie {
 		// TODO Auto-generated method stub
 		return 2;
 	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ZombieComun create(GameWorld game, int row) {
+		ZombieComun zombieComun = new ZombieComun(game, col, row);
+		return zombieComun;
+	}
+
+	@Override
+	protected void avanzar() {
+		this.col--;
+		
+	}
+
 
 }

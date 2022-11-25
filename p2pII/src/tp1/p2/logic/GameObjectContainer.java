@@ -38,11 +38,17 @@ public class GameObjectContainer {
 	}
 
 	public boolean removeDead() {
-		// TODO add your code here
-		return false;
+		boolean ok=false;
+		for(int i =0;i<this.gameObjects.size();i=i+1) {
+			if (!gameObjects.get(i).isAlive()) {
+				gameObjects.remove(i);   
+				ok=true;
+			}
+		}
+		return ok;
 	}
 
-	public void update() {
+	public void update() {//Falta pensar qué hacer con la ñapa
 		// Can't use for-each loop (for(GameObject g : gameObjexts)) without errors.
 		for(int i = 0; i < gameObjects.size(); i++) {
 			GameObject g = gameObjects.get(i);
@@ -85,5 +91,14 @@ public class GameObjectContainer {
 		return null;
 	}
 	// TODO add your code here
+	
+	protected void addObject(GameObject object) {
+		
+		gameObjects.add(object);
+	}
+	
+	public int getSize() {
+		return gameObjects.size();
+	}
 
 }

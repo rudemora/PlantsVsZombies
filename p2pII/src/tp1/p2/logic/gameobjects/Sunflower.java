@@ -58,7 +58,7 @@ public class Sunflower extends Plant {
 	}
 
 	@Override
-	protected String getSymbol() {
+	public String getSymbol() {
 		return String.format(Messages.SUNFLOWER_SYMBOL, this.getEndurance());
 	}
 
@@ -69,7 +69,10 @@ public class Sunflower extends Plant {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		
+			
+			this.addCycle();
+			this.game.addSuncoins(this.addSoles());
 		
 	}
 
@@ -89,6 +92,21 @@ public class Sunflower extends Plant {
 	public boolean fillPosition() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	public String getName() {
+		// TODO Auto-generated method stub
+		return Messages.SUNFLOWER_NAME;
+	}
+	public Sunflower create(GameWorld game, int col, int row) {
+		Sunflower sunflower = new Sunflower(game, col, row);
+		return sunflower;
+	 }
+	private int addSoles() {
+		if (this.ciclo%4==0) {
+			this.ciclo = 1;
+			return soles;
+		}
+		return 0;
 	}
 
 }

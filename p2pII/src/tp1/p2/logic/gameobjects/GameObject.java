@@ -46,13 +46,25 @@ public abstract class GameObject implements GameItem {
 		return row;
 	}
 	
-	public abstract boolean isAlive();
+	public boolean isAlive() {
+		if (this.endurance <= 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
 	public String toString() {
+		System.out.println(this.getDescription());
 		if (isAlive()) {
+		
+			int endurance = this.endurance;
+			String icon= this.getSymbol();
+			return status(icon,endurance);
 			// TODO add your code here
-		return "aaa";
-		} else {
+		} 
+		else {
 			return "";
 		}
 	}
@@ -73,4 +85,20 @@ public abstract class GameObject implements GameItem {
 	abstract public void onEnter();
 	
 	abstract public void onExit();
+	
+	abstract public String getName();
+	public boolean canAdd() {
+		if(game.isPositionEmpty(this.col, this.row) ) {
+			return true;
+		}
+		return false;
+	}
+	
+	public int getCost() {
+		return this.getCost();
+	}
+	
+	protected void addCycle() {
+		this.ciclo = this.ciclo +1;
+	}
 }

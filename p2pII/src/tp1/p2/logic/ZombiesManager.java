@@ -67,18 +67,32 @@ public class ZombiesManager {
 
 		if (canAdd) {
 			// TODO add your code here
+			Zombie zombie = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
+			Zombie z = zombie.create(game, row);
+			game.addGameObject(z);
+			remainingZombies --;
+			zombiesAlived += 1;
 		}
 		return canAdd;
 	}
 
-	private boolean isPositionEmpty(int numCols, int row) {
+	public int getRemainingZombies() {
 		// TODO Auto-generated method stub
-		return false;
+		return this.remainingZombies;
 	}
 
-	private int getRemainingZombies() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+
+	protected boolean zombiesDead() {
+		return zombiesAlived == 0;
+	}
+	
+	protected void matarZombie() {
+		zombiesAlived--;
+	}
+	
+	private boolean isPositionEmpty(int x, int y) {
+		return game.isPositionEmpty(x, y);
 	}
 
 	// TODO add your code here

@@ -9,7 +9,7 @@ import tp1.p2.logic.GameWorld;
 public class ZombieFactory {
 
 	/* @formatter:off */
-	private static final List<Zombie> AVAILABLE_ZOMBIES = Arrays.asList(
+	public static final List<Zombie> AVAILABLE_ZOMBIES = Arrays.asList(
 		new ZombieComun(),
 		new BucketHead(),
 		new Sporty(),

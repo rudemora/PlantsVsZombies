@@ -88,5 +88,15 @@ public class WallNut extends Plant {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public String getName() {
+		// TODO Auto-generated method stub
+		return Messages.WALL_NUT_NAME;
+	}
+	
+	public WallNut create(GameWorld game, int col, int row) {
+		WallNut wallnut = new WallNut(game, col, row);
+		return wallnut;
+	 }
 
 }

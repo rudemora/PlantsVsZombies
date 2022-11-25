@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import tp1.p2.logic.GameWorld;
+import tp1.p2.view.Messages;//IMportado por mi para el spawn plant
 
 public class PlantFactory {
 
@@ -26,8 +27,16 @@ public class PlantFactory {
 	}
 
 	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
-		// TODO add your code here
-		return null;
+		for(Plant p: PlantFactory.getAvailablePlants()) {
+			if(p.getName().equalsIgnoreCase(plantName) || p.getSymbol().equalsIgnoreCase(plantName)) {
+				Plant planta = p.create(game, col, row);
+				return planta;
+			}
+		
+	}
+	
+	System.out.println(Messages.INVALID_GAME_OBJECT);
+	return null;
 	}
 
 	public static Iterable<Plant> getAvailablePlants() {

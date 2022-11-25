@@ -1,5 +1,6 @@
 package tp1.p2.logic.gameobjects;
 
+import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
@@ -51,8 +52,16 @@ public class ExplosiveZombie extends Zombie {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		this.addCycle();
+		GameItem item = game.getGameItemInPosition(col - 1, row);
+		if(item != null ) {  
+    		item.receiveZombieAttack(this.getDamage());
+		}
+		else {
+			if(this.game.isPositionEmpty(col-1, row) && this.canAvanzar()) {
+				this.avanzar();
+			}
+		}
 	}
 
 	@Override
@@ -89,6 +98,24 @@ public class ExplosiveZombie extends Zombie {
 	protected int getDamage() {
 		// TODO Auto-generated method stub
 		return 1;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ExplosiveZombie create(GameWorld game, int row) {
+		ExplosiveZombie explosivezombie = new ExplosiveZombie(game, col, row);
+		return explosivezombie;
+	}
+	
+	@Override
+	protected void avanzar() {
+		this.col--;
+		
 	}
 
 }

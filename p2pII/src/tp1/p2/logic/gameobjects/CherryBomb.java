@@ -87,5 +87,14 @@ public class CherryBomb extends Plant {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public String getName() {
+		// TODO Auto-generated method stub
+		return Messages.CHERRY_BOMB_NAME;
+	}
+	public CherryBomb create(GameWorld game, int col, int row) {
+		CherryBomb cherrybomb = new CherryBomb(game, col, row);
+		return cherrybomb;
+	 }
 
 }

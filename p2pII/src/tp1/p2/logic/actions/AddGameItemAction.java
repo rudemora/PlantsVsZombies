@@ -13,6 +13,6 @@ public class AddGameItemAction implements GameAction {
 
 	@Override
 	public void execute(GameWorld game) {
-		game.addItem(gameObject);
+		game.addGameObject(gameObject);
 	}
 }

@@ -6,7 +6,9 @@ import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
 public class AddPlantCheatCommand extends Command {
-
+	private int col;
+	private int row;
+	private String plantName;
 	@Override
 	protected String getName() {
 		return Messages.COMMAND_CHEAT_PLANT_NAME;

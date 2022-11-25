@@ -1,5 +1,6 @@
 package tp1.p2.logic.gameobjects;
 
+import tp1.p2.logic.GameItem;//Importado por mi
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
@@ -50,9 +51,20 @@ public class Peashooter extends Plant {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		this.addCycle();
+		int i = col + 1;
+		boolean atacked = false;
+		while (!atacked && i <game.NUM_COLS) {
+			GameItem item = game.getGameItemInPosition(i, row);
+			if(item != null ) {  
+    		atacked = item.receivePlantAttack(this.getDamage());
+			}
+			i = i +1;
+		}
 		
 	}
+		
+	
 
 	@Override
 	public void onEnter() {
@@ -86,5 +98,17 @@ public class Peashooter extends Plant {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return Messages.PEASHOOTER_NAME;
+	}
+	public Peashooter create(GameWorld game, int col, int row) {
+		Peashooter peashooter = new Peashooter(game, col, row);
+		return peashooter;
+	 }
+	
+	
 
 }

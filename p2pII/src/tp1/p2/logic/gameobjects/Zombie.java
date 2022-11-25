@@ -11,4 +11,19 @@ public abstract class Zombie extends GameObject {
 	}
 	
 	abstract public int getSpeed();
+	abstract public Zombie create(GameWorld game, int row);
+	public boolean receiveZombieAttack(int damage) {
+		return false;
+	}
+	abstract protected void avanzar();
+	protected boolean canAvanzar() {
+		return (this.ciclo % this.getSpeed()) == 0;
+	}
+	public boolean receivePlantAttack(int damage) {
+		this.endurance= this.endurance - damage;
+		if (endurance <= 0) {
+			game.matarZombie();
+		}
+		return true;
+	}
 }
