@@ -4,17 +4,13 @@ import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
 public class Sunflower extends Plant {
-
-	private int soles;
 	
 	protected Sunflower() {
-		soles = 10;
 		endurance = 1;
 	}
 	
 	protected Sunflower(GameWorld game, int col, int row) {
 		super(game, col, row);
-		soles = 10;
 		endurance = 1;
 	}
 	
@@ -64,11 +60,10 @@ public class Sunflower extends Plant {
 
 	@Override
 	public void update() {
-		
-			
-			this.addCycle();
-			this.game.addSuncoins(this.addSoles());
-		
+		this.addCycle();
+		if (addSoles()) {
+			this.game.addSun();
+		}		
 	}
 
 	@Override
@@ -96,12 +91,12 @@ public class Sunflower extends Plant {
 		Sunflower sunflower = new Sunflower(game, col, row);
 		return sunflower;
 	 }
-	private int addSoles() {
+	private boolean addSoles() {
 		if (this.ciclo%4==0) {
 			this.ciclo = 1;
-			return soles;
+			return true;
 		}
-		return 0;
+		return false;
 	}
 
 }

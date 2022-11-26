@@ -101,10 +101,7 @@ public class Peashooter extends Plant {
 		return Messages.PEASHOOTER_NAME;
 	}
 	public Peashooter create(GameWorld game, int col, int row) {
-		Peashooter P = new Peashooter();
-		P.game = game;
-		P.col=col;
-		P.row=row;
+		Peashooter P = new Peashooter(game, col, row);
 		return P;
 	 }
 	

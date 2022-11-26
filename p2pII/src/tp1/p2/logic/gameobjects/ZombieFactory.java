@@ -25,8 +25,11 @@ public class ZombieFactory {
 		if (!isValidZombie(zombieIdx)) {
 			return null;
 		}
-		return null;
-		// TODO add your code here
+		else {
+			Zombie zombieType = AVAILABLE_ZOMBIES.get(zombieIdx);
+			Zombie zombie = zombieType.create(game, col, row);
+			return zombie;
+		}
 	}
 
 	public static List<Zombie> getAvailableZombies() {

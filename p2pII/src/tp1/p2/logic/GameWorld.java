@@ -3,6 +3,7 @@ package tp1.p2.logic;
 
 import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.logic.gameobjects.Sun;
+import tp1.p2.control.Level;
 
 public interface GameWorld {
 
@@ -12,20 +13,22 @@ public interface GameWorld {
 
 	// TODO add your code here
 
-	void addSun();
+	abstract void addSun();
 
 	boolean tryToCatchObject(int col, int row);
-
-	abstract public boolean addObject(GameObject gameObject, boolean consumeCoins);
-	abstract public GameItem getGameItemInPosition(int x, int y);
-	abstract public void addSuncoins(int Coins);
-	void addItem(Sun sun);
+	abstract int getCaughtSuns();
+	abstract boolean addItem(GameObject gameObject, boolean consumeCoins);
+	abstract GameItem getGameItemInPosition(int x, int y);
+	abstract void addSuncoins(int Coins);
 	abstract void playerQuits();
-	abstract public void removeDead();
-	abstract public boolean isPositionEmpty(int x, int y);
-	abstract public void update();
-	abstract public void matarZombie();//Pensar si todos estos metodos tienen que ser abstractos
+	abstract void removeDead();
+	abstract boolean isPositionEmpty(int x, int y);
+	abstract void update();
+	abstract void matarZombie();//Pensar si todos estos metodos tienen que ser abstractos
 	abstract boolean isFullyOcuppied(int col, int row);
+	abstract void reset(long seed, Level level);
+	abstract Level getLevel();
+	abstract long getSeed();
 }
 
 

@@ -6,25 +6,34 @@ import tp1.p2.view.Messages;
 
 
 public class Sun extends GameObject {
-	private GameWorld game;
-	private int col;
-	private int row;
+
+	//private int endurance;
 	// Remember that a Sun is updated the very same cycle is added to the container
 	public static final int SUN_COOLDOWN = 10+1;
+	
+	public Sun() {
+		endurance = SUN_COOLDOWN;
+	}
 	public Sun(GameWorld game, int col, int row) {
 		this.game=game;
 		this.col=col;
 		this.row=row;
+		endurance = SUN_COOLDOWN;
 	}
 	@Override
 	public boolean catchObject() {
 		// TODO add your code here
-		return true;
+		if (endurance > 0) {
+			endurance = 0;
+			
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean fillPosition() {
-		return false;
+		return  false;
 	}
 	@Override
 	public boolean receiveZombieAttack(int damage) {
@@ -36,25 +45,23 @@ public class Sun extends GameObject {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@Override
-	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 	@Override
 	protected String getSymbol() {
 		// TODO Auto-generated method stub
-		return null;
+		return Messages.SUN_SYMBOL;
 	}
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return Messages.SUN_DESCRIPTION;
 	}
+	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+		//this.decreaseCycle();
+		endurance--;
 	}
 	@Override
 	public void onEnter() {
@@ -64,12 +71,12 @@ public class Sun extends GameObject {
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub
-		
+		endurance = 0;
 	}
 	@Override
 	public int getEndurance() {
 		// TODO Auto-generated method stub
-		return 0;
+		return endurance;
 	}
 	@Override
 	protected int getDamage() {
@@ -80,5 +87,14 @@ public class Sun extends GameObject {
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	/*
+	public int getCol() {
+		return col;
+	}*/
+	
+	public Sun create(GameWorld game, int col, int row) {
+		Sun sun = new Sun(game, col, row);
+		return sun;
 	}
 }

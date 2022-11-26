@@ -53,13 +53,24 @@ public class CatchCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
-		return null;
+		if (!caughtSunThisCycle) {
+			game.tryToCatchObject(col, row);
+		}
+		return new ExecutionResult(true);
 	}
 
 	@Override
 	public Command create(String[] parameters) {
 		// TODO add your code here
-		return null;
-	}
-
+		if (parameters.length == 3) {
+			int col = Integer.parseInt(parameters[1]);
+			int row = Integer.parseInt(parameters[2]);
+			Command command = new CatchCommand(col, row);
+			return command;
+		}
+		else {
+			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+			return null;
+		}
+	}	
 }

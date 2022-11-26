@@ -95,7 +95,6 @@ public class GameObjectContainer {
 	// TODO add your code here
 	
 	protected void addObject(GameObject object) {
-		
 		gameObjects.add(object);
 	}
 	

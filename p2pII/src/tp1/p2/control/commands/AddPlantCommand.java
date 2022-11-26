@@ -33,10 +33,11 @@ public class AddPlantCommand extends Command implements Cloneable {
 	}
 	
 	public AddPlantCommand(int columna, int fila, String name) {
+	    this.consumeCoins=true;
 		this.col=columna;
 		this.row= fila;
 		this.plantName=name;
-		this.consumeCoins=true;
+		
 	}
 
 	@Override
@@ -65,8 +66,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 		// TODO add your code here
 		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
 		if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
-			
-			if(game.addObject(plant, this.consumeCoins)) {
+			if(game.addItem(plant, this.consumeCoins)) {
 			game.update(); 
 			game.removeDead();
 			return new ExecutionResult(true);

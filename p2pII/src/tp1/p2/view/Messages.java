@@ -60,9 +60,9 @@ public class Messages {
 
 	public static final String NUMBER_OF_COINS = "Sun coins: %d";
 
-	public static final String GENERATED_SUNS = "Generated suns:";
+	public static final String GENERATED_SUNS = "Generated suns: %d";
 
-	public static final String CAUGHT_SUNS = "Caught suns:";
+	public static final String CAUGHT_SUNS = "Caught suns: %d";
 
 	public static final String REMAINING_ZOMBIES = "Remaining zombies: %d";
 

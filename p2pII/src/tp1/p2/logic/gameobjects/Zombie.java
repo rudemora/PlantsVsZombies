@@ -7,12 +7,12 @@ public abstract class Zombie extends GameObject {
 	protected Zombie() {
 		
 	}
-	protected Zombie(GameWorld game, int col, int row) {
-		super(game, Game.NUM_COLS, row);
+	public Zombie(GameWorld game, int col, int row) {
+		super(game, col, row);
 	}
 	
 	abstract public int getSpeed();
-	abstract public Zombie create(GameWorld game, int row);
+	abstract public Zombie create(GameWorld game, int col, int row);
 	public boolean receiveZombieAttack(int damage) {
 		return false;
 	}

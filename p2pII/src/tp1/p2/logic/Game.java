@@ -33,12 +33,17 @@ public class Game implements GameStatus, GameWorld {
 	
 	private Random rand;
 	
-	private ZombiesManager Zombies;
+	private ZombiesManager zombiesManager;
+	
+	private SunsManager sunsManager;
+	
+	private int caughtSuns;
+
 	
 	private int sunCoins;
 	
 	public Game(long seed, Level level) {
-		this.reset(level, seed);
+		this.reset(seed, level);
 	}
 
 	
@@ -49,7 +54,7 @@ public class Game implements GameStatus, GameWorld {
 	 * @param seed Random seed Used to initialize the game.
 	 */
 	//@Override
-	public void reset(Level level, long seed) {
+	public void reset( long seed ,Level level) {
 		// TODO add your code here
 		this.seed = seed;
 		this.level = level;
@@ -59,14 +64,22 @@ public class Game implements GameStatus, GameWorld {
 		playerQuits = false;
 		this.actions = new ArrayDeque<>();
 		this.rand = new Random(this.seed);
-		this.Zombies= new ZombiesManager(this,level,rand);
+		this.zombiesManager= new ZombiesManager(this,level,rand);
 		sunCoins = INITIAL_SUNCOINS+2000;
+		this.sunsManager = new SunsManager(this, rand);
+		this.caughtSuns = 0;
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
 	}
 
 	
+	public Level getLevel() {
+		return this.level;
+	}
 	
+	public long getSeed() {
+		return this.seed;
+	}
 	
 	
 	
@@ -84,7 +97,8 @@ public class Game implements GameStatus, GameWorld {
 		// TODO add your code here
 
 		// 3. Game object updates
-		Zombies.update();
+		sunsManager.update();
+		zombiesManager.update();
 		container.update();
 		// TODO add your code here
 
@@ -143,24 +157,20 @@ public class Game implements GameStatus, GameWorld {
 		// TODO Auto-generated method stub
 		return playerQuits;
 	}
-
+/*
 	@Override
 	public void addSun() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public boolean tryToCatchObject(int col, int row) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	}*/
 
 	
-	public boolean addObject(GameObject gameObject, boolean consumeCoins) {//Este consumeCoins se lo he metido yo
+
+	
+	public boolean addItem(GameObject gameObject, boolean consumeCoins) {//Este consumeCoins se lo he metido yo
 		if(gameObject.canAdd()) {
-			if (consumeCoins && this.consumeCoins(gameObject) ) {
-    			this.addGameObject(gameObject);
+			if (consumeCoins && this.consumeCoins(gameObject) || !consumeCoins) {
+    			this.addGameItem(gameObject);
     			return true;
     		}
     		else {
@@ -172,13 +182,12 @@ public class Game implements GameStatus, GameWorld {
         	return false;
     	}
 	}
-
+	
 	@Override
-	public void addItem(Sun sun) {
-		// TODO Auto-generated method stub
-		
+	public int getCaughtSuns() {
+		return caughtSuns;
 	}
-
+	
 	@Override
 	public int getCycle() {
 		// TODO Auto-generated method stub
@@ -194,7 +203,7 @@ public class Game implements GameStatus, GameWorld {
 	@Override
 	public int getRemainingZombies() {
 		// TODO Auto-generated method stub
-		return  this.Zombies.getRemainingZombies();
+		return  this.zombiesManager.getRemainingZombies();
 	}
 
 	@Override
@@ -215,15 +224,9 @@ public class Game implements GameStatus, GameWorld {
 	
 	@Override
 	public int getGeneratedSuns() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.sunsManager.getGeneratedSuns();
 	}
 
-	@Override
-	public int getCaughtSuns() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public void playerQuits() {
@@ -246,15 +249,33 @@ public class Game implements GameStatus, GameWorld {
     	return false;
     }
 	
-	public void addGameObject(GameObject object) {
+	public void addGameItem(GameObject object) {
     	container.addObject(object);
     }
 	
 	 public void matarZombie() {
-	    	Zombies.matarZombie();
+		 zombiesManager.matarZombie();
 	 }
 	 
 	 public void addSuncoins(int coins) {
 	    	sunCoins = sunCoins + coins;
-	    }
+	 }
+	 
+	 public void addSun() {
+		 sunsManager.addSun();
+	 }
+	 
+	 @Override
+		public boolean tryToCatchObject(int col, int row) {
+			// TODO Auto-generated method stub
+			if (!container.isPositionEmpty(col, row)) {
+				GameItem item = getGameItemInPosition(col, row);
+				if (item.catchObject()) {
+					addSuncoins(1);
+					caughtSuns++;
+					return true;
+				}
+			}
+			return false;
+		}
 }

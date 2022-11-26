@@ -17,24 +17,23 @@ public class PlantFactory {
 		new CherryBomb()
 	);
 	/* @formatter:on */
-
+/*
 	public static boolean isValidPlant(String plantName) {
 		for (Plant p : AVAILABLE_PLANTS) {
-			// TODO add your code here
+			if (p.getName().equalsIgnoreCase(plantName)|| p.getSymbol().equalsIgnoreCase(plantName)) {
+				return true;
+			}
 		}
-
-		return false;
+		return false;	
 	}
-
-	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
-		for(Plant p: PlantFactory.getAvailablePlants()) {
+*/
+	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) { // QUIZÁ QUEDARÍA MEJOR SI UTILIZAMOS ISVALIDPLANT, IGUAL EN
+		for(Plant p: PlantFactory.getAvailablePlants()) {								//	 ZOMBIE FACTORY		
 			if(p.getName().equalsIgnoreCase(plantName) || p.getSymbol().equalsIgnoreCase(plantName)) {
 				Plant planta = p.create(game, col, row);
 				return planta;
 			}
-		
-	}
-	
+		}
 	System.out.println(Messages.INVALID_GAME_OBJECT);
 	return null;
 	}

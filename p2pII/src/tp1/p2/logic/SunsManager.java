@@ -3,6 +3,8 @@ package tp1.p2.logic;
 import java.util.Random;
 
 import tp1.p2.logic.gameobjects.Sun;
+import tp1.p2.logic.gameobjects.Zombie;
+import tp1.p2.logic.gameobjects.ZombieFactory;
 
 public class SunsManager {
 
@@ -14,28 +16,32 @@ public class SunsManager {
 
 	private int cooldown;
 
+	private int generatedSuns;
+	
+	
+	
 	public SunsManager(GameWorld game, Random rand) {
 		this.game = game;
 		this.rand = rand;
 		this.cooldown = COOLDOWN_RANDOM_SUN;
+		this.generatedSuns = 0;
+		
+		
 		// TODO add your code here
 	}
 
-	public int getCatchedSuns() {
-		// TODO add your code here
-		return 0;
-	}
+	
 
 	public int getGeneratedSuns() {
-		// TODO add your code here
-		return 0;
+		return this.generatedSuns;
 	}
 
 	public void update() {
 		if (cooldown == 0) {
 			addSun();
 			cooldown = COOLDOWN_RANDOM_SUN;
-		} else {
+			} 
+		else {
 			cooldown--;
 		}
 	}
@@ -45,8 +51,16 @@ public class SunsManager {
 	}
 
 	public void addSun() {
-		int col = getRandomInt(GameWorld.NUM_COLS);
-		int row = getRandomInt(GameWorld.NUM_ROWS);
-		game.addItem(new Sun(this.game, col, row));
+		int columna = getRandomInt(GameWorld.NUM_COLS);
+		int fila = getRandomInt(GameWorld.NUM_ROWS);
+		Sun s = new Sun();
+		Sun sun = s.create(game, columna, fila);
+		if (game.addItem(sun, false)) {
+			generatedSuns = generatedSuns + 1;
+		}
 	}
+
+	
+	
 }
+

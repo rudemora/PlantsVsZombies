@@ -72,8 +72,7 @@ public abstract class GameObject implements GameItem {
 
 	abstract public String getDescription();
 	
-	//abstract public String getName();
-	//abstract public int getCost();
+
 	
 	abstract public int getEndurance();
 	
@@ -100,5 +99,9 @@ public abstract class GameObject implements GameItem {
 	
 	protected void addCycle() {
 		this.ciclo = this.ciclo +1;
+	}
+	
+	protected void decreaseCycle() {
+		this.ciclo = this.ciclo-1;
 	}
 }

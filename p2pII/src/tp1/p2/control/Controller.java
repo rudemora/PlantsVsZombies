@@ -33,6 +33,8 @@ public class Controller {
 		System.out.println(String.format(Messages.NUMBER_OF_CYCLES, game.getCycle()));
 		System.out.println(String.format(Messages.NUMBER_OF_COINS, game.getSuncoins()));
 		System.out.println(String.format(Messages.REMAINING_ZOMBIES, game.getRemainingZombies()));
+		System.out.println(String.format(Messages.GENERATED_SUNS, game.getGeneratedSuns()));
+		System.out.println(String.format(Messages.CAUGHT_SUNS, game.getCaughtSuns()));
 		System.out.println(gamePrinter);
 	}
 

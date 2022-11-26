@@ -102,8 +102,8 @@ public class ExplosiveZombie extends Zombie {
 		return null;
 	}
 	
-	@Override
-	public ExplosiveZombie create(GameWorld game, int row) {
+	
+	public ExplosiveZombie create(GameWorld game,int col, int row) {
 		ExplosiveZombie explosivezombie = new ExplosiveZombie(game, col, row);
 		return explosivezombie;
 	}

@@ -99,8 +99,7 @@ public class BucketHead extends Zombie {
 		return Messages.BUCKET_HEAD_ZOMBIE_NAME;
 	}
 	
-	@Override
-	public BucketHead create(GameWorld game, int row) {
+	public BucketHead create(GameWorld game, int col, int row) {
 		BucketHead buckethead = new BucketHead(game, col, row);
 		return buckethead;
 	}

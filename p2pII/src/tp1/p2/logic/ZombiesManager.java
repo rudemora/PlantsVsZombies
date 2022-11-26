@@ -66,9 +66,9 @@ public class ZombiesManager {
 		int zombieType = randomZombieType();
 		if (canAdd) {
 			// TODO add your code here
-			Zombie zombie = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
-			Zombie z = zombie.create(game, row);
-			game.addObject(z, true);
+			Zombie z = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
+			Zombie zombie = z.create(game, GameWorld.NUM_COLS, row);
+			game.addItem(zombie, true);
 			remainingZombies --;
 			zombiesAlived += 1;
 		}
@@ -76,7 +76,6 @@ public class ZombiesManager {
 	}
 
 	public int getRemainingZombies() {
-		// TODO Auto-generated method stub
 		return this.remainingZombies;
 	}
 

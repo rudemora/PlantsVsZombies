@@ -100,8 +100,8 @@ public class Sporty extends Zombie {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public Sporty create(GameWorld game, int row) {
+
+	public Sporty create(GameWorld game, int col, int row) {
 		Sporty sporty = new Sporty(game, col, row);
 		return sporty;
 	}

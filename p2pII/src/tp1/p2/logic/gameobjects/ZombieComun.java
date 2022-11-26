@@ -101,8 +101,8 @@ public class ZombieComun extends Zombie {
 		return null;
 	}
 	
-	@Override
-	public ZombieComun create(GameWorld game, int row) {
+	
+	public ZombieComun create(GameWorld game, int col, int row) {
 		ZombieComun zombieComun = new ZombieComun(game, col, row);
 		return zombieComun;
 	}
