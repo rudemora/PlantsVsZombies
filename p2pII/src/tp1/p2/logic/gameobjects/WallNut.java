@@ -29,7 +29,7 @@ public class WallNut extends Plant {
 		return 0;
 	}
 	
-	@Override
+	/*@Override
 	public boolean receiveZombieAttack(int damage) {
 		// TODO Auto-generated method stub
 		return false;
@@ -39,7 +39,7 @@ public class WallNut extends Plant {
 	public boolean receivePlantAttack(int damage) {
 		// TODO Auto-generated method stub
 		return false;
-	}
+	}*/
 
 	@Override
 	public boolean catchObject() {

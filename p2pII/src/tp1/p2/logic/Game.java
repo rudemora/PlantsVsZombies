@@ -149,8 +149,17 @@ public class Game implements GameStatus, GameWorld {
     }
 
 	public boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.zombiesManager.getRemainingZombies() == 0 && zombiesManager.zombiesDead()) { 
+    		return true; 
+    	}
+    	else {
+    		if (zombiesGana()) {
+    			return true;
+    		}
+    		else {
+        		return false;
+    		}
+    	}
 	}
 
 	public boolean isPlayerQuits() {
@@ -271,11 +280,18 @@ public class Game implements GameStatus, GameWorld {
 			if (!container.isPositionEmpty(col, row)) {
 				GameItem item = getGameItemInPosition(col, row);
 				if (item.catchObject()) {
-					addSuncoins(1);
+					addSuncoins(10);
 					caughtSuns++;
 					return true;
 				}
 			}
 			return false;
 		}
+	 
+	 private boolean zombiesGana() {
+	    	return container.zombiesGana();
+	 }
+	 public boolean jugadorGanador() {
+	    	return this.zombiesManager.getZombiesAlived()==0;
+	 }
 }

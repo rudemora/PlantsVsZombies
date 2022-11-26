@@ -65,6 +65,8 @@ public class Controller {
 	 */
 	public void run() {
 		boolean refreshDisplay = true;
+		
+		
 
 		while (!game.isFinished() && !game.isPlayerQuits()) {
 
@@ -99,14 +101,14 @@ public class Controller {
 			System.out.print(Messages.PLAYER_QUITS);
 			
 		}
-		/*else {
-			//if (game.jugadorGanador()) {
-			//	System.out.print(Messages.PLAYER_WINS);
-			//}
-			//else {
+		else {
+			if (game.jugadorGanador()) {
+				System.out.print(Messages.PLAYER_WINS);
+			}
+			else {
 				System.out.print(Messages.ZOMBIES_WIN);
-			//}
-		}*/
+			}
+		}
 	}
 
 }

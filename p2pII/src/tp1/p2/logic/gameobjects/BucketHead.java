@@ -15,7 +15,7 @@ public class BucketHead extends Zombie {
 		endurance = 8;
 	}
 	
-	@Override
+	/*@Override
 	public boolean receiveZombieAttack(int damage) {
 		// TODO Auto-generated method stub
 		return false;
@@ -25,7 +25,7 @@ public class BucketHead extends Zombie {
 	public boolean receivePlantAttack(int damage) {
 		// TODO Auto-generated method stub
 		return false;
-	}
+	}*/
 
 	@Override
 	public boolean catchObject() {

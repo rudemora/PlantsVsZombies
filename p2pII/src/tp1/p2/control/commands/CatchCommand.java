@@ -9,14 +9,14 @@ import tp1.p2.view.Messages;
 
 public class CatchCommand extends Command {
 
-	private static boolean caughtSunThisCycle = false;
+	private static boolean caughtSunThisCycle;
 
 	private int col;
 
 	private int row;
 
 	public CatchCommand() {
-		caughtSunThisCycle = false;
+		
 	}
 	
 	@Override
@@ -54,7 +54,12 @@ public class CatchCommand extends Command {
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
 		if (!caughtSunThisCycle) {
-			game.tryToCatchObject(col, row);
+			if(game.tryToCatchObject(col, row)) {
+				caughtSunThisCycle= true;
+			};
+		}
+		else {
+			System.out.println("Me invento el mensaje: ya has cogido un suncoin");
 		}
 		return new ExecutionResult(true);
 	}

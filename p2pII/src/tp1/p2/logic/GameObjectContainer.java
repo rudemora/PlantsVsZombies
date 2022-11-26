@@ -98,5 +98,14 @@ public class GameObjectContainer {
 		gameObjects.add(object);
 	}
 	
+	protected boolean zombiesGana() {
+		for(int i =0;i<gameObjects.size();i=i+1) {
+			if (gameObjects.get(i).winner()) { 
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 }

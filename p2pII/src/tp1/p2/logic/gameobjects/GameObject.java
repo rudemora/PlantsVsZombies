@@ -104,4 +104,12 @@ public abstract class GameObject implements GameItem {
 	protected void decreaseCycle() {
 		this.ciclo = this.ciclo-1;
 	}
+	public boolean winner() {
+		if (this.col <= -1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

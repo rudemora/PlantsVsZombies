@@ -15,7 +15,7 @@ public class ZombieComun extends Zombie {
 		endurance = 5;
 	}
 	
-	@Override
+	/*@Override
 	public boolean receiveZombieAttack(int damage) {
 		// TODO Auto-generated method stub
 		return false;
@@ -25,7 +25,7 @@ public class ZombieComun extends Zombie {
 	public boolean receivePlantAttack(int damage) {
 		// TODO Auto-generated method stub
 		return false;
-	}
+	}*/
 
 	@Override
 	public boolean catchObject() {

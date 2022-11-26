@@ -78,6 +78,10 @@ public class ZombiesManager {
 	public int getRemainingZombies() {
 		return this.remainingZombies;
 	}
+	
+	public int getZombiesAlived() {
+		return this.zombiesAlived;
+	}
 
 	
 
