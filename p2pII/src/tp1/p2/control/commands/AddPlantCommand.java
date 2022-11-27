@@ -15,7 +15,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 	private int col;
 
 	private int row;
-
+	
 	private String plantName;
 
 	private boolean consumeCoins;//NO ENTIENDO PARA QUÉ SE NECESITA

@@ -80,7 +80,7 @@ public class CherryBomb extends Plant {
 	@Override
 	public boolean fillPosition() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 	public String getName() {

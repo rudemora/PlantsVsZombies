@@ -87,10 +87,10 @@ public abstract class GameObject implements GameItem {
 	abstract public String getName();
 	
 	public boolean canAdd() {
-		if(game.isPositionEmpty(this.col, this.row) ) {
-			return true;
+		if(game.isFullyOcuppied(this.col, this.row) ) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	public int getCost() {
@@ -112,4 +112,6 @@ public abstract class GameObject implements GameItem {
 			return false;
 		}
 	}
+	
+	abstract public boolean fillPosition();
 }

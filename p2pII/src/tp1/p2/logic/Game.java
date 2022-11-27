@@ -92,7 +92,7 @@ public class Game implements GameStatus, GameWorld {
 
 		// 1. Execute pending actions
 		executePendingActions();
-
+		
 		// 2. Execute game Actions
 		// TODO add your code here
 
@@ -101,7 +101,7 @@ public class Game implements GameStatus, GameWorld {
 		zombiesManager.update();
 		container.update();
 		// TODO add your code here
-
+		
 		// 4. & 5. Remove dead and execute pending actions
 		boolean deadRemoved = true;
 		while (deadRemoved || areTherePendingActions()) {
@@ -126,6 +126,10 @@ public class Game implements GameStatus, GameWorld {
 		}
 	}
 
+	public void pushAction(GameAction gameAction) {
+	    this.actions.addLast(gameAction);
+	}
+	
 	private boolean areTherePendingActions() {
 		return this.actions.size() > 0;
 	}
@@ -143,6 +147,8 @@ public class Game implements GameStatus, GameWorld {
 	public boolean isFullyOcuppied(int col, int row) {
 		return this.container.isFullyOccupied(col, row);
 	}
+	
+	
 	
 	public boolean execute (Command command) {
     	return command.execute(this).draw();
@@ -217,14 +223,14 @@ public class Game implements GameStatus, GameWorld {
 
 	@Override
 	public String positionToString(int col, int row) {
-		String escribe= "";
+	StringBuilder str = new StringBuilder();
 		if(!container.isPositionEmpty(col, row)) {
-			GameItem item = this.getGameItemInPosition(col, row);
-			return item.toString();
-			
+			str.append(container.toString(col,row));
+			//GameItem item = this.getGameItemInPosition(col, row);
+			//str.append(item.toString());
 		}
 		
-		return escribe;
+		return str.toString();
 	}
 	
 	public GameItem getGameItemInPosition(int col, int row) {
@@ -294,4 +300,6 @@ public class Game implements GameStatus, GameWorld {
 	 public boolean jugadorGanador() {
 	    	return this.zombiesManager.getZombiesAlived()==0;
 	 }
+	 
+	
 }

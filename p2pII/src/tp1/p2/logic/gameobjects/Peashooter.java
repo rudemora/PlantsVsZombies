@@ -92,7 +92,7 @@ public class Peashooter extends Plant {
 	@Override
 	public boolean fillPosition() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

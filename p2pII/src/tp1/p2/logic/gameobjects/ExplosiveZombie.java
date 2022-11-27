@@ -50,11 +50,11 @@ public class ExplosiveZombie extends Zombie {
 	public void update() {
 		this.addCycle();
 		GameItem item = game.getGameItemInPosition(col - 1, row);
-		if(item != null ) {  
+		if(item != null && game.isFullyOcuppied(col-1, row)) {  
     		item.receiveZombieAttack(this.getDamage());
 		}
 		else {
-			if(this.game.isPositionEmpty(col-1, row) && this.canAvanzar()) {
+			if(!this.game.isFullyOcuppied(col-1, row) && this.canAvanzar()) {
 				this.avanzar();
 			}
 		}
@@ -75,7 +75,7 @@ public class ExplosiveZombie extends Zombie {
 	@Override
 	public boolean fillPosition() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

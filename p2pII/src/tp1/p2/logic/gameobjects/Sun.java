@@ -33,7 +33,7 @@ public class Sun extends GameObject {
 
 	@Override
 	public boolean fillPosition() {
-		return  false;
+		return false;
 	}
 	@Override
 	public boolean receiveZombieAttack(int damage) {

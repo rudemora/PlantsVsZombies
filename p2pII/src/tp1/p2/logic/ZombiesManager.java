@@ -62,7 +62,7 @@ public class ZombiesManager {
 	}
 
 	public boolean addZombie(int row) {
-		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && isPositionEmpty(GameWorld.NUM_COLS, row);
+		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && !game.isFullyOcuppied(GameWorld.NUM_COLS, row);
 		int zombieType = randomZombieType();
 		if (canAdd) {
 			// TODO add your code here
@@ -93,9 +93,7 @@ public class ZombiesManager {
 		zombiesAlived--;
 	}
 	
-	private boolean isPositionEmpty(int x, int y) {
-		return game.isPositionEmpty(x, y);
-	}
+	
 
 	// TODO add your code here
 

@@ -75,8 +75,7 @@ public class GameObjectContainer {
 	
 	protected boolean isPositionEmpty(int col,int row) {
 		for(GameObject g: gameObjects) {
-			if(g.isInPosition(col, row)) {
-				
+			if(g.isInPosition(col, row)) {			
 				return false;
 			}
 			
@@ -84,7 +83,7 @@ public class GameObjectContainer {
 		return true;
 	}
 	
-	protected GameItem getGameItemInPosition(int col,int row) {  
+	protected GameItem getGameItemInPosition(int col,int row) {
 		for(int i =0;i<gameObjects.size();i=i+1) {
 			if ( gameObjects.get(i).isInPosition(col, row)) { 
 				return gameObjects.get(i);
@@ -105,6 +104,27 @@ public class GameObjectContainer {
 			}
 		}
 		return false;
+	}
+	
+	public String toString(int col, int row) {
+		StringBuilder str = new StringBuilder();
+		boolean isSun = false;
+		boolean nextSun = false;
+		for(int i =0;i<gameObjects.size();i=i+1) {
+			if (gameObjects.get(i).isInPosition(col,  row)) {
+				String object = gameObjects.get(i).toString();
+				nextSun = (object.charAt(1) == Messages.SUN_SYMBOL.charAt(0));
+				if (nextSun && !isSun) {
+					System.out.print("a");
+					str.append(gameObjects.get(i).toString());
+					isSun = true;
+				}
+				else if (!nextSun){
+					str.append(gameObjects.get(i).toString());
+				}
+			}
+		}
+		return str.toString();
 	}
 	
 	
