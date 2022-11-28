@@ -56,10 +56,11 @@ public class CatchCommand extends Command {
 		if (!caughtSunThisCycle) {
 			if(game.tryToCatchObject(col, row)) {
 				caughtSunThisCycle= true;
-			};
+			}
 		}
 		else {
-			System.out.println("Me invento el mensaje: ya has cogido un suncoin");
+			System.out.println(error(Messages.SUN_ALREADY_CAUGHT));
+			return new ExecutionResult(false);
 		}
 		return new ExecutionResult(true);
 	}
@@ -68,10 +69,17 @@ public class CatchCommand extends Command {
 	public Command create(String[] parameters) {
 		// TODO add your code here
 		if (parameters.length == 3) {
-			int col = Integer.parseInt(parameters[1]);
-			int row = Integer.parseInt(parameters[2]);
-			Command command = new CatchCommand(col, row);
-			return command;
+			try {
+				int col = Integer.parseInt(parameters[1]);
+				int row = Integer.parseInt(parameters[2]);
+				Command command = new CatchCommand(col, row);
+				return command;
+			}
+			catch (Exception e){
+				System.out.println(error(Messages.INVALID_POSITION));
+				return null;
+			}
+				
 		}
 		else {
 			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));

@@ -14,33 +14,14 @@ public class GameObjectContainer {
 		gameObjects = new ArrayList<>();
 	}
 
-	public String positionToString(int col, int row) {
-		StringBuilder buffer = new StringBuilder();
-		boolean sunPainted = false;
-		boolean sunAboutToPaint = false;
-
-		for (GameObject g : gameObjects) {
-			if(g.isAlive() && g.getCol() == col && g.getRow() == row) {
-				String objectText = g.toString();
-				sunAboutToPaint = objectText.indexOf(Messages.SUN_SYMBOL) >= 0;
-				if (sunAboutToPaint) {
-					if (!sunPainted) {
-						buffer.append(objectText);
-						sunPainted = true;
-					}
-				} else {
-					buffer.append(objectText);
-				}
-			}
-		}
-
-		return buffer.toString();
-	}
+	
 
 	public boolean removeDead() {
+		
 		boolean ok=false;
 		for(int i =0;i<this.gameObjects.size();i=i+1) {
 			if (!gameObjects.get(i).isAlive()) {
+				gameObjects.get(i).onExit();
 				gameObjects.remove(i);   
 				ok=true;
 			}
@@ -52,8 +33,11 @@ public class GameObjectContainer {
 		// Can't use for-each loop (for(GameObject g : gameObjexts)) without errors.
 		for(int i = 0; i < gameObjects.size(); i++) {
 			GameObject g = gameObjects.get(i);
+			
 			if(g.isAlive()) {
 				g.update();
+				
+
 			}
 		}
 	}
@@ -85,7 +69,7 @@ public class GameObjectContainer {
 	
 	protected GameItem getGameItemInPosition(int col,int row) {
 		for(int i =0;i<gameObjects.size();i=i+1) {
-			if ( gameObjects.get(i).isInPosition(col, row)) { 
+			if (gameObjects.get(i).isInPosition(col, row) && gameObjects.get(i).fillPosition()) { 
 				return gameObjects.get(i);
 			}
 		}
@@ -106,26 +90,45 @@ public class GameObjectContainer {
 		return false;
 	}
 	
-	public String toString(int col, int row) {
-		StringBuilder str = new StringBuilder();
-		boolean isSun = false;
-		boolean nextSun = false;
-		for(int i =0;i<gameObjects.size();i=i+1) {
-			if (gameObjects.get(i).isInPosition(col,  row)) {
-				String object = gameObjects.get(i).toString();
-				nextSun = (object.charAt(1) == Messages.SUN_SYMBOL.charAt(0));
-				if (nextSun && !isSun) {
-					System.out.print("a");
-					str.append(gameObjects.get(i).toString());
-					isSun = true;
-				}
-				else if (!nextSun){
-					str.append(gameObjects.get(i).toString());
+	public String positionToString(int col, int row) {
+		StringBuilder buffer = new StringBuilder();
+		boolean sunPainted = false;
+		boolean sunAboutToPaint = false;
+
+		for (GameObject g : gameObjects) {
+			if(g.isAlive() && g.getCol() == col && g.getRow() == row) {
+				String objectText = g.toString();
+				sunAboutToPaint = objectText.indexOf(Messages.SUN_SYMBOL) >= 0;
+				if (sunAboutToPaint) {
+					if (!sunPainted) {
+						buffer.append(objectText);
+						sunPainted = true;
+					}
+				} else {
+					buffer.append(objectText);
 				}
 			}
 		}
-		return str.toString();
+
+		return buffer.toString();
 	}
 	
+	public void explode(int col, int row, int damage) {
+		for(int i =0;i<gameObjects.size();i=i+1) {
+			if (gameObjects.get(i).isInPosition(col,  row) && gameObjects.get(i).isAlive()) {
+				gameObjects.get(i).receiveExplosion(damage);
+			}
+		}
+	}
+	
+	public int tryToCatchObject(int col, int row) {
+		int num = 0;
+		for(GameObject g : gameObjects) {
+			if(g.isInPosition(col, row) && g.catchObject()) {
+				num++;
+			}
+		}
+		return num;
+	}
 	
 }

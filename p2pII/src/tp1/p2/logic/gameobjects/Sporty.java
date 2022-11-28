@@ -47,16 +47,16 @@ public class Sporty extends Zombie {
 
 	@Override
 	public void update() {
+
 		this.addCycle();
+		if(!this.game.isFullyOcuppied(col-1, row) && this.canAvanzar()) {
+			this.avanzar();
+		}
 		GameItem item = game.getGameItemInPosition(col - 1, row);
-		if(item != null && game.isFullyOcuppied(col-1, row)) {  
-    		item.receiveZombieAttack(this.getDamage());
+		if(item != null) { // && game.isFullyOcuppied(col-1, row)) {  
+			item.receiveZombieAttack(this.getDamage());
 		}
-		else {
-			if(!this.game.isFullyOcuppied(col-1, row) && this.canAvanzar()) {
-				this.avanzar();
-			}
-		}
+		
 	}
 
 	@Override
@@ -110,5 +110,6 @@ public class Sporty extends Zombie {
 		this.col--;
 		
 	}
+
 
 }

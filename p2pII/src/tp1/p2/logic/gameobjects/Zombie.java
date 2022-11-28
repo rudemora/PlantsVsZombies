@@ -19,7 +19,12 @@ public abstract class Zombie extends GameObject {
 	abstract protected void avanzar();
 	
 	protected boolean canAvanzar() {
-		return (this.ciclo % this.getSpeed()) == 0;
+		
+		boolean advance = (this.ciclo % this.getSpeed()) == 0 && this.ciclo != 0;
+		if (advance) {
+			this.ciclo = 0;
+		}
+		return advance;
 	}
 	
 	public boolean receivePlantAttack(int damage) {

@@ -53,12 +53,16 @@ public class AddZombieCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		Zombie zombie = ZombieFactory.spawnZombie(this.zombieIdx, game, this.col, this.row);
-		if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
+		if (col>= 0 && col <= Game.NUM_COLS && row>= 0 && row <= Game.NUM_ROWS) {
 			if(game.addItem(zombie, false)) {
 				game.update(); 
-				game.removeDead();
 				return new ExecutionResult(true);
 			}	
+			else {
+				game.update(); 
+				return new ExecutionResult(true);
+			}
+			
 		}
 		else {
 			System.out.print(error(Messages.INVALID_POSITION));

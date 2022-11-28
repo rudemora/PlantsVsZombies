@@ -47,15 +47,14 @@ public class BucketHead extends Zombie {
 
 	@Override
 	public void update() {
+		
 		this.addCycle();
-		GameItem item = game.getGameItemInPosition(col - 1, row);
-		if(item != null && game.isFullyOcuppied(col-1, row)) {  
-    		item.receiveZombieAttack(this.getDamage());
+		if(!this.game.isFullyOcuppied(col-1, row) && this.canAvanzar()) {
+			this.avanzar();
 		}
-		else {
-			if(!this.game.isFullyOcuppied(col-1, row) && this.canAvanzar()) {
-				this.avanzar();
-			}
+		GameItem item = game.getGameItemInPosition(col - 1, row);
+		if(item != null) { // && game.isFullyOcuppied(col-1, row)) {  
+			item.receiveZombieAttack(this.getDamage());
 		}
 	}
 
@@ -108,5 +107,7 @@ public class BucketHead extends Zombie {
 		this.col--;
 		
 	}
+
+	
 
 }

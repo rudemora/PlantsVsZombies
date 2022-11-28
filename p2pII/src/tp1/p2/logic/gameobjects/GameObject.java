@@ -23,7 +23,7 @@ public abstract class GameObject implements GameItem {
 	protected int ciclo;
 	
 	
-	protected GameObject() {
+	public GameObject() {
 		
 	}
 
@@ -31,7 +31,7 @@ public abstract class GameObject implements GameItem {
 		this.game = game;
 		this.col = col;
 		this.row = row;
-		this.ciclo = 0;
+		this.ciclo = -1;
 	}
 
 	public boolean isInPosition(int columna, int fila) {
@@ -61,7 +61,6 @@ public abstract class GameObject implements GameItem {
 			int endurance = this.endurance;
 			String icon= this.getSymbol();
 			return status(icon,endurance);
-			// TODO add your code here
 		} 
 		else {
 			return "";
@@ -101,9 +100,7 @@ public abstract class GameObject implements GameItem {
 		this.ciclo = this.ciclo +1;
 	}
 	
-	protected void decreaseCycle() {
-		this.ciclo = this.ciclo-1;
-	}
+	
 	public boolean winner() {
 		if (this.col <= -1) {
 			return true;
@@ -114,4 +111,10 @@ public abstract class GameObject implements GameItem {
 	}
 	
 	abstract public boolean fillPosition();
+	
+	
+	public boolean receiveExplosion(int damage) {
+		this.endurance = this.endurance - damage;
+		return true;
+	}
 }

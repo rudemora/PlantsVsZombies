@@ -64,35 +64,54 @@ public class AddPlantCommand extends Command implements Cloneable {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
-		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-		if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
-			if(game.addItem(plant, this.consumeCoins)) {
-			game.update(); 
-			game.removeDead();
-			return new ExecutionResult(true);
-			}	
+		
+		try {
+			Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
+			if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
+				if(game.addItem(plant, this.consumeCoins)) {
+				game.update(); 
+				//game.removeDead();
+				return new ExecutionResult(true);
+				}	
+			}
+			else {
+				System.out.println(error(Messages.INVALID_POSITION));
+			}
+			
+			return new ExecutionResult(false);
 		}
-		else {
-			System.out.print(error(Messages.INVALID_POSITION));
+		catch (Exception e) {
+			
+			System.out.println(error(Messages.INVALID_GAME_OBJECT));
+			return new ExecutionResult(false);
 		}
-		return new ExecutionResult(false);
+		
+		
 
 	}
 
 	@Override
 	public Command create(String[] parameters) {
 		// TODO add your code here
-		if(parameters.length == 4) {
-			String name = parameters[1];
-			int col = Integer.parseInt(parameters[2]);
-			int row = Integer.parseInt(parameters[3]);
-			Command command= new AddPlantCommand(col, row, name);
-		return command;
+		try {
+			if(parameters.length == 4) {
+				String name = parameters[1];
+				int col = Integer.parseInt(parameters[2]);
+				int row = Integer.parseInt(parameters[3]);
+				
+				Command command= new AddPlantCommand(col, row, name);
+			return command;
+			}
+			else {
+				System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+				return null;
+			}
 		}
-		else {
-			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+		catch (Exception e) {
+			System.out.println(error(Messages.INVALID_POSITION));
 			return null;
 		}
+		
 		
 	}
 

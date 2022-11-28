@@ -10,7 +10,9 @@ import java.util.Random;
 import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
 import tp1.p2.control.Level;
+import tp1.p2.logic.actions.ExplosionAction; //importado por nosotros
 import tp1.p2.logic.actions.GameAction;
+import tp1.p2.logic.GameItem; //importado por nosotros
 import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.logic.gameobjects.Sun;
 import tp1.p2.view.Messages;
@@ -65,7 +67,7 @@ public class Game implements GameStatus, GameWorld {
 		this.actions = new ArrayDeque<>();
 		this.rand = new Random(this.seed);
 		this.zombiesManager= new ZombiesManager(this,level,rand);
-		sunCoins = INITIAL_SUNCOINS+2000;
+		sunCoins = INITIAL_SUNCOINS;
 		this.sunsManager = new SunsManager(this, rand);
 		this.caughtSuns = 0;
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
@@ -94,20 +96,17 @@ public class Game implements GameStatus, GameWorld {
 		executePendingActions();
 		
 		// 2. Execute game Actions
-		// TODO add your code here
-
-		// 3. Game object updates
-		sunsManager.update();
 		zombiesManager.update();
+		sunsManager.update();
+		//container.removeDead();
+		// 3. Game object updates
 		container.update();
-		// TODO add your code here
 		
 		// 4. & 5. Remove dead and execute pending actions
 		boolean deadRemoved = true;
 		while (deadRemoved || areTherePendingActions()) {
 			// 4. Remove dead
 			deadRemoved = this.container.removeDead();
-
 			// 5. execute pending actions
 			executePendingActions();
 		}
@@ -128,6 +127,11 @@ public class Game implements GameStatus, GameWorld {
 
 	public void pushAction(GameAction gameAction) {
 	    this.actions.addLast(gameAction);
+	}
+	
+	public void pushAction(int col, int row, int damage) {
+		GameAction action = new ExplosionAction(col, row, damage);
+		this.pushAction(action);
 	}
 	
 	private boolean areTherePendingActions() {
@@ -169,15 +173,9 @@ public class Game implements GameStatus, GameWorld {
 	}
 
 	public boolean isPlayerQuits() {
-		// TODO Auto-generated method stub
 		return playerQuits;
 	}
-/*
-	@Override
-	public void addSun() {
-		// TODO Auto-generated method stub
-		
-	}*/
+
 
 	
 
@@ -185,7 +183,7 @@ public class Game implements GameStatus, GameWorld {
 	public boolean addItem(GameObject gameObject, boolean consumeCoins) {//Este consumeCoins se lo he metido yo
 		if(gameObject.canAdd()) {
 			if (consumeCoins && this.consumeCoins(gameObject) || !consumeCoins) {
-    			this.addGameItem(gameObject);
+				this.addGameItem(gameObject);
     			return true;
     		}
     		else {
@@ -217,7 +215,6 @@ public class Game implements GameStatus, GameWorld {
 
 	@Override
 	public int getRemainingZombies() {
-		// TODO Auto-generated method stub
 		return  this.zombiesManager.getRemainingZombies();
 	}
 
@@ -225,9 +222,7 @@ public class Game implements GameStatus, GameWorld {
 	public String positionToString(int col, int row) {
 	StringBuilder str = new StringBuilder();
 		if(!container.isPositionEmpty(col, row)) {
-			str.append(container.toString(col,row));
-			//GameItem item = this.getGameItemInPosition(col, row);
-			//str.append(item.toString());
+			str.append(container.positionToString(col,row));
 		}
 		
 		return str.toString();
@@ -248,9 +243,7 @@ public class Game implements GameStatus, GameWorld {
 		playerQuits = true;
 		
 	}
-	public void removeDead() {
-    	container.removeDead();
-    }
+	
 	// TODO add your code here
 	public boolean isPositionEmpty(int x, int y) {
     	return container.isPositionEmpty(x, y);
@@ -264,6 +257,7 @@ public class Game implements GameStatus, GameWorld {
     	return false;
     }
 	
+	@Override
 	public void addGameItem(GameObject object) {
     	container.addObject(object);
     }
@@ -282,15 +276,14 @@ public class Game implements GameStatus, GameWorld {
 	 
 	 @Override
 		public boolean tryToCatchObject(int col, int row) {
-			// TODO Auto-generated method stub
 			if (!container.isPositionEmpty(col, row)) {
-				GameItem item = getGameItemInPosition(col, row);
-				if (item.catchObject()) {
-					addSuncoins(10);
-					caughtSuns++;
-					return true;
-				}
+				int num = container.tryToCatchObject(col, row);
+				int soles = num * 10;
+				addSuncoins(soles);
+				caughtSuns += num;
+				return true;
 			}
+			
 			return false;
 		}
 	 
@@ -301,5 +294,15 @@ public class Game implements GameStatus, GameWorld {
 	    	return this.zombiesManager.getZombiesAlived()==0;
 	 }
 	 
+	 public void explode(int col, int row, int damage) {
+		 for(int i = col-1; i <= col + 1; i++) {
+			 for(int j = row-1; j<= row +1;j=j+1) {
+				 if(i!= col || j!= row) {
+					 container.explode(i, j, damage);
+				 }
+			 }
+		 }	    
+	     
+	 }
 	
 }

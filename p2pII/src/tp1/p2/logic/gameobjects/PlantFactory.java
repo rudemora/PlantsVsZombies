@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import tp1.p2.logic.GameWorld;
-import tp1.p2.view.Messages;//IMportado por mi para el spawn plant
+//import tp1.p2.view.Messages;//IMportado por mi para el spawn plant
 
 public class PlantFactory {
 
@@ -34,7 +34,7 @@ public class PlantFactory {
 				return planta;
 			}
 		}
-	System.out.println(Messages.INVALID_GAME_OBJECT);
+	//System.out.println(error(Messages.INVALID_GAME_OBJECT));
 	return null;
 	}
 

@@ -7,11 +7,13 @@ public class Sunflower extends Plant {
 	
 	protected Sunflower() {
 		endurance = 1;
+		ciclo = 0;
 	}
 	
 	protected Sunflower(GameWorld game, int col, int row) {
 		super(game, col, row);
 		endurance = 1;
+		ciclo = 0;
 	}
 	
 	@Override
@@ -80,8 +82,7 @@ public class Sunflower extends Plant {
 
 	@Override
 	public boolean fillPosition() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -98,5 +99,6 @@ public class Sunflower extends Plant {
 		}
 		return false;
 	}
+
 
 }

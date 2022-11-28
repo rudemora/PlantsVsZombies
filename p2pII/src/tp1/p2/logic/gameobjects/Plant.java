@@ -18,6 +18,7 @@ public abstract class Plant extends GameObject {
 	abstract public int getCost();
 	
 	abstract public Plant create(GameWorld game, int col, int row);
+	
 	public boolean receiveZombieAttack(int damage) {
 		this.endurance = this.endurance - damage;
 		return true;

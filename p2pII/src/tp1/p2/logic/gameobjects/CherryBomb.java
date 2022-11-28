@@ -4,15 +4,18 @@ import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
 public class CherryBomb extends Plant {
-
+	
+	public static final int INITIAL_ENDURANCE = 2;
 
 	protected CherryBomb() {
-		endurance = 2;
+		endurance = INITIAL_ENDURANCE;
+		ciclo = 2;
 	}
 	
 	protected CherryBomb(GameWorld game, int col, int row) {
 		super(game, col, row);
-		endurance = 2;
+		endurance =  INITIAL_ENDURANCE;
+		ciclo = 2;
 	}
 	
 	@Override
@@ -20,9 +23,10 @@ public class CherryBomb extends Plant {
 		return 50;
 	}
 	
+	
 	@Override
 	public int getEndurance() {
-		return endurance;
+		return INITIAL_ENDURANCE;
 	}
 	
 	@Override 
@@ -51,7 +55,12 @@ public class CherryBomb extends Plant {
 
 	@Override
 	protected String getSymbol() {
-		return String.format(Messages.CHERRY_BOMB_SYMBOL, this.getEndurance());
+		if (ciclo != 0) {
+			return String.format(Messages.CHERRY_BOMB_SYMBOL, this.getEndurance());
+		}
+		else {
+			return String.format((Messages.CHERRY_BOMB_SYMBOL).toUpperCase(), this.getEndurance());
+		}
 	}
 
 	@Override
@@ -62,7 +71,13 @@ public class CherryBomb extends Plant {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+		if (ciclo > 0) {
+			ciclo--;
+		}
+		else if (ciclo == 0) {
+			game.pushAction(col, row, getDamage());
+			endurance = 0;
+		}
 	}
 
 	@Override
@@ -74,7 +89,7 @@ public class CherryBomb extends Plant {
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub
-		
+		//game.pushAction(col, row, getDamage());
 	}
 
 	@Override
@@ -91,5 +106,7 @@ public class CherryBomb extends Plant {
 		CherryBomb cherrybomb = new CherryBomb(game, col, row);
 		return cherrybomb;
 	 }
+
+	
 
 }

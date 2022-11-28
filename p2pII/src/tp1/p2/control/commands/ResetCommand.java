@@ -54,21 +54,31 @@ public class ResetCommand extends Command {
 
 	@Override
 	public Command create(String[] parameters) {
-		if(parameters.length==3) {
-			Level level = Level.valueOfIgnoreCase(parameters[1]);
-			long seed = System.currentTimeMillis() % 1000;
-			seed = Long.parseLong(parameters[2]);
-			Command command= new ResetCommand(level, seed);
-		return command;
-		}
-		else if (parameters.length == 1) {
-			Command command = new ResetCommand();
+		try {
+			if(parameters.length==3) {
+				Level level = Level.valueOfIgnoreCase(parameters[1]);
+				long seed = System.currentTimeMillis() % 1000;
+				seed = Long.parseLong(parameters[2]);
+				Command command= new ResetCommand(level, seed);
 			return command;
+			}
+			else if (parameters.length == 1) {
+				Command command = new ResetCommand();
+				return command;
+			}
+			else {
+				System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+				return null;
+			}
 		}
-		else {
-			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+		catch (Exception e) {
+			System.out.println(error(Messages.INVALID_COMMAND));
 			return null;
 		}
+					
+		
 	}
+		
+	
 
 }

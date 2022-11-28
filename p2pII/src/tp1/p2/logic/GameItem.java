@@ -14,8 +14,7 @@ public interface GameItem {
 	 * @return <code>true</code> if a plant has been attacked, <code>false</code>
 	 *         otherwise.
 	 */
-	abstract boolean receiveZombieAttack(int damage);//No se si tienen que ser abstract
-
+	abstract boolean receiveZombieAttack(int damage);
 	/**
 	 * Receive a plant attack.
 	 * 
@@ -40,5 +39,7 @@ public interface GameItem {
 	 * @return
 	 */
 	boolean fillPosition();
+	
+	boolean receiveExplosion(int damage);
 
 }

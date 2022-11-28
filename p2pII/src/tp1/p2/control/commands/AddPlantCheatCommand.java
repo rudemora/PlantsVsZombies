@@ -54,12 +54,15 @@ public class AddPlantCheatCommand extends Command {
 		// TODO Auto-generated method stub
 		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
 		if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
-			
 			if(game.addItem(plant, this.consumeCoins)) {
-			game.update(); 
-			game.removeDead();
-			return new ExecutionResult(true);
+				game.update(); 
+				//game.removeDead();
+				return new ExecutionResult(true);
 			}	
+			else {
+				game.update();
+				return new ExecutionResult(true);
+			}
 		}
 		else {
 			System.out.print(error(Messages.INVALID_POSITION));

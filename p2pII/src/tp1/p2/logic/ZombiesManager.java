@@ -70,7 +70,8 @@ public class ZombiesManager {
 			Zombie zombie = z.create(game, GameWorld.NUM_COLS, row);
 			game.addItem(zombie, true);
 			remainingZombies --;
-			zombiesAlived += 1;
+			zombiesAlived += 1;	
+
 		}
 		return canAdd;
 	}

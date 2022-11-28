@@ -24,8 +24,7 @@ public class Sun extends GameObject {
 	public boolean catchObject() {
 		// TODO add your code here
 		if (endurance > 0) {
-			endurance = 0;
-			
+			this.onExit();
 			return true;
 		}
 		return false;
@@ -37,12 +36,10 @@ public class Sun extends GameObject {
 	}
 	@Override
 	public boolean receiveZombieAttack(int damage) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	@Override
 	public boolean receivePlantAttack(int damage) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -60,7 +57,6 @@ public class Sun extends GameObject {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		//this.decreaseCycle();
 		endurance--;
 	}
 	@Override
@@ -88,13 +84,14 @@ public class Sun extends GameObject {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	/*
-	public int getCol() {
-		return col;
-	}*/
-	
+
 	public Sun create(GameWorld game, int col, int row) {
 		Sun sun = new Sun(game, col, row);
 		return sun;
+	}
+	
+	@Override
+	public boolean receiveExplosion(int damage) {
+		return false;
 	}
 }

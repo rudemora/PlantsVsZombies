@@ -50,7 +50,7 @@ public class Peashooter extends Plant {
 		this.addCycle();
 		int i = col + 1;
 		boolean atacked = false;
-		while (!atacked && i <game.NUM_COLS) {
+		while (!atacked && i < game.NUM_COLS) {
 			GameItem item = game.getGameItemInPosition(i, row);
 			if(item != null ) {  
     		atacked = item.receivePlantAttack(this.getDamage());
@@ -104,6 +104,7 @@ public class Peashooter extends Plant {
 		Peashooter P = new Peashooter(game, col, row);
 		return P;
 	 }
+
 	
 	
 

@@ -6,6 +6,8 @@ import tp1.p2.view.Messages;
 
 public class ExplosiveZombie extends Zombie {
 
+	private static final int DAMAGE_EXPLOSION = 3;
+	
 	protected ExplosiveZombie (){
 		endurance = 5;
 	}
@@ -48,15 +50,14 @@ public class ExplosiveZombie extends Zombie {
 
 	@Override
 	public void update() {
+		
 		this.addCycle();
-		GameItem item = game.getGameItemInPosition(col - 1, row);
-		if(item != null && game.isFullyOcuppied(col-1, row)) {  
-    		item.receiveZombieAttack(this.getDamage());
+		if(!this.game.isFullyOcuppied(col-1, row) && this.canAvanzar()) {
+			this.avanzar();
 		}
-		else {
-			if(!this.game.isFullyOcuppied(col-1, row) && this.canAvanzar()) {
-				this.avanzar();
-			}
+		GameItem item = game.getGameItemInPosition(col - 1, row);
+		if(item != null) { // && game.isFullyOcuppied(col-1, row)) {  
+			item.receiveZombieAttack(this.getDamage());
 		}
 	}
 
@@ -69,7 +70,7 @@ public class ExplosiveZombie extends Zombie {
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub
-		
+		game.pushAction(col, row, DAMAGE_EXPLOSION);
 	}
 
 	@Override
@@ -96,6 +97,7 @@ public class ExplosiveZombie extends Zombie {
 		return 1;
 	}
 
+		
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -113,5 +115,7 @@ public class ExplosiveZombie extends Zombie {
 		this.col--;
 		
 	}
+
+	
 
 }

@@ -2,6 +2,7 @@ package tp1.p2.logic;
 
 import java.util.Random;
 
+import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.logic.gameobjects.Sun;
 import tp1.p2.logic.gameobjects.Zombie;
 import tp1.p2.logic.gameobjects.ZombieFactory;
@@ -55,9 +56,9 @@ public class SunsManager {
 		int fila = getRandomInt(GameWorld.NUM_ROWS);
 		Sun s = new Sun();
 		Sun sun = s.create(game, columna, fila);
-		if (game.addItem(sun, false)) {
-			generatedSuns = generatedSuns + 1;
-		}
+		game.addGameItem(sun);
+		generatedSuns = generatedSuns + 1;
+		
 	}
 
 	

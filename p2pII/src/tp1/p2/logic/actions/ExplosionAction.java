@@ -10,6 +10,7 @@ public class ExplosionAction implements GameAction {
 
 	private int damage;
 
+	
 	public ExplosionAction(int col, int row, int damage) {
 		this.col = col;
 		this.row = row;
@@ -18,7 +19,7 @@ public class ExplosionAction implements GameAction {
 
 	@Override
 	public void execute(GameWorld game) {
-		// TODO add your code here
+		game.explode(col, row, damage);
 	}
 
 	

@@ -36,7 +36,7 @@ public class NoneCommand extends Command {
 	public ExecutionResult execute(GameWorld game) {
 		// TODO add your code here
 		game.update();
-		game.removeDead();
+		//game.removeDead();
 		return new ExecutionResult(true);
 	}
 
