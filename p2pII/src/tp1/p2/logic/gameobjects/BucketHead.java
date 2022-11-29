@@ -6,34 +6,24 @@ import tp1.p2.view.Messages;
 
 public class BucketHead extends Zombie {
 	
+	private static final int INITIAL_ENDURANCE = 8;
+	private static final int SPEED = 4;
+	private static final int DAMAGE = 1;
+	
 	protected BucketHead (){
-		endurance = 8;
+		endurance = INITIAL_ENDURANCE;
 	}
 	
-	protected BucketHead (GameWorld game, int col, int row) {
+	private BucketHead (GameWorld game, int col, int row) {
 		super(game, col, row);
-		endurance = 8;
+		endurance = INITIAL_ENDURANCE;
 	}
 	
-	/*@Override
-	public boolean receiveZombieAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean receivePlantAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
 
 	@Override
 	public boolean catchObject() {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 
 	@Override
 	protected String getSymbol() {
@@ -42,70 +32,64 @@ public class BucketHead extends Zombie {
 
 	@Override
 	public String getDescription() {
-		return Messages.ZOMBIE_DESCRIPTION.formatted(Messages.BUCKET_HEAD_ZOMBIE_NAME,getSpeed(),getDamage(),getEndurance());
+		return Messages.ZOMBIE_DESCRIPTION.formatted(getName(),getSpeed(),getDamage(),INITIAL_ENDURANCE);
 	}
 
 	@Override
 	public void update() {
-		
 		this.addCycle();
 		if(!this.game.isFullyOcuppied(col-1, row) && this.canAvanzar()) {
 			this.avanzar();
 		}
 		GameItem item = game.getGameItemInPosition(col - 1, row);
-		if(item != null) { // && game.isFullyOcuppied(col-1, row)) {  
+		if(item != null) { 
 			item.receiveZombieAttack(this.getDamage());
 		}
 	}
 
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean fillPosition() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public int getSpeed() {
-		// TODO Auto-generated method stub
-		return 4;
+		return SPEED;
 	}
 
 	@Override
 	public int getEndurance() {
-		// TODO Auto-generated method stub
 		return endurance;
 	}
 
 	@Override
 	protected int getDamage() {
-		// TODO Auto-generated method stub
-		return 1;
+		return DAMAGE;
 	}
-	public String getName() {
-		// TODO Auto-generated method stub
+	
+	@Override
+	protected String getName() {
 		return Messages.BUCKET_HEAD_ZOMBIE_NAME;
 	}
 	
 	public BucketHead create(GameWorld game, int col, int row) {
 		BucketHead buckethead = new BucketHead(game, col, row);
 		return buckethead;
+		
 	}
 	@Override
 	protected void avanzar() {
 		this.col--;
-		
 	}
 
 	

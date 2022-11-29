@@ -129,8 +129,8 @@ public class Game implements GameStatus, GameWorld {
 	    this.actions.addLast(gameAction);
 	}
 	
-	public void pushAction(int col, int row, int damage) {
-		GameAction action = new ExplosionAction(col, row, damage);
+	public void pushAction(int col, int row, int damage, boolean affectsZombies) {
+		GameAction action = new ExplosionAction(col, row, damage, affectsZombies);
 		this.pushAction(action);
 	}
 	
@@ -294,12 +294,22 @@ public class Game implements GameStatus, GameWorld {
 	    	return this.zombiesManager.getZombiesAlived()==0;
 	 }
 	 
-	 public void explode(int col, int row, int damage) {
+	 public void explode(int col, int row, int damage, boolean affectsZombies) {
 		 for(int i = col-1; i <= col + 1; i++) {
 			 for(int j = row-1; j<= row +1;j=j+1) {
-				 if(i!= col || j!= row) {
-					 container.explode(i, j, damage);
-				 }
+
+					 GameItem item = this.getGameItemInPosition(i, j);
+					 
+					 if (item != null) {
+						 if (affectsZombies) {
+							 item.receivePlantAttack(damage);
+						 }
+						 else {
+							 item.receiveZombieAttack(damage);
+						 }
+					 }
+					 
+				 
 			 }
 		 }	    
 	     

@@ -12,7 +12,7 @@ public interface GameWorld {
 	public static final int NUM_COLS = 8;
 
 	// TODO add your code here
-	abstract void pushAction(int col, int row, int damage);
+	abstract void pushAction(int col, int row, int damage, boolean affectsZombies);
 	abstract void addSun();
 	abstract void addGameItem(GameObject object);
 	boolean tryToCatchObject(int col, int row);
@@ -28,7 +28,7 @@ public interface GameWorld {
 	abstract void reset(long seed, Level level);
 	abstract Level getLevel();
 	abstract long getSeed();
-	abstract void explode (int col, int row, int damage);
+	abstract void explode (int col, int row, int damage, boolean affectsZombies);
 }
 
 

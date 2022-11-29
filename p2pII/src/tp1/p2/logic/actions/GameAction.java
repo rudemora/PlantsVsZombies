@@ -4,5 +4,5 @@ import tp1.p2.logic.GameWorld;
 
 public interface GameAction {
 		
-	void execute(GameWorld game);
+	abstract void execute(GameWorld game);
 }

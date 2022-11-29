@@ -5,20 +5,24 @@ import tp1.p2.view.Messages;
 
 public class Sunflower extends Plant {
 	
+	private static final int INITIAL_ENDURANCE = 1;
+	private static final int DAMAGE = 0;
+	private static final int COST = 20;
+	
 	protected Sunflower() {
-		endurance = 1;
+		endurance = INITIAL_ENDURANCE;
 		ciclo = 0;
 	}
 	
-	protected Sunflower(GameWorld game, int col, int row) {
+	private Sunflower(GameWorld game, int col, int row) {
 		super(game, col, row);
-		endurance = 1;
+		endurance = INITIAL_ENDURANCE;
 		ciclo = 0;
 	}
 	
 	@Override
 	public int getCost() {
-		return 20;
+		return COST;
 	}
 	
 	@Override
@@ -28,24 +32,13 @@ public class Sunflower extends Plant {
 	
 	@Override 
 	public int getDamage() {
-		return 0;
+		return DAMAGE;
 	}
 	
-	/*@Override
-	public boolean receiveZombieAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean receivePlantAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
+	
 
 	@Override
 	public boolean catchObject() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -70,13 +63,11 @@ public class Sunflower extends Plant {
 
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -85,13 +76,14 @@ public class Sunflower extends Plant {
 		return true;
 	}
 	public String getName() {
-		// TODO Auto-generated method stub
 		return Messages.SUNFLOWER_NAME;
 	}
+	
 	public Sunflower create(GameWorld game, int col, int row) {
 		Sunflower sunflower = new Sunflower(game, col, row);
 		return sunflower;
 	 }
+	
 	private boolean addSoles() {
 		if (this.ciclo%4==0) {
 			this.ciclo = 1;

@@ -15,9 +15,10 @@ public class ResetCommand extends Command {
 	private long seed;
 
 	public ResetCommand() {
+		
 	}
 
-	public ResetCommand(Level level, long seed) {
+	private ResetCommand(Level level, long seed) {
 		this.level = level;
 		this.seed = seed;
 	}
@@ -53,7 +54,7 @@ public class ResetCommand extends Command {
 	}
 
 	@Override
-	public Command create(String[] parameters) {
+	protected Command create(String[] parameters) {
 		try {
 			if(parameters.length==3) {
 				Level level = Level.valueOfIgnoreCase(parameters[1]);
@@ -75,8 +76,6 @@ public class ResetCommand extends Command {
 			System.out.println(error(Messages.INVALID_COMMAND));
 			return null;
 		}
-					
-		
 	}
 		
 	

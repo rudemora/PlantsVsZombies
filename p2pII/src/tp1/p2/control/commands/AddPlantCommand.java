@@ -18,22 +18,13 @@ public class AddPlantCommand extends Command implements Cloneable {
 	
 	private String plantName;
 
-	private boolean consumeCoins;//NO ENTIENDO PARA QUÉ SE NECESITA
-
-	/*public AddPlantCommand() {
-		this(true);
-	}*/
-
-	/*public AddPlantCommand(boolean consumeCoins) {
-		this.consumeCoins = consumeCoins;
-	}*/ //ESTE es el que nos dan , pero no lo entiendo
+	private static final boolean consumeCoins = true;
 	
 	public AddPlantCommand() {
 		
 	}
 	
-	public AddPlantCommand(int columna, int fila, String name) {
-	    this.consumeCoins=true;
+	private AddPlantCommand(int columna, int fila, String name) {
 		this.col=columna;
 		this.row= fila;
 		this.plantName=name;
@@ -63,14 +54,11 @@ public class AddPlantCommand extends Command implements Cloneable {
 
 	@Override
 	public ExecutionResult execute(GameWorld game) {
-		// TODO add your code here
-		
-		try {
-			Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
+		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
+		if (plant != null) {
 			if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
-				if(game.addItem(plant, this.consumeCoins)) {
+				if(game.addItem(plant, consumeCoins)) {
 				game.update(); 
-				//game.removeDead();
 				return new ExecutionResult(true);
 				}	
 			}
@@ -80,8 +68,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 			
 			return new ExecutionResult(false);
 		}
-		catch (Exception e) {
-			
+		else {
 			System.out.println(error(Messages.INVALID_GAME_OBJECT));
 			return new ExecutionResult(false);
 		}
@@ -91,8 +78,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 	}
 
 	@Override
-	public Command create(String[] parameters) {
-		// TODO add your code here
+	protected Command create(String[] parameters) {
 		try {
 			if(parameters.length == 4) {
 				String name = parameters[1];

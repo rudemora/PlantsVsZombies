@@ -4,19 +4,23 @@ import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
 public class WallNut extends Plant {
-
+	
+	private static final int INITIAL_ENDURANCE = 10;
+	private static final int DAMAGE = 0;
+	private static final int COST = 50;
+	
 	protected WallNut (){
-		endurance = 10;
+		endurance = INITIAL_ENDURANCE;
 	}
 	
-	protected WallNut(GameWorld game, int col, int row) {
+	private WallNut(GameWorld game, int col, int row) {
 		super(game, col, row);
-		endurance = 10;
+		endurance = INITIAL_ENDURANCE;
 	}
 	
 	@Override
 	public int getCost() {
-		return 50;
+		return COST;
 	}
 	
 	@Override
@@ -26,24 +30,11 @@ public class WallNut extends Plant {
 	
 	@Override 
 	public int getDamage() {
-		return 0;
+		return DAMAGE;
 	}
 	
-	/*@Override
-	public boolean receiveZombieAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean receivePlantAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
-
 	@Override
 	public boolean catchObject() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -62,30 +53,25 @@ public class WallNut extends Plant {
 	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean fillPosition() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	
 	public String getName() {
-		// TODO Auto-generated method stub
 		return Messages.WALL_NUT_NAME;
 	}
 	

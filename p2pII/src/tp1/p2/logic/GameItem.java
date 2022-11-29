@@ -40,6 +40,5 @@ public interface GameItem {
 	 */
 	boolean fillPosition();
 	
-	boolean receiveExplosion(int damage);
 
 }

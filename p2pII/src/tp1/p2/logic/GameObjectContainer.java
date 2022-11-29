@@ -113,13 +113,7 @@ public class GameObjectContainer {
 		return buffer.toString();
 	}
 	
-	public void explode(int col, int row, int damage) {
-		for(int i =0;i<gameObjects.size();i=i+1) {
-			if (gameObjects.get(i).isInPosition(col,  row) && gameObjects.get(i).isAlive()) {
-				gameObjects.get(i).receiveExplosion(damage);
-			}
-		}
-	}
+
 	
 	public int tryToCatchObject(int col, int row) {
 		int num = 0;

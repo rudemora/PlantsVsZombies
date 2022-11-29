@@ -1,35 +1,27 @@
-package tp1.p2.logic.gameobjects;
+ package tp1.p2.logic.gameobjects;
 
-import tp1.p2.logic.GameItem;//Importado por mi
+import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
 public class Peashooter extends Plant {
+	private static final int INITIAL_ENDURANCE = 3;
+	private static final int COST = 50;
+	private static final int DAMAGE = 1;
 	
 	protected Peashooter (){
-		endurance = 3;
+		endurance = INITIAL_ENDURANCE;
 	}
 	
-	protected Peashooter(GameWorld game, int col, int row) {
+	private Peashooter(GameWorld game, int col, int row) {
 		super(game, col, row);
-		endurance = 3;
+		endurance = INITIAL_ENDURANCE;
 	}
 	
-	/*@Override
-	public boolean receiveZombieAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean receivePlantAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
+	
 
 	@Override
 	public boolean catchObject() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -50,7 +42,7 @@ public class Peashooter extends Plant {
 		this.addCycle();
 		int i = col + 1;
 		boolean atacked = false;
-		while (!atacked && i < game.NUM_COLS) {
+		while (!atacked && i < GameWorld.NUM_COLS) {
 			GameItem item = game.getGameItemInPosition(i, row);
 			if(item != null ) {  
     		atacked = item.receivePlantAttack(this.getDamage());
@@ -60,23 +52,19 @@ public class Peashooter extends Plant {
 		
 	}
 		
-	
-
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
 	public int getCost() {
-		return 50;
+		return COST;
 	}
 	
 	@Override
@@ -86,26 +74,22 @@ public class Peashooter extends Plant {
 	
 	@Override
 	public int getDamage() {
-		return 1;
+		return DAMAGE;
 	}
 	
 	@Override
 	public boolean fillPosition() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return Messages.PEASHOOTER_NAME;
 	}
+	
 	public Peashooter create(GameWorld game, int col, int row) {
 		Peashooter P = new Peashooter(game, col, row);
 		return P;
 	 }
-
-	
-	
 
 }

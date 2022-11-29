@@ -10,16 +10,18 @@ public class ExplosionAction implements GameAction {
 
 	private int damage;
 
+	private boolean affectsZombies;
 	
-	public ExplosionAction(int col, int row, int damage) {
+	public ExplosionAction(int col, int row, int damage, boolean affectsZombies) {
 		this.col = col;
 		this.row = row;
 		this.damage = damage;
+		this.affectsZombies = affectsZombies;
 	}
 
 	@Override
 	public void execute(GameWorld game) {
-		game.explode(col, row, damage);
+		game.explode(col, row, damage, affectsZombies);
 	}
 
 	

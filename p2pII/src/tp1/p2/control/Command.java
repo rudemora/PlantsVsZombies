@@ -45,7 +45,6 @@ public abstract class Command {
 
 	public static Command parse(String[] commandWords) {
 		if (commandWords.length == 1 && commandWords[0].isEmpty()) {
-			// TODO add your code here
 			return defaultCommand;
 		}
 
@@ -69,13 +68,17 @@ public abstract class Command {
 		}
 	}
 
-	public Command() {
+
+	public Command() { // REPASAR ESTO
 		this(false);
 	}
 
 	public Command(boolean isDefault) {
 		if (isDefault) {
 			// TODO add your code here
+		}
+		else {
+
 		}
 	}
 
@@ -107,11 +110,7 @@ public abstract class Command {
 	 */
 	public abstract ExecutionResult execute(GameWorld game);
 
-	public Command create(String[] parameters) {
-		/*if (parameters.length != 0) {
-			System.out.println(error(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER));
-			return null;
-		}*/
+	protected Command create(String[] parameters) {
 		return this;
 	}
 
@@ -119,5 +118,6 @@ public abstract class Command {
 	 * Notifies the {@link Command} that a new cycle has started.
 	 */
 	protected void newCycleStarted() {
+		
 	}
 }

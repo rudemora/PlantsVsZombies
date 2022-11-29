@@ -12,13 +12,8 @@ import tp1.p2.logic.GameWorld;
 public abstract class GameObject implements GameItem {
 
 	protected GameWorld game;
-
 	protected int col;
-
 	protected int row;
-
-
-	
 	protected int endurance;
 	protected int ciclo;
 	
@@ -83,7 +78,7 @@ public abstract class GameObject implements GameItem {
 	
 	abstract public void onExit();
 	
-	abstract public String getName();
+	abstract protected String getName();
 	
 	public boolean canAdd() {
 		if(game.isFullyOcuppied(this.col, this.row) ) {
@@ -100,7 +95,6 @@ public abstract class GameObject implements GameItem {
 		this.ciclo = this.ciclo +1;
 	}
 	
-	
 	public boolean winner() {
 		if (this.col <= -1) {
 			return true;
@@ -113,8 +107,5 @@ public abstract class GameObject implements GameItem {
 	abstract public boolean fillPosition();
 	
 	
-	public boolean receiveExplosion(int damage) {
-		this.endurance = this.endurance - damage;
-		return true;
-	}
+	
 }

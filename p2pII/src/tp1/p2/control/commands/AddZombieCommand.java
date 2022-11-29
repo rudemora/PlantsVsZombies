@@ -6,8 +6,6 @@ import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
 import tp1.p2.logic.Game;
 import tp1.p2.logic.GameWorld;
-import tp1.p2.logic.gameobjects.Plant;
-import tp1.p2.logic.gameobjects.PlantFactory;
 import tp1.p2.logic.gameobjects.Zombie;
 import tp1.p2.logic.gameobjects.ZombieFactory;
 import tp1.p2.view.Messages;
@@ -20,6 +18,9 @@ public class AddZombieCommand extends Command {
 
 	private int row;
 
+	private static final boolean consumeCoins = false;
+
+	
 	public AddZombieCommand() {
 
 	}
@@ -53,26 +54,29 @@ public class AddZombieCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		Zombie zombie = ZombieFactory.spawnZombie(this.zombieIdx, game, this.col, this.row);
-		if (col>= 0 && col <= Game.NUM_COLS && row>= 0 && row <= Game.NUM_ROWS) {
-			if(game.addItem(zombie, false)) {
-				game.update(); 
-				return new ExecutionResult(true);
-			}	
-			else {
-				game.update(); 
-				return new ExecutionResult(true);
+		if (zombie != null) {
+			if (col>= 0 && col <= Game.NUM_COLS && row>= 0 && row <= Game.NUM_ROWS) {
+				game.addItem(zombie, consumeCoins);
+				game.update();
+				return new ExecutionResult(true);				
 			}
-			
+			else {
+				System.out.print(error(Messages.INVALID_POSITION));
+				return new ExecutionResult(false);
+			}
 		}
 		else {
-			System.out.print(error(Messages.INVALID_POSITION));
+			System.out.print(error(Messages.INVALID_GAME_OBJECT));
+			return new ExecutionResult(false);
 		}
-		return new ExecutionResult(false);
+		
+		
+		
 	}
 	
 	
 	@Override
-	public Command create(String[] parameters) {
+	protected Command create(String[] parameters) {
 		if(parameters.length == 4) {
 			int type = Integer.parseInt(parameters[1]);
 			int col = Integer.parseInt(parameters[2]);

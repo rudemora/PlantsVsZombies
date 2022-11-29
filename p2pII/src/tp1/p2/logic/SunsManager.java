@@ -2,10 +2,9 @@ package tp1.p2.logic;
 
 import java.util.Random;
 
-import tp1.p2.logic.gameobjects.GameObject;
+
 import tp1.p2.logic.gameobjects.Sun;
-import tp1.p2.logic.gameobjects.Zombie;
-import tp1.p2.logic.gameobjects.ZombieFactory;
+
 
 public class SunsManager {
 
@@ -26,9 +25,6 @@ public class SunsManager {
 		this.rand = rand;
 		this.cooldown = COOLDOWN_RANDOM_SUN;
 		this.generatedSuns = 0;
-		
-		
-		// TODO add your code here
 	}
 
 	

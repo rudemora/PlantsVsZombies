@@ -5,14 +5,16 @@ import tp1.p2.view.Messages;
 
 public class CherryBomb extends Plant {
 	
-	public static final int INITIAL_ENDURANCE = 2;
+	private static final int INITIAL_ENDURANCE = 2;
+	private static final int DAMAGE = 10;
+	private static final int COST = 50;
 
 	protected CherryBomb() {
 		endurance = INITIAL_ENDURANCE;
 		ciclo = 2;
 	}
 	
-	protected CherryBomb(GameWorld game, int col, int row) {
+	private CherryBomb(GameWorld game, int col, int row) {
 		super(game, col, row);
 		endurance =  INITIAL_ENDURANCE;
 		ciclo = 2;
@@ -20,7 +22,7 @@ public class CherryBomb extends Plant {
 	
 	@Override
 	public int getCost() {
-		return 50;
+		return COST;
 	}
 	
 	
@@ -31,24 +33,11 @@ public class CherryBomb extends Plant {
 	
 	@Override 
 	public int getDamage() {
-		return 10;
+		return DAMAGE;
 	}
 	
-	/*@Override
-	public boolean receiveZombieAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean receivePlantAttack(int damage) {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
-
 	@Override
 	public boolean catchObject() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -70,38 +59,34 @@ public class CherryBomb extends Plant {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		if (ciclo > 0) {
 			ciclo--;
 		}
 		else if (ciclo == 0) {
-			game.pushAction(col, row, getDamage());
+			game.pushAction(col, row, getDamage(), true);
 			endurance = 0;
 		}
 	}
 
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
-		//game.pushAction(col, row, getDamage());
+		
 	}
 
 	@Override
 	public boolean fillPosition() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	
 	public String getName() {
-		// TODO Auto-generated method stub
 		return Messages.CHERRY_BOMB_NAME;
 	}
+	
 	public CherryBomb create(GameWorld game, int col, int row) {
 		CherryBomb cherrybomb = new CherryBomb(game, col, row);
 		return cherrybomb;

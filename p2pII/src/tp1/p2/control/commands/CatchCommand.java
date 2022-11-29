@@ -52,22 +52,25 @@ public class CatchCommand extends Command {
 
 	@Override
 	public ExecutionResult execute(GameWorld game) {
-		// TODO add your code here
 		if (!caughtSunThisCycle) {
 			if(game.tryToCatchObject(col, row)) {
 				caughtSunThisCycle= true;
+				return new ExecutionResult(true);
+			}
+			else {
+				System.out.println(error(Messages.INVALID_POSITION));
+				return new ExecutionResult(false);
 			}
 		}
 		else {
 			System.out.println(error(Messages.SUN_ALREADY_CAUGHT));
 			return new ExecutionResult(false);
 		}
-		return new ExecutionResult(true);
+		
 	}
 
 	@Override
-	public Command create(String[] parameters) {
-		// TODO add your code here
+	protected Command create(String[] parameters) {
 		if (parameters.length == 3) {
 			try {
 				int col = Integer.parseInt(parameters[1]);

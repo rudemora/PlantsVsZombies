@@ -39,6 +39,5 @@ public class ZombieFactory {
 	/*
 	 * Avoid creating instances of this class
 	 */
-	private ZombieFactory() {
-	}
+	
 }

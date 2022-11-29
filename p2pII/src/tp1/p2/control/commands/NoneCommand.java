@@ -8,7 +8,6 @@ import tp1.p2.view.Messages;
 public class NoneCommand extends Command {
 
 	public NoneCommand() {
-		// default command
 		super(true);
 	}
 
@@ -34,9 +33,7 @@ public class NoneCommand extends Command {
 
 	@Override
 	public ExecutionResult execute(GameWorld game) {
-		// TODO add your code here
 		game.update();
-		//game.removeDead();
 		return new ExecutionResult(true);
 	}
 

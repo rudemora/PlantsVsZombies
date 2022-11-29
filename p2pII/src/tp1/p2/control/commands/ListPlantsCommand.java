@@ -31,11 +31,8 @@ public class ListPlantsCommand extends Command {
 		System.out.println(Messages.AVAILABLE_PLANTS);
 		for(Plant p: PlantFactory.getAvailablePlants()) {
 			System.out.println(p.getDescription());
-		}
-		// TODO add your code here
-		
+		}		
 		System.out.println();
-
 		return new ExecutionResult(false);
 	}
 
