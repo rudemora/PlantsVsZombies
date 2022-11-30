@@ -10,6 +10,7 @@ public class Sun extends GameObject {
 	// Remember that a Sun is updated the very same cycle is added to the container
 	private static final int SUN_COOLDOWN = 10+1;
 	private static final int DAMAGE = 0;
+	private static final int COINS = 10;
 	
 	public Sun() {
 		endurance = SUN_COOLDOWN;
@@ -24,7 +25,7 @@ public class Sun extends GameObject {
 	@Override
 	public boolean catchObject() {
 		if (endurance > 0) {
-			this.onExit();
+			endurance = 0;
 			return true;
 		}
 		return false;
@@ -60,11 +61,13 @@ public class Sun extends GameObject {
 	
 	@Override
 	public void onEnter() {
-		
+		game.addGeneratedSuns();
 	}
+	
 	@Override
 	public void onExit() {
-		endurance = 0;
+		game.addCaughtSuns();
+		game.addSuncoins(COINS);
 	}
 	
 	@Override

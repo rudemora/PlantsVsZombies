@@ -52,7 +52,7 @@ public class ZombiesManager {
 		return rand.nextInt(ZombieFactory.getAvailableZombies().size());
 	}
 
-	public void update() {
+	protected void update() {
 		addZombie();
 	}
 
@@ -61,41 +61,35 @@ public class ZombiesManager {
 		return addZombie(row);
 	}
 
-	public boolean addZombie(int row) {
+	private boolean addZombie(int row) {
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && !game.isFullyOcuppied(GameWorld.NUM_COLS, row);
 		int zombieType = randomZombieType();
 		if (canAdd) {
-			// TODO add your code here
 			Zombie z = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
 			Zombie zombie = z.create(game, GameWorld.NUM_COLS, row);
 			game.addItem(zombie, true);
 			remainingZombies --;
-			zombiesAlived += 1;	
-
 		}
 		return canAdd;
 	}
 
-	public int getRemainingZombies() {
+	protected int getRemainingZombies() {
 		return this.remainingZombies;
 	}
 	
-	public int getZombiesAlived() {
+	protected int getZombiesAlived() {
 		return this.zombiesAlived;
 	}
 
+	protected void decreaseZombiesAlived() {
+		this.zombiesAlived--;
+	}
 	
+	protected void addZombiesAlived() {
+		this.zombiesAlived += 1;	
+	}
 
 	protected boolean zombiesDead() {
 		return zombiesAlived == 0;
 	}
-	
-	protected void matarZombie() {
-		zombiesAlived--;
-	}
-	
-	
-
-	// TODO add your code here
-
 }

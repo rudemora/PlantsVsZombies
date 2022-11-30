@@ -50,12 +50,12 @@ public class Sporty extends Zombie {
 
 	@Override
 	public void onEnter() {
-		
+		game.addZombiesAlived();
 	}
 
 	@Override
 	public void onExit() {
-		
+		game.decreaseZombiesAlived();
 	}
 
 	@Override

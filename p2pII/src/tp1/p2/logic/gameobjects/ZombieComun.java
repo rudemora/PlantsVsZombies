@@ -44,19 +44,19 @@ public class ZombieComun extends Zombie {
 			this.avanzar();
 		}
 		GameItem item = game.getGameItemInPosition(col - 1, row);
-		if(item != null) { // && game.isFullyOcuppied(col-1, row)) {  
+		if(item != null) {
 			item.receiveZombieAttack(this.getDamage());
 		}
 	}
 
 	@Override
 	public void onEnter() {
-		
+		game.addZombiesAlived();
 	}
 
 	@Override
 	public void onExit() {
-		
+		game.decreaseZombiesAlived();
 	}
 
 	@Override

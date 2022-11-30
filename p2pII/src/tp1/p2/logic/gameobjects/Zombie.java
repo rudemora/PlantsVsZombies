@@ -30,9 +30,6 @@ public abstract class Zombie extends GameObject {
 	
 	public boolean receivePlantAttack(int damage) {
 		this.endurance= this.endurance - damage;
-		if (endurance <= 0) {
-			game.matarZombie();
-		}
 		return true;
 	}
 	

@@ -53,13 +53,15 @@ public class ExplosiveZombie extends Zombie {
 
 	@Override
 	public void onEnter() {
-		
+		game.addZombiesAlived();
 	}
 
 	@Override
 	public void onExit() {
 		game.pushAction(col, row, DAMAGE_EXPLOSION, false);
+		game.decreaseZombiesAlived();
 	}
+
 
 	@Override
 	public boolean fillPosition() {

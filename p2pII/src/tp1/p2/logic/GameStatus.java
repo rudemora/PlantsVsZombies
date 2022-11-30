@@ -47,6 +47,4 @@ public interface GameStatus {
 	 */
 	int getCaughtSuns();
 
-	// TODO add your code here
-
 }

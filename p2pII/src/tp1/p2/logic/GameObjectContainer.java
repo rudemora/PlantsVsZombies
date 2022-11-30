@@ -14,9 +14,7 @@ public class GameObjectContainer {
 		gameObjects = new ArrayList<>();
 	}
 
-	
-
-	public boolean removeDead() {
+	boolean removeDead() {
 		
 		boolean ok=false;
 		for(int i =0;i<this.gameObjects.size();i=i+1) {
@@ -29,23 +27,18 @@ public class GameObjectContainer {
 		return ok;
 	}
 
-	public void update() {//Falta pensar qué hacer con la ñapa
-		// Can't use for-each loop (for(GameObject g : gameObjexts)) without errors.
+	protected void update() {
 		for(int i = 0; i < gameObjects.size(); i++) {
 			GameObject g = gameObjects.get(i);
-			
 			if(g.isAlive()) {
 				g.update();
-				
-
 			}
 		}
 	}
 
-	public boolean isFullyOccupied(int col, int row) {
+	protected boolean isFullyOccupied(int col, int row) {
 		int i=0;
 		boolean fullyOcuppied = false;
-
 		while (i<gameObjects.size() && !fullyOcuppied) {
 			GameObject g = gameObjects.get(i);
 			if (g.isAlive() && g.isInPosition(col, row)) {
@@ -75,7 +68,6 @@ public class GameObjectContainer {
 		}
 		return null;
 	}
-	// TODO add your code here
 	
 	protected void addObject(GameObject object) {
 		gameObjects.add(object);
@@ -90,7 +82,7 @@ public class GameObjectContainer {
 		return false;
 	}
 	
-	public String positionToString(int col, int row) {
+	protected String positionToString(int col, int row) {
 		StringBuilder buffer = new StringBuilder();
 		boolean sunPainted = false;
 		boolean sunAboutToPaint = false;
@@ -115,14 +107,13 @@ public class GameObjectContainer {
 	
 
 	
-	public int tryToCatchObject(int col, int row) {
-		int num = 0;
+	protected boolean tryToCatchObject(int col, int row) {
 		for(GameObject g : gameObjects) {
 			if(g.isInPosition(col, row) && g.catchObject()) {
-				num++;
+				return true;
 			}
 		}
-		return num;
+		return false;
 	}
 	
 }

@@ -4,22 +4,20 @@ import static tp1.p2.view.Messages.error;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.List;
+import java.util.List; // es necesario?
 import java.util.Random;
 
 import tp1.p2.control.Command;
-import tp1.p2.control.ExecutionResult;
+import tp1.p2.control.ExecutionResult; // por qué aquí?
 import tp1.p2.control.Level;
-import tp1.p2.logic.actions.ExplosionAction; //importado por nosotros
+import tp1.p2.logic.actions.ExplosionAction; //importado por nosotros, se hace realmente así?
 import tp1.p2.logic.actions.GameAction;
-import tp1.p2.logic.GameItem; //importado por nosotros
 import tp1.p2.logic.gameobjects.GameObject;
-import tp1.p2.logic.gameobjects.Sun;
 import tp1.p2.view.Messages;
 
 public class Game implements GameStatus, GameWorld {
 
-	private static final int INITIAL_SUNCOINS = 50; // HACER LO MISMO CON ENDURANCE (PONER UNA INICIAL) Y CON VIDA(LA QUE CAMBIE)
+	private static final int INITIAL_SUNCOINS = 50; 
 	private static final int INITIAL_CYCLE = 0;
 	private long seed;
 
@@ -41,7 +39,6 @@ public class Game implements GameStatus, GameWorld {
 	
 	private int caughtSuns;
 
-	
 	private int sunCoins;
 	
 	public Game(long seed, Level level) {
@@ -55,13 +52,10 @@ public class Game implements GameStatus, GameWorld {
 	 * @param level {@link Level} Used to initialize the game.
 	 * @param seed Random seed Used to initialize the game.
 	 */
-	//@Override
 	public void reset( long seed ,Level level) {
-		// TODO add your code here
 		this.seed = seed;
 		this.level = level;
-		container = new GameObjectContainer(); // PREGUNTAR POR QUÉ NO TIENE QUE ESTAR AQUÍ Y ESTABA EN EL CONSTRUCTOR DE GAME
-		//System.out.println(container.getSize());
+		container = new GameObjectContainer(); 
 		cycle = INITIAL_CYCLE;
 		playerQuits = false;
 		this.actions = new ArrayDeque<>();
@@ -89,7 +83,7 @@ public class Game implements GameStatus, GameWorld {
 	 * Executes the game actions and update the game objects in the board.
 	 * 
 	 */
-	@Override
+	
 	public void update() {
 
 		// 1. Execute pending actions
@@ -125,11 +119,11 @@ public class Game implements GameStatus, GameWorld {
 		}
 	}
 
-	public void pushAction(GameAction gameAction) {
+	private void pushAction(GameAction gameAction) {
 	    this.actions.addLast(gameAction);
 	}
 	
-	public void pushAction(int col, int row, int damage, boolean affectsZombies) {
+	public void pushAction(int col, int row, int damage, boolean affectsZombies) { // mejor hacerlo así o en los objetos que explotan? en cherry-bomb y en explosive>ombie
 		GameAction action = new ExplosionAction(col, row, damage, affectsZombies);
 		this.pushAction(action);
 	}
@@ -147,12 +141,9 @@ public class Game implements GameStatus, GameWorld {
 	 * @return <code>true</code> if the cell is fully occupied, <code>false</code>
 	 *         otherwise.
 	 */
-	@Override
 	public boolean isFullyOcuppied(int col, int row) {
 		return this.container.isFullyOccupied(col, row);
 	}
-	
-	
 	
 	public boolean execute (Command command) {
     	return command.execute(this).draw();
@@ -176,11 +167,7 @@ public class Game implements GameStatus, GameWorld {
 		return playerQuits;
 	}
 
-
-	
-
-	
-	public boolean addItem(GameObject gameObject, boolean consumeCoins) {//Este consumeCoins se lo he metido yo
+	public boolean addItem(GameObject gameObject, boolean consumeCoins) {
 		if(gameObject.canAdd()) {
 			if (consumeCoins && this.consumeCoins(gameObject) || !consumeCoins) {
 				this.addGameItem(gameObject);
@@ -196,35 +183,32 @@ public class Game implements GameStatus, GameWorld {
     	}
 	}
 	
-	@Override
-	public int getCaughtSuns() {
+	
+	public int getCaughtSuns() {//PENDIENTE DE CAMBIO
 		return caughtSuns;
 	}
 	
-	@Override
+	
 	public int getCycle() {
-		// TODO Auto-generated method stub
 		return cycle;
 	}
 
-	@Override
+	
 	public int getSuncoins() {
-		// TODO Auto-generated method stub
 		return sunCoins;
 	}
 
-	@Override
+	
 	public int getRemainingZombies() {
 		return  this.zombiesManager.getRemainingZombies();
 	}
 
-	@Override
+	
 	public String positionToString(int col, int row) {
 	StringBuilder str = new StringBuilder();
 		if(!container.isPositionEmpty(col, row)) {
 			str.append(container.positionToString(col,row));
 		}
-		
 		return str.toString();
 	}
 	
@@ -232,22 +216,22 @@ public class Game implements GameStatus, GameWorld {
     	return container.getGameItemInPosition(col, row);
     }
 	
-	@Override
-	public int getGeneratedSuns() {
+	
+	public int getGeneratedSuns() {//PENDIENTE DE CAMBIO
 		return this.sunsManager.getGeneratedSuns();
 	}
 
 
-	@Override
+	
 	public void playerQuits() {
 		playerQuits = true;
 		
 	}
 	
-	// TODO add your code here
 	public boolean isPositionEmpty(int x, int y) {
     	return container.isPositionEmpty(x, y);
     }
+	
 	private boolean consumeCoins(GameObject object) {
     	int coste = object.getCost();
     	if(coste <= this.sunCoins) {
@@ -257,16 +241,13 @@ public class Game implements GameStatus, GameWorld {
     	return false;
     }
 	
-	@Override
+	
 	public void addGameItem(GameObject object) {
+		object.onEnter();
     	container.addObject(object);
     }
 	
-	 public void matarZombie() {
-		 zombiesManager.matarZombie();
-	 }
-	 
-	 public void addSuncoins(int coins) {
+	public void addSuncoins(int coins) {
 	    	sunCoins = sunCoins + coins;
 	 }
 	 
@@ -274,13 +255,10 @@ public class Game implements GameStatus, GameWorld {
 		 sunsManager.addSun();
 	 }
 	 
-	 @Override
-		public boolean tryToCatchObject(int col, int row) {
+	 
+	public boolean tryToCatchObject(int col, int row) {
 			if (!container.isPositionEmpty(col, row)) {
-				int num = container.tryToCatchObject(col, row);
-				int soles = num * 10;
-				addSuncoins(soles);
-				caughtSuns += num;
+				container.tryToCatchObject(col, row);
 				return true;
 			}
 			
@@ -297,9 +275,7 @@ public class Game implements GameStatus, GameWorld {
 	 public void explode(int col, int row, int damage, boolean affectsZombies) {
 		 for(int i = col-1; i <= col + 1; i++) {
 			 for(int j = row-1; j<= row +1;j=j+1) {
-
 					 GameItem item = this.getGameItemInPosition(i, j);
-					 
 					 if (item != null) {
 						 if (affectsZombies) {
 							 item.receivePlantAttack(damage);
@@ -308,11 +284,29 @@ public class Game implements GameStatus, GameWorld {
 							 item.receiveZombieAttack(damage);
 						 }
 					 }
-					 
-				 
 			 }
 		 }	    
-	     
 	 }
+
+
 	
+	public void addZombiesAlived() {
+		zombiesManager.addZombiesAlived();
+	}
+
+	public void removeDead() {
+		this.container.removeDead();
+	}
+	
+	public void decreaseZombiesAlived() {
+		zombiesManager.decreaseZombiesAlived();
+	}
+	
+	public void addGeneratedSuns() {
+		sunsManager.addGeneratedSuns();
+	}
+	
+	public void addCaughtSuns() {
+		caughtSuns++;
+	}
 }

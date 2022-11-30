@@ -49,12 +49,12 @@ public class BucketHead extends Zombie {
 
 	@Override
 	public void onEnter() {
-
+		game.addZombiesAlived();
 	}
 
 	@Override
 	public void onExit() {
-		
+		game.decreaseZombiesAlived();
 	}
 
 	@Override
