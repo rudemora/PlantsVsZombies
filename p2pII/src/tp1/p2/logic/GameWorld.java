@@ -1,6 +1,7 @@
 package tp1.p2.logic;
 
 
+import tp1.p2.logic.actions.GameAction;
 import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.control.Level;
 
@@ -10,12 +11,13 @@ public interface GameWorld {
 
 	public static final int NUM_COLS = 8;
 
-	void pushAction(int col, int row, int damage, boolean affectsZombies);
+	void pushAction(GameAction gameAction);
+	boolean consumeCoins(GameObject object, int coste);
 	void addSun();
 	void addGameItem(GameObject object);
 	boolean tryToCatchObject(int col, int row);
 	int getCaughtSuns();
-	boolean addItem(GameObject gameObject, boolean consumeCoins);
+	boolean addItem(GameObject gameObject);
 	GameItem getGameItemInPosition(int x, int y);
 	void addSuncoins(int Coins);
 	void playerQuits();
@@ -31,6 +33,7 @@ public interface GameWorld {
 	void addGeneratedSuns();
 	void addCaughtSuns();
 	void removeDead();
+	void finishGame();
 }
 
 

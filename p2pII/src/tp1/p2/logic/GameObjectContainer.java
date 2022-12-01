@@ -69,10 +69,22 @@ public class GameObjectContainer {
 		return null;
 	}
 	
-	protected void addObject(GameObject object) {
-		gameObjects.add(object);
+	protected boolean tryToCatchObject(int col, int row) {
+		if (!this.isPositionEmpty(col, row)) {
+			for(GameObject g : gameObjects) {
+				if(g.isInPosition(col, row) && g.catchObject()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
+	protected void addObject(GameObject object) {
+		gameObjects.add(object);
+		object.onEnter();
+	}
+	/*
 	protected boolean zombiesGana() {
 		for(int i =0;i<gameObjects.size();i=i+1) {
 			if (gameObjects.get(i).winner()) { 
@@ -80,7 +92,7 @@ public class GameObjectContainer {
 			}
 		}
 		return false;
-	}
+	}*/
 	
 	protected String positionToString(int col, int row) {
 		StringBuilder buffer = new StringBuilder();
@@ -103,17 +115,6 @@ public class GameObjectContainer {
 		}
 
 		return buffer.toString();
-	}
-	
-
-	
-	protected boolean tryToCatchObject(int col, int row) {
-		for(GameObject g : gameObjects) {
-			if(g.isInPosition(col, row) && g.catchObject()) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 }

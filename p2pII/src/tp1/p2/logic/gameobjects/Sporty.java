@@ -83,6 +83,7 @@ public class Sporty extends Zombie {
 		return Messages.SPORTY_ZOMBIE_NAME;
 	}
 
+	@Override
 	public Sporty create(GameWorld game, int col, int row) {
 		Sporty sporty = new Sporty(game, col, row);
 		return sporty;

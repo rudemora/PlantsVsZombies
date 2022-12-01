@@ -84,7 +84,7 @@ public class ZombieComun extends Zombie {
 		return Messages.ZOMBIE_NAME;
 	}
 	
-	
+	@Override
 	public ZombieComun create(GameWorld game, int col, int row) {
 		ZombieComun zombieComun = new ZombieComun(game, col, row);
 		return zombieComun;

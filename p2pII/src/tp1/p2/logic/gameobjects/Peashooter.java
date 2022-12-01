@@ -87,6 +87,7 @@ public class Peashooter extends Plant {
 		return Messages.PEASHOOTER_NAME;
 	}
 	
+	@Override
 	public Peashooter create(GameWorld game, int col, int row) {
 		Peashooter P = new Peashooter(game, col, row);
 		return P;

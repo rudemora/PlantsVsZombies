@@ -57,7 +57,7 @@ public class Sunflower extends Plant {
 	public void update() {
 		this.addCycle();
 		if (addSoles()) {
-			this.game.addSun();
+			game.addSun();
 		}		
 	}
 
@@ -75,14 +75,18 @@ public class Sunflower extends Plant {
 	public boolean fillPosition() {
 		return true;
 	}
+	
+	@Override
 	public String getName() {
 		return Messages.SUNFLOWER_NAME;
 	}
 	
+	@Override
 	public Sunflower create(GameWorld game, int col, int row) {
 		Sunflower sunflower = new Sunflower(game, col, row);
 		return sunflower;
 	 }
+	
 	
 	private boolean addSoles() {
 		if (this.ciclo%4==0) {

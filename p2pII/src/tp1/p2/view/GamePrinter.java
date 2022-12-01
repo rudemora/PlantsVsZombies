@@ -95,6 +95,18 @@ public class GamePrinter {
 	 *         finished.
 	 */
 	public String endMessage() {
+		if(game.isPlayerQuits()) {
+			System.out.print(Messages.PLAYER_QUITS);
+			
+		}
+		else {
+			if (game.jugadorGanador()) {
+				System.out.print(Messages.PLAYER_WINS);
+			}
+			else {
+				System.out.print(Messages.ZOMBIES_WIN);
+			}
+		}
 		return Messages.GAME_OVER;
 	}
 }

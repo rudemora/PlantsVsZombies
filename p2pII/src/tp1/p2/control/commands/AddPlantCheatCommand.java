@@ -14,7 +14,6 @@ public class AddPlantCheatCommand extends Command {
 	private int col;
 	private int row;
 	private String plantName;
-	private static final boolean consumeCoins = false;
 	
 	public AddPlantCheatCommand() {
 		
@@ -52,20 +51,14 @@ public class AddPlantCheatCommand extends Command {
 	public ExecutionResult execute(GameWorld game) {
 		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
 		if (plant != null) {
-			if (col>= 0 && col < Game.NUM_COLS && row>= 0 && row < Game.NUM_ROWS) {
-				if(game.addItem(plant, consumeCoins)) {
-					game.update(); 
-					return new ExecutionResult(true);
-				}	
-				else {
-					game.update();
-					return new ExecutionResult(true);
-				}
-			}
+			if(game.addItem(plant)) {
+				game.update(); 
+				return new ExecutionResult(true);
+			}	
 			else {
 				System.out.print(error(Messages.INVALID_POSITION));
+				return new ExecutionResult(false);
 			}
-			return new ExecutionResult(false);
 		}
 		else {
 			System.out.print(error(Messages.INVALID_GAME_OBJECT));
@@ -77,11 +70,18 @@ public class AddPlantCheatCommand extends Command {
 	@Override
 	protected Command create(String[] parameters) {
 		if(parameters.length == 4) {
-			String name = parameters[1];
-			int col = Integer.parseInt(parameters[2]);
-			int row = Integer.parseInt(parameters[3]);
-			Command command= new AddPlantCheatCommand(col, row, name);
-		return command;
+			try {
+				String name = parameters[1];
+				int col = Integer.parseInt(parameters[2]);
+				int row = Integer.parseInt(parameters[3]);
+				Command command= new AddPlantCheatCommand(col, row, name);
+				return command;
+			}
+			catch (Exception e) {
+				System.out.println(error(Messages.INVALID_POSITION));
+				return null;
+			}
+			
 		}
 		else {
 			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));

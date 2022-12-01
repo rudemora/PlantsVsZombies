@@ -24,4 +24,6 @@ public abstract class Plant extends GameObject {
 	public boolean receivePlantAttack(int damage) {
 		return false;
 	}
+	
+	
 }

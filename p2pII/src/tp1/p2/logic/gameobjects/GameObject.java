@@ -14,8 +14,8 @@ public abstract class GameObject implements GameItem {
 	protected GameWorld game;
 	protected int col;
 	protected int row;
-	protected int endurance;
-	protected int ciclo;
+	protected int endurance; //quitaría esto de aquí y lo pondría en cada gameObject, en el toString haría un getEndurance();
+	protected int ciclo; //quizá haya que quitar esto también
 	
 	
 	public GameObject() {
@@ -51,8 +51,7 @@ public abstract class GameObject implements GameItem {
 	}
 
 	public String toString() {
-		
-		if (isAlive()) {
+		if (isAlive()) { // y si hacemos un toString en cada elemento con override y podemos quitar esto
 			int endurance = this.endurance;
 			String icon= this.getSymbol();
 			return status(icon,endurance);
@@ -80,21 +79,10 @@ public abstract class GameObject implements GameItem {
 	
 	abstract protected String getName();
 	
-	public boolean canAdd() {
-		if(game.isFullyOcuppied(this.col, this.row) ) {
-			return false;
-		}
-		return true;
-	}
-	
-	public int getCost() {
-		return this.getCost();
-	}
-	
 	protected void addCycle() {
 		this.ciclo = this.ciclo +1;
 	}
-	
+	/*
 	public boolean winner() {
 		if (this.col <= -1) {
 			return true;
@@ -102,7 +90,7 @@ public abstract class GameObject implements GameItem {
 		else {
 			return false;
 		}
-	}
+	}*/
 	
 	abstract public boolean fillPosition();
 	

@@ -2,7 +2,6 @@ package tp1.p2.logic.gameobjects;
 
 import tp1.p2.logic.GameWorld;
 public abstract class Zombie extends GameObject {
-	private static final int COST = 0;
 	protected Zombie() {
 		
 	}
@@ -20,10 +19,13 @@ public abstract class Zombie extends GameObject {
 	
 	abstract protected void avanzar();
 	
-	protected boolean canAvanzar() {
+	protected boolean canAvanzar() {//modificado
 		boolean advance = (this.ciclo % this.getSpeed()) == 0 && this.ciclo != 0;
 		if (advance) {
 			this.ciclo = 0;
+			if (this.col <= -1) {
+				game.finishGame();
+			}
 		}
 		return advance;
 	}
@@ -33,8 +35,4 @@ public abstract class Zombie extends GameObject {
 		return true;
 	}
 	
-	@Override
-	public int getCost() {
-		return COST;
-	}
 }

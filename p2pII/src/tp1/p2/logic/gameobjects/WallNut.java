@@ -71,10 +71,12 @@ public class WallNut extends Plant {
 		return true;
 	}
 	
+	@Override
 	public String getName() {
 		return Messages.WALL_NUT_NAME;
 	}
 	
+	@Override
 	public WallNut create(GameWorld game, int col, int row) {
 		WallNut wallnut = new WallNut(game, col, row);
 		return wallnut;

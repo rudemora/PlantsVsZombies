@@ -1,6 +1,8 @@
 package tp1.p2.logic.gameobjects;
 
 import tp1.p2.logic.GameWorld;
+import tp1.p2.logic.actions.ExplosionAction;
+import tp1.p2.logic.actions.GameAction;
 import tp1.p2.view.Messages;
 
 public class CherryBomb extends Plant {
@@ -63,7 +65,8 @@ public class CherryBomb extends Plant {
 			ciclo--;
 		}
 		else if (ciclo == 0) {
-			game.pushAction(col, row, getDamage(), true);
+			GameAction action = new ExplosionAction(col, row, DAMAGE, true);
+			game.pushAction(action);
 			endurance = 0;
 		}
 	}
@@ -83,10 +86,12 @@ public class CherryBomb extends Plant {
 		return true;
 	}
 	
+	@Override
 	public String getName() {
 		return Messages.CHERRY_BOMB_NAME;
 	}
 	
+	@Override
 	public CherryBomb create(GameWorld game, int col, int row) {
 		CherryBomb cherrybomb = new CherryBomb(game, col, row);
 		return cherrybomb;

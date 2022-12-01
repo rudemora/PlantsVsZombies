@@ -41,7 +41,7 @@ public abstract class Command {
 	);
 	/* @formatter:on */
 
-	private static Command defaultCommand = new NoneCommand();
+	private static Command defaultCommand;
 
 	public static Command parse(String[] commandWords) {
 		if (commandWords.length == 1 && commandWords[0].isEmpty()) {
@@ -75,7 +75,7 @@ public abstract class Command {
 
 	public Command(boolean isDefault) {
 		if (isDefault) {
-			// TODO add your code here
+			
 		}
 		else {
 

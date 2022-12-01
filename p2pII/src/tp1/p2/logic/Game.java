@@ -37,7 +37,7 @@ public class Game implements GameStatus, GameWorld {
 	
 	private SunsManager sunsManager;
 	
-	private int caughtSuns;
+	private int caughtSuns; //en sunsManager
 
 	private int sunCoins;
 	
@@ -119,14 +119,10 @@ public class Game implements GameStatus, GameWorld {
 		}
 	}
 
-	private void pushAction(GameAction gameAction) {
+	public void pushAction(GameAction gameAction) {
 	    this.actions.addLast(gameAction);
 	}
 	
-	public void pushAction(int col, int row, int damage, boolean affectsZombies) { // mejor hacerlo así o en los objetos que explotan? en cherry-bomb y en explosive>ombie
-		GameAction action = new ExplosionAction(col, row, damage, affectsZombies);
-		this.pushAction(action);
-	}
 	
 	private boolean areTherePendingActions() {
 		return this.actions.size() > 0;
@@ -167,20 +163,24 @@ public class Game implements GameStatus, GameWorld {
 		return playerQuits;
 	}
 
-	public boolean addItem(GameObject gameObject, boolean consumeCoins) {
-		if(gameObject.canAdd()) {
-			if (consumeCoins && this.consumeCoins(gameObject) || !consumeCoins) {
+	public boolean addItem(GameObject gameObject) { 
+		
+		int columna = gameObject.getCol();
+		int fila = gameObject.getRow();
+		if (columna >= 0 && columna < Game.NUM_COLS && fila >= 0 && fila < Game.NUM_ROWS) {
+			if(!this.isFullyOcuppied(columna,fila)) {
 				this.addGameItem(gameObject);
-    			return true;
-    		}
-    		else {
-    			System.out.println(error(Messages.NOT_ENOUGH_COINS));
-    			return false;
-    		}
-    	}
-    	else {
-        	return false;
-    	}
+	    		return true;
+	    	}
+			else {
+	        	return false;
+	    	}
+		}
+		else {
+			System.out.println(error(Messages.INVALID_POSITION));
+			return false;
+		}
+		
 	}
 	
 	
@@ -216,11 +216,15 @@ public class Game implements GameStatus, GameWorld {
     	return container.getGameItemInPosition(col, row);
     }
 	
+	public boolean tryToCatchObject(int col, int row) {
+		return container.tryToCatchObject(col, row);
+		
+	}
+	
 	
 	public int getGeneratedSuns() {//PENDIENTE DE CAMBIO
 		return this.sunsManager.getGeneratedSuns();
 	}
-
 
 	
 	public void playerQuits() {
@@ -232,8 +236,7 @@ public class Game implements GameStatus, GameWorld {
     	return container.isPositionEmpty(x, y);
     }
 	
-	private boolean consumeCoins(GameObject object) {
-    	int coste = object.getCost();
+	public boolean consumeCoins(GameObject object, int coste) {
     	if(coste <= this.sunCoins) {
         	this.sunCoins = this.sunCoins-coste;
         	return true;
@@ -243,7 +246,6 @@ public class Game implements GameStatus, GameWorld {
 	
 	
 	public void addGameItem(GameObject object) {
-		object.onEnter();
     	container.addObject(object);
     }
 	
@@ -255,19 +257,10 @@ public class Game implements GameStatus, GameWorld {
 		 sunsManager.addSun();
 	 }
 	 
-	 
-	public boolean tryToCatchObject(int col, int row) {
-			if (!container.isPositionEmpty(col, row)) {
-				container.tryToCatchObject(col, row);
-				return true;
-			}
-			
-			return false;
-		}
-	 
+	 /*
 	 private boolean zombiesGana() {
 	    	return container.zombiesGana();
-	 }
+	 }*/
 	 public boolean jugadorGanador() {
 	    	return this.zombiesManager.getZombiesAlived()==0;
 	 }
@@ -308,5 +301,9 @@ public class Game implements GameStatus, GameWorld {
 	
 	public void addCaughtSuns() {
 		caughtSuns++;
+	}
+	
+	public void finishGame() {
+		
 	}
 }

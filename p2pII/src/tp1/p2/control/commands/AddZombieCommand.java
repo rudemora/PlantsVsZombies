@@ -18,8 +18,6 @@ public class AddZombieCommand extends Command {
 
 	private int row;
 
-	private static final boolean consumeCoins = false;
-
 	
 	public AddZombieCommand() {
 
@@ -55,10 +53,9 @@ public class AddZombieCommand extends Command {
 	public ExecutionResult execute(GameWorld game) {
 		Zombie zombie = ZombieFactory.spawnZombie(this.zombieIdx, game, this.col, this.row);
 		if (zombie != null) {
-			if (col>= 0 && col <= Game.NUM_COLS && row>= 0 && row <= Game.NUM_ROWS) {
-				game.addItem(zombie, consumeCoins);
+			if (game.addItem(zombie)) {
 				game.update();
-				return new ExecutionResult(true);				
+				return new ExecutionResult(true);	
 			}
 			else {
 				System.out.print(error(Messages.INVALID_POSITION));
@@ -68,21 +65,25 @@ public class AddZombieCommand extends Command {
 		else {
 			System.out.print(error(Messages.INVALID_GAME_OBJECT));
 			return new ExecutionResult(false);
-		}
-		
-		
-		
+		}		
 	}
 	
 	
 	@Override
 	protected Command create(String[] parameters) {
 		if(parameters.length == 4) {
-			int type = Integer.parseInt(parameters[1]);
-			int col = Integer.parseInt(parameters[2]);
-			int row = Integer.parseInt(parameters[3]);
-			Command command= new AddZombieCommand(col, row, type);
-		return command;
+			try {
+				int type = Integer.parseInt(parameters[1]);
+				int col = Integer.parseInt(parameters[2]);
+				int row = Integer.parseInt(parameters[3]);
+				Command command= new AddZombieCommand(col, row, type);
+				return command;
+			}
+			catch (Exception e) {
+				System.out.println(error(Messages.INVALID_POSITION));
+				return null;
+			}
+		
 		}
 		else {
 			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));

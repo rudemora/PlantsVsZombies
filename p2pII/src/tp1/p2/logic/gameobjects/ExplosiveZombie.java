@@ -2,6 +2,8 @@ package tp1.p2.logic.gameobjects;
 
 import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
+import tp1.p2.logic.actions.ExplosionAction;
+import tp1.p2.logic.actions.GameAction;
 import tp1.p2.view.Messages;
 
 public class ExplosiveZombie extends Zombie {
@@ -58,7 +60,8 @@ public class ExplosiveZombie extends Zombie {
 
 	@Override
 	public void onExit() {
-		game.pushAction(col, row, DAMAGE_EXPLOSION, false);
+		GameAction action = new ExplosionAction(col, row, DAMAGE_EXPLOSION, false);
+		game.pushAction(action);
 		game.decreaseZombiesAlived();
 	}
 
@@ -88,6 +91,7 @@ public class ExplosiveZombie extends Zombie {
 		return Messages.EXPLOSIVE_ZOMBIE_NAME;
 	}
 	
+	@Override
 	public ExplosiveZombie create(GameWorld game,int col, int row) {
 		ExplosiveZombie explosivezombie = new ExplosiveZombie(game, col, row);
 		return explosivezombie;
