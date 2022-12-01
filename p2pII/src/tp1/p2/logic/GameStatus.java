@@ -46,5 +46,9 @@ public interface GameStatus {
 	 * @return the number of caught suns
 	 */
 	int getCaughtSuns();
+	
+	boolean isPlayerQuits();
+	boolean jugadorGanador();
+	boolean zombiesGana();
 
 }

@@ -30,6 +30,7 @@ public class Game implements GameStatus, GameWorld {
 	private Deque<GameAction> actions;
 
 	private static boolean playerQuits;
+	private static boolean endGame;
 	
 	private Random rand;
 	
@@ -64,6 +65,7 @@ public class Game implements GameStatus, GameWorld {
 		sunCoins = INITIAL_SUNCOINS;
 		this.sunsManager = new SunsManager(this, rand);
 		this.caughtSuns = 0;
+		this.endGame = false;
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
 	}
@@ -146,6 +148,7 @@ public class Game implements GameStatus, GameWorld {
     }
 
 	public boolean isFinished() {
+		return endGame;/*
 		if (this.zombiesManager.getRemainingZombies() == 0 && zombiesManager.zombiesDead()) { 
     		return true; 
     	}
@@ -156,9 +159,10 @@ public class Game implements GameStatus, GameWorld {
     		else {
         		return false;
     		}
-    	}
+    	}*/
 	}
-
+	
+	
 	public boolean isPlayerQuits() {
 		return playerQuits;
 	}
@@ -302,6 +306,6 @@ public class Game implements GameStatus, GameWorld {
 	}
 	
 	public void finishGame() {
-		
+		endGame = true;
 	}
 }

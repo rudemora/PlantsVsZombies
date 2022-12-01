@@ -34,6 +34,7 @@ public interface GameWorld {
 	void addCaughtSuns();
 	void removeDead();
 	void finishGame();
+	
 }
 
 

@@ -32,7 +32,7 @@ public class SunsManager {
 		return sun.getGeneratedSuns();
 	}
 
-	
+	//HACER EL CAUGHTSUNS
 
 	protected void update() {
 		if (cooldown == 0) {
