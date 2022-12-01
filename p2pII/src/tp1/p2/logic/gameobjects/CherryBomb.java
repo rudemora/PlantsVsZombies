@@ -10,7 +10,7 @@ public class CherryBomb extends Plant {
 	private static final int INITIAL_ENDURANCE = 2;
 	private static final int DAMAGE = 10;
 	private static final int COST = 50;
-
+	private boolean exploded;
 	protected CherryBomb() {
 		endurance = INITIAL_ENDURANCE;
 		ciclo = 2;
@@ -20,6 +20,7 @@ public class CherryBomb extends Plant {
 		super(game, col, row);
 		endurance =  INITIAL_ENDURANCE;
 		ciclo = 2;
+		exploded=false;
 	}
 	
 	@Override
@@ -65,8 +66,7 @@ public class CherryBomb extends Plant {
 			ciclo--;
 		}
 		else if (ciclo == 0) {
-			GameAction action = new ExplosionAction(col, row, DAMAGE, true);
-			game.pushAction(action);
+			exploded=true;
 			endurance = 0;
 		}
 	}
@@ -78,6 +78,10 @@ public class CherryBomb extends Plant {
 
 	@Override
 	public void onExit() {
+		if(exploded) {
+			GameAction action = new ExplosionAction(col, row, DAMAGE, true);
+			game.pushAction(action);
+		}
 		
 	}
 
