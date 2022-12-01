@@ -11,9 +11,16 @@ public class Sun extends GameObject {
 	private static final int SUN_COOLDOWN = 10+1;
 	private static final int DAMAGE = 0;
 	private static final int COINS = 10;
-	
+	private static int generatedSuns; 
 	public Sun() {
 		endurance = SUN_COOLDOWN;
+	}
+	public int getGeneratedSuns() {//PENDIENTE DE REVISIÓN, ver donde se usa para meterlo
+		return this.generatedSuns;
+	}
+	
+	public void setInitialgeneratedSuns() {
+		generatedSuns=0;
 	}
 	
 	private Sun(GameWorld game, int col, int row) {
@@ -61,7 +68,7 @@ public class Sun extends GameObject {
 	
 	@Override
 	public void onEnter() {
-		game.addGeneratedSuns();
+		this.generatedSuns++;
 	}
 	
 	@Override

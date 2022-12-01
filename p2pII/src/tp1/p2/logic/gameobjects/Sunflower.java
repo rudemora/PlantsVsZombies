@@ -20,6 +20,8 @@ public class Sunflower extends Plant {
 		ciclo = 0;
 	}
 	
+	
+	
 	@Override
 	public int getCost() {
 		return COST;

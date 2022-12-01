@@ -16,23 +16,23 @@ public class SunsManager {
 
 	private int cooldown;
 
-	private int generatedSuns;
+
 	
 	
 	protected SunsManager(GameWorld game, Random rand) {
 		this.game = game;
 		this.rand = rand;
 		this.cooldown = COOLDOWN_RANDOM_SUN;
-		this.generatedSuns = 0;
+		Sun sun = new Sun();
+		sun.setInitialgeneratedSuns();
 	}
 
-	protected void addGeneratedSuns() {
-		generatedSuns++;
+	protected int getGeneratedSuns() {
+		Sun  sun = new Sun();
+		return sun.getGeneratedSuns();
 	}
 
-	protected int getGeneratedSuns() {//PENDIENTE DE REVISIÓN
-		return this.generatedSuns;
-	}
+	
 
 	protected void update() {
 		if (cooldown == 0) {

@@ -30,7 +30,7 @@ public interface GameWorld {
 	void explode (int col, int row, int damage, boolean affectsZombies);
 	void addZombiesAlived();
 	void decreaseZombiesAlived();
-	void addGeneratedSuns();
+	//void addGeneratedSuns();
 	void addCaughtSuns();
 	void removeDead();
 	void finishGame();

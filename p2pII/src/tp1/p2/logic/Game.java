@@ -295,9 +295,7 @@ public class Game implements GameStatus, GameWorld {
 		zombiesManager.decreaseZombiesAlived();
 	}
 	
-	public void addGeneratedSuns() {
-		sunsManager.addGeneratedSuns();
-	}
+	
 	
 	public void addCaughtSuns() {
 		caughtSuns++;
