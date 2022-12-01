@@ -33,7 +33,8 @@ public interface GameWorld {
 	//void addGeneratedSuns();
 	void addCaughtSuns();
 	void removeDead();
-	void finishGame();
+	//void finishGame();
+	boolean zombiesGana();
 	
 }
 

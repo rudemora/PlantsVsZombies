@@ -38,7 +38,6 @@ public class Game implements GameStatus, GameWorld {
 	
 	private SunsManager sunsManager;
 	
-	private int caughtSuns; //en sunsManager
 
 	private int sunCoins;
 	
@@ -64,7 +63,6 @@ public class Game implements GameStatus, GameWorld {
 		this.zombiesManager= new ZombiesManager(this,level,rand);
 		sunCoins = INITIAL_SUNCOINS;
 		this.sunsManager = new SunsManager(this, rand);
-		this.caughtSuns = 0;
 		this.endGame = false;
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
@@ -148,18 +146,20 @@ public class Game implements GameStatus, GameWorld {
     }
 
 	public boolean isFinished() {
-		return endGame;/*
-		if (this.zombiesManager.getRemainingZombies() == 0 && zombiesManager.zombiesDead()) { 
-    		return true; 
-    	}
-    	else {
-    		if (zombiesGana()) {
-    			return true;
-    		}
-    		else {
-        		return false;
-    		}
-    	}*/
+		if(this.zombiesManager.playerWon()) {
+			endGame=true;
+		}
+		return endGame;
+		
+	}
+	
+	public boolean playerWon() {
+		if(this.zombiesManager.playerWon()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	
@@ -188,8 +188,8 @@ public class Game implements GameStatus, GameWorld {
 	}
 	
 	
-	public int getCaughtSuns() {//PENDIENTE DE CAMBIO
-		return caughtSuns;
+	public int getCaughtSuns() {
+		return sunsManager.getCaughtSuns();
 	}
 	
 	
@@ -226,7 +226,7 @@ public class Game implements GameStatus, GameWorld {
 	}
 	
 	
-	public int getGeneratedSuns() {//PENDIENTE DE CAMBIO
+	public int getGeneratedSuns() {
 		return this.sunsManager.getGeneratedSuns();
 	}
 
@@ -265,10 +265,7 @@ public class Game implements GameStatus, GameWorld {
 	 private boolean zombiesGana() {
 	    	return container.zombiesGana();
 	 }*/
-	 public boolean jugadorGanador() {
-	    	return this.zombiesManager.getZombiesAlived()==0;
-	 }
-	 
+	
 	 public void explode(int col, int row, int damage, boolean affectsZombies) {
 		 for(int i = col-1; i <= col + 1; i++) {
 			 for(int j = row-1; j<= row +1;j=j+1) {
@@ -302,10 +299,11 @@ public class Game implements GameStatus, GameWorld {
 	
 	
 	public void addCaughtSuns() {
-		caughtSuns++;
+		this.sunsManager.addCaughtSuns();
 	}
 	
-	public void finishGame() {
+	public boolean zombiesGana() {
 		endGame = true;
+		return true;
 	}
 }

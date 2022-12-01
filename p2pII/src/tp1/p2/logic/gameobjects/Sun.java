@@ -12,11 +12,11 @@ public class Sun extends GameObject {
 	private static final int DAMAGE = 0;
 	private static final int COINS = 10;
 	private static int generatedSuns; 
-	private boolean iscaught;
+	private boolean isCaught;
 	public Sun() {
 		endurance = SUN_COOLDOWN;
 	}
-	public int getGeneratedSuns() {//PENDIENTE DE REVISIÓN, ver donde se usa para meterlo
+	public int getGeneratedSuns() {
 		return this.generatedSuns;
 	}
 	
@@ -28,14 +28,14 @@ public class Sun extends GameObject {
 		this.game=game;
 		this.col=col;
 		this.row=row;
-		this.iscaught=false;
+		this.isCaught=false;
 		endurance = SUN_COOLDOWN;
 	}
 	@Override
 	public boolean catchObject() {
 		if (endurance > 0) {
 			endurance = 0;
-			this.iscaught=true;
+			this.isCaught=true;
 			return true;
 		}
 		return false;
@@ -76,7 +76,7 @@ public class Sun extends GameObject {
 	
 	@Override
 	public void onExit() {
-		if(this.iscaught) {
+		if(this.isCaught) {
 			game.addCaughtSuns();
 			game.addSuncoins(COINS);
 		}

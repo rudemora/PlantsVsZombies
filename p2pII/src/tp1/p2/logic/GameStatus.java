@@ -48,7 +48,5 @@ public interface GameStatus {
 	int getCaughtSuns();
 	
 	boolean isPlayerQuits();
-	boolean jugadorGanador();
-	boolean zombiesGana();
-
+	boolean playerWon();
 }

@@ -51,8 +51,7 @@ public class AddPlantCheatCommand extends Command {
 	public ExecutionResult execute(GameWorld game) {
 		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
 		if (plant != null) {
-			if(game.addItem(plant)) {
-				game.update(); 
+			if(game.addItem(plant)) { 
 				return new ExecutionResult(true);
 			}	
 			else {

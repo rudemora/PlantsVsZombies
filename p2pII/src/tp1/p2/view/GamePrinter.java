@@ -100,7 +100,7 @@ public class GamePrinter {
 			
 		}
 		else {
-			if (game.jugadorGanador()) {
+			if (game.playerWon()) {
 				System.out.print(Messages.PLAYER_WINS);
 			}
 			else {

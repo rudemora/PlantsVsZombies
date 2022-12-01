@@ -19,12 +19,12 @@ public abstract class Zombie extends GameObject {
 	
 	abstract protected void avanzar();
 	
-	protected boolean canAvanzar() {//modificado
+	protected boolean canAvanzar() {
 		boolean advance = (this.ciclo % this.getSpeed()) == 0 && this.ciclo != 0;
 		if (advance) {
 			this.ciclo = 0;
 			if (this.col <= -1) {
-				game.finishGame();
+				game.zombiesGana();
 			}
 		}
 		return advance;

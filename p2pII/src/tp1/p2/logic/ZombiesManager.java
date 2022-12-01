@@ -77,8 +77,17 @@ public class ZombiesManager {
 		return this.remainingZombies;
 	}
 	
-	protected int getZombiesAlived() {
+	private int getZombiesAlived() {
 		return this.zombiesAlived;
+	}
+	private int getZombiesRemaining() {
+		return this.remainingZombies;
+	}
+	protected boolean playerWon() {
+		if(this.getZombiesAlived()==0 && this.getRemainingZombies()==0) {
+			return true;
+		}
+		return false;
 	}
 
 	protected void decreaseZombiesAlived() {

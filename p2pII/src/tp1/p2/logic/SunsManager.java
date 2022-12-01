@@ -15,6 +15,8 @@ public class SunsManager {
 	private Random rand;
 
 	private int cooldown;
+	
+	private int caughtSuns;
 
 
 	
@@ -23,6 +25,7 @@ public class SunsManager {
 		this.game = game;
 		this.rand = rand;
 		this.cooldown = COOLDOWN_RANDOM_SUN;
+		this.caughtSuns=0;
 		Sun sun = new Sun();
 		sun.setInitialgeneratedSuns();
 	}
@@ -32,7 +35,13 @@ public class SunsManager {
 		return sun.getGeneratedSuns();
 	}
 
-	//HACER EL CAUGHTSUNS
+	public void addCaughtSuns() {
+		this.caughtSuns++;
+	}
+	
+	public int getCaughtSuns() {
+		return this.caughtSuns;
+	}
 
 	protected void update() {
 		if (cooldown == 0) {
