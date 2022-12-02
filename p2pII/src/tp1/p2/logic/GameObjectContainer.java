@@ -17,11 +17,15 @@ public class GameObjectContainer {
 	boolean removeDead() {
 		
 		boolean ok=false;
-		for(int i =0;i<this.gameObjects.size();i=i+1) {
+		int i = 0;
+		while (i<this.gameObjects.size()) {
 			if (!gameObjects.get(i).isAlive()) {
 				gameObjects.get(i).onExit();
 				gameObjects.remove(i);   
 				ok=true;
+			}
+			else {
+				i++;
 			}
 		}
 		return ok;
@@ -89,15 +93,6 @@ public class GameObjectContainer {
 		gameObjects.add(object);
 		object.onEnter();
 	}
-	/*
-	protected boolean zombiesGana() {
-		for(int i =0;i<gameObjects.size();i=i+1) {
-			if (gameObjects.get(i).winner()) { 
-				return true;
-			}
-		}
-		return false;
-	}*/
 	
 	protected String positionToString(int col, int row) {
 		StringBuilder buffer = new StringBuilder();

@@ -18,9 +18,6 @@ public class SunsManager {
 	
 	private int caughtSuns;
 
-
-	
-	
 	protected SunsManager(GameWorld game, Random rand) {
 		this.game = game;
 		this.rand = rand;
@@ -35,9 +32,11 @@ public class SunsManager {
 		return sun.getGeneratedSuns();
 	}
 
+	
 	public void addCaughtSuns() {
 		this.caughtSuns++;
 	}
+	
 	
 	public int getCaughtSuns() {
 		return this.caughtSuns;

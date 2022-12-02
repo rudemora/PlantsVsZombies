@@ -55,7 +55,6 @@ public class CatchCommand extends Command {
 		if (!caughtSunThisCycle) {
 			if(game.tryToCatchObject(col, row)) {
 				caughtSunThisCycle= true;
-				game.removeDead();
 				return new ExecutionResult(true);
 			}
 			else {

@@ -16,11 +16,13 @@ public abstract class Plant extends GameObject {
 	
 	abstract public Plant create(GameWorld game, int col, int row);
 	
+	@Override
 	public boolean receiveZombieAttack(int damage) {
 		this.endurance = this.endurance - damage;
 		return true;
 	}
 	
+	@Override
 	public boolean receivePlantAttack(int damage) {
 		return false;
 	}

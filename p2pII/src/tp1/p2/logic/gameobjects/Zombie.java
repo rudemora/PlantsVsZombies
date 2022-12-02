@@ -13,11 +13,13 @@ public abstract class Zombie extends GameObject {
 	abstract public int getSpeed();
 	abstract public Zombie create(GameWorld game, int col, int row);
 	
+	@Override
 	public boolean receiveZombieAttack(int damage) {
 		return false;
 	}
 	
 	abstract protected void avanzar();
+	
 	
 	protected boolean canAvanzar() {
 		boolean advance = (this.ciclo % this.getSpeed()) == 0 && this.ciclo != 0;
@@ -27,6 +29,7 @@ public abstract class Zombie extends GameObject {
 		return advance;
 	}
 	
+	@Override
 	public boolean receivePlantAttack(int damage) {
 		this.endurance= this.endurance - damage;
 		return true;

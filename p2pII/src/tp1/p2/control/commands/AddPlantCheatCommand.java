@@ -50,7 +50,7 @@ public class AddPlantCheatCommand extends Command {
 	@Override
 	public ExecutionResult execute(GameWorld game) {
 		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-		if (col >= 0 && col < Game.NUM_COLS && row >= 0 && row < Game.NUM_ROWS) {
+		if (col < Game.NUM_COLS) {
 			if (plant != null) {
 				if(game.addItem(plant)) { 
 					game.update(); 
@@ -67,7 +67,7 @@ public class AddPlantCheatCommand extends Command {
 			}
 		}
 		else {
-			System.out.println(error(Messages.INVALID_GAME_OBJECT));
+			System.out.println(error(Messages.INVALID_POSITION));
 			return new ExecutionResult(false);
 		}
 	}
@@ -92,6 +92,5 @@ public class AddPlantCheatCommand extends Command {
 			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
 			return null;
 		}
-		
 	}
 }

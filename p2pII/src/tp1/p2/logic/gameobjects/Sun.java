@@ -17,7 +17,7 @@ public class Sun extends GameObject {
 		endurance = SUN_COOLDOWN;
 	}
 	public int getGeneratedSuns() {
-		return this.generatedSuns;
+		return generatedSuns;
 	}
 	
 	public void setInitialgeneratedSuns() {
@@ -71,7 +71,7 @@ public class Sun extends GameObject {
 	
 	@Override
 	public void onEnter() {
-		this.generatedSuns++;
+		generatedSuns++;
 	}
 	
 	@Override

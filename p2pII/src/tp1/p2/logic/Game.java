@@ -4,13 +4,11 @@ import static tp1.p2.view.Messages.error;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.List; // es necesario?
+import java.util.List; 
 import java.util.Random;
 
 import tp1.p2.control.Command;
-import tp1.p2.control.ExecutionResult; // por qué aquí?
 import tp1.p2.control.Level;
-import tp1.p2.logic.actions.ExplosionAction; //importado por nosotros, se hace realmente así?
 import tp1.p2.logic.actions.GameAction;
 import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.view.Messages;
@@ -63,7 +61,7 @@ public class Game implements GameStatus, GameWorld {
 		this.zombiesManager= new ZombiesManager(this,level,rand);
 		sunCoins = INITIAL_SUNCOINS;
 		this.sunsManager = new SunsManager(this, rand);
-		this.endGame = false;
+		endGame = false;
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
 	}
@@ -119,6 +117,7 @@ public class Game implements GameStatus, GameWorld {
 		}
 	}
 
+	@Override
 	public void pushAction(GameAction gameAction) {
 	    this.actions.addLast(gameAction);
 	}
@@ -137,6 +136,7 @@ public class Game implements GameStatus, GameWorld {
 	 * @return <code>true</code> if the cell is fully occupied, <code>false</code>
 	 *         otherwise.
 	 */
+	@Override
 	public boolean isFullyOcuppied(int col, int row) {
 		return this.container.isFullyOccupied(col, row);
 	}
@@ -145,6 +145,7 @@ public class Game implements GameStatus, GameWorld {
     	return command.execute(this).draw();
     }
 
+	
 	public boolean isFinished() {
 		if(this.zombiesManager.playerWon()) {
 			endGame=true;
@@ -153,6 +154,7 @@ public class Game implements GameStatus, GameWorld {
 		
 	}
 	
+	@Override
 	public boolean playerWon() {
 		if(this.zombiesManager.playerWon()) {
 			return true;
@@ -162,15 +164,18 @@ public class Game implements GameStatus, GameWorld {
 		}
 	}
 	
-	
+	@Override
 	public boolean isPlayerQuits() {
 		return playerQuits;
 	}
 
+	@Override
 	public boolean addItem(GameObject gameObject) { 
 		
 		int columna = gameObject.getCol();
 		int fila = gameObject.getRow();
+		if (columna >= 0 && columna <= Game.NUM_COLS && fila >= 0 && fila < Game.NUM_ROWS) {
+
 			if(!this.isFullyOcuppied(columna,fila)) {
 				this.addGameItem(gameObject);
 	    		return true;
@@ -179,30 +184,35 @@ public class Game implements GameStatus, GameWorld {
 	        	return false;
 	    	}
 		
-		
+		}
+		else {
+			System.out.println(error(Messages.INVALID_POSITION));
+			return false;
+			
+		}
 	}
 	
-	
+	@Override
 	public int getCaughtSuns() {
 		return sunsManager.getCaughtSuns();
 	}
 	
-	
+	@Override
 	public int getCycle() {
 		return cycle;
 	}
 
-	
+	@Override
 	public int getSuncoins() {
 		return sunCoins;
 	}
 
-	
+	@Override
 	public int getRemainingZombies() {
 		return  this.zombiesManager.getRemainingZombies();
 	}
 
-	
+	@Override
 	public String positionToString(int col, int row) {
 	StringBuilder str = new StringBuilder();
 		if(!container.isPositionEmpty(col, row)) {
@@ -210,31 +220,40 @@ public class Game implements GameStatus, GameWorld {
 		}
 		return str.toString();
 	}
-	
+	@Override
 	public List<GameItem> getGameItemInPosition(int col, int row) {
     	return container.getGameItemInPosition(col, row);
     }
 	
+	@Override
 	public boolean tryToCatchObject(int col, int row) {
-		return container.tryToCatchObject(col, row);
+		if(container.tryToCatchObject(col, row)) {
+			this.removeDead();
+			return true;
+		}
+		else {
+			return false;
+		}
 		
 	}
 	
-	
+	@Override
 	public int getGeneratedSuns() {
 		return this.sunsManager.getGeneratedSuns();
 	}
 
-	
+	@Override
 	public void playerQuits() {
 		playerQuits = true;
 		
 	}
 	
+	@Override
 	public boolean isPositionEmpty(int x, int y) {
     	return container.isPositionEmpty(x, y);
     }
 	
+	@Override
 	public boolean consumeCoins(GameObject object, int coste) {
     	if(coste <= this.sunCoins) {
         	this.sunCoins = this.sunCoins-coste;
@@ -243,24 +262,22 @@ public class Game implements GameStatus, GameWorld {
     	return false;
     }
 	
-	
+	@Override
 	public void addGameItem(GameObject object) {
     	container.addObject(object);
     }
 	
+	@Override
 	public void addSuncoins(int coins) {
 	    	sunCoins = sunCoins + coins;
 	 }
 	 
-	 public void addSun() {
-		 sunsManager.addSun();
-	 }
+	@Override
+	public void addSun() {
+		sunsManager.addSun();
+	}
 	 
-	 /*
-	 private boolean zombiesGana() {
-	    	return container.zombiesGana();
-	 }*/
-	
+	 @Override
 	 public void explode(int col, int row, int damage, boolean affectsZombies) {
 		 for(int i = col-1; i <= col + 1; i++) {
 			 for(int j = row-1; j<= row +1;j=j+1) {
@@ -277,31 +294,34 @@ public class Game implements GameStatus, GameWorld {
 								 lista.get(k).receiveZombieAttack(damage);
 							 }
 						 }
-					 }
+				}
 			 }
 		 }	    
 	 }
 
 
-	
+	@Override
 	public void addZombiesAlived() {
 		zombiesManager.addZombiesAlived();
 	}
-
-	public void removeDead() {
+	
+	
+	private void removeDead() {
 		this.container.removeDead();
 	}
 	
+	@Override
 	public void decreaseZombiesAlived() {
 		zombiesManager.decreaseZombiesAlived();
 	}
 	
 	
-	
+	@Override
 	public void addCaughtSuns() {
 		this.sunsManager.addCaughtSuns();
 	}
 	
+	@Override
 	public boolean zombiesGana() {
 		endGame = true;
 		return true;
