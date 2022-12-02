@@ -4,6 +4,7 @@ package tp1.p2.logic;
 import tp1.p2.logic.actions.GameAction;
 import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.control.Level;
+import java.util.List;
 
 public interface GameWorld {
 
@@ -18,7 +19,7 @@ public interface GameWorld {
 	boolean tryToCatchObject(int col, int row);
 	int getCaughtSuns();
 	boolean addItem(GameObject gameObject);
-	GameItem getGameItemInPosition(int x, int y);
+	List<GameItem> getGameItemInPosition(int x, int y);
 	void addSuncoins(int Coins);
 	void playerQuits();
 	boolean isPositionEmpty(int x, int y);

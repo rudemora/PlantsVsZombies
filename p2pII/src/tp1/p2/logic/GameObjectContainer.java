@@ -60,24 +60,29 @@ public class GameObjectContainer {
 		return true;
 	}
 	
-	protected GameItem getGameItemInPosition(int col,int row) {
+	protected List<GameItem> getGameItemInPosition(int col,int row) {
+		List<GameItem> lista= new ArrayList<>();
 		for(int i =0;i<gameObjects.size();i=i+1) {
 			if (gameObjects.get(i).isInPosition(col, row) && gameObjects.get(i).fillPosition()) { 
-				return gameObjects.get(i);
+				lista.add(gameObjects.get(i));
 			}
 		}
-		return null;
+		if(lista.size()==0) {
+			return null;
+		}
+		return lista;
 	}
 	
 	protected boolean tryToCatchObject(int col, int row) {
+		boolean ok=false;
 		if (!this.isPositionEmpty(col, row)) {
 			for(GameObject g : gameObjects) {
 				if(g.isInPosition(col, row) && g.catchObject()) {
-					return true;
+					ok=true;
 				}
 			}
 		}
-		return false;
+		return ok;
 	}
 	
 	protected void addObject(GameObject object) {

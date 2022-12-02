@@ -1,5 +1,7 @@
 package tp1.p2.logic.gameobjects;
 
+import java.util.List;
+
 import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
@@ -41,9 +43,14 @@ public class Sporty extends Zombie {
 		if(!this.game.isFullyOcuppied(col-1, row) && this.canAvanzar()) {
 			this.avanzar();
 		}
-		GameItem item = game.getGameItemInPosition(col - 1, row);
-		if(item != null) { 
-			item.receiveZombieAttack(this.getDamage());
+		List<GameItem> lista = game.getGameItemInPosition(col - 1, row);
+		if(lista != null) { 
+			for(int i =0;i<lista.size();i=i+1) {
+				lista.get(i).receiveZombieAttack(this.getDamage());
+			}
+		}
+		if (this.col <= -1) {
+			game.zombiesGana();
 		}
 		
 	}

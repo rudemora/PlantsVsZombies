@@ -171,7 +171,6 @@ public class Game implements GameStatus, GameWorld {
 		
 		int columna = gameObject.getCol();
 		int fila = gameObject.getRow();
-		if (columna >= 0 && columna < Game.NUM_COLS && fila >= 0 && fila < Game.NUM_ROWS) {
 			if(!this.isFullyOcuppied(columna,fila)) {
 				this.addGameItem(gameObject);
 	    		return true;
@@ -179,11 +178,7 @@ public class Game implements GameStatus, GameWorld {
 			else {
 	        	return false;
 	    	}
-		}
-		else {
-			System.out.println(error(Messages.INVALID_POSITION));
-			return false;
-		}
+		
 		
 	}
 	
@@ -216,7 +211,7 @@ public class Game implements GameStatus, GameWorld {
 		return str.toString();
 	}
 	
-	public GameItem getGameItemInPosition(int col, int row) {
+	public List<GameItem> getGameItemInPosition(int col, int row) {
     	return container.getGameItemInPosition(col, row);
     }
 	
@@ -269,13 +264,18 @@ public class Game implements GameStatus, GameWorld {
 	 public void explode(int col, int row, int damage, boolean affectsZombies) {
 		 for(int i = col-1; i <= col + 1; i++) {
 			 for(int j = row-1; j<= row +1;j=j+1) {
-					 GameItem item = this.getGameItemInPosition(i, j);
-					 if (item != null) {
+				 List<GameItem> lista = this.getGameItemInPosition(i, j);
+				 if (lista != null) {
 						 if (affectsZombies) {
-							 item.receivePlantAttack(damage);
+							 for(int k =0;k<lista.size();k=k+1) {
+								 lista.get(k).receivePlantAttack(damage);
+							 }
+
 						 }
 						 else {
-							 item.receiveZombieAttack(damage);
+							 for(int k =0;k<lista.size();k=k+1) {
+								 lista.get(k).receiveZombieAttack(damage);
+							 }
 						 }
 					 }
 			 }

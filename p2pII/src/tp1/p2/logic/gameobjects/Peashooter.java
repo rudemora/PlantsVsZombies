@@ -1,5 +1,7 @@
  package tp1.p2.logic.gameobjects;
 
+import java.util.List;
+
 import tp1.p2.logic.GameItem;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
@@ -43,9 +45,12 @@ public class Peashooter extends Plant {
 		int i = col + 1;
 		boolean atacked = false;
 		while (!atacked && i < GameWorld.NUM_COLS) {
-			GameItem item = game.getGameItemInPosition(i, row);
-			if(item != null ) {  
-    		atacked = item.receivePlantAttack(this.getDamage());
+			List<GameItem> lista = game.getGameItemInPosition(i, row);
+			if(lista != null) { 
+				for(int i1 =0;i1<lista.size();i1=i1+1) {
+					atacked=lista.get(i1).receivePlantAttack(this.getDamage());
+				}
+				
 			}
 			i = i +1;
 		}
