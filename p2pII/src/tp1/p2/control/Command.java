@@ -19,6 +19,10 @@ import tp1.p2.control.commands.ResetCommand;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
+import tp1.p2.control.commands.ShowRecordCommand;
+import tp1.p2.control.exceptions.CommandParseException;
+import tp1.p2.control.exceptions.GameException;
+
 /**
  * Represents a user action in the game.
  *
@@ -37,13 +41,16 @@ public abstract class Command {
 		new ListZombiesCommand(),
 		new AddZombieCommand(),
 		new AddPlantCheatCommand(),
-		new CatchCommand()
+
+		
+		new CatchCommand(),
+		new ShowRecordCommand()
 	);
 	/* @formatter:on */
 
 	private static Command defaultCommand;
 
-	public static Command parse(String[] commandWords) {
+	public static Command parse(String[] commandWords) throws GameException {
 		if (commandWords.length == 1 && commandWords[0].isEmpty()) {
 			return defaultCommand;
 		}
@@ -53,9 +60,11 @@ public abstract class Command {
 				command = command.create(commandWords);
 				return command;
 			}
-		}
+		}/*
 		System.out.println(error(Messages.UNKNOWN_COMMAND));
-		return null;
+		return null;*/
+		throw new CommandParseException(Messages.UNKNOWN_COMMAND);
+
 	}
 
 	public static Iterable<Command> getAvailableCommands() {
@@ -108,11 +117,16 @@ public abstract class Command {
 	 * 
 	 * @return {@code true} if game board must be printed {@code false} otherwise.
 	 */
-	public abstract ExecutionResult execute(GameWorld game);
+	public abstract boolean execute(GameWorld game) throws GameException;
 
-	protected Command create(String[] parameters) {
+	public Command create(String[] parameters) throws GameException {
+		if (parameters.length != 0) {
+			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+		}
 		return this;
+	
 	}
+	
 
 	/**
 	 * Notifies the {@link Command} that a new cycle has started.

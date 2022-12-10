@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
+import tp1.p2.control.exceptions.GameException;
+
 import tp1.p2.logic.GameWorld;
 
 public class PlantFactory {
@@ -26,7 +29,7 @@ public class PlantFactory {
 		return false;	
 	}
 
-	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) {
+	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) throws GameException {
 		if (!isValidPlant(plantName)) {
 			return null;
 		}

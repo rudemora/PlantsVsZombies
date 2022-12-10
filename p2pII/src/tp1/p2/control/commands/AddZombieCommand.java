@@ -3,11 +3,13 @@ package tp1.p2.control.commands;
 import static tp1.p2.view.Messages.error;
 
 import tp1.p2.control.Command;
-import tp1.p2.control.ExecutionResult;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.logic.gameobjects.Zombie;
 import tp1.p2.logic.gameobjects.ZombieFactory;
 import tp1.p2.view.Messages;
+
+import tp1.p2.control.exceptions.CommandParseException;
+import tp1.p2.control.exceptions.GameException;
 
 public class AddZombieCommand extends Command {
 
@@ -49,7 +51,7 @@ public class AddZombieCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game) {
+	public boolean execute(GameWorld game) throws GameException {
 		Zombie zombie = ZombieFactory.spawnZombie(this.zombieIdx, game, this.col, this.row);
 		if (zombie != null) {
 			if (game.addItem(zombie)) {
@@ -69,7 +71,7 @@ public class AddZombieCommand extends Command {
 	
 	
 	@Override
-	protected Command create(String[] parameters) {
+	public Command create(String[] parameters) throws GameException {
 		if(parameters.length == 4) {
 			try {
 				int type = Integer.parseInt(parameters[1]);

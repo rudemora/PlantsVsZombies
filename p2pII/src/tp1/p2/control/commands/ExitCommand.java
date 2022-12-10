@@ -1,9 +1,11 @@
 package tp1.p2.control.commands;
 
 import tp1.p2.control.Command;
-import tp1.p2.control.ExecutionResult;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
+
+import tp1.p2.control.exceptions.GameException;
+
 
 public class ExitCommand extends Command {
 
@@ -28,8 +30,7 @@ public class ExitCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game) {
-		game.playerQuits();
+	public boolean execute(GameWorld game) throws GameException {		game.playerQuits();
 		return new ExecutionResult(false);
 	}
 

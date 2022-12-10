@@ -9,6 +9,9 @@ import tp1.p2.logic.Game;
 import tp1.p2.view.GamePrinter;
 import tp1.p2.view.Messages;
 
+
+import tp1.p2.control.exceptions.GameException;
+
 /**
  * Accepts user input and coordinates the game execution logic.
  */
@@ -78,19 +81,27 @@ public class Controller {
 			// 2. User action
 			String[] words = prompt();
 
-			if (words.length == 0) {
+			/*if (words.length == 0) {
 				System.out.println(error(Messages.UNKNOWN_COMMAND));
 			} 
-			else {
+			else {*/
+			try {
+				refreshDisplay = false;
+				// 2-4. User action & Game Action & Update
 				Command command = Command.parse(words);
+				/*
 				if (command != null) {
 					// 3-4. Game Action & Update
 					refreshDisplay = game.execute(command);
 				} else {
 					refreshDisplay = false;
-				}
+				}*/
+				refreshDisplay = game.execute(command);
+			} catch (GameException e) {
+				System.out.println(error(e.getMessage()));
 			}
 		}
+		
 
 		if (refreshDisplay) {
 			printGame();

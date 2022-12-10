@@ -1,9 +1,11 @@
 package tp1.p2.control.commands;
 
 import tp1.p2.control.Command;
-import tp1.p2.control.ExecutionResult;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
+
+import tp1.p2.control.exceptions.GameException;
+
 
 public class NoneCommand extends Command {
 
@@ -32,7 +34,7 @@ public class NoneCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game) {
+	public boolean execute(GameWorld game) throws GameException {
 		game.update();
 		return new ExecutionResult(true);
 	}

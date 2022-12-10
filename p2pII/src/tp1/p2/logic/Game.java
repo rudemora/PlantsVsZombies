@@ -13,6 +13,9 @@ import tp1.p2.logic.actions.GameAction;
 import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.view.Messages;
 
+
+import tp1.p2.control.exceptions.GameException;
+
 public class Game implements GameStatus, GameWorld {
 
 	private static final int INITIAL_SUNCOINS = 50; 
@@ -39,7 +42,7 @@ public class Game implements GameStatus, GameWorld {
 
 	private int sunCoins;
 	
-	public Game(long seed, Level level) {
+	public Game(long seed, Level level) throws GameException {
 		this.reset(seed, level);
 	}
 
@@ -50,7 +53,7 @@ public class Game implements GameStatus, GameWorld {
 	 * @param level {@link Level} Used to initialize the game.
 	 * @param seed Random seed Used to initialize the game.
 	 */
-	public void reset( long seed ,Level level) {
+	public void reset(Level level, long seed) throws GameException {
 		this.seed = seed;
 		this.level = level;
 		container = new GameObjectContainer(); 
@@ -82,7 +85,7 @@ public class Game implements GameStatus, GameWorld {
 	 * 
 	 */
 	
-	public void update() {
+	public void update() throws GameException {
 
 		// 1. Execute pending actions
 		executePendingActions();
@@ -107,6 +110,9 @@ public class Game implements GameStatus, GameWorld {
 
 		// 6. Notify commands that a new cycle started
 		Command.newCycle();
+		
+		// 7. Update record
+		// TODO your code here
 
 	}
 

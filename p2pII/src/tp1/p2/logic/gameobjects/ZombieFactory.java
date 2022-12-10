@@ -6,6 +6,9 @@ import java.util.List;
 
 import tp1.p2.logic.GameWorld;
 
+
+import tp1.p2.control.exceptions.GameException;
+
 public class ZombieFactory {
 
 	/* @formatter:off */
@@ -21,9 +24,10 @@ public class ZombieFactory {
 		return zombieIdx >= 0 && zombieIdx < AVAILABLE_ZOMBIES.size();
 	}
 
-	public static Zombie spawnZombie(int zombieIdx, GameWorld game, int col, int row) {
+	public static Zombie spawnZombie(int zombieIdx, GameWorld game, int col, int row) throws GameException  {
 		if (!isValidZombie(zombieIdx)) {
-			return null;
+			throw new GameException(Messages.INVALID_GAME_OBJECT);
+			//return null;
 		}
 		else {
 			Zombie zombieType = AVAILABLE_ZOMBIES.get(zombieIdx);

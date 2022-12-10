@@ -3,9 +3,13 @@ package tp1.p2.control.commands;
 import static tp1.p2.view.Messages.error;
 
 import tp1.p2.control.Command;
-import tp1.p2.control.ExecutionResult;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
+
+import tp1.p2.control.exceptions.CommandExecuteException;
+import tp1.p2.control.exceptions.CommandParseException;
+import tp1.p2.control.exceptions.GameException;
+import tp1.p2.control.exceptions.NotCatchablePositionException;
 
 public class CatchCommand extends Command {
 
@@ -51,7 +55,7 @@ public class CatchCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game) {
+	public boolean execute(GameWorld game) throws GameException {
 		if (!caughtSunThisCycle) {
 			if(game.tryToCatchObject(col, row)) {
 				caughtSunThisCycle= true;
@@ -70,7 +74,7 @@ public class CatchCommand extends Command {
 	}
 
 	@Override
-	protected Command create(String[] parameters) {
+	public Command create(String[] parameters) throws GameException {
 		if (parameters.length == 3) {
 			try {
 				int col = Integer.parseInt(parameters[1]);
