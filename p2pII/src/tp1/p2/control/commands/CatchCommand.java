@@ -57,18 +57,17 @@ public class CatchCommand extends Command {
 	@Override
 	public boolean execute(GameWorld game) throws GameException {
 		if (!caughtSunThisCycle) {
-			if(game.tryToCatchObject(col, row)) {
+			try {
+				game.tryToCatchObject(col, row);
 				caughtSunThisCycle= true;
-				return new ExecutionResult(true);
+				return true;
 			}
-			else {
-				System.out.println(error(Messages.INVALID_POSITION));
-				return new ExecutionResult(false);
+			catch(GameException e) {
+				throw e;
 			}
 		}
 		else {
-			System.out.println(error(Messages.SUN_ALREADY_CAUGHT));
-			return new ExecutionResult(false);
+			throw new GameException(error(Messages.SUN_ALREADY_CAUGHT));
 		}
 		
 	}
@@ -77,10 +76,18 @@ public class CatchCommand extends Command {
 	public Command create(String[] parameters) throws GameException {
 		if (parameters.length == 3) {
 			try {
-				int col = Integer.parseInt(parameters[1]);
-				int row = Integer.parseInt(parameters[2]);
-				Command command = new CatchCommand(col, row);
-				return command;
+				try {
+					int col = Integer.parseInt(parameters[1]);
+					int row = Integer.parseInt(parameters[2]);
+					Command command = new CatchCommand(col, row);
+					return command;
+				}
+				catch(Exception e) {//No se si tengo que capturar esta excepcion-->mirar 
+					
+					throw new CommandParseException("No encuentro en mensajes el de tipo de parametros no validos");
+					
+				}
+				
 			}
 			catch (Exception e){
 				System.out.println(error(Messages.INVALID_POSITION));
@@ -89,8 +96,9 @@ public class CatchCommand extends Command {
 				
 		}
 		else {
-			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
-			return null;
+			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+//			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+//			return null;
 		}
 	}	
 }

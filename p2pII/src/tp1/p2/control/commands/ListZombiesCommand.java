@@ -37,7 +37,7 @@ public class ListZombiesCommand extends Command {
 			System.out.println(z.getDescription());
 		}
 		System.out.println();
-		return new ExecutionResult(false);
+		return false;
 	}
 
 }

@@ -36,7 +36,7 @@ public class NoneCommand extends Command {
 	@Override
 	public boolean execute(GameWorld game) throws GameException {
 		game.update();
-		return new ExecutionResult(true);
+		return true;
 	}
 
 }

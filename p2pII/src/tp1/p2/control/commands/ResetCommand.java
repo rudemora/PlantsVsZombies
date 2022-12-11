@@ -52,26 +52,36 @@ public class ResetCommand extends Command {
 			seed =  game.getSeed();
 		}
 		game.reset(seed, level);
-		return new ExecutionResult(true);
+		return true;
 	}
 
 	@Override
 	public Command create(String[] parameters) throws GameException {
 		try {
 			if(parameters.length==3) {
-				Level level = Level.valueOfIgnoreCase(parameters[1]);
-				long seed = System.currentTimeMillis() % 1000;
-				seed = Long.parseLong(parameters[2]);
-				Command command= new ResetCommand(level, seed);
-			return command;
+				try {
+					Level level = Level.valueOfIgnoreCase(parameters[1]);
+					long seed = System.currentTimeMillis() % 1000;
+					seed = Long.parseLong(parameters[2]);
+					Command command= new ResetCommand(level, seed);
+					return command;
+				}
+				catch(Exception e) {//No se si tengo que capturar esta excepcion-->mirar 
+					
+					throw new CommandParseException("No encuentro en mensajes el de tipo de parametros no validos");
+					
+				}
+				
+			
 			}
 			else if (parameters.length == 1) {
 				Command command = new ResetCommand();
 				return command;
 			}
 			else {
-				System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
-				return null;
+				throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+//				System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+//				return null;
 			}
 		}
 		catch (Exception e) {

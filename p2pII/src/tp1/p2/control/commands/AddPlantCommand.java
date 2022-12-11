@@ -8,8 +8,9 @@ import tp1.p2.logic.GameWorld;
 import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.PlantFactory;
 import tp1.p2.view.Messages;
+import tp1.p2.control.exceptions.NotEnoughCoinsException;//Importado por mi obviamente
 
-
+import tp1.p2.control.exceptions.InvalidPositionException;//Importado por mi obviamente
 import tp1.p2.control.exceptions.CommandExecuteException;
 import tp1.p2.control.exceptions.CommandParseException;
 import tp1.p2.control.exceptions.GameException;
@@ -57,35 +58,20 @@ public class AddPlantCommand extends Command implements Cloneable {
 	@Override
 	public boolean execute(GameWorld game) throws GameException {
 		
-		
-				
-		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-		if (col < Game.NUM_COLS) {
-			if (plant != null) {
-				if(game.addItem(plant)) {
-					if (game.consumeCoins(plant, plant.getCost())) {
-						game.update(); 
-						return new ExecutionResult(true);
-					}
-					else {
-						System.out.println(error(Messages.NOT_ENOUGH_COINS));
-						return new ExecutionResult(false);
-					}		
-				}
-				else {
-					return new ExecutionResult(false);
-				}
-			}
-		
-			else {
-				System.out.println(error(Messages.INVALID_GAME_OBJECT));
-				return new ExecutionResult(false);
-			}
+		try {
+			Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
+			game.addItem(plant);
+			game.tryToBuy(plant.getCost());
+			game.consumeCoins(plant, plant.getCost());
+			game.update();
+			return true;
+			
 		}
 		
-		else {
-			System.out.println(error(Messages.INVALID_POSITION));
-			return new ExecutionResult(false);
+		//Esto no tiene ningun tipo de sentido pq todas estas deberían ser sublcases de gameException y hacer solo un catch digo yo 
+				
+		catch(GameException e) {
+			throw e;
 		}
 		
 		
@@ -95,21 +81,28 @@ public class AddPlantCommand extends Command implements Cloneable {
 	@Override
 	public Command create(String[] parameters) throws GameException {
 		if(parameters.length == 4) {
-			try {
-				String name = parameters[1];
-				int col = Integer.parseInt(parameters[2]);
-				int row = Integer.parseInt(parameters[3]);
-				Command command= new AddPlantCommand(col, row, name);
-				return command;
-			}
-			catch (Exception e) {
+				try {
+					String name = parameters[1];
+					int col = Integer.parseInt(parameters[2]);
+					int row = Integer.parseInt(parameters[3]);
+					Command command= new AddPlantCommand(col, row, name);
+					return command;
+				}
+				catch( NumberFormatException nfe) {
+					
+					throw new CommandParseException(Messages.INVALID_POSITION.formatted(parameters[1], parameters[2]), nfe);
+					
+				}
+				
+			/*catch (Exception e) {
 				System.out.println(error(Messages.INVALID_POSITION));
 				return null;
-			}
+			}*/
 		}
 		else {
-			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
-			return null;
+			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+//			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+//			return null;
 		}		
 	}
 

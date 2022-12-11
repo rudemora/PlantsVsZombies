@@ -8,6 +8,7 @@ import java.util.List;
 import tp1.p2.control.exceptions.GameException;
 
 import tp1.p2.logic.GameWorld;
+import tp1.p2.view.Messages;
 
 public class PlantFactory {
 
@@ -20,28 +21,34 @@ public class PlantFactory {
 	);
 	/* @formatter:on */
 
-	public static boolean isValidPlant(String plantName) {
+	public static void isValidPlant(String plantName) throws GameException{
+		boolean ok=true;
 		for (Plant p : AVAILABLE_PLANTS) {
 			if (p.getName().equalsIgnoreCase(plantName)|| p.getSymbol().equalsIgnoreCase(plantName)) {
-				return true;
+				ok=false;
 			}
 		}
-		return false;	
+		if(ok) {
+			throw new GameException(Messages.INVALID_GAME_OBJECT);
+		}
 	}
 
 	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) throws GameException {
-		if (!isValidPlant(plantName)) {
-			return null;
-		}
-		else {
+		try {
+			isValidPlant(plantName);
 			for (Plant p : AVAILABLE_PLANTS) {
 				if (p.getName().equalsIgnoreCase(plantName)|| p.getSymbol().equalsIgnoreCase(plantName)) {
 					Plant planta = p.create(game, col, row);
 					return planta;
 				}
 			}
+			return null;
 		}
-		return null;
+		catch(GameException e) {
+			throw e;
+			
+		}
+		
 			
 	}
 		

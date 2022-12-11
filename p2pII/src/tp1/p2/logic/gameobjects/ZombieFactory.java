@@ -3,6 +3,7 @@ package tp1.p2.logic.gameobjects;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import tp1.p2.view.Messages;//Importado por mi pero en plant factory estaba
 
 import tp1.p2.logic.GameWorld;
 

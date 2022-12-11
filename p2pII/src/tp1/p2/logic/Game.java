@@ -6,7 +6,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List; 
 import java.util.Random;
-
+import tp1.p2.control.exceptions.InvalidPositionException;//Importado por mi obviamente
+import tp1.p2.control.exceptions.NotCatchablePositionException;//Importado por mi obviamente
+import tp1.p2.control.exceptions.NotEnoughCoinsException;//Importado por mi obviamente
 import tp1.p2.control.Command;
 import tp1.p2.control.Level;
 import tp1.p2.logic.actions.GameAction;
@@ -85,7 +87,7 @@ public class Game implements GameStatus, GameWorld {
 	 * 
 	 */
 	
-	public void update() throws GameException {
+	public void update()  {//throws GameException
 
 		// 1. Execute pending actions
 		executePendingActions();
@@ -174,28 +176,43 @@ public class Game implements GameStatus, GameWorld {
 	public boolean isPlayerQuits() {
 		return playerQuits;
 	}
-
 	@Override
-	public boolean addItem(GameObject gameObject) { 
-		
-		int columna = gameObject.getCol();
-		int fila = gameObject.getRow();
-		if (columna >= 0 && columna <= Game.NUM_COLS && fila >= 0 && fila < Game.NUM_ROWS) {
-
+	public void checkValidPlantPosition(int columna, int fila) throws GameException{
+		if(columna >= 0 && columna <Game.NUM_COLS && fila >= 0 && fila < Game.NUM_ROWS) {
 			if(!this.isFullyOcuppied(columna,fila)) {
-				this.addGameItem(gameObject);
-	    		return true;
-	    	}
+				
+			}
 			else {
-	        	return false;
-	    	}
-		
+				throw new InvalidPositionException(error(Messages.INVALID_POSITION));
+			}
 		}
 		else {
-			System.out.println(error(Messages.INVALID_POSITION));
-			return false;
-			
+			throw new InvalidPositionException(error(Messages.INVALID_POSITION));
 		}
+	}
+	
+	@Override
+	public void checkValidZombiePosition(int columna, int fila) throws GameException{
+		if(columna >= 0 && columna <= Game.NUM_COLS && fila >= 0 && fila < Game.NUM_ROWS) {
+			if(!this.isFullyOcuppied(columna,fila)) {
+				
+			}
+			else {
+				throw new InvalidPositionException(error(Messages.INVALID_POSITION));
+			}
+		}
+		else {
+			throw new InvalidPositionException(error(Messages.INVALID_POSITION));
+		}
+	}
+
+	@Override
+	public void addItem(GameObject gameObject){ 
+		
+		int columna = gameObject.getCol();
+		int fila = gameObject.getRow();		
+		this.addGameItem(gameObject);
+			
 	}
 	
 	@Override
@@ -232,13 +249,12 @@ public class Game implements GameStatus, GameWorld {
     }
 	
 	@Override
-	public boolean tryToCatchObject(int col, int row) {
+	public void tryToCatchObject(int col, int row) throws GameException  {
 		if(container.tryToCatchObject(col, row)) {
 			this.removeDead();
-			return true;
 		}
 		else {
-			return false;
+			throw new NotCatchablePositionException("No se que mensaje y seguramente meter tb la posicion y tal en la que falla");
 		}
 		
 	}
@@ -260,12 +276,16 @@ public class Game implements GameStatus, GameWorld {
     }
 	
 	@Override
-	public boolean consumeCoins(GameObject object, int coste) {
-    	if(coste <= this.sunCoins) {
-        	this.sunCoins = this.sunCoins-coste;
-        	return true;
-    	}
-    	return false;
+	public void tryToBuy(int cost) throws GameException{
+		if(cost > this.sunCoins) {
+			throw new NotEnoughCoinsException(Messages.NOT_ENOUGH_COINS);
+		}
+		
+	}
+	
+	@Override
+	public void consumeCoins(GameObject object, int coste) {
+		this.sunCoins = this.sunCoins-coste;
     }
 	
 	@Override
@@ -331,5 +351,19 @@ public class Game implements GameStatus, GameWorld {
 	public boolean zombiesGana() {
 		endGame = true;
 		return true;
+	}
+
+
+	@Override
+	public void reset(long seed, Level level) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void reset() throws GameException {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -4,6 +4,10 @@ import static tp1.p2.view.Messages.error;
 
 import tp1.p2.control.Command;
 import tp1.p2.control.ExecutionResult;
+import tp1.p2.control.exceptions.CommandParseException;
+import tp1.p2.control.exceptions.CommandExecuteException;//Importado por mi
+import tp1.p2.control.exceptions.InvalidPositionException; //Importado por mi obviamente
+import tp1.p2.control.exceptions.GameException;
 import tp1.p2.logic.Game;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.logic.gameobjects.Plant;
@@ -48,49 +52,55 @@ public class AddPlantCheatCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameWorld game) {
-		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-		if (col < Game.NUM_COLS) {
-			if (plant != null) {
-				if(game.addItem(plant)) { 
-					game.update(); 
-					return new ExecutionResult(true);
-				}	
-				else {
-					System.out.print(error(Messages.INVALID_POSITION));
-					return new ExecutionResult(false);
-				}
-			}
-			else {
-				System.out.print(error(Messages.INVALID_GAME_OBJECT));
-				return new ExecutionResult(false);
-			}
+	public boolean execute(GameWorld game) throws GameException{
+		try {
+			Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
+			game.checkValidPlantPosition(col, row);
+			game.addItem(plant); 
+			game.update(); 
+			return true;
+			
 		}
-		else {
-			System.out.println(error(Messages.INVALID_POSITION));
-			return new ExecutionResult(false);
+		catch(GameException e) {
+			throw e;
 		}
+		/*catch(CommandExecuteException e) {
+			throw new CommandExecuteException(e.toString());
+		}
+		
+		catch(InvalidPositionException e) {
+			throw new InvalidPositionException(Messages.INVALID_POSITION);
+		}*/
+		
 	}
 	
 	@Override
-	protected Command create(String[] parameters) {
+	public Command create(String[] parameters) throws GameException{
 		if(parameters.length == 4) {
-			try {
-				String name = parameters[1];
-				int col = Integer.parseInt(parameters[2]);
-				int row = Integer.parseInt(parameters[3]);
-				Command command= new AddPlantCheatCommand(col, row, name);
-				return command;
-			}
-			catch (Exception e) {
-				System.out.println(error(Messages.INVALID_POSITION));
-				return null;
-			}
+				try {
+					String name = parameters[1];
+					int col = Integer.parseInt(parameters[2]);
+					int row = Integer.parseInt(parameters[3]);
+					Command command= new AddPlantCheatCommand(col, row, name);
+					return command;
+				}
+				catch( NumberFormatException nfe) {
+					
+					throw new CommandParseException(Messages.INVALID_POSITION.formatted(parameters[1], parameters[2]), nfe);
+					
+				}
+			
+				/*catch (InvalidPositionException e) { Creo que mejor esta en el execute
+					throw new InvalidPositionException(Messages.INVALID_POSITION);
+//					System.out.println(error(Messages.INVALID_POSITION));
+//					return null;
+			}*/
 			
 		}
 		else {
-			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
-			return null;
+			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+			//System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+//			return null;
 		}
 	}
 }

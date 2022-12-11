@@ -52,43 +52,41 @@ public class AddZombieCommand extends Command {
 
 	@Override
 	public boolean execute(GameWorld game) throws GameException {
-		Zombie zombie = ZombieFactory.spawnZombie(this.zombieIdx, game, this.col, this.row);
-		if (zombie != null) {
-			if (game.addItem(zombie)) {
-				game.update();
-				return new ExecutionResult(true);	
-			}
-			else {
-				System.out.print(error(Messages.INVALID_POSITION));
-				return new ExecutionResult(false);
-			}
+		try {
+			Zombie zombie = ZombieFactory.spawnZombie(this.zombieIdx, game, this.col, this.row);
+			game.checkValidZombiePosition(col, row);
+			game.addItem(zombie);
+			game.update();
+			return true;
 		}
-		else {
-			System.out.print(error(Messages.INVALID_GAME_OBJECT));
-			return new ExecutionResult(false);
-		}		
+		catch(GameException e) {
+			throw e;
+		}
+		
+		
 	}
 	
 	
 	@Override
 	public Command create(String[] parameters) throws GameException {
 		if(parameters.length == 4) {
-			try {
-				int type = Integer.parseInt(parameters[1]);
-				int col = Integer.parseInt(parameters[2]);
-				int row = Integer.parseInt(parameters[3]);
-				Command command= new AddZombieCommand(col, row, type);
-				return command;
-			}
-			catch (Exception e) {
-				System.out.println(error(Messages.INVALID_POSITION));
-				return null;
-			}
-		
+				try {
+					int type = Integer.parseInt(parameters[1]);
+					int col = Integer.parseInt(parameters[2]);
+					int row = Integer.parseInt(parameters[3]);
+					Command command= new AddZombieCommand(col, row, type);
+					return command;
+				}
+				catch( NumberFormatException nfe) {
+					
+					throw new CommandParseException(Messages.INVALID_POSITION.formatted(parameters[1], parameters[2]), nfe);
+					
+				}
 		}
 		else {
-			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
-			return null;
+			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+//			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
+//			return null;
 		}
 		
 		

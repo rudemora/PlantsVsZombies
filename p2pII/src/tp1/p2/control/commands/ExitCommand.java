@@ -30,8 +30,9 @@ public class ExitCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(GameWorld game) throws GameException {		game.playerQuits();
-		return new ExecutionResult(false);
+	public boolean execute(GameWorld game) throws GameException {		
+		game.playerQuits();
+		return false;
 	}
 
 }

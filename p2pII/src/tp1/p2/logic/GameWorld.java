@@ -8,6 +8,7 @@ import java.util.List;
 
 import tp1.p2.control.Level;
 import tp1.p2.control.exceptions.GameException;
+import tp1.p2.control.exceptions.InvalidPositionException;
 
 public interface GameWorld {
 
@@ -16,17 +17,16 @@ public interface GameWorld {
 	public static final int NUM_COLS = 8;
 
 	void pushAction(GameAction gameAction);
-	boolean consumeCoins(GameObject object, int coste);
+	void consumeCoins(GameObject object, int coste);
 	void addSun();
 	void addGameItem(GameObject object);
 	void tryToCatchObject(int col, int row) throws GameException; //nuevo
 	int getCaughtSuns();
-	boolean addItem(GameObject gameObject);
+	void addItem(GameObject gameObject);
 	List<GameItem> getGameItemInPosition(int x, int y);
 	void addSuncoins(int Coins);
 	void playerQuits();
 	boolean isPositionEmpty(int x, int y);
-	void update();
 	boolean isFullyOcuppied(int col, int row);
 	void reset(long seed, Level level);
 	Level getLevel();
