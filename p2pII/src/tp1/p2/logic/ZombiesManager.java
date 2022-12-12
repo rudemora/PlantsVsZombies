@@ -55,23 +55,40 @@ public class ZombiesManager {
 		return rand.nextInt(ZombieFactory.getAvailableZombies().size());
 	}
 
-	public void update() {//throws GameException {
-		addZombie();
+	public void update ()throws GameException {
+		try {
+			addZombie();
+		}catch(GameException e) { //Todo esto no creo q sean gameexception sino que igual son commandexecute exception o q se yo
+			throw e;
+		}
+		
 	}
 
-	public boolean addZombie() {//throws GameException {
+	public boolean addZombie() throws GameException {
 		int row = randomZombieRow();
-		return addZombie(row);
+		try {
+			return addZombie(row);
+		}catch(GameException e) {
+			throw e;
+		}
+		
 	}
 
-	public boolean addZombie(int row) {//throws GameException {                 
+	public boolean addZombie (int row) throws GameException{               
 		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && !game.isFullyOcuppied(GameWorld.NUM_COLS, row);
 		int zombieType = randomZombieType();
 		if (canAdd) {
 			Zombie z = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
 			Zombie zombie = z.create(game, GameWorld.NUM_COLS, row);
-			game.addItem(zombie);
-			remainingZombies --;
+			try {
+				game.checkValidZombiePosition(zombieType, row);
+				game.addItem(zombie);
+				remainingZombies --;
+				return canAdd;
+			}catch (GameException e) {
+				throw e;
+			}
+			
 		}
 		return canAdd;
 	}

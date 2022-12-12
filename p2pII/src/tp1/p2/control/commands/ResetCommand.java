@@ -66,9 +66,9 @@ public class ResetCommand extends Command {
 					Command command= new ResetCommand(level, seed);
 					return command;
 				}
-				catch(Exception e) {//No se si tengo que capturar esta excepcion-->mirar 
+				catch( NumberFormatException nfe) {
 					
-					throw new CommandParseException("No encuentro en mensajes el de tipo de parametros no validos");
+					throw new CommandParseException("no se que mensaje escribir aqui");
 					
 				}
 				
@@ -84,9 +84,8 @@ public class ResetCommand extends Command {
 //				return null;
 			}
 		}
-		catch (Exception e) {
-			System.out.println(error(Messages.INVALID_COMMAND));
-			return null;
+		catch (CommandParseException e) {
+			throw e;
 		}
 	}
 		

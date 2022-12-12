@@ -87,35 +87,39 @@ public class Game implements GameStatus, GameWorld {
 	 * 
 	 */
 	
-	public void update()  {//throws GameException
-
-		// 1. Execute pending actions
-		executePendingActions();
-		
-		// 2. Execute game Actions
-		zombiesManager.update();
-		sunsManager.update();
-		//container.removeDead();
-		// 3. Game object updates
-		container.update();
-		
-		// 4. & 5. Remove dead and execute pending actions
-		boolean deadRemoved = true;
-		while (deadRemoved || areTherePendingActions()) {
-			// 4. Remove dead
-			deadRemoved = this.container.removeDead();
-			// 5. execute pending actions
+	public void update() throws GameException {//throws GameException
+		try { //No se si este try deberia englobar todo o solo el zombiemanagerupdate
+			// 1. Execute pending actions
 			executePendingActions();
+			
+			// 2. Execute game Actions
+			zombiesManager.update();
+			sunsManager.update();
+			//container.removeDead();
+			// 3. Game object updates
+			container.update();
+			
+			// 4. & 5. Remove dead and execute pending actions
+			boolean deadRemoved = true;
+			while (deadRemoved || areTherePendingActions()) {
+				// 4. Remove dead
+				deadRemoved = this.container.removeDead();
+				// 5. execute pending actions
+				executePendingActions();
+			}
+
+			this.cycle++;
+
+			// 6. Notify commands that a new cycle started
+			Command.newCycle();
+			
+			// 7. Update record
+			// TODO your code here
+
+		} catch(GameException e) {
+			throw e;
 		}
-
-		this.cycle++;
-
-		// 6. Notify commands that a new cycle started
-		Command.newCycle();
 		
-		// 7. Update record
-		// TODO your code here
-
 	}
 
 	private void executePendingActions() {
