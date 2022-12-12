@@ -41,7 +41,10 @@ public class Game implements GameStatus, GameWorld {
 	
 	private SunsManager sunsManager;
 	
-
+	private Long startTime;
+	private Long elapsedTime;
+	private Record record;
+	
 	private int sunCoins;
 	
 	public Game(long seed, Level level) throws GameException {
@@ -69,6 +72,14 @@ public class Game implements GameStatus, GameWorld {
 		endGame = false;
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
+		this.startTime = (long) 0;
+		this.elapsedTime = (long) 0;
+		try {
+			this.record = new Record(this);
+		}
+		catch (InputOutputRecordException e) {
+			
+		}
 	}
 
 	
@@ -115,6 +126,12 @@ public class Game implements GameStatus, GameWorld {
 			
 			// 7. Update record
 			// TODO your code here
+			if (this.startTime == 0.0) {
+				this.startTime = System.currentTimeMillis();
+			}
+			else {
+				this.elapsedTime = System.currentTimeMillis() - this.startTime;
+			}
 
 		} catch(GameException e) {
 			throw e;
@@ -370,5 +387,13 @@ public class Game implements GameStatus, GameWorld {
 	public void reset() throws GameException {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Long getElapsedTime() {
+		return this.elapsedTime;
+	}
+	
+	public void showRecord() throws InputOutPutRecordException, CommandExecuteException{
+		this.record.showRecord();
 	}
 }

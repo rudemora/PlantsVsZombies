@@ -1,37 +1,27 @@
 package tp1.p2.control.commands;
 import tp1.p2.control.Command;
+import tp1.p2.control.exceptions.CommandExecuteException;
 import tp1.p2.control.exceptions.GameException;
+import tp1.p2.control.exceptions.InputOutputRecordException;
 import tp1.p2.logic.GameWorld;
 
 public class ShowRecordCommand extends Command {
 
-	@Override
-	protected String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	private static final String NAME = "record";
+
+	private static final String DETAILS = "rec[o]rd";
+
+	private static final String SHORTCUT = "o";
+
+	private static final String HELP = "show level record";
+
+	public ShowRecordCommand() {
+		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
 
 	@Override
-	protected String getShortcut() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDetails() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getHelp() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean execute(GameWorld game) throws GameException {
-		// TODO Auto-generated method stub
+	public boolean execute(GameWorld game) throws InputOutputRecordException, CommandExecuteException {	//llamamos a la función clearRoad() de game
+		game.showRecord();
 		return false;
 	}
 
