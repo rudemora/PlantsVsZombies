@@ -48,8 +48,6 @@ public class PlantFactory {
 			throw e;
 			
 		}
-		
-			
 	}
 		
 	public static Iterable<Plant> getAvailablePlants() {

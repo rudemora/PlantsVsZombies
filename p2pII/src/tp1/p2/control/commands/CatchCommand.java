@@ -62,8 +62,8 @@ public class CatchCommand extends Command {
 				caughtSunThisCycle= true;
 				return true;
 			}
-			catch(GameException e) {
-				throw e;
+			catch(NotCatchablePositionException e) {
+				throw new CommandExecuteException(e.toString(), e);
 			}
 		}
 		else {

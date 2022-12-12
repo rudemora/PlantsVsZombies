@@ -149,8 +149,9 @@ public class Game implements GameStatus, GameWorld {
 		return this.container.isFullyOccupied(col, row);
 	}
 	
-	public boolean execute (Command command) {
-    	return command.execute(this).draw();
+	public boolean execute (Command command) throws GameException {
+		return command.execute(this);
+		
     }
 
 	
@@ -183,11 +184,11 @@ public class Game implements GameStatus, GameWorld {
 				
 			}
 			else {
-				throw new InvalidPositionException(error(Messages.INVALID_POSITION));
+				throw new InvalidPositionException(Messages.INVALID_POSITION.formatted(columna, fila));
 			}
 		}
 		else {
-			throw new InvalidPositionException(error(Messages.INVALID_POSITION));
+			throw new InvalidPositionException(Messages.INVALID_POSITION.formatted(columna, fila));
 		}
 	}
 	
@@ -198,11 +199,11 @@ public class Game implements GameStatus, GameWorld {
 				
 			}
 			else {
-				throw new InvalidPositionException(error(Messages.INVALID_POSITION));
+				throw new InvalidPositionException(Messages.INVALID_POSITION.formatted(columna, fila));
 			}
 		}
 		else {
-			throw new InvalidPositionException(error(Messages.INVALID_POSITION));
+			throw new InvalidPositionException(Messages.INVALID_POSITION.formatted(columna, fila));
 		}
 	}
 

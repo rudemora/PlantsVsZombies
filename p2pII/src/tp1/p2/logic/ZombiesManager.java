@@ -55,17 +55,17 @@ public class ZombiesManager {
 		return rand.nextInt(ZombieFactory.getAvailableZombies().size());
 	}
 
-	public void update() throws GameException {
+	public void update() {//throws GameException {
 		addZombie();
 	}
 
-	public boolean addZombie() throws GameException {
+	public boolean addZombie() {//throws GameException {
 		int row = randomZombieRow();
 		return addZombie(row);
 	}
 
-	public boolean addZombie(int row) throws GameException {                  //el cambio de abajo es por nueva plantilla!
-		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && !isObjectInPosition(GameWorld.NUM_COLS, row);//!game.isFullyOcuppied(GameWorld.NUM_COLS, row);
+	public boolean addZombie(int row) {//throws GameException {                 
+		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && !game.isFullyOcuppied(GameWorld.NUM_COLS, row);
 		int zombieType = randomZombieType();
 		if (canAdd) {
 			Zombie z = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
