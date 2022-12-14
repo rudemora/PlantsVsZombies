@@ -58,7 +58,7 @@ public class ZombiesManager {
 	public void update ()throws GameException {
 		try {
 			addZombie();
-		}catch(GameException e) { //Todo esto no creo q sean gameexception sino que igual son commandexecute exception o q se yo
+		}catch(GameException e) { //Todos estos catch habria que quitarlos creo, igual que los otros
 			throw e;
 		}
 		
@@ -68,7 +68,7 @@ public class ZombiesManager {
 		int row = randomZombieRow();
 		try {
 			return addZombie(row);
-		}catch(GameException e) {
+		}catch(GameException e) {//Este catch habria que quitarlo tambien creo
 			throw e;
 		}
 		
@@ -85,7 +85,7 @@ public class ZombiesManager {
 				game.addItem(zombie);
 				remainingZombies --;
 				return canAdd;
-			}catch (GameException e) {
+			}catch (GameException e) {//Este catch habria que quitarlo tambien creo
 				throw e;
 			}
 			

@@ -205,11 +205,11 @@ public class Game implements GameStatus, GameWorld {
 				
 			}
 			else {
-				throw new InvalidPositionException(Messages.INVALID_POSITION.formatted(columna, fila));
+				throw new InvalidPositionException(columna, fila);
 			}
 		}
 		else {
-			throw new InvalidPositionException(Messages.INVALID_POSITION.formatted(columna, fila));
+			throw new InvalidPositionException(columna, fila);
 		}
 	}
 	
@@ -220,11 +220,11 @@ public class Game implements GameStatus, GameWorld {
 				
 			}
 			else {
-				throw new InvalidPositionException(Messages.INVALID_POSITION.formatted(columna, fila));
+				throw new InvalidPositionException(columna, fila);
 			}
 		}
 		else {
-			throw new InvalidPositionException(Messages.INVALID_POSITION.formatted(columna, fila));
+			throw new InvalidPositionException(columna, fila);
 		}
 	}
 

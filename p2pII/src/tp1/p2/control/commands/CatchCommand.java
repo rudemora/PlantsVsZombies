@@ -82,18 +82,17 @@ public class CatchCommand extends Command {
 					Command command = new CatchCommand(col, row);
 					return command;
 				}
-				catch(Exception e) {//No se si tengo que capturar esta excepcion-->mirar 
+				catch( NumberFormatException nfe) {
 					
-					throw new CommandParseException("No encuentro en mensajes el de tipo de parametros no validos");
+					throw new CommandParseException(Messages.INVALID_POSITION.formatted(parameters[1], parameters[2]), nfe);
 					
 				}
 				
 			}
-			catch (Exception e){
-				System.out.println(error(Messages.INVALID_POSITION));
-				return null;
-			}
+			
+			finally {
 				
+			}
 		}
 		else {
 			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);

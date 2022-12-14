@@ -59,8 +59,8 @@ public class AddZombieCommand extends Command {
 			game.update();
 			return true;
 		}
-		catch(GameException e) {
-			throw e;
+		finally {
+			
 		}
 		
 		

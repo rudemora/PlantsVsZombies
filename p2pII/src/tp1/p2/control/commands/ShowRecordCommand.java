@@ -25,4 +25,28 @@ public class ShowRecordCommand extends Command {
 		return false;
 	}
 
+	@Override
+	protected String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String getShortcut() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getHelp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

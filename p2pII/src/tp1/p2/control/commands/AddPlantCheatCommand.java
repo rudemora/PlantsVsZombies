@@ -61,16 +61,11 @@ public class AddPlantCheatCommand extends Command {
 			return true;
 			
 		}
-		catch(GameException e) {
-			throw e;
-		}
-		/*catch(CommandExecuteException e) {
-			throw new CommandExecuteException(e.toString());
+		finally {
+			//Me obliga a incorporarlo??
 		}
 		
-		catch(InvalidPositionException e) {
-			throw new InvalidPositionException(Messages.INVALID_POSITION);
-		}*/
+		
 		
 	}
 	

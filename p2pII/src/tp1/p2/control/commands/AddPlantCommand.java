@@ -68,11 +68,11 @@ public class AddPlantCommand extends Command implements Cloneable {
 			
 		}
 		
-		//Esto no tiene ningun tipo de sentido pq todas estas deberían ser sublcases de gameException y hacer solo un catch digo yo 
-				
-		catch(GameException e) {
-			throw e;
+		finally {
+			
 		}
+				
+		
 		
 		
 
@@ -94,10 +94,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 					
 				}
 				
-			/*catch (Exception e) {
-				System.out.println(error(Messages.INVALID_POSITION));
-				return null;
-			}*/
+			
 		}
 		else {
 			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
