@@ -7,6 +7,7 @@ Sun coins: 50
 Remaining zombies: 3
 Generated suns: 0
 Caught suns: 0
+Score: 0
            0              1              2              3              4              5              6              7              8       
      ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
   0 |              |              |              |              |              |              |              |              |              
@@ -41,6 +42,7 @@ Sun coins: 50
 Remaining zombies: 3
 Generated suns: 0
 Caught suns: 0
+Score: 0
            0              1              2              3              4              5              6              7              8       
      ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
   0 |              |              |              |              |              |              |              |              |              
@@ -60,6 +62,7 @@ Sun coins: 50
 Remaining zombies: 3
 Generated suns: 0
 Caught suns: 0
+Score: 0
            0              1              2              3              4              5              6              7              8       
      ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
   0 |              |              |              |              |              |              |              |              |              
@@ -79,6 +82,7 @@ Sun coins: 50
 Remaining zombies: 3
 Generated suns: 0
 Caught suns: 0
+Score: 0
            0              1              2              3              4              5              6              7              8       
      ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
   0 |              |              |              |              |              |              |              |              |              
@@ -93,12 +97,12 @@ Caught suns: 0
 Command > 
 [DEBUG] Executing: a p a b
 
-[ERROR] Error: Invalid position
+[ERROR] Error: Invalid position (a, b)
 
 Command > 
 [DEBUG] Executing: a p 1 b
 
-[ERROR] Error: Invalid position
+[ERROR] Error: Invalid position (1, b)
 
 Command > 
 [DEBUG] Executing: a x 1 1
@@ -114,6 +118,7 @@ Sun coins: 0
 Remaining zombies: 3
 Generated suns: 0
 Caught suns: 0
+Score: 0
            0              1              2              3              4              5              6              7              8       
      ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
   0 |              |              |              |              |              |              |              |              |              

@@ -68,7 +68,7 @@ public class ResetCommand extends Command {
 				}
 				catch( NumberFormatException nfe) {
 					
-					throw new CommandParseException("no se que mensaje escribir aqui");
+					throw new CommandParseException(Messages.INVALID_COMMAND);
 					
 				}
 				

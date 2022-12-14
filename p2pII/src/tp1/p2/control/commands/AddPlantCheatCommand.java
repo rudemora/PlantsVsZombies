@@ -72,7 +72,7 @@ public class AddPlantCheatCommand extends Command {
 				}
 				catch( NumberFormatException nfe) {
 					
-					throw new CommandParseException(Messages.INVALID_POSITION.formatted(parameters[1], parameters[2]), nfe);
+					throw new CommandParseException(Messages.INVALID_POSITION.formatted(parameters[2], parameters[3]), nfe);
 					
 				}
 			
@@ -83,10 +83,11 @@ public class AddPlantCheatCommand extends Command {
 			}*/
 			
 		}
+		if (parameters.length<4) {
+			throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
+		}
 		else {
 			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
-			//System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
-//			return null;
 		}
 	}
 }

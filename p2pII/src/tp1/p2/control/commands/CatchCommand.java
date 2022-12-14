@@ -83,6 +83,9 @@ public class CatchCommand extends Command {
 			
 			
 		}
+		if (parameters.length<3) {
+			throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
+		}
 		else {
 			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 //			System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));

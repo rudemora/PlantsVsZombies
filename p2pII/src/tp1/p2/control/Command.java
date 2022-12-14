@@ -119,7 +119,7 @@ public abstract class Command {
 	public abstract boolean execute(GameWorld game) throws GameException;
 
 	
-	public Command create(String[] parameters) throws GameException {
+	public Command create(String[] parameters) throws GameException { // es necesario utilizar lo de abajo?
 		//if (parameters.length != 0) {
 		//	throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 		//}
