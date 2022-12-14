@@ -46,7 +46,7 @@ public class Game implements GameStatus, GameWorld {
 	private Record record;
 	
 	private int sunCoins;
-	
+	private static int puntos;
 	public Game(long seed, Level level) throws GameException {
 		this.reset(seed, level);
 	}
@@ -70,6 +70,7 @@ public class Game implements GameStatus, GameWorld {
 		sunCoins = INITIAL_SUNCOINS;
 		this.sunsManager = new SunsManager(this, rand);
 		endGame = false;
+		puntos = 0;
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
 		this.startTime = (long) 0;
@@ -230,11 +231,7 @@ public class Game implements GameStatus, GameWorld {
 
 	@Override
 	public void addItem(GameObject gameObject){ 
-		
-		int columna = gameObject.getCol();
-		int fila = gameObject.getRow();		
-		this.addGameItem(gameObject);
-			
+		this.addGameItem(gameObject);	
 	}
 	
 	@Override
@@ -276,7 +273,7 @@ public class Game implements GameStatus, GameWorld {
 			this.removeDead();
 		}
 		else {
-			throw new NotCatchablePositionException("No se que mensaje y seguramente meter tb la posicion y tal en la que falla");
+			throw new NotCatchablePositionException(col, row);
 		}
 		
 	}
@@ -390,11 +387,21 @@ public class Game implements GameStatus, GameWorld {
 	}
 	*/
 	
+	public int getScore() {
+		return puntos;
+	}
+	
 	public Long getElapsedTime() {
 		return this.elapsedTime;
 	}
 	
+	@Override
 	public void showRecord() throws RecordException, CommandExecuteException{
 		this.record.showRecord();
+	}
+	
+	@Override
+	public void addPuntos(int num) {
+		puntos += num;
 	}
 }

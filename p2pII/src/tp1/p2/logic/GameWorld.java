@@ -38,7 +38,7 @@ public interface GameWorld {
 	void decreaseZombiesAlived();
 	void addCaughtSuns();
 	boolean zombiesGana();
-	
+	void addPuntos(int num); //nuevo pero creado por nosotros
 	// nuevos
 	void update() throws GameException;
 
@@ -53,6 +53,7 @@ public interface GameWorld {
 	void checkValidZombiePosition(int col, int row) throws GameException;
 	
 	void showRecord() throws RecordException, CommandExecuteException;
+	
 }
 
 

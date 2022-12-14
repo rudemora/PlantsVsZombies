@@ -60,8 +60,8 @@ public class AddPlantCheatCommand extends Command {
 			return true;
 			
 		}
-		finally {
-			//Me obliga a incorporarlo??
+		catch (GameException e) {
+			throw e;
 		}
 		
 		

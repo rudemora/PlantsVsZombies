@@ -1,5 +1,7 @@
 package tp1.p2.control.exceptions;
 
+import tp1.p2.view.Messages;
+
 public class NotCatchablePositionException extends InvalidPositionException {
 	
 	private static final long serialVersionUID = 1L;
@@ -12,8 +14,8 @@ public class NotCatchablePositionException extends InvalidPositionException {
 		super(cause);
 	}
 
-	public NotCatchablePositionException(String message, Throwable cause) {
-		super(message, cause);
+	public NotCatchablePositionException(int x, int y) {
+		super(Messages.NO_CATCHABLE_IN_POSITION.formatted(x,y));
 	}
 
 	

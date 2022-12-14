@@ -63,7 +63,7 @@ public class CatchCommand extends Command {
 				return true;
 			}
 			catch(NotCatchablePositionException e) {
-				throw new CommandExecuteException(e.toString(), e);
+				throw e;
 			}
 		}
 		else {

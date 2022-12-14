@@ -60,6 +60,7 @@ public class AddPlantCommand extends Command implements Cloneable {
 		
 		try {
 			Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
+			game.checkValidPlantPosition(col, row);
 			game.addItem(plant);
 			game.tryToBuy(plant.getCost());
 			game.consumeCoins(plant, plant.getCost());
@@ -68,14 +69,9 @@ public class AddPlantCommand extends Command implements Cloneable {
 			
 		}
 		
-		finally {
-			
+		catch (GameException e) {
+			throw e;
 		}
-				
-		
-		
-		
-
 	}
 
 	@Override

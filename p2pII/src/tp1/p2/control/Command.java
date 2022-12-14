@@ -54,7 +54,6 @@ public abstract class Command {
 		if (commandWords.length == 1 && commandWords[0].isEmpty()) {
 			return defaultCommand;
 		}
-
 		for (Command command : AVAILABLE_COMMANDS) {
 			if (command.matchCommand(commandWords[0])) {
 				command = command.create(commandWords);
@@ -119,10 +118,11 @@ public abstract class Command {
 	 */
 	public abstract boolean execute(GameWorld game) throws GameException;
 
+	
 	public Command create(String[] parameters) throws GameException {
-		if (parameters.length != 0) {
-			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
-		}
+		//if (parameters.length != 0) {
+		//	throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+		//}
 		return this;
 	
 	}

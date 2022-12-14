@@ -38,6 +38,7 @@ public class Controller {
 		System.out.println(String.format(Messages.REMAINING_ZOMBIES, game.getRemainingZombies()));
 		System.out.println(String.format(Messages.GENERATED_SUNS, game.getGeneratedSuns()));
 		System.out.println(String.format(Messages.CAUGHT_SUNS, game.getCaughtSuns()));
+		System.out.println(String.format(Messages.SCORE, game.getScore()));
 		System.out.println(gamePrinter);
 	}
 

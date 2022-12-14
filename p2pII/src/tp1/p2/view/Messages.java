@@ -80,7 +80,7 @@ public class Messages {
 
 	public static final String UNEXPECTED_RUNTIME_ERROR = "Oops!, ಠ_ಠ";
 	
-	public static final String SCORE = "Score:";
+	public static final String SCORE = "Score: %d";
 
 	public static final String NEW_RECORD = "New record!: ";
 
