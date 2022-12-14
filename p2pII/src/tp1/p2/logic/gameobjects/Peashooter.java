@@ -48,7 +48,7 @@ public class Peashooter extends Plant {
 			List<GameItem> lista = game.getGameItemInPosition(i, row);
 			if(lista != null) { 
 				for(int i1 =0;i1<lista.size();i1=i1+1) {
-					atacked=lista.get(i1).receivePlantAttack(this.getDamage());
+					atacked=lista.get(i1).receivePlantAttack(this.getDamage(), false);
 				}
 				
 			}

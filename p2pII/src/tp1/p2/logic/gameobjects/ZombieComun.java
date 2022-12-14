@@ -64,6 +64,12 @@ public class ZombieComun extends Zombie {
 	@Override
 	public void onExit() {
 		game.decreaseZombiesAlived();
+		if(!muertoporexplosion) {
+			game.addPuntos(10);
+		}
+		else {
+			game.addPuntos(20);
+		}
 	}
 
 	@Override

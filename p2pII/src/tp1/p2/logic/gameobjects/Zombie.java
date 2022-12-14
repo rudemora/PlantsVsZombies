@@ -2,6 +2,7 @@ package tp1.p2.logic.gameobjects;
 
 import tp1.p2.logic.GameWorld;
 public abstract class Zombie extends GameObject {
+	protected boolean muertoporexplosion;
 	
 	protected Zombie() {
 		
@@ -9,6 +10,7 @@ public abstract class Zombie extends GameObject {
 	
 	public Zombie(GameWorld game, int col, int row) {
 		super(game, col, row);
+		muertoporexplosion=false;
 	}
 	
 	abstract public int getSpeed();
@@ -31,8 +33,9 @@ public abstract class Zombie extends GameObject {
 	}
 	
 	@Override
-	public boolean receivePlantAttack(int damage) {
+	public boolean receivePlantAttack(int damage, boolean explosion) {
 		this.endurance= this.endurance - damage;
+		muertoporexplosion=explosion;
 		return true;
 	}
 	

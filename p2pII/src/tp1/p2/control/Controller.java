@@ -90,13 +90,6 @@ public class Controller {
 				refreshDisplay = false;
 				// 2-4. User action & Game Action & Update
 				Command command = Command.parse(words);
-				/*
-				if (command != null) {
-					// 3-4. Game Action & Update
-					refreshDisplay = game.execute(command);
-				} else {
-					refreshDisplay = false;
-				}*/
 				refreshDisplay = game.execute(command);
 			} catch (GameException e) {
 				System.out.println(error(e.getMessage()));

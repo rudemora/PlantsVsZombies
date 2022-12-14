@@ -56,21 +56,16 @@ public class ZombiesManager {
 	}
 
 	public void update ()throws GameException {
-		try {
+		
 			addZombie();
-		}catch(GameException e) { //Todos estos catch habria que quitarlos creo, igual que los otros
-			throw e;
-		}
 		
 	}
 
 	public boolean addZombie() throws GameException {
 		int row = randomZombieRow();
-		try {
-			return addZombie(row);
-		}catch(GameException e) {//Este catch habria que quitarlo tambien creo
-			throw e;
-		}
+		
+		return addZombie(row);
+		
 		
 	}
 
@@ -80,17 +75,15 @@ public class ZombiesManager {
 		if (canAdd) {
 			Zombie z = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
 			Zombie zombie = z.create(game, GameWorld.NUM_COLS, row);
-			try {
+			
 				
 				game.checkValidZombiePosition(GameWorld.NUM_COLS, row);
 				game.addItem(zombie);
 				remainingZombies --;
 				return canAdd;
-			}catch (GameException e) {//Este catch habria que quitarlo tambien creo
-				throw e;
 			}
 			
-		}
+		
 		return canAdd;
 	}
 

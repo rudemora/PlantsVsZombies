@@ -50,7 +50,7 @@ public class Sun extends GameObject {
 		return false;
 	}
 	@Override
-	public boolean receivePlantAttack(int damage) {
+	public boolean receivePlantAttack(int damage, boolean explosion) {
 		return false;
 	}
 

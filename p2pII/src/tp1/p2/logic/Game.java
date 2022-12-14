@@ -42,11 +42,11 @@ public class Game implements GameStatus, GameWorld {
 	private SunsManager sunsManager;
 	
 	private Long startTime;
-	private Long elapsedTime;
+    private Long elapsedTime;
 	private Record record;
 	
 	private int sunCoins;
-	private static int puntos;
+	private static int puntos;//Tiene que ser static?
 	public Game(long seed, Level level) throws GameException {
 		this.reset(seed, level);
 	}
@@ -96,7 +96,6 @@ public class Game implements GameStatus, GameWorld {
 	 */
 	
 	public void update() throws GameException {//throws GameException
-		try { //No se si este try deberia englobar todo o solo el zombiemanagerupdate
 			// 1. Execute pending actions
 			executePendingActions();
 			
@@ -131,10 +130,6 @@ public class Game implements GameStatus, GameWorld {
 			else {
 				this.elapsedTime = System.currentTimeMillis() - this.startTime;
 			}
-
-		} catch(GameException e) {
-			throw e;
-		}
 		
 	}
 
@@ -327,7 +322,7 @@ public class Game implements GameStatus, GameWorld {
 				 if (lista != null) {
 						 if (affectsZombies) {
 							 for(int k =0;k<lista.size();k=k+1) {
-								 lista.get(k).receivePlantAttack(damage);
+								 lista.get(k).receivePlantAttack(damage, true);
 							 }
 
 						 }

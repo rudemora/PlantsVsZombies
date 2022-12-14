@@ -7,6 +7,8 @@ import java.util.List;
 
 public class BucketHead extends Zombie {
 	
+	
+	
 	private static final int INITIAL_ENDURANCE = 8;
 	private static final int SPEED = 4;
 	private static final int DAMAGE = 1;
@@ -62,7 +64,13 @@ public class BucketHead extends Zombie {
 	@Override
 	public void onExit() {
 		game.decreaseZombiesAlived();
-		game.addPuntos(10);
+		if(!muertoporexplosion) {
+			game.addPuntos(10);
+		}
+		else {
+			game.addPuntos(20);
+		}
+		
 	}
 
 	@Override

@@ -41,7 +41,7 @@ public class Record {
 			while((read = recordfile.readLine()) != null) {
 				String[] record = read.split(":");
 				int i = 0;
-				while (i < LEVELS.length) {
+				while (i < LEVELS.length) {//Este while esta mal porque el fichero puede ser vacio, creo que directamente sobra y ya
 					if (record[0].equalsIgnoreCase(LEVELS[i])) {
 						try {
 						this.records[i] = Long.parseLong(record[1]);
@@ -106,7 +106,7 @@ public class Record {
 	public Long getRecord() {
 		long record = (long) 0;
 		for (int i = 0; i < LEVELS.length; ++i) {
-			if (LEVELS[i].equalsIgnoreCase(game.getLevel().toString())) {
+			if (LEVELS[i].equalsIgnoreCase(game.getLevel().toString())) { //Esto qué hace no lo entiendo
 				record = this.records[i];
 			}
 		}

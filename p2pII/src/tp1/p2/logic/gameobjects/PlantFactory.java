@@ -29,12 +29,12 @@ public class PlantFactory {
 			}
 		}
 		if(ok) {
-			throw new GameException(Messages.INVALID_GAME_OBJECT);
+			throw new GameException(Messages.INVALID_GAME_OBJECT); //No se que tipo de excecpion tiene que ser esta
 		}
 	}
 
 	public static Plant spawnPlant(String plantName, GameWorld game, int col, int row) throws GameException {
-		try {
+		
 			isValidPlant(plantName);
 			for (Plant p : AVAILABLE_PLANTS) {
 				if (p.getName().equalsIgnoreCase(plantName)|| p.getSymbol().equalsIgnoreCase(plantName)) {
@@ -43,11 +43,6 @@ public class PlantFactory {
 				}
 			}
 			return null;
-		}
-		catch(GameException e) {
-			throw e;
-			
-		}
 	}
 		
 	public static Iterable<Plant> getAvailablePlants() {

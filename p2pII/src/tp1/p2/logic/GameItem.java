@@ -23,7 +23,7 @@ public interface GameItem {
 	 * @return <code>true</code> if a plant has been attacked, <code>false</code>
 	 *         otherwise.
 	 */
-	abstract boolean receivePlantAttack(int damage);
+	abstract boolean receivePlantAttack(int damage, boolean explosion);
 
 	
 	/**

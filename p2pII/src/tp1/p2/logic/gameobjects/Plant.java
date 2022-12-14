@@ -23,7 +23,7 @@ public abstract class Plant extends GameObject {
 	}
 	
 	@Override
-	public boolean receivePlantAttack(int damage) {
+	public boolean receivePlantAttack(int damage, boolean explosion) {
 		return false;
 	}
 	
