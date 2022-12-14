@@ -6,7 +6,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import tp1.p2.control.exceptions.InputOutputRecordException;
+import tp1.p2.control.exceptions.RecordException;
 //import tp1.p2.logic.Game; quizá no hace falta
 import tp1.p2.view.Messages;
 
@@ -14,7 +14,7 @@ public class Record {
 	
 	private static final String FILE = "record.txt";
 	
-	private static final String[] LEVELS = {"TEST", "EASY", "HARD"};
+	private static final String[] LEVELS = {"EASY", "HARD", "INSANE"};
 	
 	private static final String NOT_A_NUMBER = "the record is not a proper long number";
 	
@@ -24,7 +24,7 @@ public class Record {
 	
 	private Game game;
 	
-	public Record(Game game) throws InputOutputRecordException {
+	public Record(Game game) throws RecordException {
 		this.game = game;
 		this.records = new Long[LEVELS.length];
 		for (int i = 0; i < LEVELS.length; ++i) {
@@ -33,7 +33,7 @@ public class Record {
 		readRecords();
 	}
 	
-	private void readRecords() throws InputOutputRecordException {
+	private void readRecords() throws RecordException {
 		BufferedReader recordfile = null;
 		try {
 			recordfile = new BufferedReader(new FileReader(FILE));
@@ -48,7 +48,7 @@ public class Record {
 						try {
 						this.records[i] = Long.parseLong(record[1]);
 						} catch (NumberFormatException e) {
-							throw new InputOutputRecordException(String.format("[ERROR]: Command %s: %s%n%n", "record", NOT_A_NUMBER));
+							throw new RecordException(String.format("[ERROR]: Command %s: %s%n%n", "record", NOT_A_NUMBER));
 						}
 					} else i++;
 				}
@@ -57,20 +57,20 @@ public class Record {
 				System.out.println(DEFAULT_RECORD + "'" + game.getLevel().toString() + "'");
 			}
 		} catch(IOException e1) {
-			throw new InputOutputRecordException(e1.getMessage(), e1);
+			throw new RecordException(e1.getMessage(), e1);
 		} finally {
 			if (recordfile != null) {
 				try {
 					recordfile.close();
 				}
 				catch (IOException e2) {
-					throw new InputOutputRecordException(e2.getMessage(), e2);
+					throw new RecordException(e2.getMessage(), e2);
 				}
 			}
 		}
 	}
 	
-	public void writeRecord(Game game) throws InputOutputRecordException{
+	public void writeRecord(Game game) throws RecordException{
 		if (isNewRecord()) {
 			saveNewRecord();
 		}
@@ -79,13 +79,13 @@ public class Record {
 			recordfile = new BufferedWriter(new FileWriter(FILE));
 			recordfile.write(this.recordsToString());
 		} catch (IOException e1) {
-			throw new InputOutputRecordException(e1);
+			throw new RecordException(e1);
 		} finally {
 			if (recordfile != null) {
 				try {
 					recordfile.close();
 				} catch (IOException e2) {
-					throw new InputOutputRecordException(e2);					
+					throw new RecordException(e2);					
 				}
 			}
 		}

@@ -7,8 +7,10 @@ import tp1.p2.control.Level;
 import java.util.List;
 
 import tp1.p2.control.Level;
+import tp1.p2.control.exceptions.CommandExecuteException;
 import tp1.p2.control.exceptions.GameException;
 import tp1.p2.control.exceptions.InvalidPositionException;
+import tp1.p2.control.exceptions.RecordException;
 
 public interface GameWorld {
 
@@ -28,7 +30,7 @@ public interface GameWorld {
 	void playerQuits();
 	boolean isPositionEmpty(int x, int y);
 	boolean isFullyOcuppied(int col, int row);
-	void reset(long seed, Level level);
+	void reset(long seed, Level level) throws GameException;
 	Level getLevel();
 	long getSeed();
 	void explode (int col, int row, int damage, boolean affectsZombies);
@@ -40,15 +42,17 @@ public interface GameWorld {
 	// nuevos
 	void update() throws GameException;
 
-	void reset() throws GameException;
+	//void reset() throws GameException;
 
-	void reset(Level level, long seed) throws GameException;
+	//void reset(Level level, long seed) throws GameException;
 
 	void tryToBuy(int cost) throws GameException;
 
 	void checkValidPlantPosition(int col, int row) throws GameException;
 
 	void checkValidZombiePosition(int col, int row) throws GameException;
+	
+	void showRecord() throws RecordException, CommandExecuteException;
 }
 
 

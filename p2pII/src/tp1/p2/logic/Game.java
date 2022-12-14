@@ -9,13 +9,13 @@ import java.util.Random;
 import tp1.p2.control.exceptions.InvalidPositionException;//Importado por mi obviamente
 import tp1.p2.control.exceptions.NotCatchablePositionException;//Importado por mi obviamente
 import tp1.p2.control.exceptions.NotEnoughCoinsException;//Importado por mi obviamente
+import tp1.p2.control.exceptions.RecordException;
 import tp1.p2.control.Command;
 import tp1.p2.control.Level;
 import tp1.p2.logic.actions.GameAction;
 import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.view.Messages;
-
-
+import tp1.p2.control.exceptions.CommandExecuteException;
 import tp1.p2.control.exceptions.GameException;
 
 public class Game implements GameStatus, GameWorld {
@@ -58,7 +58,7 @@ public class Game implements GameStatus, GameWorld {
 	 * @param level {@link Level} Used to initialize the game.
 	 * @param seed Random seed Used to initialize the game.
 	 */
-	public void reset(Level level, long seed) throws GameException {
+	public void reset(long seed, Level level) throws GameException {
 		this.seed = seed;
 		this.level = level;
 		container = new GameObjectContainer(); 
@@ -77,7 +77,7 @@ public class Game implements GameStatus, GameWorld {
 		try {
 			this.record = new Record(this);
 		}
-		catch (InputOutputRecordException e) {
+		catch (RecordException e) {
 			
 		}
 	}
@@ -375,7 +375,7 @@ public class Game implements GameStatus, GameWorld {
 		return true;
 	}
 
-
+/*
 	@Override
 	public void reset(long seed, Level level) {
 		// TODO Auto-generated method stub
@@ -388,12 +388,13 @@ public class Game implements GameStatus, GameWorld {
 		// TODO Auto-generated method stub
 		
 	}
+	*/
 	
 	public Long getElapsedTime() {
 		return this.elapsedTime;
 	}
 	
-	public void showRecord() throws InputOutPutRecordException, CommandExecuteException{
+	public void showRecord() throws RecordException, CommandExecuteException{
 		this.record.showRecord();
 	}
 }

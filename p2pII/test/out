@@ -3,6 +3,6 @@ PlantsVsZombies 1.0
 Level: EASY
 Random generator initialized with seed: 123
 Exception in thread "main" java.lang.NullPointerException: Cannot invoke "tp1.p2.logic.ZombiesManager.playerWon()" because "this.zombiesManager" is null
-	at tp1.p2.logic.Game.isFinished(Game.java:159)
+	at tp1.p2.logic.Game.isFinished(Game.java:180)
 	at tp1.p2.control.Controller.run(Controller.java:74)
 	at tp1.p2.PlantsVsZombies.main(PlantsVsZombies.java:64)

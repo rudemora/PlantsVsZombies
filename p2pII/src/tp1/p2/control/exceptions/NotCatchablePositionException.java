@@ -16,4 +16,9 @@ public class NotCatchablePositionException extends InvalidPositionException {
 		super(message, cause);
 	}
 
+	
+	public NotCatchablePositionException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace){
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+	
 }

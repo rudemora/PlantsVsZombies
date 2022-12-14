@@ -5,7 +5,7 @@ public class InvalidPositionException extends GameException {
 	
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	public InvalidPositionException(String message) {
 		super(message);
 	}
@@ -17,8 +17,13 @@ public class InvalidPositionException extends GameException {
 	public InvalidPositionException(String message, Throwable cause) {
 		super(message, cause);
 	}
+	
 	public InvalidPositionException(int col, int row) {
 		super(Messages.INVALID_POSITION.formatted(col, row));
 		
+	}
+	
+	public InvalidPositionException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace){
+		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }
