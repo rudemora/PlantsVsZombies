@@ -9,11 +9,7 @@ import tp1.p2.view.Messages;
 public class ShowRecordCommand extends Command {
 
 	
-	@Override
-	public boolean execute(GameWorld game) throws RecordException, CommandExecuteException {	
-		game.showRecord();
-		return false;
-	}
+	
 
 	@Override
 	protected String getName() {
@@ -34,5 +30,10 @@ public class ShowRecordCommand extends Command {
 	public String getHelp() {
 		return Messages.COMMAND_SHOW_RECORD_HELP;
 	}
-
+	
+	@Override
+	public boolean execute(GameWorld game) throws RecordException, CommandExecuteException {	
+			game.showRecord();
+			return false;
+	}
 }

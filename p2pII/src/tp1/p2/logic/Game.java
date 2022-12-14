@@ -75,12 +75,8 @@ public class Game implements GameStatus, GameWorld {
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
 		this.startTime = (long) 0;
 		this.elapsedTime = (long) 0;
-		try {
-			this.record = new Record(this);
-		}
-		catch (RecordException e) {
-			
-		}
+		this.record = new Record(this);
+		
 	}
 
 	
@@ -106,7 +102,9 @@ public class Game implements GameStatus, GameWorld {
 			
 			// 2. Execute game Actions
 			zombiesManager.update();
+			
 			sunsManager.update();
+			
 			//container.removeDead();
 			// 3. Game object updates
 			container.update();
@@ -203,7 +201,6 @@ public class Game implements GameStatus, GameWorld {
 	public void checkValidPlantPosition(int columna, int fila) throws GameException{
 		if(columna >= 0 && columna <Game.NUM_COLS && fila >= 0 && fila < Game.NUM_ROWS) {
 			if(!this.isFullyOcuppied(columna,fila)) {
-				
 			}
 			else {
 				throw new InvalidPositionException(columna, fila);

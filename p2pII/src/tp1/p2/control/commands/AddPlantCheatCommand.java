@@ -52,19 +52,11 @@ public class AddPlantCheatCommand extends Command {
 
 	@Override
 	public boolean execute(GameWorld game) throws GameException{
-		try {
-			Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
-			game.checkValidPlantPosition(col, row);
-			game.addItem(plant); 
-			game.update(); 
-			return true;
-			
-		}
-		catch (GameException e) {
-			throw e;
-		}
-		
-		
+		Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row);
+		game.checkValidPlantPosition(col, row);
+		game.addItem(plant); 	
+		game.update();
+		return true;
 		
 	}
 	

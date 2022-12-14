@@ -52,16 +52,11 @@ public class AddZombieCommand extends Command {
 
 	@Override
 	public boolean execute(GameWorld game) throws GameException {
-		try {
 			Zombie zombie = ZombieFactory.spawnZombie(this.zombieIdx, game, this.col, this.row);
 			game.checkValidZombiePosition(col, row);
 			game.addItem(zombie);
 			game.update();
-			return true;
-		}
-		catch (GameException e) {
-			throw e;
-		}
+		return true;
 		
 		
 	}

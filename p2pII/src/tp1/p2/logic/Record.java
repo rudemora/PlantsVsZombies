@@ -40,11 +40,9 @@ public class Record {
 			String read;
 			while((read = recordfile.readLine()) != null) {
 				String[] record = read.split(":");
-				boolean levelFound = false;
 				int i = 0;
-				while (!levelFound && i < LEVELS.length) {
+				while (i < LEVELS.length) {
 					if (record[0].equalsIgnoreCase(LEVELS[i])) {
-						levelFound = true;
 						try {
 						this.records[i] = Long.parseLong(record[1]);
 						} catch (NumberFormatException e) {
@@ -58,7 +56,7 @@ public class Record {
 			}
 		} catch(IOException e1) {
 			throw new RecordException(e1.getMessage(), e1);
-		} finally {
+		} finally {							
 			if (recordfile != null) {
 				try {
 					recordfile.close();

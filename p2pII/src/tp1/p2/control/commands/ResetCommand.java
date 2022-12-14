@@ -57,8 +57,8 @@ public class ResetCommand extends Command {
 
 	@Override
 	public Command create(String[] parameters) throws GameException {
-		try {
-			if(parameters.length==3) {
+		
+		if(parameters.length==3) {
 				try {
 					Level level = Level.valueOfIgnoreCase(parameters[1]);
 					long seed = System.currentTimeMillis() % 1000;
@@ -83,12 +83,10 @@ public class ResetCommand extends Command {
 //				System.out.println(error(Messages.COMMAND_PARAMETERS_MISSING));
 //				return null;
 			}
+			
 		}
-		catch (CommandParseException e) {
-			throw e;
-		}
+		
 	}
 		
 	
 
-}

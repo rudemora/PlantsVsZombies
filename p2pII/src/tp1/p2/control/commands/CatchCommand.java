@@ -57,17 +57,12 @@ public class CatchCommand extends Command {
 	@Override
 	public boolean execute(GameWorld game) throws GameException {
 		if (!caughtSunThisCycle) {
-			try {
-				game.tryToCatchObject(col, row);
-				caughtSunThisCycle= true;
-				return true;
-			}
-			catch(NotCatchablePositionException e) {
-				throw e;
-			}
+			game.tryToCatchObject(col, row);
+			caughtSunThisCycle= true;
+			return true;
 		}
 		else {
-			throw new GameException(error(Messages.SUN_ALREADY_CAUGHT));
+			throw new CommandExecuteException(Messages.SUN_ALREADY_CAUGHT);
 		}
 		
 	}
@@ -76,23 +71,17 @@ public class CatchCommand extends Command {
 	public Command create(String[] parameters) throws GameException {
 		if (parameters.length == 3) {
 			try {
-				try {
 					int col = Integer.parseInt(parameters[1]);
 					int row = Integer.parseInt(parameters[2]);
 					Command command = new CatchCommand(col, row);
 					return command;
-				}
-				catch( NumberFormatException nfe) {
+			}
+			catch( NumberFormatException nfe) {
 					
 					throw new CommandParseException(Messages.INVALID_POSITION.formatted(parameters[1], parameters[2]), nfe);
-					
-				}
-				
-			}
+			}		
 			
-			finally {
-				
-			}
+			
 		}
 		else {
 			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
