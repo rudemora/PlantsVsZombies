@@ -25,22 +25,28 @@ public class Record {
 	
 	private Level level;
 	
+	private boolean isNewRecord;
 	
-	private Record(int i) throws GameException {
-		puntuacion=0; 
-		if (i==0) level=EASY
+	
+	private Record(Level level, int puntuacion)  {//throws GameException
+		
+		this.level= level; 
+		this.puntuacion=puntuacion;
+		isNewRecord=false;
 		
 		
 	}
 	
-	public void loadRecord(String level) throws GameException { //así o con Level level
-		for(int i=0; i<records.size(); i++) {
-			records[i]= new Record(i);
-		}
-		readRecords();
+	public void loadRecord(Level level) throws GameException { 
+//		for(int i=0; i<records.size(); i++) {
+//			records[i]= new Record(i);
+//		}
+		readRecords(level);
+		this.level=level;
+		this.puntuacion=0;
 	}
 	
-	private void readRecords() throws GameException {
+	private void readRecords(Level level) throws GameException {
 		BufferedReader recordfile = null;
 		try {
 			recordfile = new BufferedReader(new FileReader(Messages.RECORD_FILENAME));
@@ -48,21 +54,37 @@ public class Record {
 			
 			while((read = recordfile.readLine()) != null ) {
 				String[] record = read.split(":");
-				int i = 0;
-				while (i < LEVELS.length && !find) {
-					if (record[0].equalsIgnoreCase(LEVELS[i])) {
-						try {
-						int puntos = Integer.parseInt(record[1]);
-						if (puntos < 0) {
-							throw new RecordException(Messages.RECORD_READ_ERROR);
+				try {
+					int puntos = Integer.parseInt(record[1]);
+					if (puntos < 0) {
+						throw new RecordException(Messages.RECORD_READ_ERROR);
+					}
+					boolean isLevel=false;
+					for (int i=0; i<records.size(); i++) {
+						if(record[0].equalsIgnoreCase(records.get(i).toString())) {
+							isLevel=true;
+							records.get(i).puntuacion=puntos;
 						}
-						records[i] = puntos;
-						find = true;
-						} catch (NumberFormatException e) {
-							throw new RecordException(Messages.RECORD_READ_ERROR, e);
+					}
+					if(!isLevel) {
+						boolean ok=false;
+						while(!ok) {
+							if() {//aqui tengo que conseguir sacar el Level level que tiene el string de record[0]
+								ok=true;
+								Level level= ;
+							}
 						}
-					} else i++;
+						Record newrecord= new Record(level,puntos);
+						records.add(newrecord);
+						
+					}
+					
+					
+				} catch (NumberFormatException e) {
+					throw new RecordException(Messages.RECORD_READ_ERROR, e);
 				}
+					
+				
 			}
 			
 		} catch(IOException e1) {
@@ -78,7 +100,7 @@ public class Record {
 			}
 		}
 	}
-	/*
+	/* Cual es la diferencia entre el update y el save?? Es que no se que tengo que hacer aqui
 	public void update() throws GameException {
 		if (isNewRecord()) {
 			for (int i = 0; i < LEVELS.length; i = i + 1) { // qué ocurre?
@@ -92,59 +114,76 @@ public class Record {
 		//return false;
 	}*/
 	
-	public void save() throws GameException{
-		if (isNewRecord()) {
-			for (int i = 0; i < LEVELS.length; ++i) {
-				if (LEVELS[i].equalsIgnoreCase(game.getLevel().toString())) {
-					records[i] = game.getScore();
+	public void save(int score) throws GameException{
+//		if (isNewRecord()) { Creo que no hace falta
+			boolean encontrado= false;
+			for (int i = 0; i < records.size(); ++i) {
+				if (records.get(i).level.equals(this.level)) {
+					encontrado=true;
+					if(records.get(i).puntuacion<score) {
+						records.get(i).puntuacion=score;
+						this.isNewRecord=true; //Y luego cuando se escriba volverlos a poner todos a false (no se como lo ves)
+					}
 				}
 			}
-		}
-		/*
-		if (isNewRecord()) {
-		BufferedWriter recordfile = null;
-		try {
-			recordfile = new BufferedWriter(new FileWriter(FILE));
-			recordfile.write(this.recordsToString());
-		} catch (IOException e1) {
-			throw new RecordException(Messages.RECORD_WRITE_ERROR, e1);
-		} finally {
-			if (recordfile != null) {
-				try {
-					recordfile.close();
-				} catch (IOException e2) {
-					throw new RecordException(Messages.RECORD_WRITE_ERROR, e2);					
-				}
+			if(!encontrado) { //creo un nuevo record en el array con puntuacion 0 porque sera 0
+				Record newRecord= new Record(this.level, this.puntuacion);
+				records.add(newRecord);
+				
 			}
-		}
-		}*/
 	}
 	
-	private boolean isNewRecord() {
-		return game.getScore() > getRecord();
+	
+		
+	public void writeRecord(Game game) throws RecordException{
+		if (isNewRecord()) {
+			BufferedWriter recordfile = null;
+			try {
+				recordfile = new BufferedWriter(new FileWriter(Messages.RECORD_FILENAME));
+				recordfile.write(this.recordsToString());
+			} catch (IOException e1) {
+				throw new RecordException(e1);
+			} finally {
+				if (recordfile != null) {
+					try {
+						recordfile.close();
+					} catch (IOException e2) {
+						throw new RecordException(e2);					
+					}
+				}
+			}
+		}
+		
+	}
+	
+	private boolean isNewRecord() { //Para que lo quieres??
+		return this.isNewRecord;
 	}
 	
 	
 	
 	public int getRecord() {
 		int record =  0;
-		for (int i = 0; i < LEVELS.length; ++i) {
-			if (LEVELS[i].equalsIgnoreCase(game.getLevel().toString())) { //Esto qué hace no lo entiendo
-				record = records[i];
+		boolean encontrado=false;
+		for (int i = 0; i <records.size(); ++i) {
+			if (records.get(i).level.equals(this.level)) { //Esto qué hace no lo entiendo
+				record = records.get(i).puntuacion;
+				encontrado=true;
 			}
 		}
+		
 		return record;
 	}
 	
 	public void showRecord() {
-		System.out.println(game.getLevel().toString() + " record is " +(this.getRecord()));
+		System.out.println(level.toString() + " record is " +(this.getRecord()));
 	}
 	
 	private String recordsToString() {
 		StringBuilder str = new StringBuilder();
-		for (int i = 0; i < LEVELS.length; ++i) {
-			if (game.getLevel().toString().equalsIgnoreCase(LEVELS[i]) && records[i] != 0) {
-				str.append(LEVELS[i] + ":").append(records[i]).append(Messages.LINE_SEPARATOR);
+		for (int i = 0; i < records.size(); ++i) {
+			if (records.get(i).level.equals(level)) {
+				str.append(level + ":").append(records.get(i).puntuacion).append(Messages.LINE_SEPARATOR);
 			}
 		}
 		return str.toString();

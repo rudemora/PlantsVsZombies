@@ -121,7 +121,7 @@ public class Game implements GameStatus, GameWorld {
 			Command.newCycle();
 			
 			// 7. Update record
-			record.save();
+			record.save(puntos);
 			/*
 			Record r = record.loadRecord(this.level.toString());
 			boolean newRecord = r.update();
