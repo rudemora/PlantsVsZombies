@@ -19,31 +19,34 @@ public class Record {
 		
 	
 	
-	private static List<Record> records = new ArrayList<>(3);
+	private static List<Record> records;
 	
 	private int puntuacion;
 	
 	private Level level;
-	
+
 	private boolean isNewRecord;
 
 	
 	
-	public Record(Level level, int puntuacion)throws GameException  {
+	private Record(Level level, int puntuacion)throws GameException  {
 		
+		//records.add(this);//ñapa
+		//records.add(this);//ñapa
+		//records.add(this);//ñapa
+		//contador=0;//ñapa
 		this.level= level; 
 		this.puntuacion=puntuacion;
 		isNewRecord=false;
-		readRecords();
+		
 		
 		
 	}
 	
 	public static Record loadRecord(Level level) throws GameException { 
-//		for(int i=0; i<records.size(); i++) {
-//			records[i]= new Record(i);
-//		}
 		Record r = new Record(level,0);
+		r.records= new ArrayList<>();
+		r.readRecords();
 		return r;
 	}
 	
@@ -61,15 +64,34 @@ public class Record {
 						throw new RecordException(Messages.RECORD_READ_ERROR);
 					}
 					boolean isLevel=false;
-					for (int i=0; i<records.size(); i++) {
-						if(record[0].equalsIgnoreCase(records.get(i).toString())) {
-							isLevel=true;
-							records.get(i).puntuacion=puntos;
-						}
+					if(record[0].equalsIgnoreCase(level.name())){
+						isLevel=true;
 					}
+					Level lv=level; 
+					for (Level l : Level.values()) {
+						if (l.name().equalsIgnoreCase(record[0])) {
+							
+							lv= l;
+							
+						}
+					
+				    }
+					/*this.records.get(contador).level=lv;//ñapa
+					this.records.get(contador).puntuacion=puntos;//ñapa
+					this.contador++;//ñapa*/
+		
+					Record newrecord= new Record(lv,puntos);
+					records.add(newrecord);
+					
+					
 					if(!isLevel) {
-						Record newrecord= new Record(level,puntos);
-						records.add(newrecord);
+						/*this.records.get(contador).level=level;//ñapa
+						this.records.get(contador).puntuacion=0;//ñapa
+						contador++;//ñapa*/
+						
+						Record myrecord= new Record(level,0);
+						records.add(myrecord);
+						
 					}
 					
 						
@@ -78,10 +100,14 @@ public class Record {
 					
 				} catch (NumberFormatException e) {
 					throw new RecordException(Messages.RECORD_READ_ERROR, e);
+				}catch(RecordException e) {
+					throw e;
 				}
+				
 					
 				
 			}
+		
 			
 		} catch(IOException e1) {
 			throw new RecordException(e1.getMessage(), e1);
@@ -111,39 +137,33 @@ public class Record {
 	}*/
 	
 	public void save(int score) throws GameException{
-			boolean encontrado= false;
 			for (int i = 0; i < records.size(); ++i) {
 				if (records.get(i).level.equals(this.level)) {
-					encontrado=true;
 					if(records.get(i).puntuacion<score) {
 						records.get(i).puntuacion=score;
 						isNewRecord=true;
 					}
 				}
 			}
-			if(!encontrado) { 
-				Record newRecord= new Record(this.level, score);
-				records.add(newRecord);
-				
-			}
 	}
 	
 	
 		
-	public void writeRecord(Game game) throws RecordException{
+	public void writeRecord() throws GameException{
+		
 		if (isNewRecord()) {
 			BufferedWriter recordfile = null;
 			try {
 				recordfile = new BufferedWriter(new FileWriter(Messages.RECORD_FILENAME));
 				recordfile.write(this.recordsToString());
 			} catch (IOException e1) {
-				throw new RecordException(e1);
+				throw new RecordException(e1.getMessage(),e1);
 			} finally {
 				if (recordfile != null) {
 					try {
 						recordfile.close();
 					} catch (IOException e2) {
-						throw new RecordException(e2);					
+						throw new RecordException(e2.getMessage(), e2);					
 					}
 				}
 			}
@@ -157,11 +177,14 @@ public class Record {
 	
 	
 	
-	public int getRecord() {
+	private int getRecord() {
 		int record =  0;
+		
 		for (int i = 0; i <records.size(); ++i) {
+			
 			if (records.get(i).level.equals(this.level)) { 
 				record = records.get(i).puntuacion;
+
 			}
 		}
 		
@@ -169,15 +192,17 @@ public class Record {
 	}
 	
 	public void showRecord() {
+		
 		System.out.println(level.toString() + " record is " +(this.getRecord()));
 	}
 	
 	private String recordsToString() {
 		StringBuilder str = new StringBuilder();
+		
 		for (int i = 0; i < records.size(); ++i) {
-			if (records.get(i).level.equals(level)) {
-				str.append(level + ":").append(records.get(i).puntuacion).append(Messages.LINE_SEPARATOR);
-			}
+			
+				str.append(records.get(i).level.name() + ":").append(records.get(i).puntuacion).append(Messages.LINE_SEPARATOR);
+		
 		}
 		return str.toString();
 	}

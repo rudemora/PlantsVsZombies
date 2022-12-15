@@ -32,8 +32,8 @@ public class Game implements GameStatus, GameWorld {
 
 	private Deque<GameAction> actions;
 
-	private static boolean playerQuits;
-	private static boolean endGame;
+	private boolean playerQuits;
+	private boolean endGame;
 	
 	private Random rand;
 	
@@ -73,7 +73,7 @@ public class Game implements GameStatus, GameWorld {
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
 		record = Record.loadRecord(this.level); 
-	
+		
 		
 		
 	}
@@ -384,10 +384,14 @@ public class Game implements GameStatus, GameWorld {
 		return puntos;
 	}
 	
-
+	@Override
+	public void write() throws GameException {
+		record.writeRecord();
+	}
 	
 	@Override
 	public void showRecord() throws RecordException, CommandExecuteException{
+		
 		this.record.showRecord();
 	}
 	
