@@ -33,7 +33,7 @@ public interface GameWorld {
 	void reset(long seed, Level level) throws GameException;
 	Level getLevel();
 	long getSeed();
-	void explode (int col, int row, int damage, boolean affectsZombies);
+	//void explode (int col, int row, int damage, boolean affectsZombies);
 	void addZombiesAlived();
 	void decreaseZombiesAlived();
 	void addCaughtSuns();
@@ -42,9 +42,9 @@ public interface GameWorld {
 	// nuevos
 	void update() throws GameException;
 
-	//void reset() throws GameException;
+	
 
-	//void reset(Level level, long seed) throws GameException;
+	
 
 	void tryToBuy(int cost) throws GameException;
 

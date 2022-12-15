@@ -101,6 +101,7 @@ public class Controller {
 			printGame();
 		}
 		try {
+			
 			game.write();
 		}catch (GameException e) {
 			System.out.println(error(e.getMessage()));

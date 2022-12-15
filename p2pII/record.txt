@@ -1,2 +1,1 @@
 INSANE:50
-HARD:50

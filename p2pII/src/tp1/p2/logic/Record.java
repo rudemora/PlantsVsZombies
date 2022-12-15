@@ -25,7 +25,7 @@ public class Record {
 	
 	private Level level;
 
-	private boolean isNewRecord;
+
 
 	
 	
@@ -37,7 +37,7 @@ public class Record {
 		//contador=0;//ñapa
 		this.level= level; 
 		this.puntuacion=puntuacion;
-		isNewRecord=false;
+		
 		
 		
 		
@@ -45,7 +45,7 @@ public class Record {
 	
 	public static Record loadRecord(Level level) throws GameException { 
 		Record r = new Record(level,0);
-		r.records= new ArrayList<>();
+		records= new ArrayList<>();
 		r.readRecords();
 		return r;
 	}
@@ -141,7 +141,7 @@ public class Record {
 				if (records.get(i).level.equals(this.level)) {
 					if(records.get(i).puntuacion<score) {
 						records.get(i).puntuacion=score;
-						isNewRecord=true;
+						
 					}
 				}
 			}
@@ -151,7 +151,7 @@ public class Record {
 		
 	public void writeRecord() throws GameException{
 		
-		if (isNewRecord()) {
+		//if (isNewRecord()) {
 			BufferedWriter recordfile = null;
 			try {
 				recordfile = new BufferedWriter(new FileWriter(Messages.RECORD_FILENAME));
@@ -167,12 +167,19 @@ public class Record {
 					}
 				}
 			}
-		}
+		//}
 		
 	}
 	
-	private boolean isNewRecord() { //Para que lo quieres??
-		return isNewRecord;
+	public boolean update(int score) { 
+		for (int i = 0; i < records.size(); ++i) {
+			if (records.get(i).level.equals(this.level)) {
+				if(records.get(i).puntuacion<score) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	

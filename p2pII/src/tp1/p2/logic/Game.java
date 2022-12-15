@@ -41,6 +41,7 @@ public class Game implements GameStatus, GameWorld {
 	
 	private SunsManager sunsManager;
 	
+	private boolean isNewRecord;
 
 	private Record record;
 	
@@ -122,7 +123,11 @@ public class Game implements GameStatus, GameWorld {
 			Command.newCycle();
 			
 			// 7. Update record
-			record.save(puntos);
+			isNewRecord=record.update(puntos);
+			if(isNewRecord) {
+				record.save(puntos);
+			}
+			
 			/*
 			Record r = record.loadRecord(this.level.toString());
 			boolean newRecord = r.update();
@@ -133,6 +138,7 @@ public class Game implements GameStatus, GameWorld {
 		
 	}
 
+	
 	private void executePendingActions() {
 		while (!this.actions.isEmpty()) {
 			GameAction action = this.actions.removeLast();
@@ -314,7 +320,7 @@ public class Game implements GameStatus, GameWorld {
 		sunsManager.addSun();
 	}
 	 
-	 @Override
+	 /*@Override
 	 public void explode(int col, int row, int damage, boolean affectsZombies) {
 		 for(int i = col-1; i <= col + 1; i++) {
 			 for(int j = row-1; j<= row +1;j=j+1) {
@@ -334,7 +340,7 @@ public class Game implements GameStatus, GameWorld {
 				}
 			 }
 		 }	    
-	 }
+	 }*/
 
 
 	@Override
@@ -386,7 +392,10 @@ public class Game implements GameStatus, GameWorld {
 	
 	@Override
 	public void write() throws GameException {
-		record.writeRecord();
+		if(isNewRecord) {
+			record.writeRecord();
+		}
+		
 	}
 	
 	@Override
