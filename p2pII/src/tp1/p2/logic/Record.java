@@ -11,6 +11,7 @@ import tp1.p2.control.exceptions.GameException;
 import tp1.p2.control.exceptions.RecordException;
 //import tp1.p2.logic.Game; quizá no hace falta
 import tp1.p2.view.Messages;
+import java.util.List;
 
 public class Record {
 	
@@ -18,8 +19,8 @@ public class Record {
 	
 	private static final String[] LEVELS = {"EASY", "HARD", "INSANE"}; // se puede hacer de otra forma?
 	
-		
-	private static int[] records = {0};
+	
+	private static List<Record> records = newArrayList<>();
 	
 	private GameWorld game;
 	

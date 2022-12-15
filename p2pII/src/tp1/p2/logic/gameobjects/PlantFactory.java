@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
+import tp1.p2.control.exceptions.CommandExecuteException;
 import tp1.p2.control.exceptions.GameException;
 
 import tp1.p2.logic.GameWorld;
@@ -29,7 +29,7 @@ public class PlantFactory {
 			}
 		}
 		if(ok) {
-			throw new GameException(Messages.INVALID_GAME_OBJECT); //No se que tipo de excecpion tiene que ser esta
+			throw new CommandExecuteException(Messages.INVALID_GAME_OBJECT); //No se que tipo de excecpion tiene que ser esta
 		}
 	}
 
