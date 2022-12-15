@@ -60,9 +60,9 @@ public class AddPlantCommand extends Command implements Cloneable {
 		
 			Plant plant = PlantFactory.spawnPlant(this.plantName, game, col, row); // se puede hacer todo en game directamente?
 			game.checkValidPlantPosition(col, row);
-			game.addItem(plant);
 			game.tryToBuy(plant.getCost());
 			game.consumeCoins(plant, plant.getCost());
+			game.addItem(plant);
 			game.update();
 		return true;
 	}
