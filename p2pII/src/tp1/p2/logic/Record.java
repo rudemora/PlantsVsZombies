@@ -7,44 +7,46 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import tp1.p2.control.Level;
 import tp1.p2.control.exceptions.GameException;
 import tp1.p2.control.exceptions.RecordException;
 //import tp1.p2.logic.Game; quizá no hace falta
 import tp1.p2.view.Messages;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Record {
-	
-	private static final String FILE = "record.txt";
-	
-	private static final String[] LEVELS = {"EASY", "HARD", "INSANE"}; // se puede hacer de otra forma?
+		
 	
 	
-	private static List<Record> records = newArrayList<>();
+	private static List<Record> records = new ArrayList<>(3);
 	
-	private GameWorld game;
+	private int puntuacion;
 	
-	public Record(Game game) throws GameException {
-		this.game = game;
-		records = new int[LEVELS.length];
-		for (int i = 0; i < LEVELS.length; ++i) {
-			records[i] = 0;
-		}
-		readRecords();
+	private Level level;
+	
+	
+	private Record(int i) throws GameException {
+		puntuacion=0; 
+		if (i==0) level=EASY
+		
+		
 	}
 	
 	public void loadRecord(String level) throws GameException { //así o con Level level
-		records = new int[LEVELS.length];
+		for(int i=0; i<records.size(); i++) {
+			records[i]= new Record(i);
+		}
 		readRecords();
 	}
 	
 	private void readRecords() throws GameException {
 		BufferedReader recordfile = null;
 		try {
-			recordfile = new BufferedReader(new FileReader(FILE));
+			recordfile = new BufferedReader(new FileReader(Messages.RECORD_FILENAME));
 			String read;
-			boolean find = false;
-			while((read = recordfile.readLine()) != null && !find) {
+			
+			while((read = recordfile.readLine()) != null ) {
 				String[] record = read.split(":");
 				int i = 0;
 				while (i < LEVELS.length && !find) {
