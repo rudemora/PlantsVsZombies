@@ -72,7 +72,8 @@ public class Game implements GameStatus, GameWorld {
 		puntos = 0;
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
-		this.record =new Record(this);
+		record = Record.loadRecord(this.level); 
+	
 		
 		
 	}

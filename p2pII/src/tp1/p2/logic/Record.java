@@ -26,27 +26,28 @@ public class Record {
 	private Level level;
 	
 	private boolean isNewRecord;
+
 	
 	
-	private Record(Level level, int puntuacion)  {//throws GameException
+	public Record(Level level, int puntuacion)throws GameException  {
 		
 		this.level= level; 
 		this.puntuacion=puntuacion;
 		isNewRecord=false;
+		readRecords();
 		
 		
 	}
 	
-	public void loadRecord(Level level) throws GameException { 
+	public static Record loadRecord(Level level) throws GameException { 
 //		for(int i=0; i<records.size(); i++) {
 //			records[i]= new Record(i);
 //		}
-		readRecords(level);
-		this.level=level;
-		this.puntuacion=0;
+		Record r = new Record(level,0);
+		return r;
 	}
 	
-	private void readRecords(Level level) throws GameException {
+	private void readRecords() throws GameException {
 		BufferedReader recordfile = null;
 		try {
 			recordfile = new BufferedReader(new FileReader(Messages.RECORD_FILENAME));
@@ -67,17 +68,12 @@ public class Record {
 						}
 					}
 					if(!isLevel) {
-						boolean ok=false;
-						while(!ok) {
-							if() {//aqui tengo que conseguir sacar el Level level que tiene el string de record[0]
-								ok=true;
-								Level level= ;
-							}
-						}
 						Record newrecord= new Record(level,puntos);
 						records.add(newrecord);
-						
 					}
+					
+						
+					
 					
 					
 				} catch (NumberFormatException e) {
@@ -115,19 +111,18 @@ public class Record {
 	}*/
 	
 	public void save(int score) throws GameException{
-//		if (isNewRecord()) { Creo que no hace falta
 			boolean encontrado= false;
 			for (int i = 0; i < records.size(); ++i) {
 				if (records.get(i).level.equals(this.level)) {
 					encontrado=true;
 					if(records.get(i).puntuacion<score) {
 						records.get(i).puntuacion=score;
-						this.isNewRecord=true; //Y luego cuando se escriba volverlos a poner todos a false (no se como lo ves)
+						isNewRecord=true;
 					}
 				}
 			}
-			if(!encontrado) { //creo un nuevo record en el array con puntuacion 0 porque sera 0
-				Record newRecord= new Record(this.level, this.puntuacion);
+			if(!encontrado) { 
+				Record newRecord= new Record(this.level, score);
 				records.add(newRecord);
 				
 			}
@@ -157,18 +152,16 @@ public class Record {
 	}
 	
 	private boolean isNewRecord() { //Para que lo quieres??
-		return this.isNewRecord;
+		return isNewRecord;
 	}
 	
 	
 	
 	public int getRecord() {
 		int record =  0;
-		boolean encontrado=false;
 		for (int i = 0; i <records.size(); ++i) {
-			if (records.get(i).level.equals(this.level)) { //Esto qué hace no lo entiendo
+			if (records.get(i).level.equals(this.level)) { 
 				record = records.get(i).puntuacion;
-				encontrado=true;
 			}
 		}
 		
