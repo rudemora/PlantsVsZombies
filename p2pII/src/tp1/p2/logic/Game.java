@@ -74,7 +74,7 @@ public class Game implements GameStatus, GameWorld {
 		System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
 		System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
 		record = Record.loadRecord(this.level); 
-		
+		isNewRecord = false;
 		
 		
 	}
@@ -390,12 +390,22 @@ public class Game implements GameStatus, GameWorld {
 		return puntos;
 	}
 	
+	@Override 
+	public int getRecord() {
+		return record.getRecord();
+	}
+	
 	@Override
 	public void write() throws GameException {
 		if(isNewRecord) {
 			record.writeRecord();
 		}
 		
+	}
+	
+	@Override
+	public boolean isNewRecord() {
+		return isNewRecord;
 	}
 	
 	@Override

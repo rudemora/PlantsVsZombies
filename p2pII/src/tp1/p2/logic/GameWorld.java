@@ -54,7 +54,7 @@ public interface GameWorld {
 	
 	void showRecord() throws RecordException, CommandExecuteException;
 	
-	int getScore();
+	//int getScore();
 	void write()throws GameException;
 	
 }

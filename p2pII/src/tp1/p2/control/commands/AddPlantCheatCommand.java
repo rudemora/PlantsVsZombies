@@ -61,4 +61,28 @@ public class AddPlantCheatCommand extends AddPlantCommand {
 	}
 	
 
+	@Override
+	public Command create(String[] parameters) throws GameException{
+		if(parameters.length == 4) {
+				try {
+					String name = parameters[1];
+					int col = Integer.parseInt(parameters[2]);
+					int row = Integer.parseInt(parameters[3]);
+					Command command= new AddPlantCheatCommand(col, row, name);
+					return command;
+				}
+				catch( NumberFormatException nfe) {
+					
+					throw new CommandParseException(Messages.INVALID_POSITION.formatted(parameters[2], parameters[3]), nfe);
+					
+				}
+		}
+		if (parameters.length<4) {
+			throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
+		}
+		else {
+			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+		}
+	}
 }
+

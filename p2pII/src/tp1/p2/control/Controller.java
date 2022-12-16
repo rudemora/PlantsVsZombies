@@ -46,7 +46,7 @@ public class Controller {
 	 * Prints the final message once the match is finished.
 	 */
 	public void printEndMessage() {
-		System.out.println(gamePrinter.endMessage());
+		gamePrinter.endMessage();
 	}
 
 	/**

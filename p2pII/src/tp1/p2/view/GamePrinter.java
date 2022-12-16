@@ -94,19 +94,29 @@ public class GamePrinter {
 	 * @return a string representing a message to be printed once the game has
 	 *         finished.
 	 */
-	public String endMessage() {
+	public void endMessage() {
 		System.out.println(Messages.GAME_OVER);
 		if(game.isPlayerQuits()) {
-			return Messages.PLAYER_QUITS;
+			System.out.println(Messages.PLAYER_QUITS);
 			
 		}
 		else {
 			if (game.playerWon()) {
-				return Messages.PLAYER_WINS;
+				System.out.println(Messages.PLAYER_WINS);
+				if (game.isNewRecord()) {
+					System.out.println(Messages.NEW_RECORD.formatted(game.getScore()));
+				}
+				else {
+					System.out.println(Messages.RECORD.formatted(game.getRecord()));
+				}
 			}
 			else {
-				return Messages.ZOMBIES_WIN;
+				System.out.println(Messages.ZOMBIES_WIN);
+				if (game.isNewRecord()) {
+					System.out.println(Messages.NEW_RECORD.formatted(game.getScore()));
+				}
 			}
 		}
+		
 	}
 }

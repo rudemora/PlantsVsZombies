@@ -2,7 +2,6 @@ PlantsVsZombies 1.0
 
 Level: EASY
 Random generator initialized with seed: 25
-Creating default record for level 'EASY'
 Number of cycles: 0
 Sun coins: 50
 Remaining zombies: 3
@@ -21,86 +20,83 @@ Score: 0
      ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
 
 Command > 
-[DEBUG] Executing: r insane 856
+[DEBUG] Executing: h
 
-Level: INSANE
-Random generator initialized with seed: 856
-Creating default record for level 'INSANE'
-Number of cycles: 0
-Sun coins: 50
-Remaining zombies: 10
-Generated suns: 0
-Caught suns: 0
-Score: 0
-           0              1              2              3              4              5              6              7              8       
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  0 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  1 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  2 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  3 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
+Available commands:
+[a]dd <plant> <col> <row>: add a plant in position (col, row)
+[l]ist: print the list of available plants
+[r]eset [<level> <seed>]: start a new game (if level and seed are both provided, they are used to initialize the game)
+[h]elp: print this help message
+[e]xit: terminate the program
+[n]one | "": skip user action for this cycle
+[l]ist[Z]ombies: print the list of available zombies
+[a]dd[Z]ombie <idx> <col> <row>: add a zombie in position (col, row)
+[C]heat[P]lant <plant> <col> <row>: add a plant in position (col, row) without consuming suncoins
+[C]atch <col> <row>: catch a sun, if posible, in position (col, row)
+Rec[o]rd: show record of the current level
+Command > 
+[DEBUG] Executing: H
+
+Available commands:
+[a]dd <plant> <col> <row>: add a plant in position (col, row)
+[l]ist: print the list of available plants
+[r]eset [<level> <seed>]: start a new game (if level and seed are both provided, they are used to initialize the game)
+[h]elp: print this help message
+[e]xit: terminate the program
+[n]one | "": skip user action for this cycle
+[l]ist[Z]ombies: print the list of available zombies
+[a]dd[Z]ombie <idx> <col> <row>: add a zombie in position (col, row)
+[C]heat[P]lant <plant> <col> <row>: add a plant in position (col, row) without consuming suncoins
+[C]atch <col> <row>: catch a sun, if posible, in position (col, row)
+Rec[o]rd: show record of the current level
+Command > 
+[DEBUG] Executing: help
+
+Available commands:
+[a]dd <plant> <col> <row>: add a plant in position (col, row)
+[l]ist: print the list of available plants
+[r]eset [<level> <seed>]: start a new game (if level and seed are both provided, they are used to initialize the game)
+[h]elp: print this help message
+[e]xit: terminate the program
+[n]one | "": skip user action for this cycle
+[l]ist[Z]ombies: print the list of available zombies
+[a]dd[Z]ombie <idx> <col> <row>: add a zombie in position (col, row)
+[C]heat[P]lant <plant> <col> <row>: add a plant in position (col, row) without consuming suncoins
+[C]atch <col> <row>: catch a sun, if posible, in position (col, row)
+Rec[o]rd: show record of the current level
+Command > 
+[DEBUG] Executing: Help
+
+Available commands:
+[a]dd <plant> <col> <row>: add a plant in position (col, row)
+[l]ist: print the list of available plants
+[r]eset [<level> <seed>]: start a new game (if level and seed are both provided, they are used to initialize the game)
+[h]elp: print this help message
+[e]xit: terminate the program
+[n]one | "": skip user action for this cycle
+[l]ist[Z]ombies: print the list of available zombies
+[a]dd[Z]ombie <idx> <col> <row>: add a zombie in position (col, row)
+[C]heat[P]lant <plant> <col> <row>: add a plant in position (col, row) without consuming suncoins
+[C]atch <col> <row>: catch a sun, if posible, in position (col, row)
+Rec[o]rd: show record of the current level
+Command > 
+[DEBUG] Executing: l
+
+Available plants:
+[S]unflower: cost='20' suncoins, damage='0', endurance='1'
+[P]eashooter: cost='50' suncoins, damage='1', endurance='3'
+[W]all-[N]ut: cost='50' suncoins, damage='0', endurance='10'
+[C]herry-Bomb: cost='50' suncoins, damage='10', endurance='2'
 
 Command > 
-[DEBUG] Executing: o
+[DEBUG] Executing: List
 
-INSANE record is 9223372036854776,00 s
-Command > 
-[DEBUG] Executing: r hard 543
+Available plants:
+[S]unflower: cost='20' suncoins, damage='0', endurance='1'
+[P]eashooter: cost='50' suncoins, damage='1', endurance='3'
+[W]all-[N]ut: cost='50' suncoins, damage='0', endurance='10'
+[C]herry-Bomb: cost='50' suncoins, damage='10', endurance='2'
 
-Level: HARD
-Random generator initialized with seed: 543
-Creating default record for level 'HARD'
-Number of cycles: 0
-Sun coins: 50
-Remaining zombies: 5
-Generated suns: 0
-Caught suns: 0
-Score: 0
-           0              1              2              3              4              5              6              7              8       
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  0 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  1 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  2 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  3 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-
-Command > 
-[DEBUG] Executing: o
-
-HARD record is 9223372036854776,00 s
-Command > 
-[DEBUG] Executing: r easy 25
-
-Level: EASY
-Random generator initialized with seed: 25
-Creating default record for level 'EASY'
-Number of cycles: 0
-Sun coins: 50
-Remaining zombies: 3
-Generated suns: 0
-Caught suns: 0
-Score: 0
-           0              1              2              3              4              5              6              7              8       
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  0 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  1 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  2 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-  3 |              |              |              |              |              |              |              |              |              
-     ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── ────────────── 
-
-Command > 
-[DEBUG] Executing: o
-
-EASY record is 9223372036854776,00 s
 Command > 
 [DEBUG] Executing: 
 
@@ -1863,3 +1859,4 @@ Score: 30
 
 Game over
 Player wins!
+Record: 0

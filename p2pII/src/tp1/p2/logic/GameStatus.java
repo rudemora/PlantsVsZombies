@@ -49,4 +49,7 @@ public interface GameStatus {
 	
 	boolean isPlayerQuits();
 	boolean playerWon();
+	boolean isNewRecord();
+	int getScore();
+	int getRecord();
 }

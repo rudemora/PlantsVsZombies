@@ -82,9 +82,9 @@ public class Messages {
 	
 	public static final String SCORE = "Score: %d";
 
-	public static final String NEW_RECORD = "New record!: ";
+	public static final String NEW_RECORD = "New record!: %d";
 
-	public static final String RECORD = "Record: ";
+	public static final String RECORD = "Record: %d";
 
 	public static final String RECORD_FILENAME = "record.txt";
 

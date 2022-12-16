@@ -78,7 +78,6 @@ public class AddPlantCommand extends Command implements Cloneable {
 					return command;
 				}
 				catch( NumberFormatException nfe) {
-					
 					throw new CommandParseException(Messages.INVALID_POSITION.formatted(parameters[2], parameters[3]), nfe);
 					
 				}

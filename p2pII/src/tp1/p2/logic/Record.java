@@ -25,22 +25,9 @@ public class Record {
 	
 	private Level level;
 
-
-
-	
-	
 	private Record(Level level, int puntuacion)throws GameException  {
-		
-		//records.add(this);//ñapa
-		//records.add(this);//ñapa
-		//records.add(this);//ñapa
-		//contador=0;//ñapa
 		this.level= level; 
 		this.puntuacion=puntuacion;
-		
-		
-		
-		
 	}
 	
 	public static Record loadRecord(Level level) throws GameException { 
@@ -55,59 +42,47 @@ public class Record {
 		try {
 			recordfile = new BufferedReader(new FileReader(Messages.RECORD_FILENAME));
 			String read;
-			
+			boolean isLevel=false;
+
 			while((read = recordfile.readLine()) != null ) {
 				String[] record = read.split(":");
-				try {
-					int puntos = Integer.parseInt(record[1]);
-					if (puntos < 0) {
+				if (record.length == 1) {
+					Record myrecord= new Record(level,0);
+					records.add(myrecord);
+				}
+				else {
+					if (record.length != 2) {
+
 						throw new RecordException(Messages.RECORD_READ_ERROR);
 					}
-					boolean isLevel=false;
-					if(record[0].equalsIgnoreCase(level.name())){
-						isLevel=true;
-					}
-					Level lv=level; 
-					for (Level l : Level.values()) {
-						if (l.name().equalsIgnoreCase(record[0])) {
-							
-							lv= l;
-							
+					try {
+						int puntos = Integer.parseInt(record[1]);
+						if (puntos < 0) {
+							throw new RecordException(Messages.RECORD_READ_ERROR);
 						}
-					
-				    }
-					/*this.records.get(contador).level=lv;//ñapa
-					this.records.get(contador).puntuacion=puntos;//ñapa
-					this.contador++;//ñapa*/
-		
-					Record newrecord= new Record(lv,puntos);
-					records.add(newrecord);
-					
-					
+						if(record[0].equalsIgnoreCase(level.name())){
+							isLevel=true;
+						}
+						Level lv=level; 
+						for (Level l : Level.values()) {
+							if (l.name().equalsIgnoreCase(record[0])) {
+								lv= l;
+							}		
+					    }
+						Record newrecord= new Record(lv,puntos);
+						records.add(newrecord);
+					} catch (NumberFormatException e) {
+						throw new RecordException(Messages.RECORD_READ_ERROR, e);
+					}catch(RecordException e) {
+						throw e;
+					}
+				
 					if(!isLevel) {
-						/*this.records.get(contador).level=level;//ñapa
-						this.records.get(contador).puntuacion=0;//ñapa
-						contador++;//ñapa*/
-						
 						Record myrecord= new Record(level,0);
 						records.add(myrecord);
-						
 					}
-					
-						
-					
-					
-					
-				} catch (NumberFormatException e) {
-					throw new RecordException(Messages.RECORD_READ_ERROR, e);
-				}catch(RecordException e) {
-					throw e;
 				}
-				
-					
-				
 			}
-		
 			
 		} catch(IOException e1) {
 			throw new RecordException(e1.getMessage(), e1);
@@ -122,19 +97,7 @@ public class Record {
 			}
 		}
 	}
-	/* Cual es la diferencia entre el update y el save?? Es que no se que tengo que hacer aqui
-	public void update() throws GameException {
-		if (isNewRecord()) {
-			for (int i = 0; i < LEVELS.length; i = i + 1) { // qué ocurre?
-				if (LEVELS[i].equalsIgnoreCase(game.getLevel().toString())) {
-					records[i] = game.getScore();
-				}
-			//return true;
-			}
-			
-		}
-		//return false;
-	}*/
+	
 	
 	public void save(int score) throws GameException{
 			for (int i = 0; i < records.size(); ++i) {
@@ -184,7 +147,7 @@ public class Record {
 	
 	
 	
-	private int getRecord() {
+	public int getRecord() {
 		int record =  0;
 		
 		for (int i = 0; i <records.size(); ++i) {
