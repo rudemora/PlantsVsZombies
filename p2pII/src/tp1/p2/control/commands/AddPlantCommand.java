@@ -1,17 +1,12 @@
 package tp1.p2.control.commands;
 
-import static tp1.p2.view.Messages.error;
 
 import tp1.p2.control.Command;
-import tp1.p2.logic.Game;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.logic.gameobjects.Plant;
 import tp1.p2.logic.gameobjects.PlantFactory;
 import tp1.p2.view.Messages;
-import tp1.p2.control.exceptions.NotEnoughCoinsException;//Importado por mi obviamente
 
-import tp1.p2.control.exceptions.InvalidPositionException;//Importado por mi obviamente
-import tp1.p2.control.exceptions.CommandExecuteException;
 import tp1.p2.control.exceptions.CommandParseException;
 import tp1.p2.control.exceptions.GameException;
 

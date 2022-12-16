@@ -43,7 +43,6 @@ public class ExplosionAction implements GameAction {
 				}
 			 }
 		 }	 
-		//game.explode(col, row, damage, affectsZombies);
 	}
 
 	

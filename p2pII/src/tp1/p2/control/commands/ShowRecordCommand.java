@@ -1,15 +1,11 @@
 package tp1.p2.control.commands;
 import tp1.p2.control.Command;
 import tp1.p2.control.exceptions.CommandExecuteException;
-import tp1.p2.control.exceptions.GameException;
 import tp1.p2.control.exceptions.RecordException;
 import tp1.p2.logic.GameWorld;
 import tp1.p2.view.Messages;
 
 public class ShowRecordCommand extends Command {
-
-	
-	
 
 	@Override
 	protected String getName() {

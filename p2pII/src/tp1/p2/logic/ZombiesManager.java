@@ -75,15 +75,11 @@ public class ZombiesManager {
 		if (canAdd) {
 			Zombie z = ZombieFactory.AVAILABLE_ZOMBIES.get(zombieType);
 			Zombie zombie = z.create(game, GameWorld.NUM_COLS, row);
-			
-				
 				game.checkValidZombiePosition(GameWorld.NUM_COLS, row);
 				game.addItem(zombie);
 				remainingZombies --;
 				return canAdd;
 			}
-			
-		
 		return canAdd;
 	}
 

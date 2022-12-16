@@ -70,7 +70,7 @@ public class ExplosiveZombie extends Zombie {
 		GameAction action = new ExplosionAction(col, row, DAMAGE_EXPLOSION, false);
 		game.pushAction(action);
 		game.decreaseZombiesAlived();
-		if(!muertoporexplosion) {
+		if(!muertoPorExplosion) {
 			game.addPuntos(10);
 		}
 		else {

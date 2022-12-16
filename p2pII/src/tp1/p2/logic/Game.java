@@ -1,14 +1,13 @@
 package tp1.p2.logic;
 
-import static tp1.p2.view.Messages.error;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List; 
 import java.util.Random;
-import tp1.p2.control.exceptions.InvalidPositionException;//Importado por mi obviamente
-import tp1.p2.control.exceptions.NotCatchablePositionException;//Importado por mi obviamente
-import tp1.p2.control.exceptions.NotEnoughCoinsException;//Importado por mi obviamente
+import tp1.p2.control.exceptions.InvalidPositionException;
+import tp1.p2.control.exceptions.NotCatchablePositionException;
+import tp1.p2.control.exceptions.NotEnoughCoinsException;
 import tp1.p2.control.exceptions.RecordException;
 import tp1.p2.control.Command;
 import tp1.p2.control.Level;
@@ -46,7 +45,7 @@ public class Game implements GameStatus, GameWorld {
 	private Record record;
 	
 	private int sunCoins;
-	private static int puntos;//Tiene que ser static?
+	private int puntos;
 	public Game(long seed, Level level) throws GameException {
 		this.reset(seed, level);
 	}
@@ -126,16 +125,7 @@ public class Game implements GameStatus, GameWorld {
 			isNewRecord=record.update(puntos);
 			if(isNewRecord) {
 				record.save(puntos);
-			}
-			
-			/*
-			Record r = record.loadRecord(this.level.toString());
-			boolean newRecord = r.update();
-			if (newRecord) {
-				r.save();
-			}
-			*/
-		
+			}		
 	}
 
 	
@@ -320,29 +310,6 @@ public class Game implements GameStatus, GameWorld {
 		sunsManager.addSun();
 	}
 	 
-	 /*@Override
-	 public void explode(int col, int row, int damage, boolean affectsZombies) {
-		 for(int i = col-1; i <= col + 1; i++) {
-			 for(int j = row-1; j<= row +1;j=j+1) {
-				 List<GameItem> lista = this.getGameItemInPosition(i, j);
-				 if (lista != null) {
-						 if (affectsZombies) {
-							 for(int k =0;k<lista.size();k=k+1) {
-								 lista.get(k).receivePlantAttack(damage, true);
-							 }
-
-						 }
-						 else {
-							 for(int k =0;k<lista.size();k=k+1) {
-								 lista.get(k).receiveZombieAttack(damage);
-							 }
-						 }
-				}
-			 }
-		 }	    
-	 }*/
-
-
 	@Override
 	public void addZombiesAlived() {
 		zombiesManager.addZombiesAlived();
@@ -369,21 +336,6 @@ public class Game implements GameStatus, GameWorld {
 		endGame = true;
 		return true;
 	}
-
-/*
-	@Override
-	public void reset(long seed, Level level) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void reset() throws GameException {
-		// TODO Auto-generated method stub
-		
-	}
-	*/
 	
 	@Override
 	public int getScore() {

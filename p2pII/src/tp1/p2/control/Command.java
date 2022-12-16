@@ -1,7 +1,5 @@
 package tp1.p2.control;
 
-import static tp1.p2.view.Messages.error;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -59,9 +57,7 @@ public abstract class Command {
 				command = command.create(commandWords);
 				return command;
 			}
-		}/*
-		System.out.println(error(Messages.UNKNOWN_COMMAND));
-		return null;*/
+		}
 		throw new CommandParseException(Messages.UNKNOWN_COMMAND);
 
 	}

@@ -6,10 +6,8 @@ import tp1.p2.logic.gameobjects.GameObject;
 import tp1.p2.control.Level;
 import java.util.List;
 
-import tp1.p2.control.Level;
 import tp1.p2.control.exceptions.CommandExecuteException;
 import tp1.p2.control.exceptions.GameException;
-import tp1.p2.control.exceptions.InvalidPositionException;
 import tp1.p2.control.exceptions.RecordException;
 
 public interface GameWorld {
@@ -33,28 +31,16 @@ public interface GameWorld {
 	void reset(long seed, Level level) throws GameException;
 	Level getLevel();
 	long getSeed();
-	//void explode (int col, int row, int damage, boolean affectsZombies);
 	void addZombiesAlived();
 	void decreaseZombiesAlived();
 	void addCaughtSuns();
 	boolean zombiesGana();
-	void addPuntos(int num); //nuevo pero creado por nosotros
-	// nuevos
+	void addPuntos(int num); 
 	void update() throws GameException;
-
-	
-
-	
-
 	void tryToBuy(int cost) throws GameException;
-
 	void checkValidPlantPosition(int col, int row) throws GameException;
-
 	void checkValidZombiePosition(int col, int row) throws GameException;
-	
 	void showRecord() throws RecordException, CommandExecuteException;
-	
-	//int getScore();
 	void write()throws GameException;
 	
 }

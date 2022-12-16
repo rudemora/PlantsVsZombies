@@ -64,7 +64,7 @@ public class BucketHead extends Zombie {
 	@Override
 	public void onExit() {
 		game.decreaseZombiesAlived();
-		if(!muertoporexplosion) {
+		if(!muertoPorExplosion) {
 			game.addPuntos(10);
 		}
 		else {

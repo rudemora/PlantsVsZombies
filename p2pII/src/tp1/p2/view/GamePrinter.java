@@ -14,8 +14,6 @@ public class GamePrinter {
 
 	private static final String VERTICAL_DELIMITER = "|";
 
-	private static final String NEW_LINE = System.lineSeparator();
-
 	private static final int MARGIN_SIZE = 2;
 
 	private static final String MARGIN = repeat(SPACE, MARGIN_SIZE);
@@ -62,7 +60,6 @@ public class GamePrinter {
 		StringBuilder str = new StringBuilder();
 
 		// Game Status
-
 		str.append(getInfo());
 
 		// Cols numbering

@@ -28,7 +28,6 @@ public class ZombieFactory {
 	public static Zombie spawnZombie(int zombieIdx, GameWorld game, int col, int row) throws GameException  {
 		if (!isValidZombie(zombieIdx)) {
 			throw new GameException(Messages.INVALID_GAME_OBJECT);
-			//return null;
 		}
 		else {
 			Zombie zombieType = AVAILABLE_ZOMBIES.get(zombieIdx);

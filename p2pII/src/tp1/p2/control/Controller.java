@@ -82,10 +82,6 @@ public class Controller {
 			// 2. User action
 			String[] words = prompt();
 
-			/*if (words.length == 0) {
-				System.out.println(error(Messages.UNKNOWN_COMMAND));
-			} 
-			else {*/
 			try {
 				refreshDisplay = false;
 				// 2-4. User action & Game Action & Update
@@ -106,8 +102,6 @@ public class Controller {
 		}catch (GameException e) {
 			System.out.println(error(e.getMessage()));
 		}
-		
-		
 		printEndMessage();
 		
 	}

@@ -54,10 +54,6 @@ public class PlantsVsZombies {
 				seed = Long.parseLong(seedParam);
 			}
 			System.out.println(Messages.WELCOME);
-
-//			System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
-//			System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
-
 			Game game = new Game(seed, level);
 			Scanner scanner = new Scanner(System.in);
 			Controller controller = new Controller(game, scanner);
@@ -70,14 +66,6 @@ public class PlantsVsZombies {
 		} catch (GameException e) {
 			System.out.println(error(e.getMessage()));
 		}
-		
-		/*
-		System.out.println(Messages.WELCOME);
-
-		Game game = new Game(seed, level);
-		Scanner scanner = new Scanner(System.in);
-		Controller controller = new Controller(game, scanner);
-		controller.run();*/
 	}
 
 }

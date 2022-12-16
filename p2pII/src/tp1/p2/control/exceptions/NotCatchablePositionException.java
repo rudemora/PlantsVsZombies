@@ -14,8 +14,8 @@ public class NotCatchablePositionException extends InvalidPositionException {
 		super(cause);
 	}
 
-	public NotCatchablePositionException(int x, int y) {
-		super(Messages.NO_CATCHABLE_IN_POSITION.formatted(x,y));
+	public NotCatchablePositionException(int col, int row) {
+		super(Messages.NO_CATCHABLE_IN_POSITION.formatted(col,row));
 	}
 
 	

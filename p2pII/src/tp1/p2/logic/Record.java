@@ -51,7 +51,7 @@ public class Record {
 			while((read) != null ) {
 				String[] record = read.split(":");
 				if (record.length != 2) {
-
+						
 						throw new RecordException(Messages.RECORD_READ_ERROR);
 					}
 					try {
@@ -82,9 +82,6 @@ public class Record {
 					}
 					read = recordfile.readLine();
 				}
-			
-
-			
 		} catch(IOException e1) {
 			throw new RecordException(e1.getMessage(), e1);
 		} finally {							
@@ -114,26 +111,23 @@ public class Record {
 	
 		
 	public void writeRecord() throws GameException{
-		
-		//if (isNewRecord()) {
-			BufferedWriter recordfile = null;
-			try {
-				recordfile = new BufferedWriter(new FileWriter(Messages.RECORD_FILENAME));
-				recordfile.write(this.recordsToString());
-			} catch (IOException e1) {
-				throw new RecordException(e1.getMessage(),e1);
-			} finally {
-				if (recordfile != null) {
-					try {
-						recordfile.close();
-					} catch (IOException e2) {
-						throw new RecordException(e2.getMessage(), e2);					
-					}
+		BufferedWriter recordfile = null;
+		try {
+			recordfile = new BufferedWriter(new FileWriter(Messages.RECORD_FILENAME));
+			recordfile.write(this.recordsToString());
+		} catch (IOException e1) {
+			throw new RecordException(e1.getMessage(),e1);
+		} finally {
+			if (recordfile != null) {
+				try {
+					recordfile.close();
+				} catch (IOException e2) {
+					throw new RecordException(e2.getMessage(), e2);					
 				}
 			}
-		//}
-		
+		}
 	}
+		
 	
 	public boolean update(int score) { 
 		for (int i = 0; i < records.size(); ++i) {
@@ -149,8 +143,6 @@ public class Record {
 		return false;
 	}
 	
-	
-	
 	public int getRecord() {
 		int record =  0;
 		
@@ -161,22 +153,17 @@ public class Record {
 
 			}
 		}
-		
 		return record;
 	}
 	
 	public void showRecord() {
-		
 		System.out.println(level.toString() + " record is " +(this.getRecord()));
 	}
 	
 	private String recordsToString() {
 		StringBuilder str = new StringBuilder();
-		
 		for (int i = 0; i < records.size(); ++i) {
-			
 				str.append(records.get(i).level.name() + ":").append(records.get(i).puntuacion).append(Messages.LINE_SEPARATOR);
-		
 		}
 		return str.toString();
 	}

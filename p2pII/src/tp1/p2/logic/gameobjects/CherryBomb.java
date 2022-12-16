@@ -11,6 +11,7 @@ public class CherryBomb extends Plant {
 	private static final int DAMAGE = 10;
 	private static final int COST = 50;
 	private boolean exploded;
+	
 	protected CherryBomb() {
 		endurance = INITIAL_ENDURANCE;
 		ciclo = 2;

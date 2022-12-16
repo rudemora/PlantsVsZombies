@@ -1,6 +1,5 @@
 package tp1.p2.control.commands;
 
-import static tp1.p2.view.Messages.error;
 
 import tp1.p2.control.Command;
 import tp1.p2.logic.GameWorld;
