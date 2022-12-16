@@ -32,7 +32,7 @@ public class Record {
 	
 	public static Record loadRecord(Level level) throws GameException { 
 		Record r = new Record(level,0);
-		records= new ArrayList<>();
+		records= new ArrayList<>(3);
 		r.readRecords();
 		return r;
 	}
@@ -43,15 +43,14 @@ public class Record {
 			recordfile = new BufferedReader(new FileReader(Messages.RECORD_FILENAME));
 			String read;
 			boolean isLevel=false;
-
-			while((read = recordfile.readLine()) != null ) {
+			read = recordfile.readLine();
+			if (read == null) {
+				Record myrecord= new Record(level,0);
+				records.add(myrecord);
+			}
+			while((read) != null ) {
 				String[] record = read.split(":");
-				if (record.length == 1) {
-					Record myrecord= new Record(level,0);
-					records.add(myrecord);
-				}
-				else {
-					if (record.length != 2) {
+				if (record.length != 2) {
 
 						throw new RecordException(Messages.RECORD_READ_ERROR);
 					}
@@ -81,8 +80,10 @@ public class Record {
 						Record myrecord= new Record(level,0);
 						records.add(myrecord);
 					}
+					read = recordfile.readLine();
 				}
-			}
+			
+
 			
 		} catch(IOException e1) {
 			throw new RecordException(e1.getMessage(), e1);
@@ -136,8 +137,11 @@ public class Record {
 	
 	public boolean update(int score) { 
 		for (int i = 0; i < records.size(); ++i) {
+			
 			if (records.get(i).level.equals(this.level)) {
+				
 				if(records.get(i).puntuacion<score) {
+					
 					return true;
 				}
 			}
