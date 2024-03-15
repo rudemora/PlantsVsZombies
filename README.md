@@ -1,1 +1,1 @@
-Plants vs Zombies game programmed in Java for my Computer Programming Technology course at UCM.
+Plants vs Zombies game programmed in Java for our Computer Programming Technology course at UCM.
